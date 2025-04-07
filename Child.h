@@ -6,9 +6,10 @@
 
 class Child :Ant {
 public:
-	Child() { ; }
+	Child();
 	//virtual ~Child();
 	virtual void work() override { ; }
+	string getRole() { return Ant::getRole(); }
 private:
 };
 

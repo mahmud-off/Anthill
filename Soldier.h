@@ -5,7 +5,7 @@
 
 class Soldier :Ant {
 public:
-	Soldier() { ; }
+	Soldier();
 	//virtual ~Soldier();
 	virtual void work() override { ; }
 private:

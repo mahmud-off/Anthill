@@ -5,7 +5,7 @@
 
 class Cleaner :Ant {
 public:
-	Cleaner() { ; }
+	Cleaner();
 	//virtual ~Cleaner();
 	virtual void work() override { ; }
 private:

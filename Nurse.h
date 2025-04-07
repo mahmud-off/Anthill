@@ -7,7 +7,7 @@
 
 class Nurse :Ant {
 public:
-	Nurse() { ; }
+	Nurse();
 	//virtual ~Nurse();
 	virtual void work() override { ; }
 
