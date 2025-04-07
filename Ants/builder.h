@@ -5,7 +5,7 @@
 
 class Builder :Ant {
 public:
-	Builder() { ; }
+	Builder();
 	//virtual ~Builder();
 	virtual void work() override { ; }
 

@@ -9,8 +9,8 @@ using namespace std;
 
 class Ant {
 public:
-	Ant(){ ; }
-	//virtual ~Ant();
+	Ant();
+	virtual ~Ant();
 
 	//access
 	int getAge()const { return age; }
@@ -28,7 +28,7 @@ public:
 private:
 	int age;
 	string role;
-	int health;
+	int health; // 0 - 100
 	int weight; // сколько может поднять
 };
 

@@ -5,7 +5,7 @@
 
 class Collecter :Ant {
 public:
-	Collecter() { ; }
+	Collecter();
 	//virtual ~Collecter();
 	virtual void work() override { ; }
 private:
