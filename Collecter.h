@@ -1,11 +1,14 @@
 //#pragma once
 #include "Ant.h"
+#include "Field.h"
 #ifndef COLLECTER_H
 #define COLLECTER_H
 
 class Collecter : Ant {
 public:
     int constEating = 3;
+
+    void CollectFood(Field field);
 
     Collecter();
 

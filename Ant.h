@@ -13,7 +13,7 @@ public:
 	virtual ~Ant();
 
 	//functions for collecters and builders
-	pair<int, int> findNearestPoint(int x1, int y1, vector<pair<int, int>> v); // nearest point with food or materials from ant
+	pair<int, int> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
 	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end); // shortest path from start to end
 
 	//access
@@ -22,6 +22,7 @@ public:
 	int getHealth()const { return health; }
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
+	int getWeight() { return weight; }
 
 	//setters
 	void setAge(int n){ age = n; }

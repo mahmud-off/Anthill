@@ -1,9 +1,11 @@
 #include "Field.h"
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 
 #define DAILY_FOOD_SPAWN 100
 #define DAILY_MATERIALS_SPAWN 50
+#define MAX_WEIGHT_FOOD 10
 
 Field::Field(int height, int width) {
     this->height = height;
@@ -38,7 +40,8 @@ void Field::foodSpawn(int k) {
             y = rand() % this->height;
         }
         this->field[x][y] = "food";
-        this->foodCoordinates.push_back({x, y});
+        int weight = rand() % MAX_WEIGHT_FOOD;
+        this->foodCoordinates.push_back({weight, {x, y}});
     }
 }
 
@@ -46,3 +49,16 @@ void Field::ResourceSpawn() {
     this->foodSpawn(DAILY_FOOD_SPAWN);
     this->materialsSpawn(DAILY_MATERIALS_SPAWN);
 }
+
+void Field::updateFoodCoordinatesList() { // для того чтобы не рассматривать лишние координаты с едой в следующий раз
+    vector<pair<int, pair<int, int>>> newFoodCoordinates;
+    for (int i = 0; i < newFoodCoordinates.size(); i++) {
+        int x = foodCoordinates[i].second.first;
+        int y = foodCoordinates[i].second.second;
+        if (field[x][y] == "food") {
+            newFoodCoordinates.push_back({foodCoordinates[i].first, foodCoordinates[i].second});
+        }
+    }
+    foodCoordinates = newFoodCoordinates;
+}
+
