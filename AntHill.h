@@ -21,23 +21,30 @@ using std::string;
 
 class Anthill {
 public:
-	Anthill();
+	Anthill(int scale, int x, int y);
+	void generateAnts();
 	void makeMove();
 	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:
+	//coordinates
+	int x;
+	int y;
+
+
 	// resources spending
 	void antsDailyEat();
 	void anthillDestroying(); // осыпь муравейника
 
+	int foodCount;
 	int scale;
-	int childrenConunt;
+	int childrenCount;
 	int builderCount;
-	int cleanerConut;
+	int cleanerCount;
 	int collecterCount;
 	int nurseCount;
 	int soldierCount;
-	int foodCount;
+
 	int antCount;
 
 	vector<Child> childList;
