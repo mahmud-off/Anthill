@@ -7,6 +7,8 @@ class Soldier : public Ant {
 public:
     Soldier();
 
+    void helpToFindOpponent(int x, int y);
+
     //virtual ~Soldier();
     virtual void work() override { ; }
 

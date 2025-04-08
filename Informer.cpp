@@ -19,3 +19,10 @@ void Informer::callToGetHelpToCollectMaterials(int x, int y, Field field) {
     field.field[x][y] = ""; // already no food in this point
     field.updateMaterialsCoordinatesList();
 }
+
+void Informer::callToGetHelpToFightOpponent(int x, int y) {
+    for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
+        Soldier *curSoldier = soldiersInformerSubscribers[i];
+        curSoldier->helpToFindOpponent(x, y);
+    }
+}
