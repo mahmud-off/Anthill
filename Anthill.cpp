@@ -22,7 +22,8 @@ using namespace std;
 
 Anthill::Anthill(int scale, int x, int y) {
     this->scale = scale;
-    this->x =
+    this->x = x;
+    this->y = y;
     // cout << "Enter a scale: ";
     // cin >> scale;
     // cout << "Enter a food count: ";
