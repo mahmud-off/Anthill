@@ -14,6 +14,9 @@ public:
 	using Ant::moveLeft;
 	using Ant::moveUp;
 	using Ant::moveDown;
+	using Ant::setPosX;
+	using Ant::setPosY;
+
 private:
 };
 

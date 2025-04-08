@@ -24,35 +24,9 @@ Anthill::Anthill(int scale, int x, int y) {
     this->scale = scale;
     this->x = x;
     this->y = y;
-    // cout << "Enter a scale: ";
-    // cin >> scale;
-    // cout << "Enter a food count: ";
-    // cin >> foodCount;
-    // cout << "Enter a children count: ";
-    // cin >> childrenConunt;
-    // cout << "Enter a builder count: ";
-    // cin >> builderCount;
-    // cout << "Enter a cleaner count: ";
-    // cin >> cleanerConut;
-    // cout << "Enter a collecter count: ";
-    // cin >> collecterCount;
-    // cout << "Enter a nurse count: ";
-    // cin >> nurseCount;
-    // cout << "Enter a soldier count: ";
-    // cin >> soldierCount;
-
-
-    // childList = vector<Child>(childrenCount);
-    // builderList = vector<Builder>(builderCount);
-    // cleanerList = vector<Cleaner>(cleanerCount);
-    // collecterList = vector<Collecter>(collecterCount);
-    // nurseList = vector<Nurse>(nurseCount);
-    // soldierList = vector<Soldier>(soldierCount);
-
-    // antCount = childrenConunt + builderCount + cleanerCount + collecterCount + nurseCount + soldierCount;
 }
 
-void Anthill::generateAnts() {
+void Anthill::generateAnts(int x, int y) {
     this->foodCount = 0.7 * this->scale;
     this->antCount = 0.3 * this->scale;
     this->childrenCount = 0.2 * this->antCount;
@@ -63,11 +37,35 @@ void Anthill::generateAnts() {
     this->soldierCount = 0.2 * this->antCount;
 
     childList = vector<Child>(childrenCount);
+    for (int i = 0; i < childrenCount; i++) {
+        childList[i].setPosX(x);
+        childList[i].setPosY(y);
+    }
     builderList = vector<Builder>(builderCount);
+    for (int i = 0; i < builderCount; i++) {
+        builderList[i].setPosX(x);
+        builderList[i].setPosY(y);
+    }
     cleanerList = vector<Cleaner>(cleanerCount);
+    for (int i = 0; i < cleanerCount; i++) {
+        cleanerList[i].setPosX(x);
+        cleanerList[i].setPosY(y);
+    }
     collecterList = vector<Collecter>(collecterCount);
+    for (int i = 0; i < collecterCount; i++) {
+        collecterList[i].setPosX(x);
+        collecterList[i].setPosY(y);
+    }
     nurseList = vector<Nurse>(nurseCount);
+    for (int i = 0; i < nurseCount; i++) {
+        nurseList[i].setPosX(x);
+        nurseList[i].setPosY(y);
+    }
     soldierList = vector<Soldier>(soldierCount);
+    for (int i = 0; i < soldierCount; i++) {
+        soldierList[i].setPosX(x);
+        soldierList[i].setPosY(y);
+    }
 }
 
 

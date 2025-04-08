@@ -1,7 +1,10 @@
 #include "Ant.h"
 #include "AntHill.h"
+#include <cmath>
 
 #define STEP 1
+
+using namespace std;
 
 Ant::Ant() {
     cout << "ant created\n";
@@ -9,8 +12,6 @@ Ant::Ant() {
     role = "None";
     health = 100;
     weight = 0; //���� ���� ������� ������ � �����-�� ���������
-    posX = 0;
-    posY = 0;
 }
 
 Ant::~Ant() {
@@ -18,18 +19,61 @@ Ant::~Ant() {
 }
 
 void Ant::moveRight() {
-    posX += 1 * STEP;
+    x += 1 * STEP;
 }
 
 void Ant::moveLeft() {
-    posX -= 1 * STEP;
+    x -= 1 * STEP;
 }
 
 void Ant::moveUp() {
-    posY += 1 * STEP;
+    y += 1 * STEP;
 }
 
 void Ant::moveDown() {
-    posY -= 1 * STEP;
+    y -= 1 * STEP;
 }
+
+pair<int, int> Ant::findNearestPoint(int x1, int y1, vector<pair<int, int> > v) {
+    // vector<pair<int, int>> distances; // first - distance, second - point
+    pair<int, int> answerPoint;
+    int minn = 1e9;
+    for (auto point : v) {
+        int res = sqrt((point.first - x1) * (point.first - x1) + (point.second - y1) * (point.second - y1));
+        if (res < minn) {
+            minn = res;
+            answerPoint = point;
+        }
+    }
+    return answerPoint;
+}
+
+int h(pair<int, int> p1, pair<int, int> p2) {
+    int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
+    return res;
+}
+
+vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end) {
+    vector<pair<int, int>> path; // path from start to end
+
+    vector<pair<int, int>> options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
+
+    while (start != end) {
+        options.push_back({start.first + 1, start.second});
+        options.push_back({start.first - 1, start.second});
+        options.push_back({start.first, start.second + 1});
+        options.push_back({start.first, start.second - 1});
+
+        vector<pair<int, pair<int, int>>> vH; // vector of h(option[i]) for every options
+        for (auto x : options) {
+            vH.push_back({h(x, end), x});
+        }
+        sort(vH.begin(), vH.end());
+        path.push_back(vH[0].second);
+        start = vH[0].second;
+    }
+
+    return path;
+}
+
 

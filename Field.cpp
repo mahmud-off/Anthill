@@ -24,6 +24,7 @@ void Field::materialsSpawn(int k) {
             y = rand() % this->height;
         }
         this->field[x][y] = "materials";
+        this->materialsCoordinates.push_back({x, y});
     }
 }
 
@@ -37,6 +38,7 @@ void Field::foodSpawn(int k) {
             y = rand() % this->height;
         }
         this->field[x][y] = "food";
+        this->foodCoordinates.push_back({x, y});
     }
 }
 

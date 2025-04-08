@@ -21,9 +21,10 @@ using std::string;
 
 class Anthill {
 public:
+	vector<Collecter> collecterList; // for testing only
+
 	Anthill(int scale, int x, int y);
-	void generateAnts();
-	void makeMove();
+	void generateAnts(int posX, int posY); // positions of ants in the beginning
 	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:
@@ -50,7 +51,7 @@ private:
 	vector<Child> childList;
 	vector<Builder> builderList;
 	vector<Cleaner> cleanerList;
-	vector<Collecter> collecterList;
+	// vector<Collecter> collecterList;
 	vector<Nurse> nurseList;
 	vector<Soldier> soldierList;
 
