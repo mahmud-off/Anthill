@@ -1,5 +1,5 @@
 //#pragma once
-
+#include <vector>
 #include <iostream>
 
 using namespace std;
@@ -9,6 +9,14 @@ using namespace std;
 
 class Ant {
 public:
+
+	int constChildEating = 1;
+	int constCleanerEating = 2;
+	int constNurseEating = 2;
+	int constSoldierEating = 5;
+	int constBuilderEating = 5;
+	int constCollecterEating = 3;
+
 	Ant();
 	virtual ~Ant();
 
@@ -20,6 +28,7 @@ public:
 	int getAge()const { return age; }
 	string getRole()const { return role; }
 	int getHealth()const { return health; }
+	int getWeight()const {return weight; }
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
 
@@ -46,6 +55,10 @@ private:
 	int weight; // ������� ����� �������
 	int x; // coordinates
 	int y;
+	int id;
+
+
+
 };
 
 #endif ANT_H

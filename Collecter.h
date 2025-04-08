@@ -1,13 +1,14 @@
 //#pragma once
 #include "Ant.h"
+#include "Child.h"
 #ifndef COLLECTER_H
 #define COLLECTER_H
 
-class Collecter : Ant {
+class Collecter : public Ant {
 public:
-    int constEating = 3;
-
     Collecter();
+
+    Collecter(vector<Child> list, Child &child);
 
     //virtual ~Collecter();
     virtual void work() override { ; }

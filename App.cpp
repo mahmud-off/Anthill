@@ -1,7 +1,7 @@
 #include <iostream>
 #include "AntHill.h"
 #include "Field.h"
-#include "Ant.h"
+//#include "Ant.h"
 
 #define FIELD_HEIGHT 250
 #define FIELD_WIDTH 250
@@ -12,11 +12,17 @@ int main() {
     anthill.generateAnts(FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     field.ResourceSpawn();
 
+
+
     // test
-    Collecter c = anthill.collecterList[0];
-    pair<int, int> p = c.findNearestPoint(c.getPosX(), c.getPosY(), field.foodCoordinates);
-    vector<pair<int, int>> paths = c.A_StarSearch({c.getPosX(), c.getPosY()}, p);
+    Ant* c = anthill.collecterList[0];
+    pair<int, int> p = c->findNearestPoint(c->getPosX(), c->getPosY(), field.foodCoordinates);
+    vector<pair<int, int>> paths = c->A_StarSearch({c->getPosX(), c->getPosY()}, p);
     for (auto x : paths) {
         cout << x.first << " " << x.second << "\n";
     }
+
+
+
+
 }

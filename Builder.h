@@ -3,9 +3,8 @@
 #ifndef BUILDER_H
 #define BUILDER_H
 
-class Builder :Ant {
+class Builder : public Ant {
 public:
-	int constEating = 5;
 	Builder();
 	//virtual ~Builder();
 	virtual void work() override { ; }
