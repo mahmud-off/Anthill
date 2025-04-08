@@ -6,7 +6,10 @@
 class Builder : public Ant {
 public:
 	Builder();
-	//virtual ~Builder();
+
+	Builder(vector<Ant*>& list, Ant* &collecter);
+
+	virtual ~Builder();
 	virtual void work() override { ; }
 
 

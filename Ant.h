@@ -36,6 +36,7 @@ public:
 	void setAge(int n){ age = n; }
 	void setRole(string n) { role = n; }
 	void setHealth(int n) { health = n; }
+	void setWeight(int n){ weight = n; }
 	void setPosX(int x) { this->x = x; }
 	void setPosY(int y) { this->y = y; }
 
@@ -48,6 +49,9 @@ public:
 	void moveDown();
 	void moveUp();
 
+	//compare
+	bool operator==(const Ant* right)const;
+
 private:
 	int age;
 	string role;
@@ -55,7 +59,6 @@ private:
 	int weight; // ������� ����� �������
 	int x; // coordinates
 	int y;
-	int id;
 
 
 

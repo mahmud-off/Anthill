@@ -8,7 +8,9 @@
 class Nurse : public Ant {
 public:
 	Nurse();
-	//virtual ~Nurse();
+
+	Nurse(vector<Ant*>& list, Ant* &cleaner);
+	virtual ~Nurse();
 	virtual void work() override { ; }
 
 	using Ant::moveRight;

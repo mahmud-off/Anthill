@@ -8,9 +8,9 @@ class Collecter : public Ant {
 public:
     Collecter();
 
-    Collecter(vector<Child> list, Child &child);
+    Collecter(vector<Ant*>& list, Ant* &child);
 
-    //virtual ~Collecter();
+    virtual ~Collecter();
     virtual void work() override { ; }
 
     using Ant::moveRight;

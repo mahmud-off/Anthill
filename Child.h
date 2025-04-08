@@ -11,9 +11,8 @@ public:
 
     Child();
 
-    virtual ~Child() { cout << "child was deleted"; };
+    virtual ~Child();
     virtual void work() override { ; }
-    string getRole() { return Ant::getRole(); }
 
     using Ant::moveRight;
     using Ant::moveLeft;

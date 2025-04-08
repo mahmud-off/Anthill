@@ -1,7 +1,7 @@
 #include <iostream>
 #include "AntHill.h"
 #include "Field.h"
-//#include "Ant.h"
+
 
 #define FIELD_HEIGHT 250
 #define FIELD_WIDTH 250
@@ -11,6 +11,15 @@ int main() {
     Anthill anthill(100, FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     anthill.generateAnts(FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     field.ResourceSpawn();
+
+    //test
+    // Example the rolling growth
+    cout << "\nCollecter size before -> " << anthill.collecterList.size()<<"\n";
+    cout << "Builder list before -> " << anthill.builderList.size()<<"\n\n";
+    Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);
+    anthill.builderList.push_back(pop);
+    cout << "\nCollecter size after -> " << anthill.collecterList.size()<<"\n";
+    cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
 
 
 

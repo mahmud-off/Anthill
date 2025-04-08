@@ -7,8 +7,14 @@ class Cleaner : public Ant {
 public:
 
 	Cleaner();
-	//virtual ~Cleaner();
+
+	Cleaner(vector<Ant*>& list, Ant* &child);
+
+	virtual ~Cleaner();
+
+
 	virtual void work() override { ; }
+
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

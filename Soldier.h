@@ -7,7 +7,9 @@ class Soldier : public Ant {
 public:
     Soldier();
 
-    //virtual ~Soldier();
+    Soldier(vector<Ant*>& list, Ant* &collecter);
+
+    virtual ~Soldier();
     virtual void work() override { ; }
 
     using Ant::moveRight;
