@@ -6,6 +6,9 @@
 #define DAILY_FOOD_SPAWN 100
 #define DAILY_MATERIALS_SPAWN 50
 #define MAX_WEIGHT_FOOD 10
+#define MAX_WEIGHT_MATERIALS 50
+#define MATERIALS "materials"
+#define FOOD "food"
 
 Field::Field(int height, int width) {
     this->height = height;
@@ -25,8 +28,9 @@ void Field::materialsSpawn(int k) {
             x = rand() % this->width;
             y = rand() % this->height;
         }
-        this->field[x][y] = "materials";
-        this->materialsCoordinates.push_back({x, y});
+        this->field[x][y] = MATERIALS;
+        int weight = rand() % MAX_WEIGHT_MATERIALS;
+        this->materialsCoordinates.push_back({weight, {x, y}});
     }
 }
 
@@ -39,7 +43,7 @@ void Field::foodSpawn(int k) {
             x = rand() % this->width;
             y = rand() % this->height;
         }
-        this->field[x][y] = "food";
+        this->field[x][y] = FOOD;
         int weight = rand() % MAX_WEIGHT_FOOD;
         this->foodCoordinates.push_back({weight, {x, y}});
     }
@@ -55,10 +59,23 @@ void Field::updateFoodCoordinatesList() { // для того чтобы не р�
     for (int i = 0; i < newFoodCoordinates.size(); i++) {
         int x = foodCoordinates[i].second.first;
         int y = foodCoordinates[i].second.second;
-        if (field[x][y] == "food") {
+        if (field[x][y] == FOOD) {
             newFoodCoordinates.push_back({foodCoordinates[i].first, foodCoordinates[i].second});
         }
     }
     foodCoordinates = newFoodCoordinates;
 }
+
+void Field::updateMaterialsCoordinatesList() {
+    vector<pair<int, pair<int, int>>> newMaterialsCoordinates;
+    for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
+        int x = materialsCoordinates[i].second.first;
+        int y = materialsCoordinates[i].second.second;
+        if (field[x][y] == MATERIALS) {
+            newMaterialsCoordinates.push_back({foodCoordinates[i].first, foodCoordinates[i].second});
+        }
+    }
+    foodCoordinates = newMaterialsCoordinates;
+}
+
 

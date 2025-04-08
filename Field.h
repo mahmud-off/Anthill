@@ -13,12 +13,13 @@ public:
     int getWidth() { return width; }
 
     void updateFoodCoordinatesList();
+    void updateMaterialsCoordinatesList();
 
     vector<vector<string>> field;
     Field(int height, int width);
     void ResourceSpawn();
     vector<pair<int, pair<int, int>>> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
-    vector<pair<int, int>> materialsCoordinates; // coordinates of cells with materials
+    vector<pair<int, pair<int, int>>> materialsCoordinates; // coordinates of cells with materials
 private:
     // resource spawn
     void foodSpawn(int k);

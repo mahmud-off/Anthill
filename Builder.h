@@ -1,5 +1,6 @@
 //#pragma once
 #include "Ant.h"
+#include "Field.h"
 #ifndef BUILDER_H
 #define BUILDER_H
 
@@ -11,6 +12,8 @@ public:
 	virtual void work() override { ; }
 
 
+	void collectMaterials(Field field);
+	void helpToCollectMaterial(int x, int y); // coordinates
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

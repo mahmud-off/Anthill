@@ -8,7 +8,8 @@ class Collecter : Ant {
 public:
     int constEating = 3;
 
-    void CollectFood(Field field);
+    void collectFood(Field field);
+    void helpToCollectFood(int x, int y); // coordinates
 
     Collecter();
 
