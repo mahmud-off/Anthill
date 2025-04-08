@@ -1,4 +1,5 @@
 #include "Ant.h"
+#include "AntHill.h"
 
 #define STEP 1
 
@@ -31,5 +32,4 @@ void Ant::moveUp() {
 void Ant::moveDown() {
     posY -= 1 * STEP;
 }
-
 

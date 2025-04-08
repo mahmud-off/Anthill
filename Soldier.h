@@ -5,6 +5,7 @@
 
 class Soldier : Ant {
 public:
+    int constEating = 5;
     Soldier();
 
     //virtual ~Soldier();

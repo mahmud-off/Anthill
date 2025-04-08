@@ -23,9 +23,13 @@ class Anthill {
 public:
 	Anthill();
 	void makeMove();
-	vector<Child>* getChildList()const { return childList; }
+	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:
+	// resources spending
+	void antsDailyEat();
+	void anthillDestroying(); // осыпь муравейника
+
 	int scale;
 	int childrenConunt;
 	int builderCount;
@@ -36,12 +40,12 @@ private:
 	int foodCount;
 	int antCount;
 
-	vector<Child> * childList;
-	vector<Builder> * builderList;
-	vector<Cleaner> *  cleanerList;
-	vector<Collecter> * collecterList;
-	vector<Nurse> * nurseList;
-	vector<Soldier> * soldierList;
+	vector<Child> childList;
+	vector<Builder> builderList;
+	vector<Cleaner> cleanerList;
+	vector<Collecter> collecterList;
+	vector<Nurse> nurseList;
+	vector<Soldier> soldierList;
 
 };
 

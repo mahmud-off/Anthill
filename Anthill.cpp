@@ -13,6 +13,8 @@
 #include <cstdlib>
 #include <time.h>
 
+#define ANTHILL_DESTROYING 5
+
 using std::cout;
 using std::cin;
 using std::string;
@@ -38,12 +40,12 @@ Anthill::Anthill()
 	cin >> soldierCount;
 
 	
-	childList = new vector<Child>(childrenConunt);
-	builderList = new vector<Builder> (builderCount);
-	cleanerList = new vector<Cleaner> (cleanerConut);
-	collecterList = new vector<Collecter> (collecterCount);
-	nurseList = new vector<Nurse> (nurseCount);
-	soldierList = new vector<Soldier> (soldierCount);
+	childList = vector<Child>(childrenConunt);
+	builderList = vector<Builder> (builderCount);
+	cleanerList = vector<Cleaner> (cleanerConut);
+	collecterList = vector<Collecter> (collecterCount);
+	nurseList = vector<Nurse> (nurseCount);
+	soldierList = vector<Soldier> (soldierCount);
 
 	antCount = childrenConunt + builderCount + cleanerConut + collecterCount + nurseCount + soldierCount;
 
@@ -150,3 +152,35 @@ void soldierMakeMove(Soldier ant) {
 		ant.moveDown();
 	}
 }
+
+void Anthill::antsDailyEat() {
+	for (auto ant : childList) {
+		this->foodCount -= ant.constEating;
+	}
+	for (auto ant : builderList) {
+		this->foodCount -= ant.constEating;
+	}
+	for (auto ant : cleanerList) {
+		this->foodCount -= ant.constEating;
+	}
+	for (auto ant : collecterList) {
+		this->foodCount -= ant.constEating;
+	}
+	for (auto ant : nurseList) {
+		this->foodCount -= ant.constEating;
+	}
+	for (auto ant : soldierList) {
+		this->foodCount -= ant.constEating;
+	}
+}
+
+void Anthill::anthillDestroying() {
+	this->scale -= ANTHILL_DESTROYING;
+}
+
+
+void Anthill::dailyResourceExpenditure() {
+	this->antsDailyEat();
+	this->anthillDestroying();
+}
+

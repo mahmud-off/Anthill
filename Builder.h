@@ -5,6 +5,7 @@
 
 class Builder :Ant {
 public:
+	int constEating = 5;
 	Builder();
 	//virtual ~Builder();
 	virtual void work() override { ; }

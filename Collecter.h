@@ -5,6 +5,7 @@
 
 class Collecter :Ant {
 public:
+	int constEating = 3;
 	Collecter();
 	//virtual ~Collecter();
 	virtual void work() override { ; }

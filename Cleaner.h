@@ -5,6 +5,7 @@
 
 class Cleaner :Ant {
 public:
+	int constEating = 2;
 	Cleaner();
 	//virtual ~Cleaner();
 	virtual void work() override { ; }

@@ -7,6 +7,7 @@
 
 class Nurse :Ant {
 public:
+	int constEating = 2;
 	Nurse();
 	//virtual ~Nurse();
 	virtual void work() override { ; }

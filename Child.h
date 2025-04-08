@@ -6,6 +6,7 @@
 
 class Child :Ant {
 public:
+	int constEating = 1;
 	Child();
 	//virtual ~Child();
 	virtual void work() override { ; }
