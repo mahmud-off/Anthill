@@ -1,5 +1,6 @@
 #include "Ant.h"
 #include "AntHill.h"
+#include <algorithm>
 #include <cmath>
 
 #define STEP 1

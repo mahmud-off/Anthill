@@ -6,9 +6,8 @@
 
 using namespace std;
 
-class Child : Ant {
+class Child : public Ant {
 public:
-    int constEating = 1;
 
     Child();
 

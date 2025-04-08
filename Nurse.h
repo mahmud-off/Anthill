@@ -5,9 +5,8 @@
 #define NURSE_H
 
 
-class Nurse :Ant {
+class Nurse : public Ant {
 public:
-	int constEating = 2;
 	Nurse();
 	//virtual ~Nurse();
 	virtual void work() override { ; }

@@ -3,9 +3,9 @@
 #ifndef CLEANER_H
 #define CLEANER_H
 
-class Cleaner :Ant {
+class Cleaner : public Ant {
 public:
-	int constEating = 2;
+
 	Cleaner();
 	//virtual ~Cleaner();
 	virtual void work() override { ; }

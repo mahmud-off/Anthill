@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿    #include <iostream>
 #include "AntHill.h"
 #include "Ant.h"
 #include "builder.h"
@@ -36,35 +36,43 @@ void Anthill::generateAnts(int x, int y) {
     this->nurseCount = 0.1 * this->antCount;
     this->soldierCount = 0.2 * this->antCount;
 
-    childList = vector<Child>(childrenCount);
     for (int i = 0; i < childrenCount; i++) {
-        childList[i].setPosX(x);
-        childList[i].setPosY(y);
+        childList.push_back(new Child());
+        childList[i]->setPosX(x);
+        childList[i]->setPosY(y);
     }
-    builderList = vector<Builder>(builderCount);
+
     for (int i = 0; i < builderCount; i++) {
-        builderList[i].setPosX(x);
-        builderList[i].setPosY(y);
+        builderList.push_back(new Builder());
+        builderList[i]->setPosX(x);
+        builderList[i]->setPosY(y);
     }
-    cleanerList = vector<Cleaner>(cleanerCount);
+
     for (int i = 0; i < cleanerCount; i++) {
-        cleanerList[i].setPosX(x);
-        cleanerList[i].setPosY(y);
+        cleanerList.push_back(new Cleaner());
+        cleanerList[i]->setPosX(x);
+        cleanerList[i]->setPosY(y);
     }
-    collecterList = vector<Collecter>(collecterCount);
+
+
     for (int i = 0; i < collecterCount; i++) {
-        collecterList[i].setPosX(x);
-        collecterList[i].setPosY(y);
+        collecterList.push_back(new Collecter());
+        collecterList[i]->setPosX(x);
+        collecterList[i]->setPosY(y);
     }
-    nurseList = vector<Nurse>(nurseCount);
+
+
     for (int i = 0; i < nurseCount; i++) {
-        nurseList[i].setPosX(x);
-        nurseList[i].setPosY(y);
+        nurseList.push_back(new Nurse());
+        nurseList[i]->setPosX(x);
+        nurseList[i]->setPosY(y);
     }
-    soldierList = vector<Soldier>(soldierCount);
+
+
     for (int i = 0; i < soldierCount; i++) {
-        soldierList[i].setPosX(x);
-        soldierList[i].setPosY(y);
+        soldierList.push_back(new Soldier());
+        soldierList[i]->setPosX(x);
+        soldierList[i]->setPosY(y);
     }
 }
 
@@ -155,22 +163,22 @@ void soldierMakeMove(Soldier ant) {
 
 void Anthill::antsDailyEat() {
     for (auto ant: childList) {
-        this->foodCount -= ant.constEating;
+        this->foodCount -= ant->constChildEating;
     }
     for (auto ant: builderList) {
-        this->foodCount -= ant.constEating;
+        this->foodCount -= ant->constBuilderEating;
     }
     for (auto ant: cleanerList) {
-        this->foodCount -= ant.constEating;
+        this->foodCount -= ant->constCleanerEating;
     }
     for (auto ant: collecterList) {
-        this->foodCount -= ant.constEating;
+        this->foodCount -= ant->constCollecterEating;
     }
     for (auto ant: nurseList) {
-        this->foodCount -= ant.constEating;
+        this->foodCount -= ant->constNurseEating;
     }
     for (auto ant: soldierList) {
-        this->foodCount -= ant.constEating;
+        this->foodCount -= ant->constSoldierEating;
     }
 }
 

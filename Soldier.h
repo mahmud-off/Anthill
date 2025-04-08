@@ -3,9 +3,8 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-class Soldier : Ant {
+class Soldier : public Ant {
 public:
-    int constEating = 5;
     Soldier();
 
     //virtual ~Soldier();

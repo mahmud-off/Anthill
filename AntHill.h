@@ -1,5 +1,5 @@
 //#pragma once
-#include "Ant.h"
+//#include "Ant.h"
 #include "builder.h"
 #include "Child.h"
 #include "Cleaner.h"
@@ -21,7 +21,8 @@ using std::string;
 
 class Anthill {
 public:
-	vector<Collecter> collecterList; // for testing only
+	vector<Ant*> collecterList; // for testing only
+
 
 	Anthill(int scale, int x, int y);
 	void generateAnts(int posX, int posY); // positions of ants in the beginning
@@ -48,12 +49,14 @@ private:
 
 	int antCount;
 
-	vector<Child> childList;
-	vector<Builder> builderList;
-	vector<Cleaner> cleanerList;
-	// vector<Collecter> collecterList;
-	vector<Nurse> nurseList;
-	vector<Soldier> soldierList;
+	vector<Ant*> antHill;
+
+	vector<Ant*> childList;
+	vector<Ant*> builderList;
+	vector<Ant*> cleanerList;
+	//vector<Ant*> collecterList;
+	vector<Ant*> nurseList;
+	vector<Ant*> soldierList;
 
 };
 
