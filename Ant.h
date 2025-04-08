@@ -25,11 +25,19 @@ public:
 	//functions
 	virtual void work() = 0;
 
+	// moving
+	void moveRight();
+	void moveLeft();
+	void moveDown();
+	void moveUp();
+
 private:
 	int age;
 	string role;
 	int health; // 0 - 100
-	int weight; // сколько может поднять
+	int weight; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	int posX;
+	int posY;
 };
 
 #endif ANT_H

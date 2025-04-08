@@ -10,6 +10,11 @@ public:
 	//virtual ~Child();
 	virtual void work() override { ; }
 	string getRole() { return Ant::getRole(); }
+
+	using Ant::moveRight;
+	using Ant::moveLeft;
+	using Ant::moveUp;
+	using Ant::moveDown;
 private:
 };
 

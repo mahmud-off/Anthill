@@ -1,8 +1,7 @@
 #include "Soldier.h"
 
-Soldier::Soldier()
-{
-	cout << "soldier created\n";
-	this->setRole("soldier");
-	hit = 10; // надо будет придумать как делать
+Soldier::Soldier() {
+    cout << "soldier created\n";
+    this->setRole("soldier");
+    hit = 10; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 }

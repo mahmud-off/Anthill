@@ -10,10 +10,13 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <cstdlib>
+#include <time.h>
 
 using std::cout;
 using std::cin;
 using std::string;
+using namespace std;
 
 Anthill::Anthill()
 {
@@ -44,4 +47,106 @@ Anthill::Anthill()
 
 	antCount = childrenConunt + builderCount + cleanerConut + collecterCount + nurseCount + soldierCount;
 
+}
+
+void childMakeMove(Child ant) {
+	srand(time(0));
+	int numberOfMovement = rand() % 4;
+	if (numberOfMovement == 0) {
+		ant.moveRight();
+	}
+	else if (numberOfMovement == 1) {
+		ant.moveLeft();
+	}
+	else if (numberOfMovement == 2) {
+		ant.moveUp();
+	}
+	else if (numberOfMovement == 3) {
+		ant.moveDown();
+	}
+}
+
+void builderMakeMove(Builder ant) {
+	srand(time(0));
+	int numberOfMovement = rand() % 4;
+	if (numberOfMovement == 0) {
+		ant.moveRight();
+	}
+	else if (numberOfMovement == 1) {
+		ant.moveLeft();
+	}
+	else if (numberOfMovement == 2) {
+		ant.moveUp();
+	}
+	else if (numberOfMovement == 3) {
+		ant.moveDown();
+	}
+}
+
+void cleanerMakeMove(Cleaner ant) {
+	srand(time(0));
+	int numberOfMovement = rand() % 4;
+	if (numberOfMovement == 0) {
+		ant.moveRight();
+	}
+	else if (numberOfMovement == 1) {
+		ant.moveLeft();
+	}
+	else if (numberOfMovement == 2) {
+		ant.moveUp();
+	}
+	else if (numberOfMovement == 3) {
+		ant.moveDown();
+	}
+}
+
+void collecterMakeMove(Collecter ant) {
+	srand(time(0));
+	int numberOfMovement = rand() % 4;
+	if (numberOfMovement == 0) {
+		ant.moveRight();
+	}
+	else if (numberOfMovement == 1) {
+		ant.moveLeft();
+	}
+	else if (numberOfMovement == 2) {
+		ant.moveUp();
+	}
+	else if (numberOfMovement == 3) {
+		ant.moveDown();
+	}
+}
+
+void nurseMakeMove(Nurse ant) {
+	srand(time(0));
+	int numberOfMovement = rand() % 4;
+	if (numberOfMovement == 0) {
+		ant.moveRight();
+	}
+	else if (numberOfMovement == 1) {
+		ant.moveLeft();
+	}
+	else if (numberOfMovement == 2) {
+		ant.moveUp();
+	}
+	else if (numberOfMovement == 3) {
+		ant.moveDown();
+	}
+}
+
+void soldierMakeMove(Soldier ant) {
+	srand(time(0));
+	int numberOfMovement = rand() % 4;
+	if (numberOfMovement == 0) {
+		ant.moveRight();
+	}
+	else if (numberOfMovement == 1) {
+		ant.moveLeft();
+	}
+	else if (numberOfMovement == 2) {
+		ant.moveUp();
+	}
+	else if (numberOfMovement == 3) {
+		ant.moveDown();
+	}
 }

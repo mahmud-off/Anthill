@@ -11,8 +11,10 @@ public:
 	//virtual ~Nurse();
 	virtual void work() override { ; }
 
-	//кормит личинок (всех тех, у кого нет роли)
-	//спасает их, если нападение.
+	using Ant::moveRight;
+	using Ant::moveLeft;
+	using Ant::moveUp;
+	using Ant::moveDown;
 private:
 };
 

@@ -22,7 +22,7 @@ using std::string;
 class Anthill {
 public:
 	Anthill();
-
+	void makeMove();
 	vector<Child>* getChildList()const { return childList; }
 
 private:

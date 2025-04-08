@@ -3,13 +3,20 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-class Soldier :Ant {
+class Soldier : Ant {
 public:
-	Soldier();
-	//virtual ~Soldier();
-	virtual void work() override { ; }
+    Soldier();
+
+    //virtual ~Soldier();
+    virtual void work() override { ; }
+
+    using Ant::moveRight;
+    using Ant::moveLeft;
+    using Ant::moveUp;
+    using Ant::moveDown;
+
 private:
-	int hit; // урон
+    int hit; // пїЅпїЅпїЅпїЅ
 };
 
 #endif SOLDIER_H
