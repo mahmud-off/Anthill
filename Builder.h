@@ -7,6 +7,7 @@
 class Builder : public Ant {
 public:
 	Builder();
+	Builder(int weight);
 	//virtual ~Builder();
 	virtual void work(Field field) override { collectMaterials(field); }
 

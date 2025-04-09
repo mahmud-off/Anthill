@@ -14,8 +14,13 @@ int main() {
 
 
 
-    // test
-    Ant* c = anthill.collecterList[0];
-    c->work(field);
+    // test foodCoordinates
+    // for (int i = 0; i < field.foodCoordinates.size(); i++) {
+    //     auto cur = field.foodCoordinates[i];
+    //     cout << cur.first << " " << cur.second.first << " " << cur.second.second << "\n";
+    // }
 
+    // test collecters work
+    cout << anthill.collecterList[1]->getWeight() << "\n";
+    anthill.collecterList[4]->work(field);
 }

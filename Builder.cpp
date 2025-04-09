@@ -7,15 +7,22 @@ Builder::Builder() {
     this->setRole("builder");
 }
 
+Builder::Builder(int weight) {
+    cout << "builder created\n";
+    this->setRole("builder");
+    this->setWeight(weight);
+}
+
+
 void Builder::collectMaterials(Field field) {
     if (this->getWeight() >= this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).first) { // material is too heavy
         // informer function will be here
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates);
+        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).second;
         Informer informer;
         informer.callToGetHelpToCollectMaterials(p.first, p.second, field);
     }
     else { // material is ok
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates);
+        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).second;
         vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p);
         // drawing path from points in paths with graphic
         // drawing reverse path to anthill

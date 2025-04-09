@@ -35,13 +35,15 @@ void Ant::moveDown() {
     y -= 1 * STEP;
 }
 
-pair<int, int> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
+pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
-    pair<int, int> answerPoint;
+    pair<int, pair<int, int>> answerPoint;
     int minn = 1e9;
     for (auto p : v) {
-        pair<int, int> point = p.second;
-        int res = sqrt((point.first - x1) * (point.first - x1) + (point.second - y1) * (point.second - y1));
+        pair<int, pair<int, int>> point;
+        point.second = p.second;
+        point.first = p.first;
+        int res = sqrt((point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (point.second.second - y1));
         if (res < minn) {
             minn = res;
             answerPoint = point;

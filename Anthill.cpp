@@ -1,4 +1,4 @@
-﻿    #include <iostream>
+﻿#include <iostream>
 #include "AntHill.h"
 #include "Ant.h"
 #include "builder.h"
@@ -14,6 +14,11 @@
 #include <time.h>
 
 #define ANTHILL_DESTROYING 5
+#define MAX_WEIGHT_FOR_COLLECTER 10
+#define MIN_WEIGHT_FOR_COLLECTER 5
+#define MAX_WEIGHT_FOR_BUILDER 15
+#define MIN_WEIGHT_FOR_BUILDER 10
+
 
 using std::cout;
 using std::cin;
@@ -43,7 +48,9 @@ void Anthill::generateAnts(int x, int y) {
     }
 
     for (int i = 0; i < builderCount; i++) {
-        builderList.push_back(new Builder());
+        srand(time(0));
+        int weight = rand() % (MAX_WEIGHT_FOR_BUILDER - MIN_WEIGHT_FOR_BUILDER + 1) + MIN_WEIGHT_FOR_BUILDER;
+        builderList.push_back(new Builder(weight));
         builderList[i]->setPosX(x);
         builderList[i]->setPosY(y);
     }
@@ -56,7 +63,9 @@ void Anthill::generateAnts(int x, int y) {
 
 
     for (int i = 0; i < collecterCount; i++) {
-        collecterList.push_back(new Collecter());
+        srand(time(0));
+        int weight = rand() % (MAX_WEIGHT_FOR_COLLECTER - MIN_WEIGHT_FOR_COLLECTER + 1) + MIN_WEIGHT_FOR_COLLECTER;
+        collecterList.push_back(new Collecter(weight));
         collecterList[i]->setPosX(x);
         collecterList[i]->setPosY(y);
     }
