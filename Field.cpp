@@ -50,8 +50,7 @@ void Field::createEnemy() {
     enemies.push_back(newEnemy);
 }
 
-void Field::deleteEnemy(Enemy *killed) // O(Enemies count)
-{
+void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
     for (int i = 0; i < enemies.size(); ++i) {
         if (enemies[i] == killed) {
             delete killed;

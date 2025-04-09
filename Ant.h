@@ -33,7 +33,7 @@ public:
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
 	int getWeight() { return weight; }
-	int getPower() { return this->power }
+	int getPower() { return this->power; }
 
 	//setters
 	void setAge(int n){ age = n; }

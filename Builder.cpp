@@ -15,8 +15,10 @@ Builder::Builder(int weight) {
 
 
 void Builder::collectMaterials(Field field) {
-    if (this->getWeight() >= this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).first) { // material is too heavy
+    if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).first) { // material is too heavy
         // informer function will be here
+    	// for testing
+    	cout << "material isn't available" << this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).first << "\n";
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).second;
         Informer informer;
         informer.callToGetHelpToCollectMaterials(p.first, p.second, field);
@@ -26,6 +28,12 @@ void Builder::collectMaterials(Field field) {
         vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
         // drawing reverse path to anthill
+
+    	// for testing
+    	for (auto x: paths) {
+    		cout << x.first << " " << x.second << "\n";
+    	}
+    	//
         field.field[p.first][p.second] = ""; // already no food in this point
         field.updateMaterialsCoordinatesList();
     }

@@ -2,11 +2,13 @@
 #include "AntHill.h"
 #include "Field.h"
 //#include "Ant.h"
+#include "Informer.h"
 
 #define FIELD_HEIGHT 250
 #define FIELD_WIDTH 250
 
 int main() {
+    Informer informer;
     Field field(FIELD_WIDTH, FIELD_HEIGHT);
     Anthill anthill(100, FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     anthill.generateAnts(FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
@@ -30,16 +32,15 @@ int main() {
     // }
 
     // test collecters work
-    cout << anthill.collecterList[1]->getWeight() << "\n";
-    anthill.collecterList[2]->work(field);
+    // cout << anthill.collecterList[1]->getWeight() << "\n";
+    // anthill.collecterList[1]->work(field);
+
+    //test builders work
+    cout << anthill.builderList[1]->getWeight() << "\n";
+    anthill.builderList[1]->work(field);
 
     // test builders work
-    //Enemies' test
-    cout << "\nEnemies count: " <<field.enemies.size() << "\n";
-    field.createEnemy();
-    cout << "Enemies count: " <<field.enemies.size() << "\n";
-    field.deleteEnemy(field.enemies[0]);
-    cout << "Enemies count: " <<field.enemies.size() << "\n";
+
 
 
 }

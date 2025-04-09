@@ -18,6 +18,14 @@ public:
 
     // informers for all ants
     void anthillWasAttacked(); // if opponents attack anthill
+
+    //lists of subscribers
+    void addToBuildersInformerSubscribers(Builder*);
+    void addToCollectorsInformerSubscribers(Collecter*);
+    void addToSoldiersInformerSubscribers(Soldier*);
+    void addToNursesInformerSubscribers(Nurse*);
+    void addToAllAntsInformerSubscribers(Ant*);
+
 private:
     vector<Collecter*> collectersInformerSubscribers;
     vector<Builder*> buildersInformerSubscribers;

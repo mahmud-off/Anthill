@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 
+#include "Informer.h"
+
 #define RoleCount 6;
 
 using std::cout;
@@ -31,7 +33,7 @@ public:
 	vector<Ant*> soldierList;
 
 	Anthill(int scale, int x, int y);
-	void generateAnts(int posX, int posY); // positions of ants in the beginning
+	void generateAnts(int posX, int posY, Informer informer); // positions of ants in the beginning
 	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:
