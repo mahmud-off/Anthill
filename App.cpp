@@ -31,7 +31,12 @@ int main() {
         cout << x.first << " " << x.second << "\n";
     }
 
-
+    //Enemies' test
+    cout << "\nEnemies count: " <<field.enemies.size() << "\n";
+    field.createEnemy();
+    cout << "Enemies count: " <<field.enemies.size() << "\n";
+    field.deleteEnemy(field.enemies[0]);
+    cout << "Enemies count: " <<field.enemies.size() << "\n";
 
 
 }
