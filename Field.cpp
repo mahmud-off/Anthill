@@ -10,7 +10,7 @@
 #define MATERIALS "materials"
 #define FOOD "food"
 
-Field::Field(int height, int width) {
+Field::Field(int width, int height) {
     this->height = height;
     this->width = width;
     this->field.resize(height);

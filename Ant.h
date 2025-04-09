@@ -11,6 +11,8 @@ using namespace std;
 class Ant {
 public:
 
+	Field field;
+
 	int constChildEating = 1;
 	int constCleanerEating = 2;
 	int constNurseEating = 2;
