@@ -60,8 +60,6 @@ private:
 	int x; // coordinates
 	int y;
 
-
-
 };
 
 #endif ANT_H

@@ -14,17 +14,17 @@ int main() {
 
     //test
     // Example the rolling growth
-    cout << "\nCollecter size before -> " << anthill.collecterList.size()<<"\n";
-    cout << "Builder list before -> " << anthill.builderList.size()<<"\n\n";
-    Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);
-    anthill.builderList.push_back(pop);
-    cout << "\nCollecter size after -> " << anthill.collecterList.size()<<"\n";
-    cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
+    cout << "\nCollecter size before -> " << anthill.getCollecterList().size()<<"\n";
+    cout << "Builder list before -> " << anthill.getBuilderList().size()<<"\n\n";
+    Builder* pop = new Builder(anthill.getCollecterList(),  anthill.getCollecterList()[0]);
+    anthill.getBuilderList().push_back(pop);
+    cout << "\nCollecter size after -> " << anthill.getCollecterList().size()<<"\n";
+    cout << "Builder list after -> " << anthill.getBuilderList().size()<<"\n\n";
 
 
 
     // test
-    Ant* c = anthill.collecterList[0];
+    Ant* c = anthill.getCollecterList()[0];
     pair<int, int> p = c->findNearestPoint(c->getPosX(), c->getPosY(), field.foodCoordinates);
     vector<pair<int, int>> paths = c->A_StarSearch({c->getPosX(), c->getPosY()}, p);
     for (auto x : paths) {
@@ -35,6 +35,16 @@ int main() {
     cout << "\nEnemies count: " <<field.enemies.size() << "\n";
     field.createEnemy();
     cout << "Enemies count: " <<field.enemies.size() << "\n";
+
+    cout << "Ant nearly --> " << field.enemies[0]->findAnts(anthill) << "\n";
+    cout << "Ant nearly --> " << field.enemies[0]->PositionOfNearestAnt(anthill).first << " " << field.enemies[0]->PositionOfNearestAnt(anthill).second << "\n";
+
+    cout << "Food nearly --> " << field.enemies[0]->findFood(field.foodCoordinates) << "\n";
+    cout << "Food nearly --> " << field.enemies[0]->PositionOfNearestFood(field.foodCoordinates).first << " " << field.enemies[0]->PositionOfNearestFood(field.foodCoordinates).second<< "\n";
+
+    //movement to food
+    field.enemies[0]->moveByCoordinates(field.enemies[0]->PositionOfNearestFood(field.foodCoordinates));
+
     field.deleteEnemy(field.enemies[0]);
     cout << "Enemies count: " <<field.enemies.size() << "\n";
 

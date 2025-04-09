@@ -22,13 +22,13 @@ using std::string;
 class Anthill {
 public:
 
-	// for testing to rolling growth
-	vector<Collecter*> collecterList;
-	vector<Child*> childList;
-	vector<Builder*> builderList;
-	vector<Cleaner*> cleanerList;
-	vector<Nurse*> nurseList;
-	vector<Soldier*> soldierList;
+	//getters
+	vector<Collecter*>& getCollecterList(){return collecterList;}
+	vector<Child*>& getChildList(){return childList;}
+	vector<Cleaner*>& getCleanerList(){return cleanerList;}
+	vector<Builder*>& getBuilderList(){return builderList;}
+	vector<Nurse*>& getNurseList(){return nurseList;}
+	vector<Soldier*>& getSoldierList(){return soldierList;}
 
 	Anthill(int scale, int x, int y);
 	void generateAnts(int posX, int posY); // positions of ants in the beginning
@@ -55,14 +55,12 @@ private:
 
 	int antCount;
 
-	/*
-	vector<Ant*> collecterList;
-	vector<Ant*> childList;
-	vector<Ant*> builderList;
-	vector<Ant*> cleanerList;
-	vector<Ant*> nurseList;
-	vector<Ant*> soldierList;
-	*/
+	vector<Collecter*> collecterList;
+	vector<Child*> childList;
+	vector<Builder*> builderList;
+	vector<Cleaner*> cleanerList;
+	vector<Nurse*> nurseList;
+	vector<Soldier*> soldierList;
 
 
 };

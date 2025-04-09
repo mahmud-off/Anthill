@@ -41,6 +41,7 @@ void Field::createEnemy()
     //create Enemy
     Enemy* newEnemy = new Enemy(x,y);
     enemies.push_back(newEnemy);
+    cout << "Enemy's position --> " << x << " " << y << "\n";
 }
 
 void Field::deleteEnemy(Enemy *killed) // O(Enemies count)
