@@ -33,7 +33,7 @@ public:
 	vector<Soldier*> soldierList;
 
 	Anthill(int scale, int x, int y);
-	void generateAnts(int posX, int posY, Informer informer); // positions of ants in the beginning
+	void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
 	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:

@@ -26,6 +26,13 @@ public:
     void addToNursesInformerSubscribers(Nurse*);
     void addToAllAntsInformerSubscribers(Ant*);
 
+    // getters for testing
+    vector<Collecter*> getCollectersInformerSubscribers() { return collectersInformerSubscribers; }
+    vector<Builder*> getBuildersInformerSubscribers() { return buildersInformerSubscribers; }
+    vector<Soldier*> getSoldiersInformerSubscribers() { return soldiersInformerSubscribers; }
+    vector<Nurse*> getNursesInformerSubscribers() { return nursesInformerSubscribers; }
+    vector<Ant*> getAllAntsInformerSubscribers() { return allAntsInformerSubscribers; }
+
 private:
     vector<Collecter*> collectersInformerSubscribers;
     vector<Builder*> buildersInformerSubscribers;

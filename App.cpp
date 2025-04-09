@@ -10,18 +10,18 @@
 int main() {
     Informer informer;
     Field field(FIELD_WIDTH, FIELD_HEIGHT);
-    Anthill anthill(100, FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
-    anthill.generateAnts(FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
+    Anthill anthill(100, FIELD_WIDTH / 2, FIELD_HEIGHT / 2);
+    anthill.generateAnts(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, &informer);
     field.ResourceSpawn();
 
     //test
     // Example the rolling growth
-    cout << "\nCollecter size before -> " << anthill.collecterList.size()<<"\n";
-    cout << "Builder list before -> " << anthill.builderList.size()<<"\n\n";
-    Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);
-    anthill.builderList.push_back(pop);
-    cout << "\nCollecter size after -> " << anthill.collecterList.size()<<"\n";
-    cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
+    // cout << "\nCollecter size before -> " << anthill.collecterList.size()<<"\n";
+    // cout << "Builder list before -> " << anthill.builderList.size()<<"\n\n";
+    // Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);
+    // anthill.builderList.push_back(pop);
+    // cout << "\nCollecter size after -> " << anthill.collecterList.size()<<"\n";
+    // cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
 
 
 
@@ -36,11 +36,13 @@ int main() {
     // anthill.collecterList[1]->work(field);
 
     //test builders work
-    cout << anthill.builderList[1]->getWeight() << "\n";
-    anthill.builderList[1]->work(field);
+    // cout << anthill.builderList[1]->getWeight() << "\n";
+    // anthill.builderList[1]->work(field);
 
-    // test builders work
-
-
+    // test informer
+    cout << anthill.builderList.size() << " " << informer.getBuildersInformerSubscribers().size() << "\n";
+    cout << anthill.collecterList.size() << " " << informer.getCollectersInformerSubscribers().size() << "\n";
+    cout << anthill.nurseList.size() << " " << informer.getNursesInformerSubscribers().size() << "\n";
+    cout << anthill.soldierList.size() << " " << informer.getSoldiersInformerSubscribers().size() << "\n";
 
 }
