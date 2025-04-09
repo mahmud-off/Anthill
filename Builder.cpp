@@ -23,7 +23,7 @@ void Builder::collectMaterials(Field field) {
     }
     else { // material is ok
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.materialsCoordinates).second;
-        vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p);
+        vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
         // drawing reverse path to anthill
         field.field[p.first][p.second] = ""; // already no food in this point
@@ -31,8 +31,8 @@ void Builder::collectMaterials(Field field) {
     }
 }
 
-void Builder::helpToCollectMaterial(int x, int y) {
-    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y});
+void Builder::helpToCollectMaterial(int x, int y, Field field) {
+    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
     // drawing path from points in paths with graphic
 }
 

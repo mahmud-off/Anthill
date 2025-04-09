@@ -25,7 +25,7 @@ void Collecter::collectFood(Field field) {
 	}
 	else { // food is ok
 		pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).second;
-		vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p);
+		vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
 		// drawing path from points in paths with graphic
 		// drawing reverse path to anthill
 
@@ -40,8 +40,8 @@ void Collecter::collectFood(Field field) {
 	}
 }
 
-void Collecter::helpToCollectFood(int x, int y) {
-	vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y});
+void Collecter::helpToCollectFood(int x, int y, Field field) {
+	vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
 	// drawing path from points in paths with graphic
 }
 

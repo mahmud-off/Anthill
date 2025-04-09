@@ -10,7 +10,7 @@ public:
     Collecter();
     Collecter(int weight);
     void collectFood(Field field);
-    void helpToCollectFood(int x, int y); // coordinates
+    void helpToCollectFood(int x, int y, Field field); // coordinates
 
     // Collecter(vector<Child> list, Child &child);
 

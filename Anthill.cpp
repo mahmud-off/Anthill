@@ -14,10 +14,15 @@
 #include <time.h>
 
 #define ANTHILL_DESTROYING 5
+
 #define MAX_WEIGHT_FOR_COLLECTER 10
 #define MIN_WEIGHT_FOR_COLLECTER 5
+
 #define MAX_WEIGHT_FOR_BUILDER 15
 #define MIN_WEIGHT_FOR_BUILDER 10
+
+#define MAX_POWER_FOR_SOLDIERS 10
+#define MIN_POWER_FOR_SOLDIERS 4
 
 
 using std::cout;
@@ -79,7 +84,9 @@ void Anthill::generateAnts(int x, int y) {
 
 
     for (int i = 0; i < soldierCount; i++) {
-        soldierList.push_back(new Soldier());
+        srand(time(0));
+        int power = rand() % (MAX_POWER_FOR_SOLDIERS - MIN_POWER_FOR_SOLDIERS + 1) + MIN_POWER_FOR_SOLDIERS;
+        soldierList.push_back(new Soldier(power));
         soldierList[i]->setPosX(x);
         soldierList[i]->setPosY(y);
     }

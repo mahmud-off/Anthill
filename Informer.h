@@ -14,7 +14,7 @@ class Informer {
 public:
     void callToGetHelpToCollectMaterials(int x, int y, Field field);
     void callToGetHelpToCollectFood(int x, int y, Field field); // coordinates where was the food
-    void callToGetHelpToFightOpponent(int x, int y);
+    void callToGetHelpToFightOpponent(int x, int y, Field field);
 
     // informers for all ants
     void anthillWasAttacked(); // if opponents attack anthill

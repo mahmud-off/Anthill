@@ -6,8 +6,10 @@
 class Soldier : public Ant {
 public:
     Soldier();
+    Soldier(int power);
 
-    void helpToFightOpponent(int x, int y);
+    void helpToFightOpponent(int x, int y, Field field);
+    void fightOpponent();
 
     //virtual ~Soldier();
     virtual void work(Field field) override { ; }

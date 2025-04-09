@@ -22,7 +22,7 @@ int main() {
 
     // test collecters work
     cout << anthill.collecterList[1]->getWeight() << "\n";
-    anthill.collecterList[4]->work(field);
+    anthill.collecterList[2]->work(field);
 
     // test builders work
 

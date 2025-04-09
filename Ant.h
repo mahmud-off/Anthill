@@ -11,8 +11,6 @@ using namespace std;
 class Ant {
 public:
 
-	Field field;
-
 	int constChildEating = 1;
 	int constCleanerEating = 2;
 	int constNurseEating = 2;
@@ -25,7 +23,7 @@ public:
 
 	//functions for collecters and builders
 	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
-	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end); // shortest path from start to end
+	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field field); // shortest path from start to end
 
 	//access
 	int getAge()const { return age; }
@@ -43,6 +41,7 @@ public:
 	void setPosX(int x) { this->x = x; }
 	void setPosY(int y) { this->y = y; }
 	void setWeight(int weight) { this->weight = weight; }
+	void setPower(int power) { this->power = power; }
 
 	//functions
 	virtual void work(Field field) = 0;
@@ -61,6 +60,7 @@ private:
 	int x; // coordinates
 	int y;
 	int id;
+	int power;
 
 
 

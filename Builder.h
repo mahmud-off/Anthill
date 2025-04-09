@@ -13,7 +13,7 @@ public:
 
 
 	void collectMaterials(Field field);
-	void helpToCollectMaterial(int x, int y); // coordinates
+	void helpToCollectMaterial(int x, int y, Field field); // coordinates
 
 	using Ant::moveRight;
 	using Ant::moveLeft;
