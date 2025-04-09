@@ -6,7 +6,7 @@ Enemy::Enemy(int x, int y) // Coordinates compute in Field
 {
     cout << "Enemy was created\n";
     srand(time(0));
-    hp = 100;
+    health = 100;
     hit = 5 + rand() % 10;
     weight = 5 + rand() % 10;
     posX = x;

@@ -11,7 +11,7 @@ public:
 
     Child();
 
-    virtual ~Child() { cout << "child was deleted"; };
+    virtual ~Child() override { cout << "child was deleted"; };
     virtual void work(Field field) override { ; }
     string getRole() { return Ant::getRole(); }
 

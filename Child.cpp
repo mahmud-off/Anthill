@@ -6,6 +6,3 @@ Child::Child()
 	this->setRole("child");
 }
 
-Child::~Child() {
-	cout << "child was deleted\n";
-}

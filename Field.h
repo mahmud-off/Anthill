@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "Enemy.h"
 
 using namespace std;
 
@@ -18,8 +19,6 @@ public:
     vector<vector<string>> field;
     Field(int width, int height);
     void ResourceSpawn();
-    vector<pair<int, int>> foodCoordinates; // coordinates of cells with food
-    vector<pair<int, int>> materialsCoordinates; // coordinates of cells with materials
 
     //Enemies
     void createEnemy();
@@ -34,7 +33,6 @@ private:
     void foodSpawn(int k);
     void materialsSpawn(int k);
 
-    vector<vector<string>> field;
     int height;
     int width;
 

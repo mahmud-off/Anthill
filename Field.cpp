@@ -24,7 +24,8 @@ void Field::materialsSpawn(int k) {
         srand(time(0));
         int x = rand() % this->width;
         int y = rand() % this->height;
-        while (field[x][y] != "") { // если ячейка поля уже занята, то пересчитываем заново
+        while (field[x][y] != "") {
+            // если ячейка поля уже занята, то пересчитываем заново
             x = rand() % this->width;
             y = rand() % this->height;
         }
@@ -34,25 +35,25 @@ void Field::materialsSpawn(int k) {
     }
 }
 
-void Field::createEnemy()
-{
+void Field::createEnemy() {
     //first - compute Enemy's point
     srand(time(0));
     int x = rand() % this->width;
     int y = rand() % this->height;
-    while (field[x][y] != "") { // point is free +
+    while (field[x][y] != "") {
+        // point is free +
         x = rand() % this->width;
         y = rand() % this->height;
     }
     //create Enemy
-    Enemy* newEnemy = new Enemy(x,y);
+    Enemy *newEnemy = new Enemy(x, y);
     enemies.push_back(newEnemy);
 }
 
 void Field::deleteEnemy(Enemy *killed) // O(Enemies count)
 {
-    for(int i = 0; i < enemies.size(); ++i) {
-        if(enemies[i] == killed) {
+    for (int i = 0; i < enemies.size(); ++i) {
+        if (enemies[i] == killed) {
             delete killed;
             enemies.erase(enemies.begin() + i);
             break;
@@ -65,7 +66,8 @@ void Field::foodSpawn(int k) {
         srand(time(0));
         int x = rand() % this->width;
         int y = rand() % this->height;
-        while (field[x][y] != "") { // если ячейка поля уже занята, то пересчитываем заново
+        while (field[x][y] != "") {
+            // если ячейка поля уже занята, то пересчитываем заново
             x = rand() % this->width;
             y = rand() % this->height;
         }
@@ -80,8 +82,9 @@ void Field::ResourceSpawn() {
     this->materialsSpawn(DAILY_MATERIALS_SPAWN);
 }
 
-void Field::updateFoodCoordinatesList() { // для того чтобы не рассматривать лишние координаты с едой в следующий раз
-    vector<pair<int, pair<int, int>>> newFoodCoordinates;
+void Field::updateFoodCoordinatesList() {
+    // для того чтобы не рассматривать лишние координаты с едой в следующий раз
+    vector<pair<int, pair<int, int> > > newFoodCoordinates;
     for (int i = 0; i < newFoodCoordinates.size(); i++) {
         int x = foodCoordinates[i].second.first;
         int y = foodCoordinates[i].second.second;
@@ -93,7 +96,7 @@ void Field::updateFoodCoordinatesList() { // для того чтобы не р�
 }
 
 void Field::updateMaterialsCoordinatesList() {
-    vector<pair<int, pair<int, int>>> newMaterialsCoordinates;
+    vector<pair<int, pair<int, int> > > newMaterialsCoordinates;
     for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
         int x = materialsCoordinates[i].second.first;
         int y = materialsCoordinates[i].second.second;
@@ -103,5 +106,3 @@ void Field::updateMaterialsCoordinatesList() {
     }
     foodCoordinates = newMaterialsCoordinates;
 }
-
-

@@ -20,9 +20,14 @@ void Informer::callToGetHelpToCollectMaterials(int x, int y, Field field) {
     field.updateMaterialsCoordinatesList();
 }
 
-void Informer::callToGetHelpToFightOpponent(int x, int y, Field field) {
+void Informer::callToGetHelpToFightEnemy(int x, int y, Field field, Enemy enemy) {
     for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
         Soldier *curSoldier = soldiersInformerSubscribers[i];
-        curSoldier->helpToFightOpponent(x, y, field);
+        curSoldier->helpToFightEnemy(x, y, field);
+        curSoldier->fightEnemy(enemy);
+        if (enemy.getHealth() <= 0) { // if enemy died -> no need to help
+            break;
+        }
+        // if enemy is alive -> next soldier goes to help
     }
 }
