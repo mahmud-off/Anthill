@@ -12,7 +12,7 @@ public:
     void collectFood(Field field);
     void helpToCollectFood(int x, int y, Field field); // coordinates
 
-    Collecter(vector<Ant*>& list, Ant* &child);
+    Collecter(vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
     virtual void work(Field field) override { collectFood(field); }

@@ -12,7 +12,7 @@ Soldier::Soldier(int power) {
     this->setPower(power);
 }
 
-Soldier::Soldier(vector<Ant *> &list, Ant *&collecter) {
+Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
     cout << "soldier from collecter" << endl;
     this->setAge(collecter->getAge());
     this->setRole("soldier");

@@ -39,7 +39,7 @@ void Builder::collectMaterials(Field field) {
     }
 }
 
-Builder::Builder(vector<Ant *> &list, Ant *&collecter) {
+Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
 	cout << "builder from collecter" << endl;
 	this->setAge(collecter->getAge());
 	this->setRole("builder");

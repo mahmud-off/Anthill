@@ -6,7 +6,7 @@ Nurse::Nurse()
 	this->setRole("nurse");
 }
 
-Nurse::Nurse(vector<Ant *> &list, Ant *&cleaner) {
+Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
 	cout << "nurse from collecter" << endl;
 	this->setAge(cleaner->getAge());
 	this->setRole("nurse");

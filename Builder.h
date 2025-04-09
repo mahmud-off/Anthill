@@ -1,5 +1,6 @@
 //#pragma once
 #include "Ant.h"
+#include "Collecter.h"
 #include "Field.h"
 #ifndef BUILDER_H
 #define BUILDER_H
@@ -9,7 +10,8 @@ public:
 	Builder();
 	Builder(int weight);
 	virtual ~Builder();
-	Builder(vector<Ant*>& list, Ant* &collecter);
+	Builder(vector<Collecter*>& list, Collecter* &collecter);
+
 	virtual void work(Field field) override { collectMaterials(field); }
 
 

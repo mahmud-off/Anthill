@@ -4,20 +4,20 @@
 
 #include "Ant.h"
 #include "Enemy.h"
+#include "Collecter.h"
 
 class Soldier : public Ant {
 public:
     Soldier();
     Soldier(int power);
 
+    Soldier(vector<Collecter*>& list, Collecter* &collecter);
     void helpToFightEnemy(int x, int y, Field field);
     void fightEnemy(Enemy enemy);
 
-    //virtual ~Soldier();
+    virtual ~Soldier();
     virtual void work(Field field) override { ; }
     Soldier(vector<Ant*>& list, Ant* &collecter);
-
-    virtual ~Soldier();
 
     using Ant::moveRight;
     using Ant::moveLeft;

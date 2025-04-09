@@ -1,6 +1,7 @@
 //#pragma once
 
 #include "Ant.h"
+#include "Cleaner.h"
 #ifndef NURSE_H
 #define NURSE_H
 
@@ -11,7 +12,7 @@ public:
 	//virtual ~Nurse();
 	virtual void work(Field field) override { ; }
 
-	Nurse(vector<Ant*>& list, Ant* &cleaner);
+	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
 	virtual ~Nurse();
 
 	using Ant::moveRight;
