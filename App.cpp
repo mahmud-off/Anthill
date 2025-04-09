@@ -12,6 +12,15 @@ int main() {
     anthill.generateAnts(FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     field.ResourceSpawn();
 
+    //test
+    // Example the rolling growth
+    cout << "\nCollecter size before -> " << anthill.collecterList.size()<<"\n";
+    cout << "Builder list before -> " << anthill.builderList.size()<<"\n\n";
+    Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);
+    anthill.builderList.push_back(pop);
+    cout << "\nCollecter size after -> " << anthill.collecterList.size()<<"\n";
+    cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
+
 
 
     // test foodCoordinates
@@ -25,5 +34,12 @@ int main() {
     anthill.collecterList[2]->work(field);
 
     // test builders work
+    //Enemies' test
+    cout << "\nEnemies count: " <<field.enemies.size() << "\n";
+    field.createEnemy();
+    cout << "Enemies count: " <<field.enemies.size() << "\n";
+    field.deleteEnemy(field.enemies[0]);
+    cout << "Enemies count: " <<field.enemies.size() << "\n";
+
 
 }

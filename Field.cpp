@@ -34,6 +34,32 @@ void Field::materialsSpawn(int k) {
     }
 }
 
+void Field::createEnemy()
+{
+    //first - compute Enemy's point
+    srand(time(0));
+    int x = rand() % this->width;
+    int y = rand() % this->height;
+    while (field[x][y] != "") { // point is free +
+        x = rand() % this->width;
+        y = rand() % this->height;
+    }
+    //create Enemy
+    Enemy* newEnemy = new Enemy(x,y);
+    enemies.push_back(newEnemy);
+}
+
+void Field::deleteEnemy(Enemy *killed) // O(Enemies count)
+{
+    for(int i = 0; i < enemies.size(); ++i) {
+        if(enemies[i] == killed) {
+            delete killed;
+            enemies.erase(enemies.begin() + i);
+            break;
+        }
+    }
+}
+
 void Field::foodSpawn(int k) {
     for (int i = 0; i < k; i++) {
         srand(time(0));

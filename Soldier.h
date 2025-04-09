@@ -13,6 +13,10 @@ public:
 
     //virtual ~Soldier();
     virtual void work(Field field) override { ; }
+    Soldier(vector<Ant*>& list, Ant* &collecter);
+
+    virtual ~Soldier();
+    virtual void work() override { ; }
 
     using Ant::moveRight;
     using Ant::moveLeft;

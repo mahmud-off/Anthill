@@ -11,6 +11,9 @@ public:
 	//virtual ~Nurse();
 	virtual void work(Field field) override { ; }
 
+	Nurse(vector<Ant*>& list, Ant* &cleaner);
+	virtual ~Nurse();
+
 	using Ant::moveRight;
 	using Ant::moveLeft;
 	using Ant::moveUp;

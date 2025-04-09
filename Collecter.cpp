@@ -14,6 +14,27 @@ Collecter::Collecter(int weight) {
 }
 
 
+Collecter::Collecter(vector<Ant*>& list, Ant* &child)
+{
+	cout << "collecter from child" << endl;
+	this->setAge(child->getAge());
+	this->setRole("collecter");
+	this->setHealth(child->getHealth());
+	this->setWeight(child->getWeight());
+	this->setPosX(child->getPosX());
+	this->setPosY(child->getPosY());
+	for(int i = 0; i < list.size(); ++i) {
+		if(list[i] == child) {
+			delete list[i];
+			list.erase(list.begin()+i);
+			break;
+		}
+	}
+}
+
+Collecter::~Collecter() {
+	cout << "collecter was deleted\n";
+
 void Collecter::collectFood(Field field) {
 	if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).first) { // food is too heavy
 		// cout << "food isn't available!\n";

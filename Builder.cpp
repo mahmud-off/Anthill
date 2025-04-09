@@ -31,6 +31,27 @@ void Builder::collectMaterials(Field field) {
     }
 }
 
+Builder::Builder(vector<Ant *> &list, Ant *&collecter) {
+	cout << "builder from collecter" << endl;
+	this->setAge(collecter->getAge());
+	this->setRole("builder");
+	this->setHealth(collecter->getHealth());
+	this->setWeight(collecter->getWeight());
+	this->setPosX(collecter->getPosX());
+	this->setPosY(collecter->getPosY());
+	for(int i = 0; i < list.size(); ++i) {
+		if(list[i] == collecter) {
+			delete list[i];
+			list.erase(list.begin()+i);
+			break;
+		}
+	}
+}
+
+Builder::~Builder() {
+	cout << "builder was deleted\n";
+}
+
 void Builder::helpToCollectMaterial(int x, int y, Field field) {
     vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
     // drawing path from points in paths with graphic

@@ -7,8 +7,10 @@ class Cleaner : public Ant {
 public:
 
 	Cleaner();
-	//virtual ~Cleaner();
+	virtual ~Cleaner();
+	Cleaner(vector<Ant*>& list, Ant* &child);
 	virtual void work(Field field) override { ; }
+
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

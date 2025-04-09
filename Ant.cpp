@@ -17,7 +17,7 @@ Ant::Ant() {
 }
 
 Ant::~Ant() {
-    cout << "\nAnt destructor;!!!\n";
+    cout << "Ant destructor;!!!\n";
 }
 
 void Ant::moveRight() {
@@ -30,6 +30,18 @@ void Ant::moveLeft() {
 
 void Ant::moveUp() {
     y += 1 * STEP;
+}
+
+bool Ant::operator==(const Ant *right) const {
+
+    if(this->age == right->age &&
+        this->health == right->health &&
+        this->weight == right->weight &&
+        this->x == right->x &&
+        this->y == right->y) {
+        return true;
+    }
+    return false;
 }
 
 void Ant::moveDown() {

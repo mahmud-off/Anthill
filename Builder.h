@@ -8,7 +8,8 @@ class Builder : public Ant {
 public:
 	Builder();
 	Builder(int weight);
-	//virtual ~Builder();
+	virtual ~Builder();
+	Builder(vector<Ant*>& list, Ant* &collecter);
 	virtual void work(Field field) override { collectMaterials(field); }
 
 

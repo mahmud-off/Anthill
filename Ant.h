@@ -52,6 +52,9 @@ public:
 	void moveDown();
 	void moveUp();
 
+	//compare
+	bool operator==(const Ant* right)const;
+
 private:
 	int age;
 	string role;
