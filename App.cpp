@@ -16,10 +16,6 @@ int main() {
 
     // test
     Ant* c = anthill.collecterList[0];
-    pair<int, int> p = c->findNearestPoint(c->getPosX(), c->getPosY(), field.foodCoordinates);
-    vector<pair<int, int>> paths = c->A_StarSearch({c->getPosX(), c->getPosY()}, p);
-    for (auto x : paths) {
-        cout << x.first << " " << x.second << "\n";
-    }
+    c->work(field);
 
 }

@@ -8,7 +8,7 @@ public:
 
 	Cleaner();
 	//virtual ~Cleaner();
-	virtual void work() override { ; }
+	virtual void work(Field field) override { ; }
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

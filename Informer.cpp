@@ -23,6 +23,6 @@ void Informer::callToGetHelpToCollectMaterials(int x, int y, Field field) {
 void Informer::callToGetHelpToFightOpponent(int x, int y) {
     for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
         Soldier *curSoldier = soldiersInformerSubscribers[i];
-        curSoldier->helpToFindOpponent(x, y);
+        curSoldier->helpToFightOpponent(x, y);
     }
 }

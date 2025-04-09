@@ -9,7 +9,7 @@ class Nurse : public Ant {
 public:
 	Nurse();
 	//virtual ~Nurse();
-	virtual void work() override { ; }
+	virtual void work(Field field) override { ; }
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

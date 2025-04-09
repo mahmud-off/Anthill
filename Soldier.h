@@ -7,10 +7,10 @@ class Soldier : public Ant {
 public:
     Soldier();
 
-    void helpToFindOpponent(int x, int y);
+    void helpToFightOpponent(int x, int y);
 
     //virtual ~Soldier();
-    virtual void work() override { ; }
+    virtual void work(Field field) override { ; }
 
     using Ant::moveRight;
     using Ant::moveLeft;

@@ -1,6 +1,7 @@
 //#pragma once
 #include <vector>
 #include <iostream>
+#include "Field.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ public:
 	void setPosY(int y) { this->y = y; }
 
 	//functions
-	virtual void work() = 0;
+	virtual void work(Field field) = 0;
 
 	// moving
 	void moveRight();

@@ -12,7 +12,7 @@ public:
     Child();
 
     virtual ~Child() { cout << "child was deleted"; };
-    virtual void work() override { ; }
+    virtual void work(Field field) override { ; }
     string getRole() { return Ant::getRole(); }
 
     using Ant::moveRight;

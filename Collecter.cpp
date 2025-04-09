@@ -19,6 +19,13 @@ void Collecter::collectFood(Field field) {
 		vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p);
 		// drawing path from points in paths with graphic
 		// drawing reverse path to anthill
+
+		//for testing
+		// for (auto x : paths) {
+		// 	cout << x.first << " " << x.second << "\n";
+		// }
+		//
+
 		field.field[p.first][p.second] = ""; // already no food in this point
 		field.updateFoodCoordinatesList();
 	}

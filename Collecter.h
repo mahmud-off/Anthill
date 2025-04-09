@@ -14,7 +14,7 @@ public:
     // Collecter(vector<Child> list, Child &child);
 
     //virtual ~Collecter();
-    virtual void work() override { ; }
+    virtual void work(Field field) override { collectFood(field); }
 
     using Ant::moveRight;
     using Ant::moveLeft;
