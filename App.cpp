@@ -7,7 +7,7 @@
 #define FIELD_WIDTH 250
 
 int main() {
-    Field field(FIELD_HEIGHT, FIELD_WIDTH);
+    Field field(FIELD_WIDTH, FIELD_HEIGHT);
     Anthill anthill(100, FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     anthill.generateAnts(FIELD_HEIGHT / 2, FIELD_WIDTH / 2);
     field.ResourceSpawn();
@@ -23,4 +23,7 @@ int main() {
     // test collecters work
     cout << anthill.collecterList[1]->getWeight() << "\n";
     anthill.collecterList[4]->work(field);
+
+    // test builders work
+
 }

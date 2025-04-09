@@ -16,8 +16,8 @@ Collecter::Collecter(int weight) {
 
 void Collecter::collectFood(Field field) {
 	if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).first) { // food is too heavy
-		cout << "food isn't available!\n";
-		cout << this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).first << "\n";
+		// cout << "food isn't available!\n";
+		// cout << this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).first << "\n";
 		// informer function will be here
 		pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).second;
 		Informer informer;
