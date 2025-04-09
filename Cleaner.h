@@ -1,5 +1,6 @@
 //#pragma once
 #include "Ant.h"
+#include "Child.h"
 #ifndef CLEANER_H
 #define CLEANER_H
 
@@ -8,7 +9,7 @@ public:
 
 	Cleaner();
 
-	Cleaner(vector<Ant*>& list, Ant* &child);
+	Cleaner(vector<Child*>& list, Child* &child);
 
 	virtual ~Cleaner();
 

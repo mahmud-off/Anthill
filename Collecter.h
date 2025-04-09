@@ -8,7 +8,7 @@ class Collecter : public Ant {
 public:
     Collecter();
 
-    Collecter(vector<Ant*>& list, Ant* &child);
+    Collecter(vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
     virtual void work() override { ; }

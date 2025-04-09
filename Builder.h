@@ -1,5 +1,6 @@
 //#pragma once
 #include "Ant.h"
+#include "Collecter.h"
 #ifndef BUILDER_H
 #define BUILDER_H
 
@@ -7,7 +8,7 @@ class Builder : public Ant {
 public:
 	Builder();
 
-	Builder(vector<Ant*>& list, Ant* &collecter);
+	Builder(vector<Collecter*>& list, Collecter* &collecter);
 
 	virtual ~Builder();
 	virtual void work() override { ; }

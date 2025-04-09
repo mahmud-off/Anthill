@@ -6,7 +6,7 @@ Cleaner::Cleaner()
 	this->setRole("cleaner");
 }
 
-Cleaner::Cleaner(vector<Ant *> &list, Ant *&child)
+Cleaner::Cleaner(vector<Child *> &list, Child *&child)
 {
 	cout << "cleaner from child" << endl;
 	this->setAge(child->getAge());

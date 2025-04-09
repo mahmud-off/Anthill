@@ -7,7 +7,7 @@ Collecter::Collecter()
 }
 
 
-Collecter::Collecter(vector<Ant*>& list, Ant* &child)
+Collecter::Collecter(vector<Child*>& list, Child* &child)
 {
 	cout << "collecter from child" << endl;
 	this->setAge(child->getAge());

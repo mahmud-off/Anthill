@@ -1,5 +1,6 @@
 //#pragma once
 #include "Ant.h"
+#include "Collecter.h"
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
@@ -7,7 +8,7 @@ class Soldier : public Ant {
 public:
     Soldier();
 
-    Soldier(vector<Ant*>& list, Ant* &collecter);
+    Soldier(vector<Collecter*>& list, Collecter* &collecter);
 
     virtual ~Soldier();
     virtual void work() override { ; }

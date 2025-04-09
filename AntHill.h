@@ -23,12 +23,12 @@ class Anthill {
 public:
 
 	// for testing to rolling growth
-	vector<Ant*> collecterList;
-	vector<Ant*> childList;
-	vector<Ant*> builderList;
-	vector<Ant*> cleanerList;
-	vector<Ant*> nurseList;
-	vector<Ant*> soldierList;
+	vector<Collecter*> collecterList;
+	vector<Child*> childList;
+	vector<Builder*> builderList;
+	vector<Cleaner*> cleanerList;
+	vector<Nurse*> nurseList;
+	vector<Soldier*> soldierList;
 
 	Anthill(int scale, int x, int y);
 	void generateAnts(int posX, int posY); // positions of ants in the beginning

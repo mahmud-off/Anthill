@@ -6,7 +6,7 @@ Soldier::Soldier() {
     hit = 10; // ���� ����� ��������� ��� ������
 }
 
-Soldier::Soldier(vector<Ant *> &list, Ant *&collecter) {
+Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
     cout << "soldier from collecter" << endl;
     this->setAge(collecter->getAge());
     this->setRole("soldier");

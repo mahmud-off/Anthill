@@ -6,7 +6,7 @@ Builder::Builder()
 	this->setRole("builder");
 }
 
-Builder::Builder(vector<Ant *> &list, Ant *&collecter) {
+Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
 	cout << "builder from collecter" << endl;
 	this->setAge(collecter->getAge());
 	this->setRole("builder");
