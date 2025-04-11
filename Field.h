@@ -19,7 +19,12 @@ public:
     void createEnemy();
     void deleteEnemy(Enemy* killed);
     //for testing
-    vector<Enemy*> enemies;
+
+    //getters
+    vector<Enemy*>& getEnemiesList(){return enemies;}
+    int getHeight()const{return height; }
+    int getWidth()const{return width; }
+
 
 private:
     // resource spawn
@@ -31,7 +36,7 @@ private:
     int width;
 
     //enemies
-    //vector<Enemy*> enemies;
+    vector<Enemy*> enemies;
 
 };
 

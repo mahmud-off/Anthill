@@ -31,7 +31,7 @@ public:
 
     void moveByCoordinates(pair<int, int> coords);
 
-
+    void moveToRandomPointInROView(int heightOfField, int widthOfField);
 
 private:
     //parameters

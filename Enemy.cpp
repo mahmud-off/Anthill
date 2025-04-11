@@ -141,6 +141,18 @@ void Enemy::moveByCoordinates(pair<int, int> coords) {
     }
 }
 
+void Enemy::moveToRandomPointInROView(int heightOfField, int widthOfField)
+{
+    srand(time(0));
+
+    pair<int, int> randPoint(rand()%widthOfField, rand()%heightOfField);
+    while(distance(this->posX, this->posY, randPoint.first, randPoint.second) > roView) {
+        randPoint.first = rand()%widthOfField;
+        randPoint.second = rand()%heightOfField;
+    }
+    moveByCoordinates(randPoint);
+}
+
 
 double Enemy::distance(int x1, int y1, int x2, int y2)
 {

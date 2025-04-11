@@ -32,21 +32,21 @@ int main() {
     }
 
     //Enemies' test
-    cout << "\nEnemies count: " <<field.enemies.size() << "\n";
+    cout << "\nEnemies count: " <<field.getEnemiesList().size() << "\n";
     field.createEnemy();
-    cout << "Enemies count: " <<field.enemies.size() << "\n";
+    cout << "Enemies count: " <<field.getEnemiesList().size() << "\n";
 
-    cout << "Ant nearly --> " << field.enemies[0]->findAnts(anthill) << "\n";
-    cout << "Ant nearly --> " << field.enemies[0]->PositionOfNearestAnt(anthill).first << " " << field.enemies[0]->PositionOfNearestAnt(anthill).second << "\n";
+    cout << "Ant nearly --> " << field.getEnemiesList()[0]->findAnts(anthill) << "\n";
+    cout << "Ant nearly --> " << field.getEnemiesList()[0]->PositionOfNearestAnt(anthill).first << " " << field.getEnemiesList()[0]->PositionOfNearestAnt(anthill).second << "\n";
 
-    cout << "Food nearly --> " << field.enemies[0]->findFood(field.foodCoordinates) << "\n";
-    cout << "Food nearly --> " << field.enemies[0]->PositionOfNearestFood(field.foodCoordinates).first << " " << field.enemies[0]->PositionOfNearestFood(field.foodCoordinates).second<< "\n";
+    cout << "Food nearly --> " << field.getEnemiesList()[0]->findFood(field.foodCoordinates) << "\n";
+    cout << "Food nearly --> " << field.getEnemiesList()[0]->PositionOfNearestFood(field.foodCoordinates).first << " " << field.getEnemiesList()[0]->PositionOfNearestFood(field.foodCoordinates).second<< "\n";
 
     //movement to food
-    field.enemies[0]->moveByCoordinates(field.enemies[0]->PositionOfNearestFood(field.foodCoordinates));
-
-    field.deleteEnemy(field.enemies[0]);
-    cout << "Enemies count: " <<field.enemies.size() << "\n";
+    //field.getEnemiesList()[0]->moveByCoordinates(field.getEnemiesList()[0]->PositionOfNearestFood(field.foodCoordinates));
+    field.getEnemiesList()[0]->moveToRandomPointInROView(field.getHeight(), field.getWidth());
+    field.deleteEnemy(field.getEnemiesList()[0]);
+    cout << "Enemies count: " <<field.getEnemiesList().size() << "\n";
 
 
 }
