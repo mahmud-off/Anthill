@@ -13,7 +13,7 @@ void Game::initWindow(){
 }
 
 // Constructor / Destructor
-Game::Game(): ant(sf::Vector2f(20.f, 20.f)) {
+Game::Game(): ant(sf::Vector2f(100.f, 100.f)) {
 	this->initVariables();
 	this->initWindow();
 }
