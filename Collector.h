@@ -6,10 +6,11 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <random>
+#include <iostream>
 
 using namespace std;
 
-class Ant {
+class Collector {
 private:
     sf::RectangleShape shape; // Заменяем спрайт на прямоугольник
 
@@ -18,7 +19,7 @@ private:
 
     int x, y;
 public:
-    Ant(const sf::Vector2f& position);
+    Collector(const sf::Vector2f& position);
     void draw(sf::RenderWindow& window);
     void updateMovement();         // Обновление позиции
 

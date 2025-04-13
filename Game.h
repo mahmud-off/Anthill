@@ -5,7 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#include "Ant.h"
+#include "Anthill.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ public:
 private:
 	sf::RenderWindow* window;
 	sf::VideoMode videomode;
-	vector<Ant> ants;
+	Anthill anthill;
 
 	void initVariables();
 	void initWindow();
