@@ -13,7 +13,7 @@ class Ant {
 private:
     sf::RectangleShape shape; // Заменяем спрайт на прямоугольник
 
-    pair <int, int> endPoint;
+    pair <int, int> endPoint = { 583, 497 };
     bool isMoving = false;                 // Флаг движения
 
     int x, y;

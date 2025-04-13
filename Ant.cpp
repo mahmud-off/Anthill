@@ -2,6 +2,8 @@
 #include "Ant.h"
 #include <iostream>
 
+#define ANTHILL_WH 200
+
 int getRandom(int min_n, int max_n) {
     static mt19937 generator(random_device{}());
     uniform_int_distribution<int> distribution(min_n, max_n);
@@ -14,8 +16,10 @@ Ant::Ant(const sf::Vector2f& position) {
     shape.setFillColor(sf::Color::Black); // яркий цвет дл€ видимости
     shape.setPosition(position);
 
+    
     setPosX(position.x);
     setPosY(position.y);
+    cout << getPosX() << " " << getPosY() << endl;
 }
 
 void Ant::draw(sf::RenderWindow& window) {
@@ -24,7 +28,7 @@ void Ant::draw(sf::RenderWindow& window) {
 
 void Ant::updateMovement()
 {
-    if (x != endPoint.first && y != endPoint.second) {
+    if (x != endPoint.first || y != endPoint.second) {
         if (x < endPoint.first) setPosX(getPosX() + 1);
         else if (x > endPoint.first) setPosX(getPosX() - 1);
 
@@ -32,10 +36,15 @@ void Ant::updateMovement()
         else if (y > endPoint.second) setPosY(getPosY() - 1);
 
         shape.setPosition(sf::Vector2f(x, y));
-    }else {
+    }else if ( !((x == ANTHILL_WH && y <= ANTHILL_WH) || (y == ANTHILL_WH && x <= ANTHILL_WH)) ){ // "если мы не дома, то находим координаты дл€ дома" 
+        endPoint.first = (x >= ANTHILL_WH ? ANTHILL_WH : x);
+        endPoint.second = (y >= ANTHILL_WH ? ANTHILL_WH : y);
+        //cout << "2 " << endPoint.first << " " << endPoint.second << endl;
+    }else{
         endPoint.first = getRandom(0, 1024);
-        endPoint.second = getRandom(0, 768);
+        endPoint.second =  endPoint.first > ANTHILL_WH ? getRandom(0, 768) : getRandom(ANTHILL_WH+1, 768);
         //this->isMoving = true;
+        cout << "3" << endl;
     }
 
 
