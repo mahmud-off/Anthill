@@ -13,9 +13,13 @@ void Game::initWindow(){
 }
 
 // Constructor / Destructor
-Game::Game(): ant(sf::Vector2f(100.f, 100.f)) {
+Game::Game() {
 	this->initVariables();
 	this->initWindow();
+
+	for (int i = 0; i < 3; ++i) {
+		ants.emplace_back(sf::Vector2f(100.f, 100.f));
+	}
 }
 Game::~Game() {
 	delete this->window;
@@ -29,13 +33,17 @@ const bool Game::running() const{
 void Game::update(){
 	pollEvents();
 
-	ant.updateMovement();
+	for (auto& ant : ants) {
+		ant.updateMovement();
+	}
 }
 
 void Game::render(){
 	window->clear(sf::Color(93,161,48,54)); // зелёный фон 
 
-	ant.draw(*window);
+	for (auto& ant : ants) {
+		ant.draw(*window);
+	}
 
 	window->display();
 }

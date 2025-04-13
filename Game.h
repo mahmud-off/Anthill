@@ -23,7 +23,7 @@ public:
 private:
 	sf::RenderWindow* window;
 	sf::VideoMode videomode;
-	Ant ant;
+	vector<Ant> ants;
 
 	void initVariables();
 	void initWindow();
