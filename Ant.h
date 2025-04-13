@@ -5,13 +5,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <random>
 
+using namespace std;
 
 class Ant {
 private:
     sf::RectangleShape shape; // Заменяем спрайт на прямоугольник
 
-    std::pair <int, int> path = { 583, 497 };
+    pair <int, int> endPoint;
     bool isMoving = false;                 // Флаг движения
 
     int x, y;
