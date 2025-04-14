@@ -1,4 +1,4 @@
-﻿    #include <iostream>
+﻿#include <iostream>
 #include "AntHill.h"
 #include "Ant.h"
 #include "builder.h"
@@ -13,7 +13,19 @@
 #include <cstdlib>
 #include <time.h>
 
+#include "Informer.h"
+
 #define ANTHILL_DESTROYING 5
+
+#define MAX_WEIGHT_FOR_COLLECTER 10
+#define MIN_WEIGHT_FOR_COLLECTER 5
+
+#define MAX_WEIGHT_FOR_BUILDER 15
+#define MIN_WEIGHT_FOR_BUILDER 10
+
+#define MAX_POWER_FOR_SOLDIERS 10
+#define MIN_POWER_FOR_SOLDIERS 4
+
 
 using std::cout;
 using std::cin;
@@ -26,7 +38,7 @@ Anthill::Anthill(int scale, int x, int y) {
     this->y = y;
 }
 
-void Anthill::generateAnts(int x, int y) {
+void Anthill::generateAnts(int x, int y, Informer *informer) {
     this->foodCount = 0.7 * this->scale;
     this->antCount = 0.3 * this->scale;
     this->childrenCount = 0.2 * this->antCount;
@@ -38,27 +50,37 @@ void Anthill::generateAnts(int x, int y) {
 
     for (int i = 0; i < childrenCount; i++) {
         childList.push_back(new Child());
+        informer->addToAllAntsInformerSubscribers(childList.back());
         childList[i]->setPosX(x);
         childList[i]->setPosY(y);
     }
 
     for (int i = 0; i < builderCount; i++) {
-        builderList.push_back(new Builder());
+        srand(time(0));
+        int weight = rand() % (MAX_WEIGHT_FOR_BUILDER - MIN_WEIGHT_FOR_BUILDER + 1) + MIN_WEIGHT_FOR_BUILDER;
+        builderList.push_back(new Builder(weight));
         builderList[i]->setPosX(x);
         builderList[i]->setPosY(y);
+        informer->addToBuildersInformerSubscribers(builderList.back());
+        informer->addToAllAntsInformerSubscribers(builderList.back());
     }
 
     for (int i = 0; i < cleanerCount; i++) {
         cleanerList.push_back(new Cleaner());
         cleanerList[i]->setPosX(x);
         cleanerList[i]->setPosY(y);
+        informer->addToAllAntsInformerSubscribers(cleanerList.back());
     }
 
 
     for (int i = 0; i < collecterCount; i++) {
-        collecterList.push_back(new Collecter());
+        srand(time(0));
+        int weight = rand() % (MAX_WEIGHT_FOR_COLLECTER - MIN_WEIGHT_FOR_COLLECTER + 1) + MIN_WEIGHT_FOR_COLLECTER;
+        collecterList.push_back(new Collecter(weight));
         collecterList[i]->setPosX(x);
         collecterList[i]->setPosY(y);
+        informer->addToAllAntsInformerSubscribers(collecterList.back());
+        informer->addToCollectorsInformerSubscribers(collecterList.back());
     }
 
 
@@ -66,13 +88,19 @@ void Anthill::generateAnts(int x, int y) {
         nurseList.push_back(new Nurse());
         nurseList[i]->setPosX(x);
         nurseList[i]->setPosY(y);
+        informer->addToAllAntsInformerSubscribers(nurseList.back());
+        informer->addToNursesInformerSubscribers(nurseList.back());
     }
 
 
     for (int i = 0; i < soldierCount; i++) {
-        soldierList.push_back(new Soldier());
+        srand(time(0));
+        int power = rand() % (MAX_POWER_FOR_SOLDIERS - MIN_POWER_FOR_SOLDIERS + 1) + MIN_POWER_FOR_SOLDIERS;
+        soldierList.push_back(new Soldier(power));
         soldierList[i]->setPosX(x);
         soldierList[i]->setPosY(y);
+        informer->addToAllAntsInformerSubscribers(soldierList.back());
+        informer->addToSoldiersInformerSubscribers(soldierList.back());
     }
 }
 

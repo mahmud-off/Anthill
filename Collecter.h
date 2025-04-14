@@ -3,16 +3,19 @@
 
 #include "Ant.h"
 #include "Child.h"
-
+#include "Field.h"
 
 class Collecter : public Ant {
 public:
     Collecter();
+    Collecter(int weight);
+    void collectFood(Field field);
+    void helpToCollectFood(int x, int y, Field field); // coordinates
 
     Collecter(vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
-    virtual void work() override { ; }
+    virtual void work(Field field) override { collectFood(field); }
 
     using Ant::moveRight;
     using Ant::moveLeft;

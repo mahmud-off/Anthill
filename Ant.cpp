@@ -2,6 +2,7 @@
 #include "AntHill.h"
 #include <algorithm>
 #include <cmath>
+#include "Field.h"
 
 #define STEP 1
 
@@ -50,12 +51,25 @@ void Ant::moveDown() {
     y -= 1 * STEP;
 }
 
-pair<int, int> Ant::findNearestPoint(int x1, int y1, vector<pair<int, int> > v) {
+int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) { // check if point is in the Field
+    if (point.first < fiedlWidth && point.second < fieldHeight && point.first > 0 && point.second > 0) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+
+pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
-    pair<int, int> answerPoint;
+    pair<int, pair<int, int>> answerPoint;
     int minn = 1e9;
-    for (auto point : v) {
-        int res = sqrt((point.first - x1) * (point.first - x1) + (point.second - y1) * (point.second - y1));
+    for (auto p : v) {
+        pair<int, pair<int, int>> point;
+        point.second = p.second;
+        point.first = p.first;
+        int res = sqrt((point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (point.second.second - y1));
         if (res < minn) {
             minn = res;
             answerPoint = point;
@@ -69,16 +83,26 @@ int h(pair<int, int> p1, pair<int, int> p2) {
     return res;
 }
 
-vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end) {
+vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field field) {
     vector<pair<int, int>> path; // path from start to end
 
     vector<pair<int, int>> options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
 
     while (start != end) {
-        options.push_back({start.first + 1, start.second});
-        options.push_back({start.first - 1, start.second});
-        options.push_back({start.first, start.second + 1});
-        options.push_back({start.first, start.second - 1});
+        pair<int, int> p1 = make_pair(start.first + 1, start.second);
+        pair<int, int> p2 = make_pair(start.first - 1, start.second);
+        pair<int, int> p3 = make_pair(start.first, start.second + 1);
+        pair<int, int> p4 = make_pair(start.first, start.second - 1);
+        if (isValid(p1, field.getWidth(), field.getHeight()))
+            options.push_back(p1);
+        if (isValid(p2, field.getWidth(), field.getHeight()))
+            options.push_back(p2);
+        if (isValid(p3, field.getWidth(), field.getHeight()))
+            options.push_back(p3);
+        if (isValid(p4, field.getWidth(), field.getHeight()))
+            options.push_back(p4);
+
+
 
         vector<pair<int, pair<int, int>>> vH; // vector of h(option[i]) for every options
         for (auto x : options) {

@@ -3,7 +3,6 @@
 
 #include "Ant.h"
 
-
 using namespace std;
 
 class Child : public Ant {
@@ -12,7 +11,8 @@ public:
     Child();
 
     virtual ~Child();
-    virtual void work() override { ; }
+    virtual void work(Field field) override { ; }
+    string getRole() { return Ant::getRole(); }
 
     using Ant::moveRight;
     using Ant::moveLeft;

@@ -1,4 +1,3 @@
-
 #ifndef ENEMY_H
 #define ENEMY_H
 
@@ -8,7 +7,6 @@
 
 
 using namespace std;
-
 
 class Enemy {
 public:
@@ -22,7 +20,7 @@ public:
     int getHealth() { return this->health; }
 
     // setters
-    void setHealth(int health) { this->health = health; }
+    int setHealth(int health) { this->health = health; }
 
     //functions
     bool findAnts(Anthill antHill);

@@ -1,12 +1,11 @@
-
 #ifndef ANT_H
 #define ANT_H
 
 #include <vector>
 #include <iostream>
+#include "Field.h"
 
 using namespace std;
-
 
 class Ant {
 public:
@@ -22,8 +21,8 @@ public:
 	virtual ~Ant();
 
 	//functions for collecters and builders
-	pair<int, int> findNearestPoint(int x1, int y1, vector<pair<int, int>> v); // nearest point with food or materials from ant
-	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end); // shortest path from start to end
+	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
+	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field field); // shortest path from start to end
 
 	//access
 	int getAge()const { return age; }
@@ -32,7 +31,8 @@ public:
 	int getWeight()const {return weight; }
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
-	bool getLifeStyle(){return alive; }
+	int getWeight() { return weight; }
+	int getPower() { return this->power; }
 
 	//setters
 	void setAge(int n){ age = n; }
@@ -41,18 +41,16 @@ public:
 	void setWeight(int n){ weight = n; }
 	void setPosX(int x) { this->x = x; }
 	void setPosY(int y) { this->y = y; }
+	void setPower(int power) { this->power = power; }
 
 	//functions
-	virtual void work() = 0;
+	virtual void work(Field field) = 0;
 
 	// moving
 	void moveRight();
 	void moveLeft();
 	void moveDown();
 	void moveUp();
-
-	//death
-	void death(){alive = false;}
 
 	//compare
 	bool operator==(const Ant* right)const;
@@ -64,9 +62,8 @@ private:
 	int weight; // ������� ����� �������
 	int x; // coordinates
 	int y;
-
-	bool visible;
-	bool alive;
+	int id;
+	int power;
 
 };
 

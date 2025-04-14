@@ -5,14 +5,14 @@
 #include "Cleaner.h"
 
 
-
 class Nurse : public Ant {
 public:
 	Nurse();
+	//virtual ~Nurse();
+	virtual void work(Field field) override { ; }
 
 	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
 	virtual ~Nurse();
-	virtual void work() override { ; }
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

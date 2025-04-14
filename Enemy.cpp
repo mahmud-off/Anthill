@@ -15,8 +15,7 @@ Enemy::Enemy(int x, int y) // Coordinates compute in Field
     posY = y;
 }
 
-Enemy::~Enemy()
-{
+Enemy::~Enemy() {
     cout << "Enemy was deleted from " << this->posX << " " << this->posY << "\n";
 }
 

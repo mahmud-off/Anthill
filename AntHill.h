@@ -1,4 +1,3 @@
-
 #ifndef ANTHILL_H
 #define ANTHILL_H
 
@@ -12,33 +11,37 @@
 #include <iostream>
 #include <vector>
 
+#include "Informer.h"
+
 #define RoleCount 6;
+#define ENTER_COORDINATE_X 100
+#define ENTER_COORDINATE_Y 100
 
 using std::cout;
 using std::cin;
 using std::string;
 
 
-
 class Anthill {
 public:
-
-	//getters
-	vector<Collecter*>& getCollecterList(){return collecterList;}
-	vector<Child*>& getChildList(){return childList;}
-	vector<Cleaner*>& getCleanerList(){return cleanerList;}
-	vector<Builder*>& getBuilderList(){return builderList;}
-	vector<Nurse*>& getNurseList(){return nurseList;}
-	vector<Soldier*>& getSoldierList(){return soldierList;}
+    //getters
+    vector<Collecter *> &getCollecterList() { return collecterList; }
+    vector<Child *> &getChildList() { return childList; }
+    vector<Cleaner *> &getCleanerList() { return cleanerList; }
+    vector<Builder *> &getBuilderList() { return builderList; }
+    vector<Nurse *> &getNurseList() { return nurseList; }
+    vector<Soldier *> &getSoldierList() { return soldierList; }
 
 	Anthill(int scale, int x, int y);
 	void generateAnts(int posX, int posY); // positions of ants in the beginning
 	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:
-	//coordinates
-	int x;
-	int y;
+    //coordinates
+    int x;
+    int y;
+    int enterX; // position of anthill enter
+    int enterY;
 
 
 	// resources spending
