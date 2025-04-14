@@ -2,6 +2,11 @@
 #include "AntHill.h"
 #include "Field.h"
 //#include "Ant.h"
+#include "builder.h"
+#include "Collecter.h"
+#include "Cleaner.h"
+#include "Soldier.h"
+#include "Nurse.h"
 #include "Informer.h"
 
 #define FIELD_HEIGHT 250
@@ -13,6 +18,25 @@ int main() {
     Anthill anthill(100, FIELD_WIDTH / 2, FIELD_HEIGHT / 2);
     anthill.generateAnts(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, &informer);
     field.ResourceSpawn();
+
+
+
+
+    /*
+    while(true) {
+        anthill.getBuilderList()[0]->randomMoving(field.getHeight(), field.getWidth());
+    }
+    */
+
+    //random-walking test
+    //anthill.getCollecterList()[0]->randomMoving(field.getHeight(),field.getWidth());
+    //cout << "\n";
+    //cout << "OP, salamaleicum\n";
+    //cout << "\n";
+    //anthill.getCollecterList()[0]->randomMoving(field.getHeight(),field.getWidth());
+
+
+
 
     //test
     // Example the rolling growth

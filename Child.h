@@ -7,7 +7,6 @@ using namespace std;
 
 class Child : public Ant {
 public:
-
     Child();
 
     virtual ~Child() override { cout << "child was deleted"; };

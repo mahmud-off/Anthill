@@ -2,6 +2,7 @@
 #include "AntHill.h"
 #include <algorithm>
 #include <cmath>
+#include <random>
 #include "Field.h"
 
 #define STEP 1
@@ -30,6 +31,35 @@ void Ant::moveLeft() {
 
 void Ant::moveUp() {
     y += 1 * STEP;
+}
+
+
+void Ant::randomMoving(int heightOfField, int widthOfField)
+{
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distX(0, widthOfField);
+    std::uniform_int_distribution<int> distY(0, heightOfField);
+    int randomNumberX = distX(gen);
+    int randomNumberY = distY(gen);
+    pair<int, int> randPoint(randomNumberX, randomNumberY);
+
+    cout << "Your random point: " << randPoint.first << " " << randPoint.second << "\n";
+
+    moveByCoordinates(randPoint);
+}
+
+void Ant::moveByCoordinates(pair<int, int> point)
+{
+    while(x != point.first || y != point.second) {
+        if(x < point.first) ++x;
+        else if (x > point.first) --x;
+
+        if(y < point.second) ++y;
+        else if(y > point.second) --y;
+        printPosition();
+    }
 }
 
 bool Ant::operator==(const Ant *right) const {
