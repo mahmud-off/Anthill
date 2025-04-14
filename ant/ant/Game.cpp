@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "Anthill.h"
 Game::Game() {
 	this->initvar();
 	this->initWindow();
@@ -74,10 +74,7 @@ void Game::spawnAnts()
 
 void Game::createWorld()
 {
-	int x, y, w, h = 0;
 	
-
-
 }
 
 
