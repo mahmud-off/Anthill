@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "Anthill.h"
-Game::Game() {
+
+Game::Game():anthill(0,0,0)  {
 	this->initvar();
 	this->initWindow();
 	this->initAnt();
@@ -40,6 +40,9 @@ void Game::initvar()
 	this->antSpawnTimerMax = 100.f;
 	this->antSpawnTimer = this->antSpawnTimerMax;
 	this->maxAnts = 5;
+
+	this->widthRoom = 10;
+	this->heightRoom = 50;
 }
 
 void Game::initWindow()
@@ -74,7 +77,11 @@ void Game::spawnAnts()
 
 void Game::createWorld()
 {
-	
+	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2);
+	for (int i = 0;i< this->anthill.getCollecterList().size();i++) {
+		this->anthill.getCollecterList()[i]->setPosX(rand() % this -> widthRoom + (this->window->getSize().x / 2));
+		this->anthill.getCollecterList()[i]->setPosY(rand() % this -> heightRoom + (this->window->getSize().y / 2));
+	}
 }
 
 

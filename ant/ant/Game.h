@@ -11,6 +11,7 @@
 #include<vector>
 #include<ctime>
 
+#include "Anthill.h"
 
 class Game{
 private:
@@ -19,16 +20,20 @@ private:
 	sf::Event ev;
 	sf::VideoMode videoMode;
 
-	
 	sf::RectangleShape ant;
 	std::vector <sf::RectangleShape> ants;
 
+	Anthill anthill;
 
 	//Таймер для спавна муравьев
 	float antSpawnTimer;
 	float antSpawnTimerMax;
 	int maxAnts;
 	
+
+	int widthRoom;
+	int heightRoom;
+
 
 	void initvar();
 	void initWindow();
