@@ -5,4 +5,3 @@ Child::Child()
 	cout << "child created\n";
 	this->setRole("child");
 }
-

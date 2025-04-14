@@ -80,4 +80,3 @@ void Informer::addToAllAntsInformerSubscribers(Ant *newAnt) {
 }
 
 
-

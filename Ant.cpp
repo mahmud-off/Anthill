@@ -113,4 +113,3 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
     return path;
 }
 
-
