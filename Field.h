@@ -24,7 +24,12 @@ public:
     void createEnemy();
     void deleteEnemy(Enemy* killed);
     //for testing
-    vector<Enemy*> enemies;
+
+    //getters
+    vector<Enemy*>& getEnemiesList(){return enemies;}
+    int getHeight()const{return height; }
+    int getWidth()const{return width; }
+
 
     vector<pair<int, pair<int, int>>> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
     vector<pair<int, pair<int, int>>> materialsCoordinates; // coordinates of cells with materials
@@ -37,7 +42,7 @@ private:
     int width;
 
     //enemies
-    //vector<Enemy*> enemies;
+    vector<Enemy*> enemies;
 
 };
 

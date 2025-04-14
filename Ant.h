@@ -66,8 +66,6 @@ private:
 	int id;
 	int power;
 
-
-
 };
 
 #endif ANT_H

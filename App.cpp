@@ -1,7 +1,6 @@
 #include <iostream>
 #include "AntHill.h"
 #include "Field.h"
-//#include "Ant.h"
 #include "Informer.h"
 
 #define FIELD_HEIGHT 250
@@ -35,8 +34,24 @@ int main() {
     // anthill.collecterList[1]->work(field);
 
     // test builders and builder informers work
-    cout << anthill.builderList[1]->getWeight() << "\n";
-    anthill.builderList[1]->work(field);
+    // cout << anthill.builderList[1]->getWeight() << "\n";
+    // anthill.builderList[1]->work(field);
+    // //Enemies' test
+    cout << "\nEnemies count: " <<field.getEnemiesList().size() << "\n";
+    field.createEnemy();
+    cout << "Enemies count: " <<field.getEnemiesList().size() << "\n";
+
+    cout << "Ant nearly --> " << field.getEnemiesList()[0]->findAnts(anthill) << "\n";
+    cout << "Ant nearly --> " << field.getEnemiesList()[0]->PositionOfNearestAnt(anthill).first << " " << field.getEnemiesList()[0]->PositionOfNearestAnt(anthill).second << "\n";
+
+    cout << "Food nearly --> " << field.getEnemiesList()[0]->findFood(field.foodCoordinates) << "\n";
+    cout << "Food nearly --> " << field.getEnemiesList()[0]->PositionOfNearestFood(field.foodCoordinates).first << " " << field.getEnemiesList()[0]->PositionOfNearestFood(field.foodCoordinates).second<< "\n";
+
+    //movement to food
+    //field.getEnemiesList()[0]->moveByCoordinates(field.getEnemiesList()[0]->PositionOfNearestFood(field.foodCoordinates));
+    field.getEnemiesList()[0]->moveToRandomPointInROView(field.getHeight(), field.getWidth());
+    field.deleteEnemy(field.getEnemiesList()[0]);
+    cout << "Enemies count: " <<field.getEnemiesList().size() << "\n";
 
     // test informer
     // cout << anthill.builderList.size() << " " << informer.getBuildersInformerSubscribers().size() << "\n";
