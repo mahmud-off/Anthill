@@ -1,9 +1,9 @@
-//#pragma once
+#ifndef COLLECTER_H
+#define COLLECTER_H
+
 #include "Ant.h"
 #include "Child.h"
 #include "Field.h"
-#ifndef COLLECTER_H
-#define COLLECTER_H
 
 class Collecter : public Ant {
 public:

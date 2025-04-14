@@ -5,10 +5,16 @@
 #include <string>
 #include "Enemy.h"
 
+#define GRAVE_COORDINATE_X 200
+#define GRAVE_COORDINATE_Y 200
+
 using namespace std;
 
 class Field {
 public:
+
+    Anthill* anthill;
+
     //getters
     int getHeight() { return height; }
     int getWidth() { return width; }
@@ -23,20 +29,30 @@ public:
     //Enemies
     void createEnemy();
     void deleteEnemy(Enemy* killed);
-    //for testing
+
 
     //getters
     vector<Enemy*>& getEnemiesList(){return enemies;}
     int getHeight()const{return height; }
     int getWidth()const{return width; }
+    int getGravePosX() { return this->gravePosX; }
+    int getGravePosY() { return this->gravePosY; }
 
 
     vector<pair<int, pair<int, int>>> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
     vector<pair<int, pair<int, int>>> materialsCoordinates; // coordinates of cells with materials
+
+    vector<Ant*> deadAnts;
 private:
+
+    // grave coordinates
+    int gravePosX;
+    int gravePosY;
+
     // resource spawn
     void foodSpawn(int k);
     void materialsSpawn(int k);
+
 
     int height;
     int width;

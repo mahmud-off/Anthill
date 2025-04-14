@@ -1,12 +1,11 @@
-//#pragma once
+#ifndef ANT_H
+#define ANT_H
+
 #include <vector>
 #include <iostream>
 #include "Field.h"
 
 using namespace std;
-
-#ifndef ANT_H
-#define ANT_H
 
 class Ant {
 public:

@@ -1,4 +1,3 @@
-//#pragma once
 #ifndef SOLDIER_H
 #define SOLDIER_H
 

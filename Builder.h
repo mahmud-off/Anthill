@@ -1,9 +1,9 @@
-//#pragma once
+#ifndef BUILDER_H
+#define BUILDER_H
+
 #include "Ant.h"
 #include "Collecter.h"
 #include "Field.h"
-#ifndef BUILDER_H
-#define BUILDER_H
 
 class Builder : public Ant {
 public:
