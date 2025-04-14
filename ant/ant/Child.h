@@ -12,16 +12,15 @@ public:
 
     virtual ~Child();
     virtual void work(Field field) override { ; }
-    string getRole() { return Ant::getRole(); }
 
-    using Ant::moveRight;
-    using Ant::moveLeft;
-    using Ant::moveUp;
-    using Ant::moveDown;
-    using Ant::setPosX;
-    using Ant::setPosY;
+    // using Ant::moveRight;
+    // using Ant::moveLeft;
+    // using Ant::moveUp;
+    // using Ant::moveDown;
+    // using Ant::setPosX;
+    // using Ant::setPosY;
 
 private:
 };
 
-#endif CHILD_H
+#endif //CHILD_H

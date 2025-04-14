@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "AntHill.h"
+// #include "AntHill.h"
 
 
 using namespace std;
@@ -21,6 +21,10 @@ public:
 
     // setters
     int setHealth(int health) { this->health = health; }
+
+
+    vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end);
+
 
     //functions
     bool findAnts(Anthill antHill);
@@ -40,13 +44,6 @@ private:
     int weight;
     int posX;
     int posY;
-
-    int roView = 100; // range of view
-
-    double distance(int x1, int y1, int x2, int y2);
-
-
-
 };
 
 
