@@ -33,14 +33,15 @@ public:
 	int getPosY() { return this->y; }
 	int getWeight() { return weight; }
 	int getPower() { return this->power; }
+	string getStatus() { return this->status; }
 
 	//setters
 	void setAge(int n){ age = n; }
 	void setRole(string n) { role = n; }
 	void setHealth(int n) { health = n; }
-	void setWeight(int n){ weight = n; }
 	void setPosX(int x) { this->x = x; }
 	void setPosY(int y) { this->y = y; }
+	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
 
 	//functions
@@ -54,6 +55,8 @@ public:
 
 	//compare
 	bool operator==(const Ant* right)const;
+
+	string status; // free / busy
 
 private:
 	int age;

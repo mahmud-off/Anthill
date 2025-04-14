@@ -34,4 +34,4 @@ private:
     int hit; // ����
 };
 
-#endif SOLDIER_H
+#endif // SOLDIER_H

@@ -2,7 +2,7 @@
 #define ANTHILL_H
 
 //#include "Ant.h"
-#include "builder.h"
+#include "Builder.h"
 #include "Child.h"
 #include "Cleaner.h"
 #include "Collecter.h"
@@ -32,9 +32,15 @@ public:
     vector<Nurse *> &getNurseList() { return nurseList; }
     vector<Soldier *> &getSoldierList() { return soldierList; }
 
-	Anthill(int scale, int x, int y);
-	void generateAnts(int posX, int posY); // positions of ants in the beginning
-	void dailyResourceExpenditure(); // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
+    int getEnterPosX() { return this->enterX; }
+    int getEnterPosY() { return this->enterY; }
+
+    Anthill (int scale, int x, int y);
+
+    void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
+    void dailyResourceExpenditure();
+
+    // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
 private:
     //coordinates
@@ -44,29 +50,28 @@ private:
     int enterY;
 
 
-	// resources spending
-	void antsDailyEat();
-	void anthillDestroying(); // осыпь муравейника
+    // resources spending
+    void antsDailyEat();
 
-	int foodCount;
-	int scale;
-	int childrenCount;
-	int builderCount;
-	int cleanerCount;
-	int collecterCount;
-	int nurseCount;
-	int soldierCount;
+    void anthillDestroying(); // осыпь муравейника
 
-	int antCount;
+    int foodCount;
+    int scale;
+    int childrenCount;
+    int builderCount;
+    int cleanerCount;
+    int collecterCount;
+    int nurseCount;
+    int soldierCount;
 
-	vector<Collecter*> collecterList;
-	vector<Child*> childList;
-	vector<Builder*> builderList;
-	vector<Cleaner*> cleanerList;
-	vector<Nurse*> nurseList;
-	vector<Soldier*> soldierList;
+    int antCount;
 
-
+    vector<Collecter *> collecterList;
+    vector<Child *> childList;
+    vector<Builder *> builderList;
+    vector<Cleaner *> cleanerList;
+    vector<Nurse *> nurseList;
+    vector<Soldier *> soldierList;
 };
 
 #endif ANTHILL_H

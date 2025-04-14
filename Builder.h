@@ -28,4 +28,4 @@ public:
 private:
 };
 
-#endif BUILDER_H
+#endif //BUILDER_H

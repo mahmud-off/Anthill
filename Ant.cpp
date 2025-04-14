@@ -14,9 +14,6 @@ Ant::Ant() {
     role = "None";
     health = 100;
     weight = 0; //���� ���� ������� ������ � �����-�� ���������
-
-    alive = true;
-    visible = true;
 }
 
 Ant::~Ant() {
@@ -115,5 +112,4 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
 
     return path;
 }
-
 

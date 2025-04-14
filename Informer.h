@@ -13,7 +13,7 @@ using namespace std;
 class Informer {
 public:
     void callToGetHelpToCollectMaterials(int x, int y, Field field);
-    void callToGetHelpToCollectFood(int x, int y, Field field); // coordinates where was the food
+    void callToGetHelpToCollectFood(Collecter* collecterWhoNeedHelp, int x, int y, Field field, int foodWeight); // coordinates where was the food
     void callToGetHelpToFightEnemy(int x, int y, Field field, Enemy enemy);
 
     // informers for all ants
@@ -41,4 +41,4 @@ private:
     vector<Ant*> allAntsInformerSubscribers;
 };
 
-#endif //INFORMER_H
+#endif // INFORMER_H

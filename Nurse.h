@@ -24,4 +24,4 @@ public:
 private:
 };
 
-#endif NURSE_H
+#endif // NURSE_H
