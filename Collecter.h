@@ -15,7 +15,6 @@ public:
     void collectFood(Field *field);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
-    void changeStatus();
 
     int getWeight() { return this->getWeight(); }
 

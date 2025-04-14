@@ -38,15 +38,6 @@ Collecter::~Collecter() {
     cout << "collecter was deleted\n";
 }
 
-void Collecter::changeStatus() {
-	if (this->getStatus() == "free") {
-		this->status = "busy";
-	}
-	else if (this->getStatus() == "busy") {
-		this->status = "free";
-	}
-}
-
 
 void Collecter::collectFood(Field *field) {
 	this->changeStatus(); // change status to busy
@@ -60,7 +51,8 @@ void Collecter::collectFood(Field *field) {
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
-        // drawing reverse path to anthill
+        // drawing reverse path back to anthill
+    	this->changeStatus(); // change status to free
         field->field[p.first][p.second] = ""; // already no food in this point
         field->updateFoodCoordinatesList();
     }

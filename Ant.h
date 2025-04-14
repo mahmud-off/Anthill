@@ -45,6 +45,7 @@ public:
 	void setPosY(int y) { this->y = y; }
 	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
+	void setStatus(string status) { this->status = status; }
 
 	//functions
 	virtual void work(Field *field) = 0;
@@ -59,6 +60,7 @@ public:
 	bool operator==(const Ant* right)const;
 
 	string status; // free / busy
+	void changeStatus();
 
 private:
 	int age;

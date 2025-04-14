@@ -41,10 +41,35 @@ void Informer::callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x
     field->updateFoodCoordinatesList();
 }
 
-void Informer::callToGetHelpToCollectMaterials(int x, int y, Field *field) {
+void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int x, int y, Field *field, int materialWeight) {
+    int antWeight = builderWhoNeedHelp->getWeight();
+    int summaryWeight = antWeight;
+    vector<Builder*> buildersCameToHelp; // builders who were free and came to help
+    buildersCameToHelp.push_back(builderWhoNeedHelp);
     for (int i = 0; i < this->buildersInformerSubscribers.size(); i++) {
         Builder *curBuilder = buildersInformerSubscribers[i];
-        curBuilder->helpToCollectMaterial(x, y, field);
+        if (curBuilder->getStatus() == "free") {
+            curBuilder->changeStatus();
+            buildersCameToHelp.push_back(curBuilder);
+            curBuilder->helpToCollectMaterial(x, y, field);
+            summaryWeight += curBuilder->getWeight();
+            if (summaryWeight >= materialWeight) {
+                // no more builders needed
+                // all builders go home
+                for (int i = 0; i < buildersCameToHelp.size(); i++) {
+                    auto currentBuilder = buildersCameToHelp[i];
+                    // go home
+                }
+                // set status free for all of them
+                for (int i = 0; i < buildersCameToHelp.size(); i++) {
+                    auto currentBuilder = buildersCameToHelp[i];
+                    currentBuilder->changeStatus();
+                }
+            }
+        }
+        else if (curBuilder->getStatus() == "busy") {
+            continue;
+        }
     }
     // collecting materials together
     field->field[x][y] = ""; // already no food in this point
