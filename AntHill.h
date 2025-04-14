@@ -2,7 +2,7 @@
 #define ANTHILL_H
 
 //#include "Ant.h"
-#include "builder.h"
+#include "Builder.h"
 #include "Child.h"
 #include "Cleaner.h"
 #include "Collecter.h"
@@ -35,13 +35,7 @@ public:
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
 
-    Anthill
-
-    (
-    int scale,
-    int x,
-    int y
-    );
+    Anthill (int scale, int x, int y);
 
     void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();
