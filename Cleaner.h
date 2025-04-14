@@ -1,8 +1,9 @@
-//#pragma once
-#include "Ant.h"
-#include "Child.h"
 #ifndef CLEANER_H
 #define CLEANER_H
+
+#include "Ant.h"
+#include "Child.h"
+
 
 class Cleaner : public Ant {
 public:

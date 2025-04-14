@@ -1,8 +1,9 @@
-//#pragma once
-#include "Ant.h"
-#include "Child.h"
 #ifndef COLLECTER_H
 #define COLLECTER_H
+
+#include "Ant.h"
+#include "Child.h"
+
 
 class Collecter : public Ant {
 public:

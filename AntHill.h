@@ -1,4 +1,7 @@
-//#pragma once
+
+#ifndef ANTHILL_H
+#define ANTHILL_H
+
 //#include "Ant.h"
 #include "builder.h"
 #include "Child.h"
@@ -15,8 +18,6 @@ using std::cout;
 using std::cin;
 using std::string;
 
-#ifndef ANTHILL_H
-#define ANTHILL_H
 
 
 class Anthill {

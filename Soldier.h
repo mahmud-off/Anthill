@@ -1,8 +1,9 @@
-//#pragma once
-#include "Ant.h"
-#include "Collecter.h"
 #ifndef SOLDIER_H
 #define SOLDIER_H
+
+#include "Ant.h"
+#include "Collecter.h"
+
 
 class Soldier : public Ant {
 public:

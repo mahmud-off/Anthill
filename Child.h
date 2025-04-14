@@ -1,8 +1,8 @@
-//#pragma once
-
-#include "Ant.h"
 #ifndef CHILD_H
 #define CHILD_H
+
+#include "Ant.h"
+
 
 using namespace std;
 

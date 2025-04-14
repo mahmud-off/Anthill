@@ -1,9 +1,9 @@
-//#pragma once
+#ifndef NURSE_H
+#define NURSE_H
 
 #include "Ant.h"
 #include "Cleaner.h"
-#ifndef NURSE_H
-#define NURSE_H
+
 
 
 class Nurse : public Ant {

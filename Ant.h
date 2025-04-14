@@ -1,11 +1,12 @@
-//#pragma once
+
+#ifndef ANT_H
+#define ANT_H
+
 #include <vector>
 #include <iostream>
 
 using namespace std;
 
-#ifndef ANT_H
-#define ANT_H
 
 class Ant {
 public:
@@ -31,6 +32,7 @@ public:
 	int getWeight()const {return weight; }
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
+	bool getLifeStyle(){return alive; }
 
 	//setters
 	void setAge(int n){ age = n; }
@@ -49,6 +51,9 @@ public:
 	void moveDown();
 	void moveUp();
 
+	//death
+	void death(){alive = false;}
+
 	//compare
 	bool operator==(const Ant* right)const;
 
@@ -59,6 +64,9 @@ private:
 	int weight; // ������� ����� �������
 	int x; // coordinates
 	int y;
+
+	bool visible;
+	bool alive;
 
 };
 

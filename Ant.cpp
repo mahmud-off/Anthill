@@ -13,6 +13,9 @@ Ant::Ant() {
     role = "None";
     health = 100;
     weight = 0; //���� ���� ������� ������ � �����-�� ���������
+
+    alive = true;
+    visible = true;
 }
 
 Ant::~Ant() {

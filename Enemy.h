@@ -1,3 +1,7 @@
+
+#ifndef ENEMY_H
+#define ENEMY_H
+
 #include <iostream>
 
 #include "AntHill.h"
@@ -5,8 +9,6 @@
 
 using namespace std;
 
-#ifndef ENEMY_H
-#define ENEMY_H
 
 class Enemy {
 public:
