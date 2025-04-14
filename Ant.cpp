@@ -80,7 +80,7 @@ int h(pair<int, int> p1, pair<int, int> p2) {
     return res;
 }
 
-vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field field) {
+vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
     vector<pair<int, int>> path; // path from start to end
 
     vector<pair<int, int>> options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
@@ -90,13 +90,13 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
         pair<int, int> p2 = make_pair(start.first - 1, start.second);
         pair<int, int> p3 = make_pair(start.first, start.second + 1);
         pair<int, int> p4 = make_pair(start.first, start.second - 1);
-        if (isValid(p1, field.getWidth(), field.getHeight()))
+        if (isValid(p1, field->getWidth(), field->getHeight()))
             options.push_back(p1);
-        if (isValid(p2, field.getWidth(), field.getHeight()))
+        if (isValid(p2, field->getWidth(), field->getHeight()))
             options.push_back(p2);
-        if (isValid(p3, field.getWidth(), field.getHeight()))
+        if (isValid(p3, field->getWidth(), field->getHeight()))
             options.push_back(p3);
-        if (isValid(p4, field.getWidth(), field.getHeight()))
+        if (isValid(p4, field->getWidth(), field->getHeight()))
             options.push_back(p4);
 
 

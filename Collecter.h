@@ -2,15 +2,18 @@
 #define COLLECTER_H
 
 #include "Ant.h"
-#include "Child.h"
-#include "Field.h"
+// #include "Child.h"
+// #include "Field.h"
+
+class Child;
+class Field;
 
 class Collecter : public Ant {
 public:
     Collecter();
     Collecter(int weight);
-    void collectFood(Field field);
-    void helpToCollectFood(int x, int y, Field field); // coordinates
+    void collectFood(Field *field);
+    void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
     void changeStatus();
 
@@ -19,7 +22,7 @@ public:
     Collecter(vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
-    virtual void work(Field field) override { collectFood(field); }
+    virtual void work(Field *field) override { collectFood(field); }
     //
     // using Ant::moveRight;
     // using Ant::moveLeft;

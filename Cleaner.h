@@ -1,8 +1,11 @@
 #ifndef CLEANER_H
 #define CLEANER_H
 #include "Ant.h"
-#include "Child.h"
-#include "Field.h"
+// #include "Child.h"
+// #include "Field.h"
+
+class Child;
+class Field;
 
 
 class Cleaner : public Ant {
@@ -19,7 +22,7 @@ public:
 
 	virtual ~Cleaner();
 	Cleaner(vector<Ant*>& list, Ant* &child);
-	virtual void work(Field field) override { ; }
+	virtual void work(Field *field) override { ; }
 
 
 	using Ant::moveRight;

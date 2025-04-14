@@ -2,14 +2,22 @@
 #define ANTHILL_H
 
 //#include "Ant.h"
-#include "Builder.h"
-#include "Child.h"
-#include "Cleaner.h"
-#include "Collecter.h"
-#include "Nurse.h"
-#include "Soldier.h"
+// #include "Builder.h"
+// #include "Child.h"
+// #include "Cleaner.h"
+// #include "Collecter.h"
+// #include "Nurse.h"
+// #include "Soldier.h"
 #include <iostream>
 #include <vector>
+
+class Builder;
+class Child;
+class Cleaner;
+class Collecter;
+class Nurse;
+class Soldier;
+
 
 #include "Informer.h"
 

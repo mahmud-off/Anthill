@@ -3,7 +3,10 @@
 
 #include <iostream>
 
+// #include "AntHill.h"
+
 class Anthill;
+
 
 using namespace std;
 
@@ -13,15 +16,16 @@ public:
     Enemy(int x, int y);
     ~Enemy();
 
+    pair<int, int> PositionOfNearestAnt(Anthill antHill);
+    int roView = 100;
+    double distance(int x1, int y1, int x2, int y2);
+
     // getters
     int getPower() { return this->hit; }
     int getHealth() { return this->health; }
 
     // setters
     int setHealth(int health) { this->health = health; }
-
-
-    bool findAnts(Anthill antHill);
 
 private:
     //parameters
@@ -30,11 +34,6 @@ private:
     int weight;
     int posX;
     int posY;
-
-    int roView = 100;
-
-    double distance(int x1, int y1, int x2, int y2);
-
 };
 
 

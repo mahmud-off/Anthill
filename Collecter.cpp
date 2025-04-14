@@ -1,4 +1,6 @@
 #include "Collecter.h"
+
+#include "Child.h"
 #include "Field.h"
 #include "Informer.h"
 
@@ -46,25 +48,25 @@ void Collecter::changeStatus() {
 }
 
 
-void Collecter::collectFood(Field field) {
+void Collecter::collectFood(Field *field) {
 	this->changeStatus(); // change status to busy
-    if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).first) {
+    if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
         // food is too heavy
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).second;
+        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         Informer informer;
-        informer.callToGetHelpToCollectFood(this, p.first, p.second, field, this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).first);
+        informer.callToGetHelpToCollectFood(this, p.first, p.second, field, this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first);
     } else {
         // weight is ok
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field.foodCoordinates).second;
+        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
         // drawing reverse path to anthill
-        field.field[p.first][p.second] = ""; // already no food in this point
-        field.updateFoodCoordinatesList();
+        field->field[p.first][p.second] = ""; // already no food in this point
+        field->updateFoodCoordinatesList();
     }
 }
 
-void Collecter::helpToCollectFood(int x, int y, Field field) {
+void Collecter::helpToCollectFood(int x, int y, Field *field) {
 	this->changeStatus();
     vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
     // drawing path from points in paths with graphic
