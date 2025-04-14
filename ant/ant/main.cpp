@@ -5,9 +5,13 @@ int main() {
 	std::srand((unsigned)time(NULL));
 
 	Game game;
-	while (game.getWindowIsOpen() ){
-		game.update();
-		game.render();
+	if (game.getWindowIsOpen()) {
+
+		
+		while (game.getWindowIsOpen()) {
+			game.update();
+			game.render();
+		}
 	}
 
 	return 0;

@@ -28,7 +28,7 @@ private:
 	float antSpawnTimer;
 	float antSpawnTimerMax;
 	int maxAnts;
-
+	
 
 	void initvar();
 	void initWindow();
@@ -36,6 +36,8 @@ private:
 public:
 	Game();
 	
+	void createWorld();
+
 	const bool getWindowIsOpen() const;
 	void pollEvents();
 
@@ -47,7 +49,7 @@ public:
 	void render();
 	void renderAnts();
 
-
+	
 
 	~Game();
 

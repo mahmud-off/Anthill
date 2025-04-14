@@ -7,6 +7,8 @@ Game::Game() {
 
 }
 
+
+
 const bool Game::getWindowIsOpen() const
 {
 	return this->window->isOpen();
@@ -69,6 +71,14 @@ void Game::spawnAnts()
 	this->ants.push_back(ant);
 }
 
+
+void Game::createWorld()
+{
+	int x, y, w, h = 0;
+	
+
+
+}
 
 
 void Game::update()
