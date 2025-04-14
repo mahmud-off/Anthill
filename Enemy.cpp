@@ -2,7 +2,14 @@
 #include <ctime>
 #include <cstdlib>
 #include <math.h>
-#include <algorithm>
+#include "AntHill.h"
+#include "builder.h"
+#include "Child.h"
+#include "Cleaner.h"
+#include "Collecter.h"
+#include "Nurse.h"
+#include "Soldier.h"
+
 
 Enemy::Enemy(int x, int y) // Coordinates compute in Field
 {
@@ -49,63 +56,63 @@ Enemy::~Enemy() {
 //     return false;
 // }
 //
-// pair<int, int> Enemy::PositionOfNearestAnt(Anthill antHill) {
-//
-//     double minDist = INT_MAX; //minimal distance
-//     pair<int, int> coordinates(this->posX, this->posY);
-//
-//     for(auto ant: antHill.getCollecterList()) {
-//         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
-//         if(temp <= roView && temp < minDist) {
-//             minDist = temp;
-//             coordinates.first = ant->getPosX();
-//             coordinates.second = ant->getPosY();
-//         }
-//     }
-//     for(auto ant: antHill.getBuilderList()) {
-//         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
-//         if(temp <= roView && temp < minDist) {
-//             minDist = temp;
-//             coordinates.first = ant->getPosX();
-//             coordinates.second = ant->getPosY();
-//         }
-//     }
-//     for(auto ant: antHill.getChildList()) {
-//         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
-//         if(temp <= roView && temp < minDist) {
-//             minDist = temp;
-//             coordinates.first = ant->getPosX();
-//             coordinates.second = ant->getPosY();
-//         }
-//     }
-//     for(auto ant: antHill.getCleanerList()) {
-//         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
-//         if(temp <= roView && temp < minDist) {
-//             minDist = temp;
-//             coordinates.first = ant->getPosX();
-//             coordinates.second = ant->getPosY();
-//         }
-//     }
-//     for(auto ant: antHill.getNurseList()) {
-//         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
-//         if(temp <= roView && temp < minDist) {
-//             minDist = temp;
-//             coordinates.first = ant->getPosX();
-//             coordinates.second = ant->getPosY();
-//         }
-//     }
-//     for(auto ant: antHill.getSoldierList()) {
-//         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
-//         if(temp <= roView && temp < minDist) {
-//             minDist = temp;
-//             coordinates.first = ant->getPosX();
-//             coordinates.second = ant->getPosY();
-//         }
-//     }
-//
-//     return coordinates;
-//
-// }
+pair<int, int> Enemy::PositionOfNearestAnt(Anthill antHill) {
+
+    double minDist = INT_MAX; //minimal distance
+    pair<int, int> coordinates(this->posX, this->posY);
+
+    for(auto ant: antHill.getCollecterList()) {
+        double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
+        if(temp <= roView && temp < minDist) {
+            minDist = temp;
+            coordinates.first = ant->getPosX();
+            coordinates.second = ant->getPosY();
+        }
+    }
+    for(auto ant: antHill.getBuilderList()) {
+        double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
+        if(temp <= roView && temp < minDist) {
+            minDist = temp;
+            coordinates.first = ant->getPosX();
+            coordinates.second = ant->getPosY();
+        }
+    }
+    for(auto ant: antHill.getChildList()) {
+        double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
+        if(temp <= roView && temp < minDist) {
+            minDist = temp;
+            coordinates.first = ant->getPosX();
+            coordinates.second = ant->getPosY();
+        }
+    }
+    for(auto ant: antHill.getCleanerList()) {
+        double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
+        if(temp <= roView && temp < minDist) {
+            minDist = temp;
+            coordinates.first = ant->getPosX();
+            coordinates.second = ant->getPosY();
+        }
+    }
+    for(auto ant: antHill.getNurseList()) {
+        double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
+        if(temp <= roView && temp < minDist) {
+            minDist = temp;
+            coordinates.first = ant->getPosX();
+            coordinates.second = ant->getPosY();
+        }
+    }
+    for(auto ant: antHill.getSoldierList()) {
+        double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
+        if(temp <= roView && temp < minDist) {
+            minDist = temp;
+            coordinates.first = ant->getPosX();
+            coordinates.second = ant->getPosY();
+        }
+    }
+
+    return coordinates;
+
+}
 //
 // bool Enemy::findFood(vector<pair<int, int>> foodCoordinates)
 // {
@@ -153,10 +160,9 @@ Enemy::~Enemy() {
 // }
 //
 //
-// double Enemy::distance(int x1, int y1, int x2, int y2)
-// {
-//     return sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
-// }
+double Enemy::distance(int x1, int y1, int x2, int y2) {
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
 //
 // double hFunc(pair<int, int> p1, pair<int, int> p2) {
 //     return sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));

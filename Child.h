@@ -11,7 +11,7 @@ public:
     Child();
 
     virtual ~Child() override { cout << "child was deleted"; };
-    virtual void work(Field field) override { ; }
+    virtual void work(Field *field) override { ; }
 
     // using Ant::moveRight;
     // using Ant::moveLeft;

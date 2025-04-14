@@ -5,6 +5,8 @@
 #include <string>
 #include "Enemy.h"
 
+// class Enemy;
+
 
 
 #define GRAVE_COORDINATE_X 200

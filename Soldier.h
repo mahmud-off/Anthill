@@ -2,8 +2,11 @@
 #define SOLDIER_H
 
 #include "Ant.h"
-#include "Enemy.h"
-#include "Collecter.h"
+// #include "Enemy.h"
+// #include "Collecter.h"
+
+class Enemy;
+class Collecter;
 
 class Soldier : public Ant {
 public:
@@ -11,11 +14,11 @@ public:
     Soldier(int power);
 
     Soldier(vector<Collecter*>& list, Collecter* &collecter);
-    void helpToFightEnemy(int x, int y, Field field);
-    void fightEnemy(Enemy enemy, Field field);
+    void helpToFightEnemy(int x, int y, Field *field);
+    void fightEnemy(Enemy *enemy, Field *field);
 
     virtual ~Soldier();
-    virtual void work(Field field) override { ; }
+    virtual void work(Field *field) override { ; }
     Soldier(vector<Ant*>& list, Ant* &collecter);
 
     using Ant::moveRight;

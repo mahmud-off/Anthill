@@ -3,7 +3,9 @@
 
 #include <vector>
 #include <iostream>
-#include "Field.h"
+// #include "Field.h"
+
+class Field;
 
 using namespace std;
 
@@ -22,7 +24,7 @@ public:
 
 	//functions for collecters and builders
 	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
-	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field field); // shortest path from start to end
+	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
 
 	//access
 	int getAge()const { return age; }
@@ -45,7 +47,7 @@ public:
 	void setPower(int power) { this->power = power; }
 
 	//functions
-	virtual void work(Field field) = 0;
+	virtual void work(Field *field) = 0;
 
 	// moving
 	void moveRight();
