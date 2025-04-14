@@ -3,7 +3,7 @@
 Game::Game() {
 	this->initvar();
 	this->initWindow();
-	this->initEnemies();
+	this->initAnt();
 
 }
 
@@ -28,9 +28,16 @@ void Game::pollEvents()
 	}
 }
 
+
+
 void Game::initvar()
 {
 	this->window = nullptr;
+
+	
+	this->antSpawnTimerMax = 100.f;
+	this->antSpawnTimer = this->antSpawnTimerMax;
+	this->maxAnts = 5;
 }
 
 void Game::initWindow()
@@ -39,29 +46,64 @@ void Game::initWindow()
 	this->videoMode.width = 600;
 	
 	this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-	this->window->setFramerateLimit(144);
+	this->window->setFramerateLimit(60);
 }
 
-void Game::initEnemies()
+void Game::initAnt()
 {
 	//this->enemy.setPosition(100.f,100.f);
-	this->enemy.setSize(sf::Vector2f(100.f,100.f));
-	this->enemy.setScale(sf::Vector2f(0.5f,0.5f));
-	this->enemy.setFillColor(sf::Color::Cyan);
+	this->ant.setSize(sf::Vector2f(100.f,100.f));
+	this->ant.setScale(sf::Vector2f(0.5f,0.5f));
+	this->ant.setFillColor(sf::Color::Cyan);
 	//this -> enemy.setOutlineColor(sf::Color::Green);
 	//this->enemy.setOutlineThickness(1.f);
 
 }
 
+void Game::spawnAnts()
+{
+	this->ant.setPosition(
+		(float)(rand() % (int)(this->window->getSize().x - this->ant.getSize().x)),
+		(float)(rand() % (int)(this->window->getSize().y - this->ant.getSize().y)));
+	this->ant.setFillColor(sf::Color::Green);
+	this->ants.push_back(ant);
+}
+
+
+
 void Game::update()
 {
 	this->pollEvents();
+	this->upadateAnts();
 }
+
+void Game::upadateAnts()
+{
+	if (this->ants.size() < this->maxAnts) {
+		if (this->antSpawnTimer >= this->antSpawnTimerMax) {
+			this->spawnAnts();
+			this->antSpawnTimer = 0.f;
+		}
+		else {
+			this->antSpawnTimer += 1.f;
+		}
+	}
+}
+
+
 void Game::render()
 {
 	this->window->clear();
-	this->window->draw(this->enemy);
+	this->renderAnts();
 	this->window->display(); 
+}
+
+void Game::renderAnts()
+{
+	for (auto& e : this->ants) {
+		 
+		this->window->draw(e);
+	}
 }
 
 Game::~Game() {
