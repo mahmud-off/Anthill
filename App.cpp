@@ -24,7 +24,6 @@ int main() {
     // cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
 
 
-
     // test foodCoordinates
     // for (int i = 0; i < field.foodCoordinates.size(); i++) {
     //     auto cur = field.foodCoordinates[i];
@@ -35,14 +34,13 @@ int main() {
     // cout << anthill.collecterList[1]->getWeight() << "\n";
     // anthill.collecterList[1]->work(field);
 
-    //test builders work
-    // cout << anthill.builderList[1]->getWeight() << "\n";
-    // anthill.builderList[1]->work(field);
+    // test builders and builder informers work
+    cout << anthill.builderList[1]->getWeight() << "\n";
+    anthill.builderList[1]->work(field);
 
     // test informer
-    cout << anthill.builderList.size() << " " << informer.getBuildersInformerSubscribers().size() << "\n";
-    cout << anthill.collecterList.size() << " " << informer.getCollectersInformerSubscribers().size() << "\n";
-    cout << anthill.nurseList.size() << " " << informer.getNursesInformerSubscribers().size() << "\n";
-    cout << anthill.soldierList.size() << " " << informer.getSoldiersInformerSubscribers().size() << "\n";
-
+    // cout << anthill.builderList.size() << " " << informer.getBuildersInformerSubscribers().size() << "\n";
+    // cout << anthill.collecterList.size() << " " << informer.getCollectersInformerSubscribers().size() << "\n";
+    // cout << anthill.nurseList.size() << " " << informer.getNursesInformerSubscribers().size() << "\n";
+    // cout << anthill.soldierList.size() << " " << informer.getSoldiersInformerSubscribers().size() << "\n";
 }
