@@ -3,6 +3,7 @@
 #include "Field.h"
 //#include "Ant.h"
 #include "builder.h"
+#include "Child.h"
 #include "Collecter.h"
 #include "Cleaner.h"
 #include "Soldier.h"
@@ -19,9 +20,17 @@ int main() {
     anthill.generateAnts(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, &informer);
     field.ResourceSpawn();
 
-
-
-
+/*
+    //test for changing roles
+    cout << "\nChildren size before: " << anthill.getChildList().size() << "\n";
+    cout << "Collector size before: " << anthill.getCollecterList().size() << "\n";
+    cout << "Cleaner size before: " << anthill.getCleanerList().size() << "\n";
+    anthill.getChildList()[0]->setAge(6);
+    anthill.update();
+    cout << "Children size after: " << anthill.getChildList().size() << "\n";
+    cout << "Collector size after: " << anthill.getCollecterList().size() << "\n";
+    cout << "Cleaner size after: " << anthill.getCleanerList().size() << "\n";
+*/
     /*
     while(true) {
         anthill.getBuilderList()[0]->randomMoving(field.getHeight(), field.getWidth());
@@ -42,7 +51,7 @@ int main() {
     // Example the rolling growth
     // cout << "\nCollecter size before -> " << anthill.collecterList.size()<<"\n";
     // cout << "Builder list before -> " << anthill.builderList.size()<<"\n\n";
-    // Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);
+    // Builder* pop = new Builder(anthill.collecterList,  anthill.collecterList[0]);`
     // anthill.builderList.push_back(pop);
     // cout << "\nCollecter size after -> " << anthill.collecterList.size()<<"\n";
     // cout << "Builder list after -> " << anthill.builderList.size()<<"\n\n";
