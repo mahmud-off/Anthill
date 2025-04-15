@@ -30,8 +30,14 @@ Cleaner::~Cleaner() {
     cout << "cleaner was deleted\n";
 }
 
-int antNotInAnthill(Ant *ant, Anthill *anthil) {
+int antNotInAnthill(Ant *ant, Anthill *anthill) {
     // check if ant coordinates not in the anthill
+    if (ant->getPosX() > anthill->getX() && ant->getPosX() < (anthill->getX() + anthill->getW())) {
+        if (ant->getPosY() > anthill->getY() && ant->getPosY() < (anthill->getY() + anthill->getH())) {
+            return 1; // ant in anthill
+        }
+    }
+    return 0;
 }
 
 void Cleaner::cleanDeadAnts(Field *field, Anthill *anthill) {
@@ -76,7 +82,7 @@ Dead* Cleaner::findNearestDeadAnt(Field *field, Anthill *anthill) {
     }
     return nearestDeadAnt;
 }
-//
+
 bool Cleaner::canFindDeadAnts(Field *field, Anthill *anthill) {
     for (int i = 0; i < anthill->getDeadAntsList().size(); i++) {
         auto ant = anthill->getDeadAntsList()[i];
@@ -85,7 +91,7 @@ bool Cleaner::canFindDeadAnts(Field *field, Anthill *anthill) {
     }
     return false;
 }
-//
+
 double Cleaner::distance(int x1, int y1, int x2, int y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }

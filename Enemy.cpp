@@ -46,8 +46,14 @@ void Enemy::atackAntInField(Anthill *anthill, Field *field) {
 }
 
 
-int antNotInAnthill(Ant *ant, Anthill *anthil) {
+int antNotInAnthill(Ant *ant, Anthill *anthill) {
     // check if ant coordinates not in the anthill
+    if (ant->getPosX() > anthill->getX() && ant->getPosX() < (anthill->getX() + anthill->getW())) {
+        if (ant->getPosY() > anthill->getY() && ant->getPosY() < (anthill->getY() + anthill->getH())) {
+            return 1; // ant in anthill
+        }
+    }
+    return 0;
 }
 
 bool Enemy::canFindAntsInField(Anthill *anthill) {

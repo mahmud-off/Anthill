@@ -325,3 +325,11 @@ void Anthill::update() {
         //+- food count or others parameters
 
 }
+
+void Anthill::setxy(int x, int y, int w, int h) {
+    this->x = x;
+    this->y = y;
+    this->width = w;
+    this->height = h;
+}
+
