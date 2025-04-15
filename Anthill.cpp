@@ -7,6 +7,7 @@
 #include "Collecter.h"
 #include "Nurse.h"
 #include "Soldier.h"
+#include "Dead.h"
 #include <iostream>
 #include <map>
 #include <vector>
@@ -235,9 +236,44 @@ void Anthill::update() {
     //1.Rolling shifts check
         //Check for each type of ant
 
+    //Builder death
+    for(int i = 0; i < this->getBuilderList().size(); ++i) {
+        Builder* temp = this->getBuilderList()[i];
+        if(temp->getHealth() <= 0) {
+            Dead* deadTest = new Dead(this->getBuilderList(),temp);
+            this->getDeadAntsList().push_back(deadTest);
+        }
+    }
+
+    //Soldier death
+    for(int i = 0; i < this->getSoldierList().size(); ++i) {
+        Soldier* temp = this->getSoldierList()[i];
+        if(temp->getHealth() <= 0) {
+            Dead* deadTest = new Dead(this->getSoldierList(),temp);
+            this->getDeadAntsList().push_back(deadTest);
+        }
+    }
+
+    //Nurse death
+    for(int i = 0; i < this->getNurseList().size(); ++i) {
+        Nurse* temp = this->getNurseList()[i];
+        if(temp->getHealth() <= 0) {
+            Dead* deadTest = new Dead(this->getNurseList(),temp);
+            this->getDeadAntsList().push_back(deadTest);
+        }
+    }
+
     //Children check
     for(int i = 0; i < this->getChildList().size(); ++i) {
         Child* temp = getChildList()[i];
+
+        //Death check
+        if(temp->getHealth() <= 0) {
+            Dead* deadTest = new Dead(this->getChildList(),temp);
+            this->getDeadAntsList().push_back(deadTest);
+            continue;
+        }
+
         if(temp->getAge() >= CHILDREN_AGE) {
             if(temp->getWeight() >= COLLECTOR_WEIGHT) {
                 //change role to collector
@@ -267,6 +303,14 @@ void Anthill::update() {
     //Collector check
     for(int i =0 ;i < this->getCollecterList().size(); ++i) {
         Collecter* temp = this->getCollecterList()[i];
+
+        //Death check
+        if(temp->getHealth() <= 0) {
+            Dead* deadTest = new Dead(this->getCollecterList(),temp);
+            this->getDeadAntsList().push_back(deadTest);
+            continue;
+        }
+
         if(temp->getAge() >= COLLECTOR_AGE) {
             if(temp->getAge() < 50 || temp->getWeight() >= 3) {
                 //change role to Builder
@@ -289,6 +333,14 @@ void Anthill::update() {
     //Cleaner check
     for(int i = 0; i < this->getCleanerList().size(); ++i) {
         Cleaner* temp = this->getCleanerList()[i];
+
+        //Death check
+        if(temp->getHealth() <= 0) {
+            Dead* deadTest = new Dead(this->getCleanerList(),temp);
+            this->getDeadAntsList().push_back(deadTest);
+            continue;
+        }
+
         if(temp->getAge() >= CLEANER_AGE) {
             if(this->getNurseList().size() < this->getCleanerList().size()) {
                 //change to Nurse
@@ -297,6 +349,7 @@ void Anthill::update() {
             }
         }
     }
+
 
 
     //2.Ordinary tasks for every ant

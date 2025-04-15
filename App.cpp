@@ -21,7 +21,7 @@ int main() {
     anthill.generateAnts(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, &informer);
     field.ResourceSpawn();
 
-/*
+
     //test for changing roles
     cout << "\nChildren size before: " << anthill.getChildList().size() << "\n";
     cout << "Collector size before: " << anthill.getCollecterList().size() << "\n";
@@ -36,7 +36,6 @@ int main() {
     anthill.getDeadAntsList().push_back(deadTest);
     cout << "Children size after death: " << anthill.getChildList().size() << "\n";
     cout << "Death list size: " << anthill.getDeadAntsList().size() << "\n";
-*/
     /*
     while(true) {
         anthill.getBuilderList()[0]->randomMoving(field.getHeight(), field.getWidth());
