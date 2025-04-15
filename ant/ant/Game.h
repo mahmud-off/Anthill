@@ -17,6 +17,7 @@
 #include "Anthill.h"
 #include "Informer.h"
 #include "Field.h"
+#include "Storage.h"
 
 using namespace std;
 
@@ -60,15 +61,16 @@ public:
 	void update();
 
 	void render();
+
 	void renderCollecter();
-	void renderCleaner();
 	void renderSoldier();
-
 	void renderChild();
-
 	void renderNurse();
-
 	void renderBuilder();
+	void renderCleaner();
+
+	void renderFood();
+	
 
 	
 

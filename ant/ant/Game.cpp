@@ -14,6 +14,7 @@ Game::Game():anthill(1000,0,0),field(0,0) {
 	this->initWindow();
 	anthill.setxy(this->videoMode.height/2, this->videoMode.width/2);
 	field.setHW(this->videoMode.width, this->videoMode.height);
+
 }
 
 
@@ -149,6 +150,12 @@ void Game::renderCleaner()
 	}
 }
 
+void Game::renderFood() {
+	for (int i = 0;i < field.foodCoordinates.size();i++)
+	{
+
+	}
+}
 
 void Game::renderSoldier()
 {
