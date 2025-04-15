@@ -3,8 +3,18 @@
 
 #include <vector>
 #include <iostream>
-// #include "Field.h"
+#include <algorithm>
+#include <cmath>
+#include <random>
 
+// #include "Field.h"
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Graphics.hpp>
+
+class Anthill;
 class Field;
 
 using namespace std;
@@ -24,8 +34,7 @@ public:
 
 	//functions for collecters and builders
 	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
-	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
-
+	
 	//access
 	int getAge()const { return age; }
 	string getRole()const { return role; }
@@ -49,18 +58,20 @@ public:
 	//functions
 	virtual void work(Field *field) = 0;
 
+	void updateMovement(Field* field, Anthill* anthil);
+
+	// set new target
+	void goHome(Anthill* anthill);
+	void findFood(Field* field);
+	void findMaterial(Field* field);
+	void build();
+	//void findDeadAnts();
+
+	pair<int, int> randomAntHill(Anthill* anthill);
+	void randomMoving(Field* filed);
+
 	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}
-
-
-	// moving
-	void moveRight();
-	void moveLeft();
-	void moveDown();
-	void moveUp();
-
-	void randomMoving(int heightOfField, int widthOfField);
-	void moveByCoordinates(pair<int,int> point);
-
+	
 	//compare
 	bool operator==(const Ant* right)const;
 
@@ -75,7 +86,8 @@ private:
 	int y;
 	int id;
 	int power;
-
+	sf::RectangleShape shape; // Заменяем спрайт на прямоугольник
+	pair<int, int> endPoint;
 };
 
 #endif ANT_H

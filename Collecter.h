@@ -2,6 +2,11 @@
 #define COLLECTER_H
 
 #include "Ant.h"
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Graphics.hpp>
 // #include "Child.h"
 // #include "Field.h"
 
@@ -10,8 +15,8 @@ class Field;
 
 class Collecter : public Ant {
 public:
-    Collecter();
-    Collecter(int weight);
+    Collecter(const sf::Vector2f& position);
+    Collecter(const sf::Vector2f& position, int weight);
     void collectFood(Field *field);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
@@ -19,10 +24,11 @@ public:
 
     int getWeight() { return this->getWeight(); }
 
-    Collecter(vector<Child*>& list, Child* &child);
+    Collecter(const sf::Vector2f& position, vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
-    virtual void work(Field *field) override { collectFood(field); }
+    
+    virtual void work(Field* field) override {};
     //
     // using Ant::moveRight;
     // using Ant::moveLeft;

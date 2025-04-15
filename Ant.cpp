@@ -1,9 +1,7 @@
 #include "Ant.h"
 #include "AntHill.h"
-#include <algorithm>
-#include <cmath>
-#include <random>
 #include "Field.h"
+#include "Anthill.h"
 
 #define STEP 1
 
@@ -21,45 +19,61 @@ Ant::~Ant() {
     cout << "Ant destructor;!!!\n";
 }
 
-void Ant::moveRight() {
-    x += 1 * STEP;
+int getRandom(int min_n, int max_n) {
+    static mt19937 generator(random_device{}());
+    uniform_int_distribution<int> distribution(min_n, max_n);
+
+    return distribution(generator);
+};
+
+pair<int, int> Ant::randomAntHill(Anthill* anthill) {
+    int hill_x = getRandom(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
+    int hill_y = getRandom(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());
+
+    return { hill_x, hill_y };
 }
 
-void Ant::moveLeft() {
-    x -= 1 * STEP;
-}
+void Ant::updateMovement(Field* field, Anthill* anthil){
+    if (getPosX() != endPoint.first || getPosY() != endPoint.second) {
+        if (getPosX() < endPoint.first) setPosX(getPosX() + 1);
+        else if (getPosX() > endPoint.first) setPosX(getPosX() - 1);
 
-void Ant::moveUp() {
-    y += 1 * STEP;
-}
+        if (getPosY() < endPoint.second) setPosY(getPosY() + 1);
+        else if (getPosY() > endPoint.second) setPosY(getPosY() - 1);
 
-
-void Ant::randomMoving(int heightOfField, int widthOfField)
-{
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> distX(0, widthOfField);
-    std::uniform_int_distribution<int> distY(0, heightOfField);
-    int randomNumberX = distX(gen);
-    int randomNumberY = distY(gen);
-    pair<int, int> randPoint(randomNumberX, randomNumberY);
-
-    cout << "Your random point: " << randPoint.first << " " << randPoint.second << "\n";
-
-    moveByCoordinates(randPoint);
-}
-
-void Ant::moveByCoordinates(pair<int, int> point)
-{
-    while(x != point.first || y != point.second) {
-        if(x < point.first) ++x;
-        else if (x > point.first) --x;
-
-        if(y < point.second) ++y;
-        else if(y > point.second) --y;
+        shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
         printPosition();
     }
+}
+
+void Ant::goHome(Anthill* anthill){
+    endPoint = randomAntHill(anthill);
+}
+
+void Ant::findFood(Field* field){
+    pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
+    endPoint.first = point.second.first;
+    endPoint.second = point.second.second;
+}
+
+void Ant::findMaterial(Field* field){
+    pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->materialsCoordinates);
+    endPoint.first = point.second.first;
+    endPoint.second = point.second.second;
+}
+
+void Ant::randomMoving(Field* filed){
+    int randMove = getRandom(0, 7);
+    vector<pair<int, int>> movesRandOption = {
+        {-1,-1}, {0,-1}, {1,1},
+        {-1,0},           {1,0},
+        {-1,1}, {0,1}, {1,1}
+    };
+
+    setPosX(getPosX() + movesRandOption[randMove].first);
+    setPosY(getPosY() + movesRandOption[randMove].second);
+    shape.setPosition({ getPosX(), getPosY() });
+
 }
 
 bool Ant::operator==(const Ant *right) const {
@@ -74,10 +88,6 @@ bool Ant::operator==(const Ant *right) const {
     return false;
 }
 
-void Ant::moveDown() {
-    y -= 1 * STEP;
-}
-
 int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) { // check if point is in the Field
     if (point.first < fiedlWidth && point.second < fieldHeight && point.first > 0 && point.second > 0) {
         return 1;
@@ -86,7 +96,6 @@ int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) { // check if
         return 0;
     }
 }
-
 
 pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
@@ -104,42 +113,3 @@ pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int,
     }
     return answerPoint;
 }
-
-int h(pair<int, int> p1, pair<int, int> p2) {
-    int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
-    return res;
-}
-
-vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
-    vector<pair<int, int>> path; // path from start to end
-
-    vector<pair<int, int>> options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
-
-    while (start != end) {
-        pair<int, int> p1 = make_pair(start.first + 1, start.second);
-        pair<int, int> p2 = make_pair(start.first - 1, start.second);
-        pair<int, int> p3 = make_pair(start.first, start.second + 1);
-        pair<int, int> p4 = make_pair(start.first, start.second - 1);
-        if (isValid(p1, field->getWidth(), field->getHeight()))
-            options.push_back(p1);
-        if (isValid(p2, field->getWidth(), field->getHeight()))
-            options.push_back(p2);
-        if (isValid(p3, field->getWidth(), field->getHeight()))
-            options.push_back(p3);
-        if (isValid(p4, field->getWidth(), field->getHeight()))
-            options.push_back(p4);
-
-
-
-        vector<pair<int, pair<int, int>>> vH; // vector of h(option[i]) for every options
-        for (auto x : options) {
-            vH.push_back({h(x, end), x});
-        }
-        sort(vH.begin(), vH.end());
-        path.push_back(vH[0].second);
-        start = vH[0].second;
-    }
-
-    return path;
-}
-

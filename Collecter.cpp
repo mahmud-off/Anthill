@@ -4,19 +4,36 @@
 #include "Field.h"
 #include "Informer.h"
 
-Collecter::Collecter() {
-    cout << "collecter created\n";
+Collecter::Collecter(const sf::Vector2f& position) {
+    shape.setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
+    shape.setFillColor(sf::Color::Black); // Яркий цвет для видимости
+    shape.setPosition(position);
+
+
+    this->setPosX(position.x);
+    this->setPosY(position.y);
     this->setRole("collecter");
+	
+	cout << "collecter created: " << getPosX() << " " << getPosY() << endl;
+
 }
 
-Collecter::Collecter(int weight) {
-    cout << "collecter created\n";
+Collecter::Collecter(const sf::Vector2f& position, int weight) {
+    shape.setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
+    shape.setFillColor(sf::Color::Black); // Яркий цвет для видимости
+    shape.setPosition(position);
+
+
+    this->setPosX(position.x);
+    this->setPosY(position.y);
     this->setRole("collecter");
     this->setWeight(weight);
+
+    cout << "collecter created: " << getPosX() << " " << getPosY() << endl;
 }
 
 
-Collecter::Collecter(vector<Child*>& list, Child* &child)
+Collecter::Collecter(const sf::Vector2f& position, vector<Child*>& list, Child* &child)
 {
 	cout << "collecter from child" << endl;
 	this->setAge(child->getAge());
@@ -36,6 +53,10 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 
 Collecter::~Collecter() {
     cout << "collecter was deleted\n";
+}
+
+void Collecter::work() {
+
 }
 
 void Collecter::changeStatus() {
@@ -71,3 +92,13 @@ void Collecter::helpToCollectFood(int x, int y, Field *field) {
     vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
     // drawing path from points in paths with graphic
 }
+
+
+/*
+int getRandom(int min_n, int max_n) {
+    static mt19937 generator(random_device{}());
+    uniform_int_distribution<int> distribution(min_n, max_n);
+
+    return distribution(generator);
+};
+*/

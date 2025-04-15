@@ -42,6 +42,11 @@ public:
 
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
+    int getPosX() { return this->x; }
+    int getPosY() { return this->y; }
+    int getWidth() { return this->width; }
+    int getHeight() { return this->height; }
+
 
     Anthill (int scale, int x, int y);
 
@@ -61,6 +66,7 @@ private:
     int y;
     int enterX; // position of anthill enter
     int enterY;
+    int width, height;
 
 
     // resources spending
