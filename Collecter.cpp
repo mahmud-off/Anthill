@@ -5,9 +5,9 @@
 #include "Informer.h"
 
 Collecter::Collecter(const sf::Vector2f& position) {
-    shape.setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
-    shape.setFillColor(sf::Color::Black); // Яркий цвет для видимости
-    shape.setPosition(position);
+    getShape().setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
+    getShape().setFillColor(sf::Color::Black); // Яркий цвет для видимости
+    getShape().setPosition(position);
 
 
     this->setPosX(position.x);
@@ -19,9 +19,9 @@ Collecter::Collecter(const sf::Vector2f& position) {
 }
 
 Collecter::Collecter(const sf::Vector2f& position, int weight) {
-    shape.setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
-    shape.setFillColor(sf::Color::Black); // Яркий цвет для видимости
-    shape.setPosition(position);
+    getShape().setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
+    getShape().setFillColor(sf::Color::Black); // Яркий цвет для видимости
+    getShape().setPosition(position);
 
 
     this->setPosX(position.x);
@@ -55,8 +55,13 @@ Collecter::~Collecter() {
     cout << "collecter was deleted\n";
 }
 
-void Collecter::work() {
+void Collecter::work(Field* field, Anthill* anthill) {
+    string role = getRole();
+    if (role == "moving") {
+        updateMovement(field, anthill);
+    }else if(role == "go_home") {
 
+    }
 }
 
 void Collecter::changeStatus() {

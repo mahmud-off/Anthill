@@ -23,6 +23,8 @@ public:
     // getters
     int getPower() { return this->hit; }
     int getHealth() { return this->health; }
+    int getPosX() { return this->posX; }
+    int getPosY() { return this->posY; }
 
     // setters
     int setHealth(int health) { this->health = health; }

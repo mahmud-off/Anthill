@@ -24,11 +24,6 @@ public:
 	Cleaner(vector<Ant*>& list, Ant* &child);
 	virtual void work(Field *field) override { ; }
 
-
-	using Ant::moveRight;
-	using Ant::moveLeft;
-	using Ant::moveUp;
-	using Ant::moveDown;
 	using Ant::setPosX;
 	using Ant::setPosY;
 

@@ -16,6 +16,7 @@
 
 class Anthill;
 class Field;
+class Dead;
 
 using namespace std;
 
@@ -32,9 +33,6 @@ public:
 	Ant();
 	virtual ~Ant();
 
-	//functions for collecters and builders
-	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
-	
 	//access
 	int getAge()const { return age; }
 	string getRole()const { return role; }
@@ -42,9 +40,9 @@ public:
 	int getWeight()const {return weight; }
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
-	int getWeight() { return weight; }
 	int getPower() { return this->power; }
 	string getStatus() { return this->status; }
+	sf::RectangleShape getShape() { return this->shape; }
 
 	//setters
 	void setAge(int n){ age = n; }
@@ -55,17 +53,29 @@ public:
 	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
 
-	//functions
-	virtual void work(Field *field) = 0;
+	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
+	
+	//Base function for ant actions
+	virtual void work(Field* field, Anthill* anthil) = 0;
 
+	// Movent to point
 	void updateMovement(Field* field, Anthill* anthil);
 
-	// set new target
-	void goHome(Anthill* anthill);
+	// Определение координат
 	void findFood(Field* field);
 	void findMaterial(Field* field);
+	void findDeadAnts(Anthill* anthill);
+	void goHome(Anthill* anthill);
+	void findEnemy(Field* field);
+
+	// Рабочие действия
 	void build();
-	//void findDeadAnts();
+	void attack();
+	void removeDeadAnt();
+
+	//void safeChild();
+
+
 
 	pair<int, int> randomAntHill(Anthill* anthill);
 	void randomMoving(Field* filed);

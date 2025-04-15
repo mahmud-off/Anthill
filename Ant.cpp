@@ -50,6 +50,20 @@ void Ant::goHome(Anthill* anthill){
     endPoint = randomAntHill(anthill);
 }
 
+void Ant::findEnemy(Field* field){
+    vector<pair<int, pair<int, int>>> enemiesPositions;
+    vector<Enemy*> enemies = field->getEnemiesList();
+
+    for (int i = 0; i < enemies.size(); ++i) {
+        enemiesPositions[i] = { 0, {enemies[i]->getPosX(), enemies[i]->getPosY()} };
+    }
+
+    pair<int, pair<int, int>> point = findNearestPoint(this->getPosX(), this->getPosY(), enemiesPositions);
+    
+    endPoint.first = point.second.first;
+    endPoint.second = point.second.second;
+}
+
 void Ant::findFood(Field* field){
     pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
     endPoint.first = point.second.first;
@@ -62,12 +76,26 @@ void Ant::findMaterial(Field* field){
     endPoint.second = point.second.second;
 }
 
+void Ant::findDeadAnts(Anthill* anthill){
+
+    vector<pair<int, pair<int, int>>> deadAntsPositions;
+    vector<Dead*> deadList = anthill->getDeadAntsList();
+
+    for (int i = 0; i < deadList.size(); ++i) {
+        deadAntsPositions[i] = { 0, {deadList[i].getPosX(), deadList[i].getPosY()} }; // узнать про 0
+    }
+    pair<int, pair<int, int>> point = findNearestPoint(this->getPosX(), this->getPosY(), deadAntsPositions);
+
+    endPoint.first = point.second.first;
+    endPoint.second = point.second.second;
+}
+
 void Ant::randomMoving(Field* filed){
     int randMove = getRandom(0, 7);
     vector<pair<int, int>> movesRandOption = {
         {-1,-1}, {0,-1}, {1,1},
         {-1,0},           {1,0},
-        {-1,1}, {0,1}, {1,1}
+        {-1,1}, {0,1},    {1,1}
     };
 
     setPosX(getPosX() + movesRandOption[randMove].first);
@@ -86,15 +114,6 @@ bool Ant::operator==(const Ant *right) const {
         return true;
     }
     return false;
-}
-
-int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) { // check if point is in the Field
-    if (point.first < fiedlWidth && point.second < fieldHeight && point.first > 0 && point.second > 0) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
 }
 
 pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {

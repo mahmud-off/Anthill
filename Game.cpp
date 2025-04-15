@@ -34,14 +34,14 @@ void Game::update(){
 	pollEvents();
 
 	for (auto& collector : anthill.getCollectorList()) {
-		collector->updateMovement();
+		collector->work();
 	}
 }
 
 void Game::render(){
 	window->clear(sf::Color(93,161,48,54)); // зелёный фон 
 
-	for (auto& collector : anthill.getCollectorList()) {
+	for (auto& collector : anthill->getCollectorList()) {
 		collector->draw(*window);
 	}
 
