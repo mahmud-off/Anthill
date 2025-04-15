@@ -1,11 +1,13 @@
 #ifndef CLEANER_H
 #define CLEANER_H
 #include "Ant.h"
+#include "AntHill.h"
 // #include "Child.h"
 // #include "Field.h"
 
 class Child;
 class Field;
+class Dead;
 
 
 class Cleaner : public Ant {
@@ -15,10 +17,11 @@ public:
 
 	Cleaner(vector<Child*>& list, Child* &child);
 
-	// void cleanDeadAnts(Field field);
-	// pair<int, int> getPositionOfNearestDeadAnt(Field field);
-	// bool canFindDeadAnts(Field field);
-	// double distance(int x1, int y1, int x2, int y2);
+	void cleanDeadAnts(Field *field, Anthill *anthill);
+	bool canFindDeadAnts(Field *field, Anthill *anthill);
+	double distance(int x1, int y1, int x2, int y2);
+	Dead* findNearestDeadAnt(Field *field, Anthill *anthill);
+
 
 	virtual ~Cleaner();
 	Cleaner(vector<Ant*>& list, Ant* &child);
