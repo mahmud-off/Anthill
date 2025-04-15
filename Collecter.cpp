@@ -84,7 +84,7 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
     } else {
         // weight is ok
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
-        vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
+        //vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
         // drawing reverse path back to anthill
     	this->changeStatus(); // change status to free
@@ -93,13 +93,6 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
     }
 	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
-
-void Collecter::helpToCollectFood(int x, int y, Field *field) {
-	this->changeStatus();
-    vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
-    // drawing path from points in paths with graphic
-}
-
 
 /*
 int getRandom(int min_n, int max_n) {

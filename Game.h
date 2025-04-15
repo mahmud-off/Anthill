@@ -7,6 +7,9 @@
 #include <SFML/Network.hpp>
 #include "Anthill.h"
 
+#include "Collecter.h"
+
+
 using namespace std;
 
 class Game{

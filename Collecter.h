@@ -29,6 +29,7 @@ public:
     virtual ~Collecter();
     
     void work(Field* field, Anthill* anthill) override;
+    void changeStatus();
     //
     // using Ant::moveRight;
     // using Ant::moveLeft;

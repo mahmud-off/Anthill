@@ -62,13 +62,3 @@ void Soldier::fightEnemy(Enemy *enemy, Field *field) {
         }
     }
 }
-
-
-void Soldier::helpToFightEnemy(Enemy *enemy, Field *field) {
-    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {enemy->getPosX(), enemy->getPosY()}, field);
-    // drawing path from points in paths with graphic
-    this->fightEnemy(enemy, field);
-    if (this->getHealth() > 0) {
-        // soldier go home
-    }
-}

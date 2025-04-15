@@ -16,7 +16,7 @@ public:
 	virtual ~Builder();
 	Builder(vector<Collecter*>& list, Collecter* &collecter);
 
-	virtual void work(Field* field) override;
+	virtual void work(Field* field, Anthill* anthill) override;
 
 
 	void collectMaterials(Field *field, Anthill *anthill);

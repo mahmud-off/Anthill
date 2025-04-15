@@ -48,6 +48,7 @@ void Enemy::atackAntInField(Anthill *anthill, Field *field) {
 
 int antNotInAnthill(Ant *ant, Anthill *anthil) {
     // check if ant coordinates not in the anthill
+    return 0;
 }
 
 bool Enemy::canFindAntsInField(Anthill *anthill) {
@@ -94,7 +95,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
     }
     return false;
 }
-
+/*
 Ant *Enemy::findNearestAntInField(Anthill *anthill) {
     double minDist = INT_MAX; //minimal distance
     Ant *attackedAnt;
@@ -140,7 +141,7 @@ Ant *Enemy::findNearestAntInField(Anthill *anthill) {
     }
     return attackedAnt;
 }
-
+*/
 
 double Enemy::distance(int x1, int y1, int x2, int y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));

@@ -39,7 +39,7 @@ public:
     int getPosY() { return this->posY; }
 
     // setters
-    int setHealth(int health) { this->health = health; }
+    void setHealth(int health) { this->health = health; }
 
 private:
     //parameters
