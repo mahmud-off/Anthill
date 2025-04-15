@@ -1,17 +1,21 @@
-﻿#include <iostream>
-#include "Game.h";
+#include <iostream>
+#include "Game.h"
 
-using namespace std;
+int main() {
+	std::srand((unsigned)time(NULL));
 
-int main()
-{
-    Game game;
-    
-    while (game.running()){
-        game.update();
+	Game game;
+	game.createWorld();
+	game.update();
 
-        game.render();
-    }
+	game.render();
+	while(game.getWindowIsOpen()) {
+		while (game.getWindowIsOpen()) {
+			game.update();
+			game.render();
+		}
+	}
 
-    return 0;
+	return 0;
+
 }

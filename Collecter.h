@@ -19,8 +19,8 @@ class Anthill;
 
 class Collecter : public Ant {
 public:
-    Collecter(const sf::Vector2f& position);
-    Collecter(const sf::Vector2f& position, int weight);
+    Collecter();
+    Collecter(int weight);
     void collectFood(Field *field, Anthill *anthill);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
@@ -29,7 +29,7 @@ public:
 
     int getWeight() { return this->getWeight(); }
 
-    Collecter(const sf::Vector2f& position, vector<Child*>& list, Child* &child);
+    Collecter(vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
     

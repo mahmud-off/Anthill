@@ -36,8 +36,16 @@ Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
     this->initSoldier();
 }
 
+void Soldier::helpToFightEnemy(Enemy* enemy, Field* field)
+{
+    return;
+}
+
 Soldier::~Soldier() {
     cout << "soldier was deleted\n";
+}
+Soldier::Soldier(vector<Ant*>& list, Ant*& collecter)
+{
 }
 void Soldier::initSoldier()
 {

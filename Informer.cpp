@@ -90,6 +90,10 @@ void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Fi
     }
 }
 
+void Informer::anthillWasAttacked()
+{
+}
+
 void Informer::addToBuildersInformerSubscribers(Builder *newBuilder) {
     this->buildersInformerSubscribers.push_back(newBuilder);
 }

@@ -63,6 +63,11 @@ void Builder::initBuilder() {
     this->getShape().setFillColor(sf::Color::White);
 }
 
+void Builder::work(Field* field, Anthill* anthill)
+{
+    return;
+}
+
 Builder::~Builder() {
 	cout << "builder was deleted\n";
 }

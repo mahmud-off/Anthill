@@ -42,7 +42,6 @@ public:
 	int getPosY() { return this->y; }
 	int getPower() { return this->power; }
 	string getStatus() { return this->status; }
-	sf::RectangleShape getShape() { return this->shape; }
 
 	//setters
 	void setAge(int n){ age = n; }
@@ -53,6 +52,7 @@ public:
 	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
 	void setStatus(string status) { this->status = status; }
+	void setEndPoint(pair<int, int> point) { endPoint = point; }
 
 	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
 	
@@ -91,7 +91,6 @@ public:
 	sf::RectangleShape& getShape();
 
 private:
-	sf::RectangleShape shape;
 	int age;
 	string role;
 	int health; // 0 - 100

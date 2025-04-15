@@ -5,33 +5,21 @@
 #include "Field.h"
 #include "Informer.h"
 
-Collecter::Collecter(const sf::Vector2f& position) {
-    getShape().setSize(sf::Vector2f(20, 20)); // ������ 20x20 �������
-    getShape().setFillColor(sf::Color::Black); // ����� ���� ��� ���������
-    getShape().setPosition(position);
-
-
-    this->setPosX(position.x);
-    this->setPosY(position.y);
+Collecter::Collecter() {
+    //getShape().setPosition(position);
     this->setRole("collecter");
 	initCollecter();
 }
 
-Collecter::Collecter(const sf::Vector2f& position, int weight) {
-    getShape().setSize(sf::Vector2f(20, 20)); // ������ 20x20 �������
-    getShape().setFillColor(sf::Color::Black); // ����� ���� ��� ���������
-    getShape().setPosition(position);
-
-
-    this->setPosX(position.x);
-    this->setPosY(position.y);
+Collecter::Collecter(int weight) {
+    //getShape().setPosition(position);
     this->setRole("collecter");
     this->setWeight(weight);
 	initCollecter();
 }
 
 
-Collecter::Collecter(const sf::Vector2f& position, vector<Child*>& list, Child* &child)
+Collecter::Collecter(vector<Child*>& list, Child* &child)
 {
 	cout << "collecter from child" << endl;
 	this->setAge(child->getAge());
@@ -95,6 +83,10 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
         field->updateFoodCoordinatesList();
     }
 	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
+}
+
+void Collecter::helpToCollectFood(int x, int y, Field* field){
+    return;
 }
 
 /*

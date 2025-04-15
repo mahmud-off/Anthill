@@ -19,7 +19,7 @@ Ant::~Ant() {
     cout << "Ant destructor;!!!\n";
 }
 
-int getRandom(int min_n, int max_n) {
+int getRandomPoint(int min_n, int max_n) {
     static mt19937 generator(random_device{}());
     uniform_int_distribution<int> distribution(min_n, max_n);
 
@@ -27,8 +27,8 @@ int getRandom(int min_n, int max_n) {
 };
 
 pair<int, int> Ant::randomAntHill(Anthill* anthill) {
-    int hill_x = getRandom(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
-    int hill_y = getRandom(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());
+    int hill_x = getRandomPoint(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
+    int hill_y = getRandomPoint(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());
 
     return { hill_x, hill_y };
 }
@@ -42,7 +42,7 @@ void Ant::updateMovement(Field* field, Anthill* anthil){
         else if (getPosY() > endPoint.second) setPosY(getPosY() - 1);
 
         shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
-        printPosition();
+        //printPosition();
     }
 }
 
@@ -91,7 +91,7 @@ void Ant::findDeadAnts(Anthill* anthill){
 }
 
 void Ant::randomMoving(Field* filed){
-    int randMove = getRandom(0, 7);
+    int randMove = getRandomPoint(0, 7);
     vector<pair<int, int>> movesRandOption = {
         {-1,-1}, {0,-1}, {1,1},
         {-1,0},           {1,0},
@@ -100,7 +100,7 @@ void Ant::randomMoving(Field* filed){
 
     setPosX(getPosX() + movesRandOption[randMove].first);
     setPosY(getPosY() + movesRandOption[randMove].second);
-    shape.setPosition({ getPosX(), getPosY() });
+    shape.setPosition(sf::Vector2f(getPosX(), getPosY() ));
 
 }
 
@@ -138,7 +138,7 @@ int h(pair<int, int> p1, pair<int, int> p2) {
     int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
     return res;
 }
-
+/*
 vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
     vector<pair<int, int> > path; // path from start to end
 
@@ -170,7 +170,7 @@ vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> e
 
     return path;
 }
-
+*/
 void Ant::changeStatus() {
     if (this->getStatus() == "free") {
         this->status = "busy";
