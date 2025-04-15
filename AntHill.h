@@ -17,7 +17,7 @@ class Cleaner;
 class Collecter;
 class Nurse;
 class Soldier;
-
+class Dead;
 
 #include "Informer.h"
 
@@ -39,6 +39,7 @@ public:
     vector<Builder *> &getBuilderList() { return builderList; }
     vector<Nurse *> &getNurseList() { return nurseList; }
     vector<Soldier *> &getSoldierList() { return soldierList; }
+    vector<Dead *> &getDeadAntsList(){return deadAntsList; }
 
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
@@ -85,6 +86,8 @@ private:
     vector<Cleaner *> cleanerList;
     vector<Nurse *> nurseList;
     vector<Soldier *> soldierList;
+    //dead ants
+    vector<Dead*> deadAntsList;
 };
 
 #endif ANTHILL_H
