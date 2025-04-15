@@ -19,6 +19,14 @@
 #include "Field.h"
 #include "Storage.h"
 
+#include "Ant.h"
+#include "Builder.h"
+#include "Child.h"
+#include "Cleaner.h"
+#include "Collecter.h"
+#include "Nurse.h"
+#include "Soldier.h"
+
 using namespace std;
 
 class Game{

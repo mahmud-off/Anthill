@@ -41,16 +41,28 @@ public:
     vector<Nurse *> &getNurseList() { return nurseList; }
     vector<Soldier *> &getSoldierList() { return soldierList; }
     vector<Dead *> &getDeadAntsList(){return deadAntsList; }
+    int getScale() { return this->scale; }
+    int getMaterialsCount() { return this->materialsCount; }
+    int getFoodCount() { return this->foodCount; }
 
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
+    int getFoodStorage_X() { return this->foodStorage_X; }
+    int getFoodStorage_Y() { return this->foodStorage_Y; }
+
+    //setters
+    void setScale(int scale) { this->scale = scale; }
+    void setMaterialsCount(int materialsCount) { this->materialsCount = materialsCount; }
+    void setFoodCount(int foodCount) { this->foodCount = foodCount; }
 
     Anthill (int scale, int x, int y);
 
     void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();
 
-    void setxy(int x,int y);
+    void increaseAnthill();
+
+    void setxy(int x, int y, int w, int h);
 
     // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
@@ -65,6 +77,8 @@ private:
     int y;
     int enterX; // position of anthill enter
     int enterY;
+    int foodStorage_X;
+    int foodStorage_Y;
 
 
     // resources spending
@@ -73,6 +87,7 @@ private:
     void anthillDestroying(); // осыпь муравейника
 
     int foodCount;
+    int materialsCount;
     int scale;
     int childrenCount;
     int builderCount;

@@ -78,8 +78,9 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-
+*vcx*
 .vs/
 x64/
-ant.*
+*.sln
 source/
+/ant/ant.sln

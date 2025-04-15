@@ -8,6 +8,6 @@ Child::Child()
 }
 
 void Child::initChild(){
-	this->get_shape().setSize(sf::Vector2f(10.f, 10.f));
-	this->get_shape().setFillColor(sf::Color::Red);
+	this->getShape().setSize(sf::Vector2f(10.f, 10.f));
+	this->getShape().setFillColor(sf::Color::Red);
 }

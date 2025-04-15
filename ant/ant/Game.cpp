@@ -12,7 +12,7 @@ int getRandom(int min_n, int max_n) {
 Game::Game():anthill(1000,0,0),field(0,0) {
 	this->initVar();
 	this->initWindow();
-	anthill.setxy(this->videoMode.height/2, this->videoMode.width/2);
+	anthill.setxy(this->antHillX, this->antHillY,this->antHillWidth,this->antHillHeight);
 	field.setHW(this->videoMode.width, this->videoMode.height);
 
 }
@@ -74,28 +74,28 @@ void Game::createWorld()
 	for (int i = 0;i< this->anthill.getCollecterList().size()-1;i++) {
 		this->anthill.getCollecterList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getCollecterList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight  ));
-		this->anthill.getCollecterList()[i]->get_shape().setPosition((float)this->anthill.getCollecterList()[i]->getPosX(),
+		this->anthill.getCollecterList()[i]->getShape().setPosition((float)this->anthill.getCollecterList()[i]->getPosX(),
 			(float)this->anthill.getCollecterList()[i]->getPosY());
 	}
 
 	for (int i = 0;i < this->anthill.getBuilderList().size() - 1;i++) {
 		this->anthill.getBuilderList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getBuilderList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
-		this->anthill.getBuilderList()[i]->get_shape().setPosition((float)this->anthill.getBuilderList()[i]->getPosX(),
+		this->anthill.getBuilderList()[i]->getShape().setPosition((float)this->anthill.getBuilderList()[i]->getPosX(),
 			(float)this->anthill.getBuilderList()[i]->getPosY());
 	}
 
 	for (int i = 0;i < this->anthill.getSoldierList().size() - 1;i++) {
 		this->anthill.getSoldierList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getSoldierList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
-		this->anthill.getSoldierList()[i]->get_shape().setPosition((float)this->anthill.getSoldierList()[i]->getPosX(),
+		this->anthill.getSoldierList()[i]->getShape().setPosition((float)this->anthill.getSoldierList()[i]->getPosX(),
 			(float)this->anthill.getSoldierList()[i]->getPosY());
 	}
 
 	for (int i = 0;i < this->anthill.getNurseList().size() - 1;i++) {
 		this->anthill.getNurseList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getNurseList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
-		this->anthill.getNurseList()[i]->get_shape().setPosition((float)this->anthill.getNurseList()[i]->getPosX(),
+		this->anthill.getNurseList()[i]->getShape().setPosition((float)this->anthill.getNurseList()[i]->getPosX(),
 			(float)this->anthill.getNurseList()[i]->getPosY());
 	}
 
@@ -104,7 +104,7 @@ void Game::createWorld()
 		
 		this->anthill.getChildList()[i]->setPosY(getRandom(this->BornRoomY , this->BornRoomY + this->bornRoomHeight));
 
-		this->anthill.getChildList()[i]->get_shape().setPosition((float)this->anthill.getChildList()[i]->getPosX(),(float)this->anthill.getChildList()[i]->getPosY());
+		this->anthill.getChildList()[i]->getShape().setPosition((float)this->anthill.getChildList()[i]->getPosX(),(float)this->anthill.getChildList()[i]->getPosY());
 		//cout << "---------" << (float)this->anthill.getChildList()[i]->getPosX() << "  " << (float)this->anthill.getChildList()[i]->getPosY() << "\n";
 		//cout << this->anthill.getChildList()[i]->get_shape().getFillColor().toInteger()<<"\n";
 	}
@@ -112,7 +112,7 @@ void Game::createWorld()
 	for (int i = 0;i < this->anthill.getCleanerList().size() - 1;i++) {
 		this->anthill.getCleanerList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getCleanerList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
-		this->anthill.getCleanerList()[i]->get_shape().setPosition((float)this->anthill.getCleanerList()[i]->getPosX(),
+		this->anthill.getCleanerList()[i]->getShape().setPosition((float)this->anthill.getCleanerList()[i]->getPosX(),
 			(float)this->anthill.getCleanerList()[i]->getPosY());
 	}
 }
@@ -139,14 +139,14 @@ void Game::render()
 void Game::renderCollecter()
 {
 	for (int i = 0;i<anthill.getCollecterList().size()-1;i++) {
-		this->window->draw(anthill.getCollecterList()[i]->get_shape());
+		this->window->draw(anthill.getCollecterList()[i]->getShape());
 	}
 }
 
 void Game::renderCleaner()
 {
 	for (int i = 0;i < anthill.getCleanerList().size() - 1;i++) {
-		this->window->draw(anthill.getCleanerList()[i]->get_shape());
+		this->window->draw(anthill.getCleanerList()[i]->getShape());
 	}
 }
 
@@ -160,7 +160,7 @@ void Game::renderFood() {
 void Game::renderSoldier()
 {
 	for (int i = 0;i < anthill.getSoldierList().size() - 1;i++) {
-		this->window->draw(anthill.getSoldierList()[i]->get_shape());
+		this->window->draw(anthill.getSoldierList()[i]->getShape());
 	}
 }
 
@@ -168,20 +168,20 @@ void Game::renderChild()
 {
 	for (int i = 0;i < anthill.getChildList().size() - 1;i++) {
 
-		this->window->draw(anthill.getChildList()[i]->get_shape());
+		this->window->draw(anthill.getChildList()[i]->getShape());
 	}
 }
 
 void Game::renderNurse()
 {
 	for (int i = 0;i < anthill.getNurseList().size() - 1;i++) {
-		this->window->draw(anthill.getNurseList()[i]->get_shape());
+		this->window->draw(anthill.getNurseList()[i]->getShape());
 	}
 }
 
 void Game::renderBuilder() {
 	for (int i = 0;i < anthill.getBuilderList().size() - 1;i++) {
-		this->window->draw(anthill.getBuilderList()[i]->get_shape());
+		this->window->draw(anthill.getBuilderList()[i]->getShape());
 	}
 }
 
