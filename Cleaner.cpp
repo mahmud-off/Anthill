@@ -30,6 +30,10 @@ Cleaner::~Cleaner() {
     cout << "cleaner was deleted\n";
 }
 
+int antNotInAnthill(Ant *ant, Anthill *anthil) {
+    // check if ant coordinates not in the anthill
+}
+
 void Cleaner::cleanDeadAnts(Field *field, Anthill *anthill) {
     if (!canFindDeadAnts(field, anthill)) { // if can't find ants
         return;
@@ -41,11 +45,19 @@ void Cleaner::cleanDeadAnts(Field *field, Anthill *anthill) {
     // delete ant
     pair<int, int> enterCoordinates = make_pair(anthill->getEnterPosX(), anthill->getEnterPosY());
     pair<int, int> graveCoordinates = make_pair(anthill->getEnterPosX(), anthill->getEnterPosY());
-    // cleaner go to enter with dead ant
-    vector<pair<int, int>> pathToEnter = this->A_StarSearch({this->getPosX(), this->getPosY()}, enterCoordinates, field);
-    // cleaner go to grave
-    vector<pair<int, int>> pathFromEnterToGrave = this->A_StarSearch(enterCoordinates, graveCoordinates, field);
-    // cleaner go back
+    if (!antNotInAnthill(deadAnt, anthill)) {
+        // if ant is in athill
+        // cleaner go to enter with dead ant
+        vector<pair<int, int>> pathToEnter = this->A_StarSearch({this->getPosX(), this->getPosY()}, enterCoordinates, field);
+        // cleaner go to grave
+        vector<pair<int, int>> pathFromEnterToGrave = this->A_StarSearch(enterCoordinates, graveCoordinates, field);
+        // cleaner go back
+    }
+    else if (antNotInAnthill(deadAnt, anthill)) {
+        // cleaner go to grave
+        vector<pair<int, int>> pathFromEnterToGrave = this->A_StarSearch(deadAntPosition, graveCoordinates, field);
+        // cleaner go back
+    }
 }
 
 Dead* Cleaner::findNearestDeadAnt(Field *field, Anthill *anthill) {
