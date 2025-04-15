@@ -2,14 +2,22 @@
 #define ANTHILL_H
 
 //#include "Ant.h"
-#include "builder.h"
-#include "Child.h"
-#include "Cleaner.h"
-#include "Collecter.h"
-#include "Nurse.h"
-#include "Soldier.h"
+// #include "Builder.h"
+// #include "Child.h"
+// #include "Cleaner.h"
+// #include "Collecter.h"
+// #include "Nurse.h"
+// #include "Soldier.h"
 #include <iostream>
 #include <vector>
+
+class Builder;
+class Child;
+class Cleaner;
+class Collecter;
+class Nurse;
+class Soldier;
+
 
 #include "Informer.h"
 
@@ -35,18 +43,17 @@ public:
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
 
-    Anthill
+    Anthill (int scale, int x, int y);
 
-    (
-        int scale,
-        int x,
-        int y
-    );
-
-    void generateAnts(int posX, int posY, Informer* informer); // positions of ants in the beginning
+    void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();
 
-    // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+    //update
+
+    void update();
+
 
 private:
     //coordinates
@@ -59,7 +66,7 @@ private:
     // resources spending
     void antsDailyEat();
 
-    void anthillDestroying(); // осыпь муравейника
+    void anthillDestroying(); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     int foodCount;
     int scale;

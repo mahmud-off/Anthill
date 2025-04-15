@@ -26,6 +26,16 @@
 #define MAX_POWER_FOR_SOLDIERS 10
 #define MIN_POWER_FOR_SOLDIERS 4
 
+//Constants for change roles
+//for children
+#define CHILDREN_AGE 5
+#define COLLECTOR_WEIGHT 3
+//for collector
+#define COLLECTOR_AGE 10
+#define BUILDER_WEIGHT 3
+//for cleaner
+#define CLEANER_AGE 10
+
 
 using std::cout;
 using std::cin;
@@ -218,4 +228,81 @@ void Anthill::anthillDestroying() {
 void Anthill::dailyResourceExpenditure() {
     this->antsDailyEat();
     this->anthillDestroying();
+}
+
+void Anthill::update() {
+
+    //1.Rolling shifts check
+        //Check for each type of ant
+
+    //Children check
+    for(int i = 0; i < this->getChildList().size(); ++i) {
+        Child* temp = getChildList()[i];
+        if(temp->getAge() >= CHILDREN_AGE) {
+            if(temp->getWeight() >= COLLECTOR_WEIGHT) {
+                //change role to collector
+                Collecter* newCollector = new Collecter(this->getChildList(), temp);
+                this->getCollecterList().push_back(newCollector);
+                continue;
+            }
+            if(temp->getHealth() <= 50) {
+                //change role to cleaner
+                Cleaner* newCleaner = new Cleaner(this->getChildList(), temp);
+                this->getCleanerList().push_back(newCleaner);
+                continue;
+            }
+            if(this->getCollecterList().size() < this->getCleanerList().size()) {
+                //change role to collector
+                Collecter* newCollector = new Collecter(this->getChildList(), temp);
+                this->getCollecterList().push_back(newCollector);
+            }
+            else {
+                //change role to cleaner
+                Cleaner* newCleaner = new Cleaner(this->getChildList(), temp);
+                this->getCleanerList().push_back(newCleaner);
+            }
+        }
+    }
+
+    //Collector check
+    for(int i =0 ;i < this->getCollecterList().size(); ++i) {
+        Collecter* temp = this->getCollecterList()[i];
+        if(temp->getAge() >= COLLECTOR_AGE) {
+            if(temp->getAge() < 50 || temp->getWeight() >= 3) {
+                //change role to Builder
+                Builder* newBuilder = new Builder(this->getCollecterList(), temp);
+                this->getBuilderList().push_back(newBuilder);
+            }
+            if(this->getBuilderList().size() < this->getSoldierList().size()) {
+                //change role to Builder
+                Builder* newBuilder = new Builder(this->getCollecterList(), temp);
+                this->getBuilderList().push_back(newBuilder);
+            }
+            else {
+                //change role to Soldier
+                Soldier* newSoldier = new Soldier(this->getCollecterList(), temp);
+                this->getSoldierList().push_back(newSoldier);
+            }
+        }
+    }
+
+    //Cleaner check
+    for(int i = 0; i < this->getCleanerList().size(); ++i) {
+        Cleaner* temp = this->getCleanerList()[i];
+        if(temp->getAge() >= CLEANER_AGE) {
+            if(this->getNurseList().size() < this->getCleanerList().size()) {
+                //change to Nurse
+                Nurse* newNurse = new Nurse(this->getCleanerList(), temp);
+                this->getNurseList().push_back(newNurse);
+            }
+        }
+    }
+
+
+    //2.Ordinary tasks for every ant
+        // call virtual func work {...} for each ant
+
+    //3.Recompute of AntHill's parameters
+        //+- food count or others parameters
+
 }

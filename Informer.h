@@ -3,18 +3,26 @@
 
 #include <vector>
 
-#include "builder.h"
-#include "Collecter.h"
-#include "Nurse.h"
-#include "Soldier.h"
+// #include "Builder.h"
+// #include "Collecter.h"
+// #include "Nurse.h"
+// #include "Soldier.h"
+
+class Builder;
+class Collecter;
+class Nurse;
+class Soldier;
+class Field;
+class Enemy;
+class Ant;
 
 using namespace std;
 
 class Informer {
 public:
-    void callToGetHelpToCollectMaterials(int x, int y, Field field);
-    void callToGetHelpToCollectFood(int x, int y, Field field); // coordinates where was the food
-    void callToGetHelpToFightEnemy(int x, int y, Field field, Enemy enemy);
+    void callToGetHelpToCollectMaterials(int x, int y, Field *field);
+    void callToGetHelpToCollectFood(Collecter* collecterWhoNeedHelp, int x, int y, Field *field, int foodWeight); // coordinates where was the food
+    void callToGetHelpToFightEnemy(int x, int y, Field *field, Enemy *enemy);
 
     // informers for all ants
     void anthillWasAttacked(); // if opponents attack anthill
@@ -41,4 +49,4 @@ private:
     vector<Ant*> allAntsInformerSubscribers;
 };
 
-#endif //INFORMER_H
+#endif // INFORMER_H

@@ -2,6 +2,7 @@
 #include "AntHill.h"
 #include <algorithm>
 #include <cmath>
+#include <random>
 #include "Field.h"
 
 #define STEP 1
@@ -30,6 +31,35 @@ void Ant::moveLeft() {
 
 void Ant::moveUp() {
     y += 1 * STEP;
+}
+
+
+void Ant::randomMoving(int heightOfField, int widthOfField)
+{
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distX(0, widthOfField);
+    std::uniform_int_distribution<int> distY(0, heightOfField);
+    int randomNumberX = distX(gen);
+    int randomNumberY = distY(gen);
+    pair<int, int> randPoint(randomNumberX, randomNumberY);
+
+    cout << "Your random point: " << randPoint.first << " " << randPoint.second << "\n";
+
+    moveByCoordinates(randPoint);
+}
+
+void Ant::moveByCoordinates(pair<int, int> point)
+{
+    while(x != point.first || y != point.second) {
+        if(x < point.first) ++x;
+        else if (x > point.first) --x;
+
+        if(y < point.second) ++y;
+        else if(y > point.second) --y;
+        printPosition();
+    }
 }
 
 bool Ant::operator==(const Ant *right) const {
@@ -80,7 +110,7 @@ int h(pair<int, int> p1, pair<int, int> p2) {
     return res;
 }
 
-vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field field) {
+vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
     vector<pair<int, int>> path; // path from start to end
 
     vector<pair<int, int>> options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
@@ -90,13 +120,13 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
         pair<int, int> p2 = make_pair(start.first - 1, start.second);
         pair<int, int> p3 = make_pair(start.first, start.second + 1);
         pair<int, int> p4 = make_pair(start.first, start.second - 1);
-        if (isValid(p1, field.getWidth(), field.getHeight()))
+        if (isValid(p1, field->getWidth(), field->getHeight()))
             options.push_back(p1);
-        if (isValid(p2, field.getWidth(), field.getHeight()))
+        if (isValid(p2, field->getWidth(), field->getHeight()))
             options.push_back(p2);
-        if (isValid(p3, field.getWidth(), field.getHeight()))
+        if (isValid(p3, field->getWidth(), field->getHeight()))
             options.push_back(p3);
-        if (isValid(p4, field.getWidth(), field.getHeight()))
+        if (isValid(p4, field->getWidth(), field->getHeight()))
             options.push_back(p4);
 
 
@@ -112,5 +142,4 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
 
     return path;
 }
-
 

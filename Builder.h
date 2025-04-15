@@ -2,8 +2,11 @@
 #define BUILDER_H
 
 #include "Ant.h"
-#include "Collecter.h"
-#include "Field.h"
+// #include "Collecter.h"
+// #include "Field.h"
+
+class Collecter;
+class Field;
 
 class Builder : public Ant {
 public:
@@ -12,11 +15,11 @@ public:
 	virtual ~Builder();
 	Builder(vector<Collecter*>& list, Collecter* &collecter);
 
-	virtual void work(Field field) override { collectMaterials(field); }
+	virtual void work(Field *field) override { collectMaterials(field); }
 
 
-	void collectMaterials(Field field);
-	void helpToCollectMaterial(int x, int y, Field field); // coordinates
+	void collectMaterials(Field *field);
+	void helpToCollectMaterial(int x, int y, Field *field); // coordinates
 
 	using Ant::moveRight;
 	using Ant::moveLeft;
@@ -28,4 +31,4 @@ public:
 private:
 };
 
-#endif BUILDER_H
+#endif //BUILDER_H
