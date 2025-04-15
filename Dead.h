@@ -18,7 +18,7 @@ public:
     Dead(vector<Soldier*>& list, Soldier* &soldier);
     Dead(vector<Nurse*>& list, Nurse* &nurse);
 
-    virtual void work(Field *field) override { cout << "bam-bam" << "\n"; }
+    virtual void work(Field *field, Anthill *anthill) override {;}
 
 private:
 };
