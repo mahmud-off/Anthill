@@ -10,34 +10,43 @@
 
 #include<vector>
 #include<ctime>
+#include <iostream>
+
 
 #include "Anthill.h"
+#include "Informer.h"
+#include "Field.h"
+
+using namespace std;
 
 class Game{
+
 private:
-	//Инициализируем все, связанное с окном
+	//экземпляры классов, связанные с окнами
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
-
-	sf::RectangleShape ant;
-	std::vector <sf::RectangleShape> ants;
-
-	Anthill anthill;
-
-	//Таймер для спавна муравьев
-	float antSpawnTimer;
-	float antSpawnTimerMax;
-	int maxAnts;
 	
+	//экземпляры классов, связанные с общей экосистемой муравейника
+	Anthill anthill;
+	Informer informer;
+	Field field;
 
-	int widthRoom;
-	int heightRoom;
+	//родильная комната
+	int bornRoomWidth;
+	int bornRoomHeight;
+	int bornRoomX;
+	int BornRoomY;
 
+	//муравейник
+	int antHillWidth;
+	int antHillHeight;
+	int antHillX;
+	int antHillY;
 
-	void initvar();
+	//функкции инициализации
+	void initVar();
 	void initWindow();
-	void initAnt();
 public:
 	Game();
 	
@@ -46,13 +55,19 @@ public:
 	const bool getWindowIsOpen() const;
 	void pollEvents();
 
-	void spawnAnts();
 
 	void update();
-	void upadateAnts();
 
 	void render();
-	void renderAnts();
+	void renderColl();
+	void renderCle();
+	void renderSol();
+
+	void renderChi();
+
+	void renderNur();
+
+	void renderBui();
 
 	
 

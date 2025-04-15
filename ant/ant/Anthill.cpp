@@ -221,3 +221,9 @@ void Anthill::dailyResourceExpenditure() {
     this->antsDailyEat();
     this->anthillDestroying();
 }
+
+void Anthill::setxy(int x,int y)
+{
+    this->x = x; 
+    this->y = y;
+}

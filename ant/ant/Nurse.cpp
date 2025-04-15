@@ -4,6 +4,7 @@ Nurse::Nurse()
 {
 	cout << "nurse created\n";
 	this->setRole("nurse");
+	this->initNurse();
 }
 
 Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
@@ -21,8 +22,12 @@ Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
 			break;
 		}
 	}
+	this->initNurse();
 }
-
+void Nurse::initNurse() {
+	this->nur.setSize(sf::Vector2f(10.f, 10.f));
+	this->nur.setFillColor(sf::Color::Yellow);
+}
 Nurse::~Nurse() {
 	cout << "nurse was deleted\n";
 }

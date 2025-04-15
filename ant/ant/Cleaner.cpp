@@ -3,6 +3,7 @@
 Cleaner::Cleaner() {
     cout << "cleaner created\n";
     this->setRole("cleaner");
+    this->initCleaner();
 }
 
 Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
@@ -20,6 +21,13 @@ Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
             break;
         }
     }
+    this->initCleaner();
+}
+
+void Cleaner:: initCleaner()
+{
+    this->cle.setSize(sf::Vector2f(10.f, 10.f));
+    this->cle.setFillColor(sf::Color::Green);
 }
 
 Cleaner::~Cleaner() {

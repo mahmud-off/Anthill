@@ -1,10 +1,10 @@
 #include "Game.h"
 
-Game::Game():anthill(0,0,0)  {
-	this->initvar();
+Game::Game():anthill(1000,0,0),field(0,0) {
+	this->initVar();
 	this->initWindow();
-	this->initAnt();
-
+	anthill.setxy(this->videoMode.height/2, this->videoMode.width/2);
+	field.setHW(this->videoMode.width, this->videoMode.height);
 }
 
 
@@ -32,55 +32,75 @@ void Game::pollEvents()
 
 
 
-void Game::initvar()
+void Game::initVar()
 {
 	this->window = nullptr;
 
-	
-	this->antSpawnTimerMax = 100.f;
-	this->antSpawnTimer = this->antSpawnTimerMax;
-	this->maxAnts = 5;
 
-	this->widthRoom = 10;
-	this->heightRoom = 50;
+	this->bornRoomHeight = 200;
+	this->bornRoomWidth = 200;
+	this->bornRoomX = 900;
+	this->BornRoomY = 400;
+
+	this->antHillWidth = 800;
+	this->antHillHeight = 500;
+	this->antHillX = 460;
+	this->antHillY = 250;
 }
 
 void Game::initWindow()
 {
-	this->videoMode.height = 800;
-	this->videoMode.width = 600;
+	this->videoMode.height = 1000;
+	this->videoMode.width = 1920;
 	
 	this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
 	this->window->setFramerateLimit(60);
 }
 
-void Game::initAnt()
-{
-	//this->enemy.setPosition(100.f,100.f);
-	this->ant.setSize(sf::Vector2f(100.f,100.f));
-	this->ant.setScale(sf::Vector2f(0.5f,0.5f));
-	this->ant.setFillColor(sf::Color::Cyan);
-	//this -> enemy.setOutlineColor(sf::Color::Green);
-	//this->enemy.setOutlineThickness(1.f);
-
-}
-
-void Game::spawnAnts()
-{
-	this->ant.setPosition(
-		(float)(rand() % (int)(this->window->getSize().x - this->ant.getSize().x)),
-		(float)(rand() % (int)(this->window->getSize().y - this->ant.getSize().y)));
-	this->ant.setFillColor(sf::Color::Green);
-	this->ants.push_back(ant);
-}
-
 
 void Game::createWorld()
 {
-	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2);
-	for (int i = 0;i< this->anthill.getCollecterList().size();i++) {
-		this->anthill.getCollecterList()[i]->setPosX(rand() % this -> widthRoom + (this->window->getSize().x / 2));
-		this->anthill.getCollecterList()[i]->setPosY(rand() % this -> heightRoom + (this->window->getSize().y / 2));
+	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2,&this->informer);
+	for (int i = 0;i< this->anthill.getCollecterList().size()-1;i++) {
+		this->anthill.getCollecterList()[i]->setPosX(rand() % this ->antHillWidth + this->antHillX);
+		this->anthill.getCollecterList()[i]->setPosY(rand() % this ->antHillHeight + this->antHillY);
+		this->anthill.getCollecterList()[i]->coll.setPosition((float)this->anthill.getCollecterList()[i]->getPosX(),
+			(float)this->anthill.getCollecterList()[i]->getPosY());
+	}
+
+	for (int i = 0;i < this->anthill.getBuilderList().size() - 1;i++) {
+		this->anthill.getBuilderList()[i]->setPosX(rand() % this->antHillWidth + antHillX);
+		this->anthill.getBuilderList()[i]->setPosY(rand() % this->antHillHeight + antHillY);
+		this->anthill.getBuilderList()[i]->bui.setPosition((float)this->anthill.getBuilderList()[i]->getPosX(),
+			(float)this->anthill.getBuilderList()[i]->getPosY());
+	}
+
+	for (int i = 0;i < this->anthill.getSoldierList().size() - 1;i++) {
+		this->anthill.getSoldierList()[i]->setPosX(rand() % this->antHillWidth + this->antHillX);
+		this->anthill.getSoldierList()[i]->setPosY(rand() % this->antHillHeight + this->antHillY);
+		this->anthill.getSoldierList()[i]->sol.setPosition((float)this->anthill.getSoldierList()[i]->getPosX(),
+			(float)this->anthill.getSoldierList()[i]->getPosY());
+	}
+
+	for (int i = 0;i < this->anthill.getNurseList().size() - 1;i++) {
+		this->anthill.getNurseList()[i]->setPosX(rand() % this->antHillWidth + antHillX);
+		this->anthill.getNurseList()[i]->setPosY(rand() % this->antHillHeight + antHillY);
+		this->anthill.getNurseList()[i]->nur.setPosition((float)this->anthill.getNurseList()[i]->getPosX(),
+			(float)this->anthill.getNurseList()[i]->getPosY());
+	}
+
+	for (int i = 0;i < this->anthill.getChildList().size() - 1;i++) {
+		this->anthill.getChildList()[i]->setPosX(rand() % this->bornRoomWidth + this->bornRoomX);
+		this->anthill.getChildList()[i]->setPosY(rand() % this->bornRoomHeight + this->BornRoomY);
+		this->anthill.getChildList()[i]->chi.setPosition((float)this->anthill.getChildList()[i]->getPosX(),
+			(float)this->anthill.getChildList()[i]->getPosY());
+	}
+
+	for (int i = 0;i < this->anthill.getCleanerList().size() - 1;i++) {
+		this->anthill.getCleanerList()[i]->setPosX(rand() % this->antHillWidth + this->antHillX);
+		this->anthill.getCleanerList()[i]->setPosY(rand() % this->antHillHeight + this->antHillY);
+		this->anthill.getCleanerList()[i]->cle.setPosition((float)this->anthill.getCleanerList()[i]->getPosX(),
+			(float)this->anthill.getCleanerList()[i]->getPosY());
 	}
 }
 
@@ -88,35 +108,59 @@ void Game::createWorld()
 void Game::update()
 {
 	this->pollEvents();
-	this->upadateAnts();
+	//this->upadateAnts();
 }
-
-void Game::upadateAnts()
-{
-	if (this->ants.size() < this->maxAnts) {
-		if (this->antSpawnTimer >= this->antSpawnTimerMax) {
-			this->spawnAnts();
-			this->antSpawnTimer = 0.f;
-		}
-		else {
-			this->antSpawnTimer += 1.f;
-		}
-	}
-}
-
 
 void Game::render()
 {
 	this->window->clear();
-	this->renderAnts();
+	this->renderColl();
+	this->renderSol();
+	this->renderCle();
+	this->renderChi();
+	this->renderNur();
+	this->renderBui();
 	this->window->display(); 
 }
 
-void Game::renderAnts()
+void Game::renderColl()
 {
-	for (auto& e : this->ants) {
-		 
-		this->window->draw(e);
+	for (int i = 0;i<anthill.getCollecterList().size()-1;i++) {
+		this->window->draw(anthill.getCollecterList()[i]->coll);
+	}
+}
+
+void Game::renderCle()
+{
+	for (int i = 0;i < anthill.getCleanerList().size() - 1;i++) {
+		this->window->draw(anthill.getCleanerList()[i]->cle);
+	}
+}
+
+void Game::renderSol()
+{
+	for (int i = 0;i < anthill.getSoldierList().size() - 1;i++) {
+		this->window->draw(anthill.getSoldierList()[i]->sol);
+	}
+}
+
+void Game::renderChi()
+{
+	for (int i = 0;i < anthill.getChildList().size() - 1;i++) {
+		this->window->draw(anthill.getChildList()[i]->chi);
+	}
+}
+
+void Game::renderNur()
+{
+	for (int i = 0;i < anthill.getNurseList().size() - 1;i++) {
+		this->window->draw(anthill.getNurseList()[i]->nur);
+	}
+}
+
+void Game::renderBui() {
+	for (int i = 0;i < anthill.getBuilderList().size() - 1;i++) {
+		this->window->draw(anthill.getBuilderList()[i]->bui);
 	}
 }
 

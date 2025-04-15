@@ -5,12 +5,14 @@
 Collecter::Collecter() {
     cout << "collecter created\n";
     this->setRole("collecter");
+	initCollecter();
 }
 
 Collecter::Collecter(int weight) {
     cout << "collecter created\n";
     this->setRole("collecter");
     this->setWeight(weight);
+	initCollecter();
 }
 
 
@@ -43,6 +45,12 @@ void Collecter::changeStatus() {
 	else if (this->getStatus() == "busy") {
 		this->status = "free";
 	}
+}
+
+void Collecter::initCollecter()
+{
+	this->coll.setSize(sf::Vector2f(10.f, 10.f));
+	this->coll.setFillColor(sf::Color::Cyan);
 }
 
 

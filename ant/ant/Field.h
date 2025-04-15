@@ -19,6 +19,8 @@ public:
     int getHeight() { return height; }
     int getWidth() { return width; }
 
+    void setHW(int x,int y);
+
     void updateFoodCoordinatesList();
     void updateMaterialsCoordinatesList();
 
@@ -62,4 +64,4 @@ private:
 
 };
 
-#endif //FIELD_H
+#endif 

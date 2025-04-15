@@ -5,14 +5,24 @@
 #include "Child.h"
 #include "Field.h"
 
+#include<SFML/Graphics.hpp>
+#include<SFML/System.hpp>
+#include<SFML/Audio.hpp>
+#include<SFML/Network.hpp>
+#include<SFML/Window.hpp>
+
+
 class Collecter : public Ant {
 public:
+    sf::RectangleShape coll;
     Collecter();
     Collecter(int weight);
     void collectFood(Field field);
     void helpToCollectFood(int x, int y, Field field); // coordinates
     // void setStatus(string status) { this->status = status; }
     void changeStatus();
+
+    void initCollecter();
 
     int getWeight() { return this->getWeight(); }
 
@@ -34,6 +44,7 @@ public:
     // using Ant::getStatus;
 
 private:
+   
 };
 
-#endif // COLLECTER_H
+#endif

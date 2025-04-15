@@ -3,6 +3,7 @@
 Soldier::Soldier() {
     cout << "soldier created\n";
     this->setRole("soldier");
+    this->initSoldier();
     // hit = 10; // power of hit
 }
 
@@ -10,6 +11,7 @@ Soldier::Soldier(int power) {
     cout << "soldier created\n";
     this->setRole("soldier");
     this->setPower(power);
+    this->initSoldier();
 }
 
 Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
@@ -27,10 +29,18 @@ Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
             break;
         }
     }
+    this->initSoldier();
 }
 
 Soldier::~Soldier() {
     cout << "soldier was deleted\n";
+}
+
+
+void Soldier::initSoldier()
+{
+    this->sol.setSize(sf::Vector2f(10.f, 10.f));
+    this->sol.setFillColor(sf::Color::Blue);
 }
 
 void Soldier::fightEnemy(Enemy enemy, Field field) {

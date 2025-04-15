@@ -5,13 +5,22 @@
 #include "Enemy.h"
 #include "Collecter.h"
 
+#include<SFML/Graphics.hpp>
+#include<SFML/System.hpp>
+#include<SFML/Audio.hpp>
+#include<SFML/Network.hpp>
+#include<SFML/Window.hpp>
+
 class Soldier : public Ant {
 public:
+    sf::RectangleShape sol;
+
     Soldier();
     Soldier(int power);
 
     Soldier(vector<Collecter*>& list, Collecter* &collecter);
     void helpToFightEnemy(int x, int y, Field field);
+    void initSoldier();
     void fightEnemy(Enemy enemy, Field field);
 
     virtual ~Soldier();
@@ -34,4 +43,4 @@ private:
     int hit; // ����
 };
 
-#endif // SOLDIER_H
+#endif 
