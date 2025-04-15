@@ -30,6 +30,7 @@ Enemy::~Enemy() {
 void Enemy::hitAttackedAnt(Ant *attackedAnt) {
     if (attackedAnt->getHealth() - this->getPower() <= 0) {
         // attackedAnt become killed
+        attackedAnt->setHealth(0); // when update - it will be deleted
     } else {
         attackedAnt->setHealth(attackedAnt->getHealth() - this->getPower());
     }
