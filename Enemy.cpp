@@ -103,7 +103,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
 
 Ant *Enemy::findNearestAntInField(Anthill *anthill) {
     double minDist = INT_MAX; //minimal distance
-    Ant *attackedAnt;
+    Ant *attackedAnt = nullptr;
     for (int i = 0; i < anthill->getCollecterList().size(); i++) {
         auto ant = anthill->getCollecterList()[i];
         double temp = distance(this->posX, this->posY, ant->getPosX(), ant->getPosY());
