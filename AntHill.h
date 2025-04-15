@@ -17,7 +17,7 @@ class Cleaner;
 class Collecter;
 class Nurse;
 class Soldier;
-
+class Dead;
 
 #include "Informer.h"
 
@@ -39,6 +39,7 @@ public:
     vector<Builder *> &getBuilderList() { return builderList; }
     vector<Nurse *> &getNurseList() { return nurseList; }
     vector<Soldier *> &getSoldierList() { return soldierList; }
+    vector<Dead *> &getDeadAntsList(){return deadAntsList; }
     int getScale() { return this->scale; }
     int getMaterialsCount() { return this->materialsCount; }
     int getFoodCount() { return this->foodCount; }
@@ -63,6 +64,11 @@ public:
     void setxy(int x, int y, int w, int h);
 
     // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
+
+    //update
+
+    void update();
+
 
 private:
     //coordinates
@@ -97,6 +103,8 @@ private:
     vector<Cleaner *> cleanerList;
     vector<Nurse *> nurseList;
     vector<Soldier *> soldierList;
+    //dead ants
+    vector<Dead*> deadAntsList;
 };
 
 #endif ANTHILL_H

@@ -51,11 +51,17 @@ public:
 	//functions
 	virtual void work(Field *field, Anthill *anthill) = 0;
 
+	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}
+
+
 	// moving
 	void moveRight();
 	void moveLeft();
 	void moveDown();
 	void moveUp();
+
+	void randomMoving(int heightOfField, int widthOfField);
+	void moveByCoordinates(pair<int,int> point);
 
 	//compare
 	bool operator==(const Ant* right)const;
