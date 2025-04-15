@@ -1,7 +1,10 @@
+#include "AntHill.h"
 #include "builder.h"
 #include "Collecter.h"
 #include "Field.h"
 #include "Informer.h"
+
+#define CONST_MAKE_ANTHILL_BIGGER 5
 
 Builder::Builder() {
     cout << "builder created\n";
@@ -15,29 +18,25 @@ Builder::Builder(int weight) {
 }
 
 
-void Builder::collectMaterials(Field *field) {
-    if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).first) { // material is too heavy
-        // informer function will be here
-    	// for testing
-    	cout << "material isn't available" << this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).first << "\n";
+void Builder::collectMaterials(Field *field, Anthill *anthill) {
+	this->changeStatus(); // change status to busy
+    if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).first) {
+    	// material is too heavy
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
         Informer informer;
-        informer.callToGetHelpToCollectMaterials(p.first, p.second, field);
+        informer.callToGetHelpToCollectMaterials(this, p.first, p.second, field, this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).first);
     }
-    else { // material is ok
+    else {
+    	// material weight is ok
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
         vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
-        // drawing reverse path to anthill
-
-    	// for testing
-    	for (auto x: paths) {
-    		cout << x.first << " " << x.second << "\n";
-    	}
-    	//
+        // drawing reverse path back to anthill
+    	this->changeStatus(); // change status to free
         field->field[p.first][p.second] = ""; // already no food in this point
         field->updateMaterialsCoordinatesList();
     }
+	anthill->setMaterialsCount(anthill->getMaterialsCount() + 1); // increase materials by 1
 }
 
 Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
@@ -62,6 +61,12 @@ Builder::~Builder() {
 }
 
 void Builder::helpToCollectMaterial(int x, int y, Field *field) {
+	this->changeStatus(); // change status to busy
     vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
     // drawing path from points in paths with graphic
 }
+
+void Builder::buildAnthill(Anthill *anthill) {
+	anthill->setScale(anthill->getScale() + CONST_MAKE_ANTHILL_BIGGER);
+}
+

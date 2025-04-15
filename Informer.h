@@ -20,9 +20,9 @@ using namespace std;
 
 class Informer {
 public:
-    void callToGetHelpToCollectMaterials(int x, int y, Field *field);
-    void callToGetHelpToCollectFood(Collecter* collecterWhoNeedHelp, int x, int y, Field *field, int foodWeight); // coordinates where was the food
-    void callToGetHelpToFightEnemy(int x, int y, Field *field, Enemy *enemy);
+    void callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int x, int y, Field *field, int materialWeight);
+    void callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x, int y, Field *field, int foodWeight); // coordinates where was the food
+    void callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field, Enemy *enemyWhoAttackedAnt);
 
     // informers for all ants
     void anthillWasAttacked(); // if opponents attack anthill

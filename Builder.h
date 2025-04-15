@@ -7,6 +7,7 @@
 
 class Collecter;
 class Field;
+class Anthill;
 
 class Builder : public Ant {
 public:
@@ -18,9 +19,10 @@ public:
 	virtual void work(Field* field) override;
 
 
-	void collectMaterials(Field *field);
+	void collectMaterials(Field *field, Anthill *anthill);
 	void helpToCollectMaterial(int x, int y, Field *field); // coordinates
 
+	void buildAnthill(Anthill *anthill);
 	using Ant::setPosX;
 	using Ant::setPosY;
 

@@ -8,6 +8,7 @@
 #include "Cleaner.h"
 #include "Soldier.h"
 #include "Nurse.h"
+#include "Dead.h"
 #include "Informer.h"
 
 #define FIELD_HEIGHT 250
@@ -20,16 +21,36 @@ int main() {
     anthill.generateAnts(FIELD_WIDTH / 2, FIELD_HEIGHT / 2, &informer);
     field.ResourceSpawn();
 
+    //test for changing roles
+    cout << "\nChildren size before: " << anthill.getChildList().size() << "\n";
+    cout << "Collector size before: " << anthill.getCollecterList().size() << "\n";
+    cout << "Cleaner size before: " << anthill.getCleanerList().size() << "\n";
+    anthill.getChildList()[0]->setAge(6);
+    anthill.getChildList()[0]->setWeight(3);
+    anthill.update();
+    cout << "Children size after: " << anthill.getChildList().size() << "\n";
+    cout << "Collector size after: " << anthill.getCollecterList().size() << "\n";
+    cout << "Cleaner size after: " << anthill.getCleanerList().size() << "\n";
+    Dead* deadTest = new Dead(anthill.getChildList(),anthill.getChildList()[0]);
+    anthill.getDeadAntsList().push_back(deadTest);
+    cout << "Children size after death: " << anthill.getChildList().size() << "\n";
+    cout << "Death list size: " << anthill.getDeadAntsList().size() << "\n";
+
 /*
     //test for changing roles
     cout << "\nChildren size before: " << anthill.getChildList().size() << "\n";
     cout << "Collector size before: " << anthill.getCollecterList().size() << "\n";
     cout << "Cleaner size before: " << anthill.getCleanerList().size() << "\n";
     anthill.getChildList()[0]->setAge(6);
+    anthill.getChildList()[0]->setWeight(3);
     anthill.update();
     cout << "Children size after: " << anthill.getChildList().size() << "\n";
     cout << "Collector size after: " << anthill.getCollecterList().size() << "\n";
     cout << "Cleaner size after: " << anthill.getCleanerList().size() << "\n";
+    Dead* deadTest = new Dead(anthill.getChildList(),anthill.getChildList()[0]);
+    anthill.getDeadAntsList().push_back(deadTest);
+    cout << "Children size after death: " << anthill.getChildList().size() << "\n";
+    cout << "Death list size: " << anthill.getDeadAntsList().size() << "\n";
 */
     /*
     while(true) {

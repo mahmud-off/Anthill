@@ -1,12 +1,13 @@
 #include "Collecter.h"
 
+#include "AntHill.h"
 #include "Child.h"
 #include "Field.h"
 #include "Informer.h"
 
 Collecter::Collecter(const sf::Vector2f& position) {
-    getShape().setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
-    getShape().setFillColor(sf::Color::Black); // Яркий цвет для видимости
+    getShape().setSize(sf::Vector2f(20, 20)); // пїЅпїЅпїЅпїЅпїЅпїЅ 20x20 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    getShape().setFillColor(sf::Color::Black); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     getShape().setPosition(position);
 
 
@@ -19,8 +20,8 @@ Collecter::Collecter(const sf::Vector2f& position) {
 }
 
 Collecter::Collecter(const sf::Vector2f& position, int weight) {
-    getShape().setSize(sf::Vector2f(20, 20)); // Размер 20x20 пикселя
-    getShape().setFillColor(sf::Color::Black); // Яркий цвет для видимости
+    getShape().setSize(sf::Vector2f(20, 20)); // пїЅпїЅпїЅпїЅпїЅпїЅ 20x20 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    getShape().setFillColor(sf::Color::Black); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     getShape().setPosition(position);
 
 
@@ -73,8 +74,7 @@ void Collecter::changeStatus() {
 	}
 }
 
-
-void Collecter::collectFood(Field *field) {
+void Collecter::collectFood(Field *field, Anthill *anthill) {
 	this->changeStatus(); // change status to busy
     if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
         // food is too heavy
@@ -86,10 +86,12 @@ void Collecter::collectFood(Field *field) {
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
-        // drawing reverse path to anthill
+        // drawing reverse path back to anthill
+    	this->changeStatus(); // change status to free
         field->field[p.first][p.second] = ""; // already no food in this point
         field->updateFoodCoordinatesList();
     }
+	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
 
 void Collecter::helpToCollectFood(int x, int y, Field *field) {

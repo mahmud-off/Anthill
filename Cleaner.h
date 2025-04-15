@@ -22,7 +22,7 @@ public:
 
 	virtual ~Cleaner();
 	Cleaner(vector<Ant*>& list, Ant* &child);
-	virtual void work(Field *field) override { ; }
+	virtual void work(Field *field, Anthill *anthill) override { ; }
 
 	using Ant::setPosX;
 	using Ant::setPosY;

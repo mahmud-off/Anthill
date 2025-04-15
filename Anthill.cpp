@@ -36,6 +36,8 @@
 //for cleaner
 #define CLEANER_AGE 10
 
+#define MATERIALS_NEEDED_TO_INCREASE_ANTHILL 10
+
 
 using std::cout;
 using std::cin;
@@ -229,6 +231,23 @@ void Anthill::dailyResourceExpenditure() {
     this->antsDailyEat();
     this->anthillDestroying();
 }
+
+void Anthill::increaseAnthill() {
+    if (this->getMaterialsCount() >= MATERIALS_NEEDED_TO_INCREASE_ANTHILL) {
+        for (int i = 0; i < this->getBuilderList().size(); i++) {
+            auto currentBuilder = this->getBuilderList()[i];
+            if (currentBuilder->getStatus() == "free") {
+                currentBuilder->changeStatus(); // change status to busy
+                currentBuilder->buildAnthill(this);
+                currentBuilder->changeStatus(); // change status to free
+            }
+            else if (currentBuilder->getStatus() == "busy") {
+                continue;
+            }
+        }
+    }
+}
+
 
 void Anthill::update() {
 

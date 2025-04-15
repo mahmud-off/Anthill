@@ -12,15 +12,15 @@
 
 class Child;
 class Field;
+class Anthill;
 
 class Collecter : public Ant {
 public:
     Collecter(const sf::Vector2f& position);
     Collecter(const sf::Vector2f& position, int weight);
-    void collectFood(Field *field);
+    void collectFood(Field *field, Anthill *anthill);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
-    void changeStatus();
 
     int getWeight() { return this->getWeight(); }
 
