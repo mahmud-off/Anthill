@@ -2,8 +2,11 @@
 #define BUILDER_H
 
 #include "Ant.h"
-#include "Collecter.h"
-#include "Field.h"
+// #include "Collecter.h"
+// #include "Field.h"
+
+class Collecter;
+class Field;
 
 
 
@@ -20,11 +23,11 @@ public:
 
 	void initBuilder();
 
-	virtual void work(Field field) override { collectMaterials(field); }
+	virtual void work(Field *field) override { collectMaterials(field); }
 
 
-	void collectMaterials(Field field);
-	void helpToCollectMaterial(int x, int y, Field field); // coordinates
+	void collectMaterials(Field *field);
+	void helpToCollectMaterial(int x, int y, Field *field); // coordinates
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

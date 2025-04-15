@@ -1,5 +1,5 @@
 #include "Nurse.h"
-
+#include "Cleaner.h"
 Nurse::Nurse()
 {
 	cout << "nurse created\n";
@@ -29,5 +29,5 @@ void Nurse::initNurse() {
 	this->get_shape().setFillColor(sf::Color::Yellow);
 }
 Nurse::~Nurse() {
-	cout << "nurse was deleted\n";
+    cout << "nurse was deleted\n";
 }

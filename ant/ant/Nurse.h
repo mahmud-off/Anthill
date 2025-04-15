@@ -2,7 +2,10 @@
 #define NURSE_H
 
 #include "Ant.h"
-#include "Cleaner.h"
+// #include "Cleaner.h"
+
+class Cleaner;
+class Field;
 
 
 
@@ -11,7 +14,7 @@ public:
 
 	Nurse();
 	//virtual ~Nurse();
-	virtual void work(Field field) override { ; }
+	virtual void work(Field *field) override { ; }
 
 	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
 	void initNurse();

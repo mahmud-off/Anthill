@@ -2,14 +2,22 @@
 #define ANTHILL_H
 
 //#include "Ant.h"
-#include "Builder.h"
-#include "Child.h"
-#include "Cleaner.h"
-#include "Collecter.h"
-#include "Nurse.h"
-#include "Soldier.h"
+// #include "Builder.h"
+// #include "Child.h"
+// #include "Cleaner.h"
+// #include "Collecter.h"
+// #include "Nurse.h"
+// #include "Soldier.h"
 #include <iostream>
 #include <vector>
+
+class Builder;
+class Child;
+class Cleaner;
+class Collecter;
+class Nurse;
+class Soldier;
+class Dead;
 
 #include "Informer.h"
 
@@ -31,6 +39,7 @@ public:
     vector<Builder *> &getBuilderList() { return builderList; }
     vector<Nurse *> &getNurseList() { return nurseList; }
     vector<Soldier *> &getSoldierList() { return soldierList; }
+    vector<Dead *> &getDeadAntsList(){return deadAntsList; }
 
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
@@ -43,6 +52,11 @@ public:
     void setxy(int x,int y);
 
     // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
+
+    //update
+
+    void update();
+
 
 private:
     //coordinates
@@ -74,6 +88,8 @@ private:
     vector<Cleaner *> cleanerList;
     vector<Nurse *> nurseList;
     vector<Soldier *> soldierList;
+    //dead ants
+    vector<Dead*> deadAntsList;
 };
 
 #endif ANTHILL_H
