@@ -88,8 +88,10 @@ public:
 
 	string status; // free / busy
 	void changeStatus();
+	sf::RectangleShape& getShape();
 
 private:
+	sf::RectangleShape shape;
 	int age;
 	string role;
 	int health; // 0 - 100

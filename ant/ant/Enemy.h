@@ -9,9 +9,7 @@ class Anthill;
 class Ant;
 class Field;
 
-
 using namespace std;
-
 
 class Enemy {
 public:
@@ -41,6 +39,15 @@ public:
     // setters
     void setHealth(int health) { this->health = health; }
 
+
+
+
+
+    //functions
+ 
+
+
+
 private:
     //parameters
     int health; // health
@@ -51,4 +58,4 @@ private:
 };
 
 
-#endif //ENEMY_H
+#endif 

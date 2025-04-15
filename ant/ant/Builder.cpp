@@ -9,12 +9,14 @@
 Builder::Builder() {
     cout << "builder created\n";
     this->setRole("builder");
+    this->initBuilder();
 }
 
 Builder::Builder(int weight) {
     cout << "builder created\n";
     this->setRole("builder");
     this->setWeight(weight);
+    this->initBuilder();
 }
 
 
@@ -54,6 +56,11 @@ Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
 			break;
 		}
 	}
+}
+
+void Builder::initBuilder() {
+    this->getShape().setSize(sf::Vector2f(10.f, 10.f));
+    this->getShape().setFillColor(sf::Color::White);
 }
 
 Builder::~Builder() {

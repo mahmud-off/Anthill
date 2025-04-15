@@ -49,4 +49,4 @@ private:
     vector<Ant*> allAntsInformerSubscribers;
 };
 
-#endif // INFORMER_H
+#endif

@@ -81,6 +81,12 @@ void Field::ResourceSpawn() {
     this->materialsSpawn(DAILY_MATERIALS_SPAWN);
 }
 
+void Field::setHW(int x,int y)
+{
+    this->width = x;
+    this ->height = y;
+}
+
 void Field::updateFoodCoordinatesList() {
     // для того чтобы не рассматривать лишние координаты с едой в следующий раз
     vector<pair<int, pair<int, int> > > newFoodCoordinates;

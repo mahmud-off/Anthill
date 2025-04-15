@@ -9,13 +9,19 @@ class Collecter;
 class Field;
 class Anthill;
 
+
+
+
+
 class Builder : public Ant {
 public:
+
+	
 	Builder();
 	Builder(int weight);
 	virtual ~Builder();
 	Builder(vector<Collecter*>& list, Collecter* &collecter);
-
+	void initBuilder();
 	virtual void work(Field* field, Anthill* anthill) override;
 
 

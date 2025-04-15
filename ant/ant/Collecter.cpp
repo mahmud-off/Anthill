@@ -14,9 +14,7 @@ Collecter::Collecter(const sf::Vector2f& position) {
     this->setPosX(position.x);
     this->setPosY(position.y);
     this->setRole("collecter");
-	
-	cout << "collecter created: " << getPosX() << " " << getPosY() << endl;
-
+	initCollecter();
 }
 
 Collecter::Collecter(const sf::Vector2f& position, int weight) {
@@ -29,8 +27,7 @@ Collecter::Collecter(const sf::Vector2f& position, int weight) {
     this->setPosY(position.y);
     this->setRole("collecter");
     this->setWeight(weight);
-
-    cout << "collecter created: " << getPosX() << " " << getPosY() << endl;
+	initCollecter();
 }
 
 
@@ -50,12 +47,18 @@ Collecter::Collecter(const sf::Vector2f& position, vector<Child*>& list, Child* 
 			break;
 		}
 	}
+	initCollecter();
 }
 
 Collecter::~Collecter() {
     cout << "collecter was deleted\n";
 }
 
+void Collecter::initCollecter()
+{
+	this->getShape().setSize(sf::Vector2f(10.f, 10.f));
+	this->getShape().setFillColor(sf::Color::Cyan);
+}
 void Collecter::work(Field* field, Anthill* anthill) {
     string role = getRole();
     if (role == "moving") {

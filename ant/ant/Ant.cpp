@@ -133,3 +133,54 @@ pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int,
     }
     return answerPoint;
 }
+
+int h(pair<int, int> p1, pair<int, int> p2) {
+    int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
+    return res;
+}
+
+vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
+    vector<pair<int, int> > path; // path from start to end
+
+    vector<pair<int, int> > options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
+
+    while (start != end) {
+        pair<int, int> p1 = make_pair(start.first + 1, start.second);
+        pair<int, int> p2 = make_pair(start.first - 1, start.second);
+        pair<int, int> p3 = make_pair(start.first, start.second + 1);
+        pair<int, int> p4 = make_pair(start.first, start.second - 1);
+        if (isValid(p1, field->getWidth(), field->getHeight()))
+            options.push_back(p1);
+        if (isValid(p2, field->getWidth(), field->getHeight()))
+            options.push_back(p2);
+        if (isValid(p3, field->getWidth(), field->getHeight()))
+            options.push_back(p3);
+        if (isValid(p4, field->getWidth(), field->getHeight()))
+            options.push_back(p4);
+
+
+        vector<pair<int, pair<int, int> > > vH; // vector of h(option[i]) for every options
+        for (auto x: options) {
+            vH.push_back({h(x, end), x});
+        }
+        sort(vH.begin(), vH.end());
+        path.push_back(vH[0].second);
+        start = vH[0].second;
+    }
+
+    return path;
+}
+
+void Ant::changeStatus() {
+    if (this->getStatus() == "free") {
+        this->status = "busy";
+    }
+    else if (this->getStatus() == "busy") {
+        this->status = "free";
+    }
+}
+
+sf::RectangleShape& Ant::getShape()
+{
+    return this->shape;
+}
