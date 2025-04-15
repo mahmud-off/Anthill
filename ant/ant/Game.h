@@ -2,15 +2,16 @@
 #define GAME_H
 
 
-#include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<SFML/Audio.hpp>
-#include<SFML/Network.hpp>
-#include<SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Window.hpp>
 
-#include<vector>
-#include<ctime>
+#include <vector>
+#include <ctime>
 #include <iostream>
+#include <random>
 
 
 #include "Anthill.h"
@@ -59,15 +60,15 @@ public:
 	void update();
 
 	void render();
-	void renderColl();
-	void renderCle();
-	void renderSol();
+	void renderCollecter();
+	void renderCleaner();
+	void renderSoldier();
 
-	void renderChi();
+	void renderChild();
 
-	void renderNur();
+	void renderNurse();
 
-	void renderBui();
+	void renderBuilder();
 
 	
 

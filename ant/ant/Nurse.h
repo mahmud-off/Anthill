@@ -4,15 +4,11 @@
 #include "Ant.h"
 #include "Cleaner.h"
 
-#include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<SFML/Audio.hpp>
-#include<SFML/Network.hpp>
-#include<SFML/Window.hpp>
+
 
 class Nurse : public Ant {
 public:
-	sf::RectangleShape nur;
+
 	Nurse();
 	//virtual ~Nurse();
 	virtual void work(Field field) override { ; }

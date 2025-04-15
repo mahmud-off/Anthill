@@ -25,8 +25,8 @@ Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
 	this->initNurse();
 }
 void Nurse::initNurse() {
-	this->nur.setSize(sf::Vector2f(10.f, 10.f));
-	this->nur.setFillColor(sf::Color::Yellow);
+	this->get_shape().setSize(sf::Vector2f(10.f, 10.f));
+	this->get_shape().setFillColor(sf::Color::Yellow);
 }
 Nurse::~Nurse() {
 	cout << "nurse was deleted\n";

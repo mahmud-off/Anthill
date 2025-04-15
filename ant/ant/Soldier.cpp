@@ -39,8 +39,8 @@ Soldier::~Soldier() {
 
 void Soldier::initSoldier()
 {
-    this->sol.setSize(sf::Vector2f(10.f, 10.f));
-    this->sol.setFillColor(sf::Color::Blue);
+    this->get_shape().setSize(sf::Vector2f(10.f, 10.f));
+    this->get_shape().setFillColor(sf::Color::Blue);
 }
 
 void Soldier::fightEnemy(Enemy enemy, Field field) {

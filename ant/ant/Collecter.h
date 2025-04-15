@@ -5,16 +5,12 @@
 #include "Child.h"
 #include "Field.h"
 
-#include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<SFML/Audio.hpp>
-#include<SFML/Network.hpp>
-#include<SFML/Window.hpp>
+
 
 
 class Collecter : public Ant {
 public:
-    sf::RectangleShape coll;
+  
     Collecter();
     Collecter(int weight);
     void collectFood(Field field);

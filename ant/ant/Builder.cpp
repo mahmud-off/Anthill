@@ -34,7 +34,7 @@ void Builder::collectMaterials(Field field) {
     	// for testing
     	for (auto x: paths) {
     		cout << x.first << " " << x.second << "\n";
-    	}
+    	}  
     	//
         field.field[p.first][p.second] = ""; // already no food in this point
         field.updateMaterialsCoordinatesList();
@@ -59,8 +59,8 @@ Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
 }
 
 void Builder::initBuilder() {
-    this->bui.setSize(sf::Vector2f(10.f, 10.f));
-    this->bui.setFillColor(sf::Color::White);
+    this->get_shape().setSize(sf::Vector2f(10.f, 10.f));
+    this->get_shape().setFillColor(sf::Color::White);
 }
 
 Builder::~Builder() {

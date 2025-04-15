@@ -5,15 +5,11 @@
 #include "Enemy.h"
 #include "Collecter.h"
 
-#include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<SFML/Audio.hpp>
-#include<SFML/Network.hpp>
-#include<SFML/Window.hpp>
+
 
 class Soldier : public Ant {
 public:
-    sf::RectangleShape sol;
+
 
     Soldier();
     Soldier(int power);

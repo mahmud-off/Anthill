@@ -32,6 +32,7 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 			break;
 		}
 	}
+	initCollecter();
 }
 
 Collecter::~Collecter() {
@@ -49,8 +50,8 @@ void Collecter::changeStatus() {
 
 void Collecter::initCollecter()
 {
-	this->coll.setSize(sf::Vector2f(10.f, 10.f));
-	this->coll.setFillColor(sf::Color::Cyan);
+	this->get_shape().setSize(sf::Vector2f(10.f, 10.f));
+	this->get_shape().setFillColor(sf::Color::Cyan);
 }
 
 

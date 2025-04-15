@@ -26,8 +26,8 @@ Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
 
 void Cleaner:: initCleaner()
 {
-    this->cle.setSize(sf::Vector2f(10.f, 10.f));
-    this->cle.setFillColor(sf::Color::Green);
+    this->get_shape().setSize(sf::Vector2f(10.f, 10.f));
+    this->get_shape().setFillColor(sf::Color::Green);
 }
 
 Cleaner::~Cleaner() {

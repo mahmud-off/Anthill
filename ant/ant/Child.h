@@ -4,18 +4,13 @@
 #include "Ant.h"
 
 
-#include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<SFML/Audio.hpp>
-#include<SFML/Network.hpp>
-#include<SFML/Window.hpp>
+
 
 using namespace std;
 
 class Child : public Ant {
 public:
 
-    sf::RectangleShape chi;
     Child();
 
     void initChild();
