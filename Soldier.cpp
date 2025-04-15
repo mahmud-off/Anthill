@@ -38,31 +38,37 @@ Soldier::~Soldier() {
 }
 
 void Soldier::fightEnemy(Enemy *enemy, Field *field) {
-    srand(time(0));
-    int whoStartFight = rand() % 2; // 0 - soldier, 1 - enemy
-    if (whoStartFight == 0) { // soldier hits first
-        if (enemy->getHealth() - this->getPower() < 0) { // soldier hitted enemy and enemy died
-            enemy->setHealth(0);
-            field->deleteEnemy(enemy); // delete killed enemy
-            // need to delete enemy here
+    while (enemy->getHealth() > 0 && this->getHealth() > 0) { // fight until someone die
+        srand(time(0));
+        int whoStartFight = rand() % 2; // 0 - soldier, 1 - enemy
+        if (whoStartFight == 0) { // soldier hits first
+            if (enemy->getHealth() - this->getPower() < 0) { // soldier hitted enemy and enemy died
+                enemy->setHealth(0);
+                field->deleteEnemy(enemy); // delete killed enemy
+                // need to delete enemy here
+            }
+            else {
+                enemy->setHealth(enemy->getHealth() - this->getPower()); // enemy didn't die
+            }
         }
-        else {
-            enemy->setHealth(enemy->getHealth() - this->getPower()); // enemy didn't die
-        }
-    }
-    else if (whoStartFight == 1) { // enemy hits first
-        if (this->getHealth() - enemy->getPower() < 0) { // enemy hitted soldier and soldier died
-            this->setHealth(0);
-            // need to delete soldier here
-        }
-        else {
-            this->setHealth(this->getHealth() - enemy->getPower()); // soldier didn't die
+        else if (whoStartFight == 1) { // enemy hits first
+            if (this->getHealth() - enemy->getPower() < 0) { // enemy hitted soldier and soldier died
+                this->setHealth(0);
+                // need to delete killed soldier here
+            }
+            else {
+                this->setHealth(this->getHealth() - enemy->getPower()); // soldier didn't die
+            }
         }
     }
 }
 
 
-void Soldier::helpToFightEnemy(int x, int y, Field *field) {
-    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
+void Soldier::helpToFightEnemy(Enemy *enemy, Field *field) {
+    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {enemy->getPosX(), enemy->getPosY()}, field);
     // drawing path from points in paths with graphic
+    this->fightEnemy(enemy, field);
+    if (this->getHealth() > 0) {
+        // soldier go home
+    }
 }

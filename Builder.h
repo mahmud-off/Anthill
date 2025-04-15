@@ -7,6 +7,7 @@
 
 class Collecter;
 class Field;
+class Anthill;
 
 class Builder : public Ant {
 public:
@@ -15,11 +16,13 @@ public:
 	virtual ~Builder();
 	Builder(vector<Collecter*>& list, Collecter* &collecter);
 
-	virtual void work(Field *field) override { collectMaterials(field); }
+	virtual void work(Field *field, Anthill *anthill) override { collectMaterials(field, anthill); }
 
 
-	void collectMaterials(Field *field);
+	void collectMaterials(Field *field, Anthill *anthill);
 	void helpToCollectMaterial(int x, int y, Field *field); // coordinates
+
+	void buildAnthill(Anthill *anthill);
 
 	using Ant::moveRight;
 	using Ant::moveLeft;

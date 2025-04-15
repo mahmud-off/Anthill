@@ -6,6 +6,7 @@
 // #include "Field.h"
 
 class Field;
+class Anthill;
 
 using namespace std;
 
@@ -48,7 +49,7 @@ public:
 	void setStatus(string status) { this->status = status; }
 
 	//functions
-	virtual void work(Field *field) = 0;
+	virtual void work(Field *field, Anthill *anthill) = 0;
 
 	// moving
 	void moveRight();

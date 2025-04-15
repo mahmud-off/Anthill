@@ -14,11 +14,11 @@ public:
     Soldier(int power);
 
     Soldier(vector<Collecter*>& list, Collecter* &collecter);
-    void helpToFightEnemy(int x, int y, Field *field);
+    void helpToFightEnemy(Enemy *enemy, Field *field);
     void fightEnemy(Enemy *enemy, Field *field);
 
     virtual ~Soldier();
-    virtual void work(Field *field) override { ; }
+    virtual void work(Field *field, Anthill *anthill) override { ; }
     Soldier(vector<Ant*>& list, Ant* &collecter);
 
     using Ant::moveRight;

@@ -12,7 +12,7 @@ class Nurse : public Ant {
 public:
 	Nurse();
 	//virtual ~Nurse();
-	virtual void work(Field *field) override { ; }
+	virtual void work(Field *field, Anthill *anthill) override { ; }
 
 	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
 	virtual ~Nurse();

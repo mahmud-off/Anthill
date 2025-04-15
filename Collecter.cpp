@@ -1,5 +1,6 @@
 #include "Collecter.h"
 
+#include "AntHill.h"
 #include "Child.h"
 #include "Field.h"
 #include "Informer.h"
@@ -39,7 +40,7 @@ Collecter::~Collecter() {
 }
 
 
-void Collecter::collectFood(Field *field) {
+void Collecter::collectFood(Field *field, Anthill *anthill) {
 	this->changeStatus(); // change status to busy
     if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
         // food is too heavy
@@ -56,6 +57,7 @@ void Collecter::collectFood(Field *field) {
         field->field[p.first][p.second] = ""; // already no food in this point
         field->updateFoodCoordinatesList();
     }
+	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
 
 void Collecter::helpToCollectFood(int x, int y, Field *field) {

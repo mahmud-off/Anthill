@@ -76,16 +76,17 @@ void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int 
     field->updateMaterialsCoordinatesList();
 }
 
-void Informer::callToGetHelpToFightEnemy(int x, int y, Field *field, Enemy *enemy) {
+void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field, Enemy *enemyWhoAttackedAnt) {
     for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
-        Soldier *curSoldier = soldiersInformerSubscribers[i];
-        curSoldier->helpToFightEnemy(x, y, field);
-        curSoldier->fightEnemy(enemy, field);
-        if (enemy->getHealth() <= 0) {
-            // if enemy died -> no need to help
-            break;
+        auto curSoldier = this->soldiersInformerSubscribers[i];
+        if (curSoldier->status == "free") {
+            curSoldier->changeStatus(); // change status to busy
+            curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
+            curSoldier->changeStatus(); // change status to free;
         }
-        // if enemy is alive -> next soldier goes to help
+        else if (curSoldier->status == "busy") {
+            continue;
+        }
     }
 }
 
