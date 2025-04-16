@@ -42,6 +42,7 @@ public:
 	int getPosY() { return this->y; }
 	int getPower() { return this->power; }
 	string getStatus() { return this->status; }
+	string getWorkStatus() { return this->work_status; }
 
 	//setters
 	void setAge(int n){ age = n; }
@@ -53,6 +54,7 @@ public:
 	void setPower(int power) { this->power = power; }
 	void setStatus(string status) { this->status = status; }
 	void setEndPoint(pair<int, int> point) { endPoint = point; }
+	void setWorkStatus(string new_work_status) { this->work_status = new_work_status; }
 
 	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
 	
@@ -60,13 +62,13 @@ public:
 	virtual void work(Field* field, Anthill* anthil) = 0;
 
 	// Movent to point
-	void updateMovement(Field* field, Anthill* anthil);
+	void updateMovement(Field* field, Anthill* anthil, string new_work);
 
 	// Определение координат
 	void findFood(Field* field);
 	void findMaterial(Field* field);
 	void findDeadAnts(Anthill* anthill);
-	void goHome(Anthill* anthill);
+	void findHome(Anthill* anthill);
 	void findEnemy(Field* field);
 
 	// Рабочие действия
@@ -93,6 +95,7 @@ public:
 private:
 	int age;
 	string role;
+	string work_status;
 	int health; // 0 - 100
 	int weight; // ������� ����� �������
 	int x; // coordinates

@@ -33,7 +33,7 @@ pair<int, int> Ant::randomAntHill(Anthill* anthill) {
     return { hill_x, hill_y };
 }
 
-void Ant::updateMovement(Field* field, Anthill* anthil){
+void Ant::updateMovement(Field* field, Anthill* anthil, string new_work_status){
     if (getPosX() != endPoint.first || getPosY() != endPoint.second) {
         if (getPosX() < endPoint.first) setPosX(getPosX() + 1);
         else if (getPosX() > endPoint.first) setPosX(getPosX() - 1);
@@ -44,9 +44,12 @@ void Ant::updateMovement(Field* field, Anthill* anthil){
         shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
         //printPosition();
     }
+    else {
+        this->setWorkStatus(new_work_status);
+    }
 }
 
-void Ant::goHome(Anthill* anthill){
+void Ant::findHome(Anthill* anthill){
     endPoint = randomAntHill(anthill);
 }
 

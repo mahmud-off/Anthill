@@ -14,7 +14,14 @@ class Child;
 class Field;
 class Anthill;
 
+enum class CollecterStatus {
+    MovingFood,
+    FindHome,
+    MovingHome,
+    FindFood,
+    CollectFood
 
+};
 
 
 class Collecter : public Ant {
@@ -49,7 +56,6 @@ public:
     // using Ant::getStatus;
 
 private:
-   
 };
 
 #endif // COLLECTER_H
