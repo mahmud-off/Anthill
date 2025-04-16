@@ -49,16 +49,17 @@ void Collecter::initCollecter()
 }
 
 
+
 void Collecter::collectFood(Field *field, Anthill *anthill) {
 	this->changeStatus(); // change status to busy
-    if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
+    if (this->getWeight() < this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
         // food is too heavy
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
+        pair<int, int> p = this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         Informer informer;
-        informer.callToGetHelpToCollectFood(this, p.first, p.second, field, this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first);
+        informer.callToGetHelpToCollectFood(this, p.first, p.second, field, this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).first);
     } else {
         // weight is ok
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
+        pair<int, int> p = this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
         // drawing reverse path back to anthill

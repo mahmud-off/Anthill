@@ -1,5 +1,5 @@
-#ifndef FOOD_H
-#define FOOD_H
+#ifndef MATERIALS_H
+#define MATERIALS_H
 
 #include<SFML/Graphics.hpp>
 #include<SFML/System.hpp>
@@ -11,17 +11,17 @@
 using namespace std;
 #include <random>
 
-class Food{
+class Materials {
 public:
-	sf::CircleShape& getFoodShape();
-	void initFood(int x,int y,int weight = 0);
+	sf::CircleShape& getMaterialsShape();
+	void initMaterials(int x, int y, int weight = 0);
 	int getWeight() { return this->weight; };
-	
+
 	int getX();
 	int getY();
 
 private:
-	sf::CircleShape foodShape;
+	sf::CircleShape materialsShape;
 	int weight;
 
 };

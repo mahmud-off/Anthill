@@ -13,7 +13,8 @@ class Storage {
 public:
 	void addFood();
 	void delFood();
-	Storage(int count);
+	void createStorage(int count, int x, int y, int h, int w);
+	int getCount() { return this->count; };
 
 	vector<Food *> storage;
 	void setHYHW(int x, int y, int height, int width);

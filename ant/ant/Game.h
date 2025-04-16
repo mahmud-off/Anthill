@@ -26,6 +26,8 @@
 #include "Collecter.h"
 #include "Nurse.h"
 #include "Soldier.h"
+#include "Food.h"
+#include "Materials.h"
 
 using namespace std;
 
@@ -55,11 +57,27 @@ private:
 	int antHillY;
 
 	//???????? ?????????????
+	//склад
+	int storageX;
+	int storageY;
+	int storageHeight;
+	int storageWidth;
+
+	void initTexture(
+);
+
+	void initSprite();
+
+	//функкции инициализации
 	void initVar();
 	void initWindow();
+
+
 public:
 	Game();
-	
+	sf::Sprite sprite;
+	sf::Texture fon;
+
 	void createWorld();
 
 	const bool getWindowIsOpen() const;
@@ -67,6 +85,8 @@ public:
 
 
 	void update();
+
+	void renderSprite(sf::Sprite sprite);
 
 	void render();
 
@@ -77,8 +97,10 @@ public:
 	void renderBuilder();
 	void renderCleaner();
 
+	void renderFoodStorage();
 	void renderFood();
-	
+	void renderMaterials();
+
 
 	
 

@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 #include "Enemy.h"
+#include "Food.h"
+
+class Materials;
 
 // class Enemy;
 
@@ -47,9 +50,10 @@ public:
     int getGravePosY() { return this->gravePosY; }
 
 
-    vector<pair<int, pair<int, int> > > foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
-    vector<pair<int, pair<int, int> > > materialsCoordinates; // coordinates of cells with materials
+    vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
+    vector<Materials* > materialsCoordinates; // coordinates of cells with materials
 private:
+
     // grave coordinates
     int gravePosX;
     int gravePosY;
