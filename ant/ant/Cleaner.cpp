@@ -36,6 +36,11 @@ Cleaner::~Cleaner() {
     cout << "cleaner was deleted\n";
 }
 
+Cleaner::Cleaner(vector<Ant*>& list, Ant*& child)
+{
+
+}
+
 // void Cleaner::cleanDeadAnts(Field field) {
 //     if (!canFindDeadAnts(field)) { // if can't find ants
 //         return;

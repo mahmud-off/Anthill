@@ -140,8 +140,22 @@ void Game::createWorld()
 void Game::update()
 {
 	this->pollEvents();
+<<<<<<< HEAD:ant/ant/Game.cpp
 	this->window->clear();
 	
+=======
+	//testing
+	for (int i = 0; i < this->anthill.getCollecterList().size(); ++i) {
+	Collecter* ant = this->anthill.getCollecterList()[i];
+
+	ant->setEndPoint({ 0,0 });
+
+	ant->updateMovement(&this->field, &this->anthill);
+	}
+
+	//ant->setPosX(getRandom(0,1024));
+	//ant->setPosY()
+>>>>>>> ivan:Game.cpp
 
 	//this->upadateAnts();
 }

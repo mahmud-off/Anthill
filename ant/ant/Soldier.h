@@ -22,13 +22,9 @@ public:
     void fightEnemy(Enemy *enemy, Field *field);
     void initSoldier();
     virtual ~Soldier();
-    virtual void work(Field *field, Anthill *anthill) override { ; }
+    void work(Field *field, Anthill *anthill) override { ; }
     Soldier(vector<Ant*>& list, Ant* &collecter);
 
-    using Ant::moveRight;
-    using Ant::moveLeft;
-    using Ant::moveUp;
-    using Ant::moveDown;
     using Ant::setPosX;
     using Ant::setPosY;
     using Ant::getPower;

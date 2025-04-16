@@ -5,8 +5,9 @@ int main() {
 	std::srand((unsigned)time(NULL));
 
 	Game game;
-	game.update();
 	game.createWorld();
+	game.update();
+
 	game.render();
 	while(game.getWindowIsOpen()) {
 		while (game.getWindowIsOpen()) {

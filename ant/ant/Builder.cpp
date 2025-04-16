@@ -30,8 +30,13 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
     }
     else {
     	// material weight is ok
+<<<<<<< HEAD:ant/ant/Builder.cpp
         pair<int, int> p = this->findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
         vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
+=======
+        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
+        //vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
+>>>>>>> ivan:Builder.cpp
         // drawing path from points in paths with graphic
         // drawing reverse path back to anthill
     	this->changeStatus(); // change status to free
@@ -63,13 +68,18 @@ void Builder::initBuilder() {
     this->getShape().setFillColor(sf::Color::White);
 }
 
+void Builder::work(Field* field, Anthill* anthill)
+{
+    return;
+}
+
 Builder::~Builder() {
 	cout << "builder was deleted\n";
 }
 
 void Builder::helpToCollectMaterial(int x, int y, Field *field) {
 	this->changeStatus(); // change status to busy
-    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
+    //vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {x, y}, field);
     // drawing path from points in paths with graphic
 }
 

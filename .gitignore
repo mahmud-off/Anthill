@@ -2,6 +2,14 @@
 .idea
 cmake-build-debug
 
+*
+!*/
+
+!.gitignore
+
+!*.cpp
+!*.h
+
 ### C++ template
 # Compiled Object files
 *.slo
