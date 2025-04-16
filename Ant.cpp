@@ -67,16 +67,21 @@ void Ant::findEnemy(Field* field){
     endPoint.second = point.second.second;
 }
 
+void Ant::collectMaterial(Field* field, Anthill* anthill){
+    pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
+    this->changeStatus(); // change status to free
+    field->field[p.first][p.second] = "";
+    field->updateMaterialsCoordinatesList();
+}
+
 void Ant::findFood(Field* field){
     pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
+    setEndPoint({ point.second.first, point.second.second });
 }
 
 void Ant::findMaterial(Field* field){
     pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->materialsCoordinates);
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
+    setEndPoint({ point.second.first, point.second.second });
 }
 
 void Ant::findDeadAnts(Anthill* anthill){

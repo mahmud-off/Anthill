@@ -63,9 +63,30 @@ void Builder::initBuilder() {
     this->getShape().setFillColor(sf::Color::White);
 }
 
-void Builder::work(Field* field, Anthill* anthill)
-{
-    return;
+void Builder::work(Field* field, Anthill* anthill){
+    string work_status = getWorkStatus();
+
+    if (work_status == "moving_material") {
+        this->updateMovement(field, anthill, "collect_material");
+
+        this->changeStatus(); // change status to busy
+    }
+    else if (work_status == "collect_material") {
+        collectMaterial(field, anthill);
+        this->setWorkStatus("find_home");
+    }
+    else if (work_status == "find_home") { // && informer->collecterWhoNeedHelp.size() == 0
+        this->findHome(anthill);
+        this->setWorkStatus("moving_home");
+    }
+    else if (work_status == "moving_home") {
+        this->updateMovement(field, anthill, "find_material");
+    }
+    else if (work_status == "find_material") {
+        buildAnthill(anthill);
+        this->findMaterial(field);
+        this->setWorkStatus("moving_material");
+    }
 }
 
 Builder::~Builder() {

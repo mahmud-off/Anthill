@@ -75,6 +75,7 @@ public:
 	void build();
 	void attack();
 	void removeDeadAnt();
+	void collectMaterial(Field* field, Anthill* anthill);
 
 	//void safeChild();
 
