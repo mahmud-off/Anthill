@@ -28,7 +28,7 @@
 #include "Soldier.h"
 #include "Food.h"
 #include "Materials.h"
-
+#include "Storage.h"
 using namespace std;
 
 class Game{
@@ -43,6 +43,7 @@ private:
 	Anthill anthill;
 	Informer informer;
 	Field field;
+	Storage storage;
 
 	//????????? ???????
 	int bornRoomWidth;
