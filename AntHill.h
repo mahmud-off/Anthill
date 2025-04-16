@@ -89,8 +89,6 @@ private:
     int width, height;
     int foodStorage_X;
     int foodStorage_Y;
-    int width;
-    int height;
 
 
     // resources spending
