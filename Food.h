@@ -13,6 +13,8 @@ using namespace std;
 
 class Food{
 public:
+	Food(int x, int y, int w);
+
 	sf::CircleShape& getFoodShape();
 	void initFood(int x,int y,int weight = 0);
 	int getWeight() { return this->weight; };
@@ -23,6 +25,8 @@ public:
 private:
 	sf::CircleShape foodShape;
 	int weight;
+	int x;
+	int y;
 
 };
 

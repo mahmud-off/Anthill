@@ -20,6 +20,7 @@ class Nurse;
 class Soldier;
 class Dead;
 
+
 #include "Informer.h"
 
 #define RoleCount 6;
@@ -59,7 +60,7 @@ public:
     void setMaterialsCount(int materialsCount) { this->materialsCount = materialsCount; }
     void setFoodCount(int foodCount) { this->foodCount = foodCount; }
 
-    Anthill (int scale, int x, int y);
+    Anthill (int scale, int x, int y, int w, int h);
 
     void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();
@@ -72,7 +73,7 @@ public:
 
     //update
 
-    void update();
+    void update(Field* field);
 
 
 private:

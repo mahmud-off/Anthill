@@ -32,10 +32,10 @@ public:
 
     Field(int width, int height);
 
-    void ResourceSpawn();
+    void ResourceSpawn(Anthill* anthill);
 
     //Enemies
-    void createEnemy();
+    void createEnemy(Anthill* anthill);
 
     void deleteEnemy(Enemy *killed);
 
@@ -51,6 +51,7 @@ public:
 
 
     vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
+    vector<Food*> detectedFood;
     vector<Materials* > materialsCoordinates; // coordinates of cells with materials
 private:
 
@@ -59,9 +60,9 @@ private:
     int gravePosY;
 
     // resource spawn
-    void foodSpawn(int k);
+    void foodSpawn(int k, Anthill* anthill);
 
-    void materialsSpawn(int k);
+    void materialsSpawn(int k,Anthill* anthill);
 
 
     int height;

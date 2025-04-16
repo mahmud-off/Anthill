@@ -3,8 +3,9 @@
 #include <cstdlib>
 #include <vector>
 #include "Materials.h"
+#include "AntHill.h"
 
-#define DAILY_FOOD_SPAWN 100
+#define DAILY_FOOD_SPAWN 50
 #define DAILY_MATERIALS_SPAWN 50
 #define MAX_WEIGHT_FOOD 10
 #define MAX_WEIGHT_MATERIALS 50
@@ -17,12 +18,21 @@ Field::Field(int width, int height) {
    
 }
 
-void Field::materialsSpawn(int k) {
+int canSpawnHere(Anthill *anthill, int x, int y) {
+    if (x > anthill->getPosX() && x < (x + anthill->getWidth())) { // pos(x, y) in anthill
+        if (y > anthill->getPosY() && y < (y + anthill->getHeight())) {
+            return 0;
+        }
+    }
+    return 1; // pos(x, y) not in anthill
+}
+
+void Field::materialsSpawn(int k, Anthill* anthill) {
     for (int i = 0; i < k; i++) {
         srand(time(0));
         int x = rand() % this->width;
         int y = rand() % this->height;
-        while (field[y][x] != "") {
+        while (field[y][x] != "" ) {
             // если ячейка поля уже занята, то пересчитываем заново
             x = rand() % this->width;
             y = rand() % this->height;
@@ -35,12 +45,12 @@ void Field::materialsSpawn(int k) {
     }
 }
 
-void Field::createEnemy() {
+void Field::createEnemy(Anthill* anthill) {
     //first - compute Enemy's point
     srand(time(0));
     int x = rand() % this->width;
     int y = rand() % this->height;
-    while (field[x][y] != "") {
+    while (field[x][y] != "" ) {
         // point is free +
         x = rand() % this->width;
         y = rand() % this->height;
@@ -60,7 +70,7 @@ void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
     }
 }
 
-void Field::foodSpawn(int k) {
+void Field::foodSpawn(int k, Anthill* anthill) {
     cout <<"HUI"<< field.size() << " ";
     cout << field[1].size() << endl;
     cout << this->width << " ";
@@ -70,7 +80,7 @@ void Field::foodSpawn(int k) {
         int x = rand() % this->width;
         int y = rand() % this->height;
         cout << x << " " << y << "\n";
-        while (field[y][x] != "") {
+        while (field[y][x] != "" ) {
             // если ячейка поля уже занята, то пересчитываем заново
             cout << x << " " << y << "\n";
             x = rand() % this->width;
@@ -78,15 +88,15 @@ void Field::foodSpawn(int k) {
         }
         this->field[y][x] = FOOD;
         int weight = rand() % MAX_WEIGHT_FOOD;
-        this->foodCoordinates.push_back(new Food);
+        this->foodCoordinates.push_back(new Food(x, y, weight));
         this->foodCoordinates.back()->initFood(x, y, weight);
 
     }
 }
 
-void Field::ResourceSpawn() {
-    this->foodSpawn(DAILY_FOOD_SPAWN);
-    this->materialsSpawn(DAILY_MATERIALS_SPAWN);
+void Field::ResourceSpawn(Anthill* anthill) {
+    this->foodSpawn(DAILY_FOOD_SPAWN, anthill);
+    this->materialsSpawn(DAILY_MATERIALS_SPAWN, anthill);
 }
 
 void Field::setHW(int x,int y)
@@ -101,6 +111,7 @@ void Field::setHW(int x,int y)
 
 void Field::updateFoodCoordinatesList() {
     // для того чтобы не рассматривать лишние координаты с едой в следующий раз
+    /*
     vector<Food*> newFoodCoordinates;
     for (int i = 0; i < foodCoordinates.size(); i++) {
         int x = foodCoordinates[i]->getX();
@@ -110,6 +121,30 @@ void Field::updateFoodCoordinatesList() {
         }
     }
     foodCoordinates = newFoodCoordinates;
+    */
+
+    /*cout << detectedFood.size()<<"\n";
+
+    for(int i = 0; i < detectedFood.size(); ++i) {
+        cout << detectedFood[i]->getX() << " " << detectedFood[i]->getY() << " / ";
+    }
+    cout << "\n";
+*/
+    vector<Food*> newFoodCoordinates = detectedFood;
+    for (int i = 0; i < newFoodCoordinates.size(); i++) {
+        int x = newFoodCoordinates[i]->getX();
+        int y = newFoodCoordinates[i]->getY();
+        if (field[y][x] != FOOD) {
+            detectedFood.erase(detectedFood.begin()+i);
+        }
+    }
+    /*
+    cout << foodCoordinates.size()<<"\n";
+    for(int i = 0; i < foodCoordinates.size(); ++i) {
+        cout << foodCoordinates[i]->getX() << " " << foodCoordinates[i]->getY() << " / ";
+    }
+    cout << "\n";
+*/
 }
 
 void Field::updateMaterialsCoordinatesList() {

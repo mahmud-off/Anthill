@@ -4,6 +4,7 @@
 #include "Anthill.h"
 #include "Dead.h"
 #include "Food.h"
+#include "Materials.h"
 #define STEP 1
 
 using namespace std;
@@ -18,6 +19,99 @@ Ant::Ant() {
 
 Ant::~Ant() {
     cout << "Ant destructor;!!!\n";
+
+}
+
+int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) {
+    // check if point is in the Field
+    if (point.first < fiedlWidth && point.second < fieldHeight && point.first > 0 && point.second > 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<Food*> v, vector<Food*>& detectedFood) {
+    // vector<pair<int, int>> distances; // first - distance, second - point
+    pair<int, pair<int, int> > answerPoint;
+    int minn = 1e9;
+    for (int i = 0; i < v.size(); i++) {
+        auto p = v[i];
+        pair<int, pair<int, int> > point;
+        point.second.first = p->getX();
+        point.second.second = p->getY();
+        point.first = p->getWeight();
+        int res = sqrt(
+            (point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (
+                point.second.second - y1));
+        if (res < minn) {
+            minn = res;
+            answerPoint = point;
+            Food *detectedP = new Food(p->getX(),p->getY(), p->getWeight());
+            detectedFood.push_back(detectedP);
+            v.erase(v.begin()+i);
+            cout << v.size() << " " << detectedFood.size() << "\n";
+        }
+    }
+    return answerPoint;
+}
+
+pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<Materials*> v) {
+    // vector<pair<int, int>> distances; // first - distance, second - point
+    pair<int, pair<int, int> > answerPoint;
+    int minn = 1e9;
+    for (auto p : v) {
+        pair<int, pair<int, int> > point;
+        point.second.first = p->getX();
+        point.second.second = p->getY();
+        point.first = p->getWeight();
+        int res = sqrt(
+            (point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (
+                point.second.second - y1));
+        if (res < minn) {
+            minn = res;
+            answerPoint = point;
+        }
+    }
+    return answerPoint;
+}
+
+int h(pair<int, int> p1, pair<int, int> p2) {
+    int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
+    return res;
+}
+
+
+vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
+    vector<pair<int, int> > path; // path from start to end
+
+    vector<pair<int, int> > options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
+
+    while (start != end) {
+        pair<int, int> p1 = make_pair(start.first + 1, start.second);
+        pair<int, int> p2 = make_pair(start.first - 1, start.second);
+        pair<int, int> p3 = make_pair(start.first, start.second + 1);
+        pair<int, int> p4 = make_pair(start.first, start.second - 1);
+        if (isValid(p1, field->getWidth(), field->getHeight()))
+            options.push_back(p1);
+        if (isValid(p2, field->getWidth(), field->getHeight()))
+            options.push_back(p2);
+        if (isValid(p3, field->getWidth(), field->getHeight()))
+            options.push_back(p3);
+        if (isValid(p4, field->getWidth(), field->getHeight()))
+            options.push_back(p4);
+
+
+        vector<pair<int, pair<int, int> > > vH; // vector of h(option[i]) for every options
+        for (auto x: options) {
+            vH.push_back({h(x, end), x});
+        }
+        sort(vH.begin(), vH.end());
+        path.push_back(vH[0].second);
+        start = vH[0].second;
+    }
+
+    return path;
 }
 
 int getRandomPoint(int min_n, int max_n) {
@@ -34,7 +128,7 @@ pair<int, int> Ant::randomAntHill(Anthill* anthill) {
     return { hill_x, hill_y };
 }
 
-void Ant::updateMovement(Field* field, Anthill* anthil){
+void Ant::updateMovement(Field* field, Anthill* anthil, string new_work_status){
     if (getPosX() != endPoint.first || getPosY() != endPoint.second) {
         if (getPosX() < endPoint.first) setPosX(getPosX() + 1);
         else if (getPosX() > endPoint.first) setPosX(getPosX() - 1);
@@ -45,12 +139,15 @@ void Ant::updateMovement(Field* field, Anthill* anthil){
         shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
         //printPosition();
     }
+    else {
+        this->setWorkStatus(new_work_status);
+    }
 }
 
 void Ant::goHome(Anthill* anthill){
     endPoint = randomAntHill(anthill);
 }
-
+/*
 void Ant::findEnemy(Field* field){
     vector<pair<int, pair<int, int>>> enemiesPositions;
     vector<Enemy*> enemies = field->getEnemiesList();
@@ -64,19 +161,35 @@ void Ant::findEnemy(Field* field){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-/*
+*/
+
 void Ant::findFood(Field* field){
-    pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
+    pair<int, pair<int, int>> point = findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates, field->detectedFood);
+        //findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
+    this->setEndPoint({point.second.first, point.second.second});
+    field->field[point.second.second][point.second.first] = "";
+/*
+    vector<Food*> newFoodCoordinates = field->foodCoordinates;
+    for (int i = 0; i < newFoodCoordinates.size(); i++) {
+        int x = newFoodCoordinates[i]->getX();
+        int y = newFoodCoordinates[i]->getY();
+        if (field->field[y][x] != "food") {
+            field->foodCoordinates.erase(field->foodCoordinates.begin()+i);
+        }
+    }
+*/
+    //endPoint.first = point.second.first;
+    //endPoint.second = point.second.second;
+}
+
+void Ant::findMaterial(Field* field){
+    pair<int, pair<int, int>> point = findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates);
+        //findNearestPoint(getPosX(), getPosY(), field->materialsCoordinates);
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
 
-void Ant::findMaterial(Field* field){
-    pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->materialsCoordinates);
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
-}
-*/
+/*
 void Ant::findDeadAnts(Anthill* anthill){
 
     vector<pair<int, pair<int, int>>> deadAntsPositions;
@@ -90,17 +203,14 @@ void Ant::findDeadAnts(Anthill* anthill){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-
+*/
 void Ant::randomMoving(Field* filed){
-    int randMove = getRandomPoint(0, 7);
-    vector<pair<int, int>> movesRandOption = {
-        {-1,-1}, {0,-1}, {1,1},
-        {-1,0},           {1,0},
-        {-1,1}, {0,1},    {1,1}
-    };
+    int randMove = getRandomPoint(-1, 1);
+    setPosX(getPosX() + randMove);
 
-    setPosX(getPosX() + movesRandOption[randMove].first);
-    setPosY(getPosY() + movesRandOption[randMove].second);
+    randMove = getRandomPoint(-1, 1);
+    setPosY(getPosY() + randMove);
+
     shape.setPosition(sf::Vector2f(getPosX(), getPosY() ));
 
 }
@@ -115,8 +225,8 @@ bool Ant::operator==(const Ant *right) const {
     }
     return false;
 }
-
-pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
+/*
+pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<Food*> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
     pair<int, pair<int, int> > answerPoint;
     int minn = 1e9;
@@ -134,11 +244,13 @@ pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int,
     }
     return answerPoint;
 }
-
+*/
+/*
 int h(pair<int, int> p1, pair<int, int> p2) {
     int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
     return res;
 }
+*/
 /*
 vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
     vector<pair<int, int> > path; // path from start to end
