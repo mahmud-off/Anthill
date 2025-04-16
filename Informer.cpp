@@ -14,7 +14,7 @@ void Informer::callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x
     for (int i = 0; i < this->collectersInformerSubscribers.size(); i++) {
         Collecter *curCollecter = collectersInformerSubscribers[i];
         if (curCollecter->getStatus() == "free") {
-            curCollecter->changeStatus();
+            // curCollecter->changeStatus();
             collectersCameToHelp.push_back(curCollecter);
             curCollecter->helpToCollectFood(x, y, field);
             summaryWeight += curCollecter->getWeight();
@@ -49,7 +49,8 @@ void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int 
     for (int i = 0; i < this->buildersInformerSubscribers.size(); i++) {
         Builder *curBuilder = buildersInformerSubscribers[i];
         if (curBuilder->getStatus() == "free") {
-            curBuilder->changeStatus();
+            // curBuilder->changeStatus();
+            // curBuilder->setWorkStatus("help");
             buildersCameToHelp.push_back(curBuilder);
             curBuilder->helpToCollectMaterial(x, y, field);
             summaryWeight += curBuilder->getWeight();
@@ -80,7 +81,7 @@ void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Fi
     for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
         auto curSoldier = this->soldiersInformerSubscribers[i];
         if (curSoldier->status == "free") {
-            curSoldier->changeStatus(); // change status to busy
+            // curSoldier->changeStatus(); // change status to busy
             curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
             curSoldier->changeStatus(); // change status to free;
         }

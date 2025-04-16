@@ -32,10 +32,11 @@ public:
 
     Field(int width, int height);
 
-    void ResourceSpawn();
+    void ResourceSpawn(Anthill *anthill);
+    void enemiesSpawn(Anthill *anthill);
 
     //Enemies
-    void createEnemy();
+    void createEnemy(int k, Anthill *anthill);
 
     void deleteEnemy(Enemy *killed);
 
@@ -59,9 +60,9 @@ private:
     int gravePosY;
 
     // resource spawn
-    void foodSpawn(int k);
+    void foodSpawn(int k, Anthill *anthill);
 
-    void materialsSpawn(int k);
+    void materialsSpawn(int k, Anthill *anthill);
 
 
     int height;

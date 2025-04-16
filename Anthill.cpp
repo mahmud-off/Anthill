@@ -45,10 +45,12 @@ using std::cin;
 using std::string;
 using namespace std;
 
-Anthill::Anthill(int scale, int x, int y) {
+Anthill::Anthill(int scale, int x, int y, int w, int h) {
     this->scale = scale;
     this->x = x;
     this->y = y;
+    this->height = h;
+    this->width = w;
 }
 
 

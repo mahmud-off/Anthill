@@ -2,14 +2,18 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+
+#include "AntHill.h"
 #include "Materials.h"
 
+#define ENEMIES_SPAWN 50
 #define DAILY_FOOD_SPAWN 100
-#define DAILY_MATERIALS_SPAWN 50
+#define DAILY_MATERIALS_SPAWN 100
 #define MAX_WEIGHT_FOOD 10
 #define MAX_WEIGHT_MATERIALS 50
 #define MATERIALS "materials"
 #define FOOD "food"
+#define ENEMY_HIT 5
 
 Field::Field(int width, int height) {
     this->height = height;
@@ -17,17 +21,35 @@ Field::Field(int width, int height) {
    
 }
 
-void Field::materialsSpawn(int k) {
+int getRandomNumber(int min_n, int max_n) {
+    static mt19937 generator(random_device{}());
+    uniform_int_distribution<int> distribution(min_n, max_n);
+
+    return distribution(generator);
+};
+
+int canSpawnHere(Anthill *anthill, int x, int y) {
+    if ((x > anthill->getPosX() && x < (x + anthill->getWidth())) && (y > anthill->getPosY() && y < (y + anthill->getHeight()))) { // pos(x, y) in anthill
+        return 0;
+    }
+    return 1; // pos(x, y) not in anthill
+}
+
+void Field::materialsSpawn(int k, Anthill *anthill) {
+    srand(time(0));
     for (int i = 0; i < k; i++) {
-        srand(time(0));
-        int x = rand() % this->width;
-        int y = rand() % this->height;
-        while (field[y][x] != "") {
-            // если ячейка поля уже занята, то пересчитываем заново
-            x = rand() % this->width;
-            y = rand() % this->height;
+        int x = getRandomNumber(0, this->width);
+        int y = getRandomNumber(0, this->height);
+        while (1) {
+            if (canSpawnHere(anthill, x, y) == 0) {
+                x = getRandomNumber(0, this->width);
+                y = getRandomNumber(0, this->height);
+            }
+            if (canSpawnHere(anthill, x, y) == 1) {
+                this->field[y][x] = MATERIALS;
+                break;
+            }
         }
-        this->field[y][x] = MATERIALS;
         int weight = rand() % MAX_WEIGHT_MATERIALS;
         this->materialsCoordinates.push_back(new Materials);
         this->materialsCoordinates.back()->initMaterials(x, y, weight);
@@ -35,19 +57,25 @@ void Field::materialsSpawn(int k) {
     }
 }
 
-void Field::createEnemy() {
+void Field::createEnemy(int k, Anthill *anthill) {
     //first - compute Enemy's point
-    srand(time(0));
-    int x = rand() % this->width;
-    int y = rand() % this->height;
-    while (field[x][y] != "") {
-        // point is free +
-        x = rand() % this->width;
-        y = rand() % this->height;
+    for (int i = 0; i < k; i++) {
+        int x = getRandomNumber(0, this->width);
+        int y = getRandomNumber(0, this->height);
+        while (1) {
+            if (canSpawnHere(anthill, x, y) == 0) {
+                x = getRandomNumber(0, this->width);
+                y = getRandomNumber(0, this->height);
+            }
+            if (canSpawnHere(anthill, x, y) == 1) {
+                this->field[y][x] = MATERIALS;
+                break;
+            }
+        }
+        //create Enemy
+        Enemy *newEnemy = new Enemy(x, y, ENEMY_HIT);
+        enemies.push_back(newEnemy);
     }
-    //create Enemy
-    Enemy *newEnemy = new Enemy(x, y);
-    enemies.push_back(newEnemy);
 }
 
 void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
@@ -60,21 +88,24 @@ void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
     }
 }
 
-void Field::foodSpawn(int k) {
+void Field::foodSpawn(int k, Anthill *anthill) {
     cout <<"HUI"<< field.size() << " ";
     cout << field[1].size() << endl;
     cout << this->width << " ";
     cout << this->height;
     for (int i = 0; i < k; i++) {
-        srand(time(0));
-        int x = rand() % this->width;
-        int y = rand() % this->height;
+        int x = getRandomNumber(0, this->width);
+        int y = getRandomNumber(0, this->height);
         cout << x << " " << y << "\n";
-        while (field[y][x] != "") {
-            // если ячейка поля уже занята, то пересчитываем заново
-            cout << x << " " << y << "\n";
-            x = rand() % this->width;
-            y = rand() % this->height;
+        while (1) {
+            if (canSpawnHere(anthill, x, y) == 0) {
+                x = getRandomNumber(0, this->width);
+                y = getRandomNumber(0, this->height);
+            }
+            if (canSpawnHere(anthill, x, y) == 1) {
+                this->field[y][x] = MATERIALS;
+                break;
+            }
         }
         this->field[y][x] = FOOD;
         int weight = rand() % MAX_WEIGHT_FOOD;
@@ -84,9 +115,13 @@ void Field::foodSpawn(int k) {
     }
 }
 
-void Field::ResourceSpawn() {
-    this->foodSpawn(DAILY_FOOD_SPAWN);
-    this->materialsSpawn(DAILY_MATERIALS_SPAWN);
+void Field::ResourceSpawn(Anthill *anthill) {
+    this->foodSpawn(DAILY_FOOD_SPAWN, anthill);
+    this->materialsSpawn(DAILY_MATERIALS_SPAWN, anthill);
+}
+
+void Field::enemiesSpawn(Anthill *anthill) {
+    this->createEnemy(ENEMIES_SPAWN, anthill);
 }
 
 void Field::setHW(int x,int y)

@@ -54,17 +54,12 @@ public:
     int getFoodStorage_X() { return this->foodStorage_X; }
     int getFoodStorage_Y() { return this->foodStorage_Y; }
 
-    int getW() { return this->width; }
-    int getH() { return this->height; }
-    int getX() { return this->x; }
-    int getY() { return this->y; }
-
     //setters
     void setScale(int scale) { this->scale = scale; }
     void setMaterialsCount(int materialsCount) { this->materialsCount = materialsCount; }
     void setFoodCount(int foodCount) { this->foodCount = foodCount; }
 
-    Anthill (int scale, int x, int y);
+    Anthill (int scale, int x, int y, int w, int h);
 
     void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();

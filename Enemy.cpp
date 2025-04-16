@@ -11,7 +11,7 @@
 #include "Soldier.h"
 
 
-Enemy::Enemy(int x, int y) // Coordinates compute in Field
+Enemy::Enemy(int x, int y, int hit) // Coordinates compute in Field
 {
     cout << "Enemy was created\n";
     srand(time(0));
@@ -20,10 +20,18 @@ Enemy::Enemy(int x, int y) // Coordinates compute in Field
     weight = 5 + rand() % 10;
     posX = x;
     posY = y;
+    initEnemy(x, y, hit);
 }
 
 Enemy::~Enemy() {
     cout << "Enemy was deleted from " << this->posX << " " << this->posY << "\n";
+}
+
+void Enemy::initEnemy(int x, int y, int hit) {
+    this->getEnemyShape().setPosition((float)x, (float)y);
+    this->getEnemyShape().setFillColor(sf::Color::Magenta);
+    this->getEnemyShape().setRadius(5.f);
+    this->setHit(hit);
 }
 
 
