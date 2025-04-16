@@ -66,6 +66,8 @@ void Collecter::work(Field* field, Anthill* anthill) {
         this->updateMovement(field, anthill, "find_food");
 
     }else if (work_status == "find_food") {
+        growthFood(anthill);
+
         this->findFood(field);
         this->setWorkStatus("moving_food");
     }
@@ -74,6 +76,10 @@ void Collecter::work(Field* field, Anthill* anthill) {
         this->setEndPoint({point.first, point.second})
      }
      */
+}
+
+void Collecter::growthFood(Anthill* anthill) {
+    anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
 
 void Collecter::changeStatus() {
@@ -103,8 +109,6 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
     	this->changeStatus(); // change status to free
         field->field[p.first][p.second] = ""; // already no food in this point
         field->updateFoodCoordinatesList();
-	    
-        anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
     //}
 }
 

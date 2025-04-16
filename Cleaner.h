@@ -7,6 +7,8 @@
 
 class Child;
 class Field;
+class Anthill;
+class Dead;
 
 
 class Cleaner : public Ant {
@@ -26,7 +28,8 @@ public:
 
 	virtual ~Cleaner();
 	Cleaner(vector<Ant*>& list, Ant* &child);
-	void work(Field *field, Anthill *anthill) override { ; }
+	void work(Field* field, Anthill* anthill) override;
+	void remove_dead(Field* field, Anthill* anthill);
 
 	using Ant::setPosX;
 	using Ant::setPosY;

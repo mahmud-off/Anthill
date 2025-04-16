@@ -14,16 +14,6 @@ class Child;
 class Field;
 class Anthill;
 
-enum class CollecterStatus {
-    MovingFood,
-    FindHome,
-    MovingHome,
-    FindFood,
-    CollectFood
-
-};
-
-
 class Collecter : public Ant {
 public:
     Collecter();
@@ -42,6 +32,7 @@ public:
     
     void work(Field* field, Anthill* anthill) override;
     void changeStatus();
+    void growthFood(Anthill* anthill);
     //
     // using Ant::moveRight;
     // using Ant::moveLeft;
