@@ -51,6 +51,8 @@ Anthill::Anthill(int scale, int x, int y) {
     this->y = y;
 }
 
+
+
 void Anthill::generateAnts(int x, int y, Informer *informer) {
     this->foodCount = 0.7 * this->scale;
     this->antCount = 0.3 * this->scale;
@@ -247,6 +249,13 @@ void Anthill::increaseAnthill() {
             }
         }
     }
+}
+
+void Anthill::setxy(int x, int y, int w, int h)
+{
+    this->x = x;
+    this->y = y;
+   
 }
 
 

@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+#include "Materials.h"
 
 #define DAILY_FOOD_SPAWN 100
 #define DAILY_MATERIALS_SPAWN 50
@@ -13,10 +14,7 @@
 Field::Field(int width, int height) {
     this->height = height;
     this->width = width;
-    this->field.resize(height);
-    for (int i = 0; i < height; i++) {
-        this->field[i].resize(width);
-    }
+   
 }
 
 void Field::materialsSpawn(int k) {
@@ -24,14 +22,16 @@ void Field::materialsSpawn(int k) {
         srand(time(0));
         int x = rand() % this->width;
         int y = rand() % this->height;
-        while (field[x][y] != "") {
+        while (field[y][x] != "") {
             // если ячейка поля уже занята, то пересчитываем заново
             x = rand() % this->width;
             y = rand() % this->height;
         }
-        this->field[x][y] = MATERIALS;
+        this->field[y][x] = MATERIALS;
         int weight = rand() % MAX_WEIGHT_MATERIALS;
-        this->materialsCoordinates.push_back({weight, {x, y}});
+        this->materialsCoordinates.push_back(new Materials);
+        this->materialsCoordinates.back()->initMaterials(x, y, weight);
+
     }
 }
 
@@ -61,18 +61,26 @@ void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
 }
 
 void Field::foodSpawn(int k) {
+    cout <<"HUI"<< field.size() << " ";
+    cout << field[1].size() << endl;
+    cout << this->width << " ";
+    cout << this->height;
     for (int i = 0; i < k; i++) {
         srand(time(0));
         int x = rand() % this->width;
         int y = rand() % this->height;
-        while (field[x][y] != "") {
+        cout << x << " " << y << "\n";
+        while (field[y][x] != "") {
             // если ячейка поля уже занята, то пересчитываем заново
+            cout << x << " " << y << "\n";
             x = rand() % this->width;
             y = rand() % this->height;
         }
-        this->field[x][y] = FOOD;
+        this->field[y][x] = FOOD;
         int weight = rand() % MAX_WEIGHT_FOOD;
-        this->foodCoordinates.push_back({weight, {x, y}});
+        this->foodCoordinates.push_back(new Food);
+        this->foodCoordinates.back()->initFood(x, y, weight);
+
     }
 }
 
@@ -81,27 +89,37 @@ void Field::ResourceSpawn() {
     this->materialsSpawn(DAILY_MATERIALS_SPAWN);
 }
 
+void Field::setHW(int x,int y)
+{
+    this->width = x;
+    this ->height = y;
+    this->field.resize(height);
+    for (int i = 0; i < height; i++) {
+        this->field[i].resize(width);
+    }
+}
+
 void Field::updateFoodCoordinatesList() {
     // для того чтобы не рассматривать лишние координаты с едой в следующий раз
-    vector<pair<int, pair<int, int> > > newFoodCoordinates;
-    for (int i = 0; i < newFoodCoordinates.size(); i++) {
-        int x = foodCoordinates[i].second.first;
-        int y = foodCoordinates[i].second.second;
-        if (field[x][y] == FOOD) {
-            newFoodCoordinates.push_back({foodCoordinates[i].first, foodCoordinates[i].second});
+    vector<Food*> newFoodCoordinates;
+    for (int i = 0; i < foodCoordinates.size(); i++) {
+        int x = foodCoordinates[i]->getX();
+        int y = foodCoordinates[i]->getY();
+        if (field[y][x] == FOOD) {
+            newFoodCoordinates.push_back(foodCoordinates[i]);
         }
     }
     foodCoordinates = newFoodCoordinates;
 }
 
 void Field::updateMaterialsCoordinatesList() {
-    vector<pair<int, pair<int, int> > > newMaterialsCoordinates;
+    vector<Materials*> newMaterialsCoordinates;
     for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
-        int x = materialsCoordinates[i].second.first;
-        int y = materialsCoordinates[i].second.second;
-        if (field[x][y] == MATERIALS) {
-            newMaterialsCoordinates.push_back({foodCoordinates[i].first, foodCoordinates[i].second});
+        int x = materialsCoordinates[i]->getX();
+        int y = materialsCoordinates[i]->getY();
+        if (field[y][x] == MATERIALS) {
+            newMaterialsCoordinates.push_back(materialsCoordinates[i]);
         }
     }
-    foodCoordinates = newMaterialsCoordinates;
+    materialsCoordinates = newMaterialsCoordinates;
 }

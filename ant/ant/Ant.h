@@ -5,8 +5,17 @@
 #include <iostream>
 // #include "Field.h"
 
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Window.hpp>
+
+
 class Field;
 class Anthill;
+class Food;
+class Materials;
 
 using namespace std;
 
@@ -24,7 +33,8 @@ public:
 	virtual ~Ant();
 
 	//functions for collecters and builders
-	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
+	pair<int, pair<int, int>> findNearestPointCollecter(int x1, int y1, vector<Food *> v); // nearest point with food or materials from ant
+	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v); // nearest point with food or materials from ant
 	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
 
 	//access
@@ -68,8 +78,10 @@ public:
 
 	string status; // free / busy
 	void changeStatus();
+	sf::RectangleShape& getShape();
 
 private:
+	sf::RectangleShape shape;
 	int age;
 	string role;
 	int health; // 0 - 100

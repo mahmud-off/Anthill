@@ -4,6 +4,7 @@
 #include <cmath>
 #include <random>
 #include "Field.h"
+#include "Materials.h"
 
 #define STEP 1
 
@@ -87,14 +88,15 @@ int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) {
 }
 
 
-pair<int, pair<int, int> > Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int> > > v) {
+pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<Food*> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
     pair<int, pair<int, int> > answerPoint;
     int minn = 1e9;
     for (auto p: v) {
         pair<int, pair<int, int> > point;
-        point.second = p.second;
-        point.first = p.first;
+        point.second.first = p->getX();
+        point.second.second = p->getY();
+        point.first = p->getWeight();
         int res = sqrt(
             (point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (
                 point.second.second - y1));
@@ -105,6 +107,27 @@ pair<int, pair<int, int> > Ant::findNearestPoint(int x1, int y1, vector<pair<int
     }
     return answerPoint;
 }
+
+pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<Materials*> v) {
+    // vector<pair<int, int>> distances; // first - distance, second - point
+    pair<int, pair<int, int> > answerPoint;
+    int minn = 1e9;
+    for (auto p : v) {
+        pair<int, pair<int, int> > point;
+        point.second.first = p->getX();
+        point.second.second = p->getY();
+        point.first = p->getWeight();
+        int res = sqrt(
+            (point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (
+                point.second.second - y1));
+        if (res < minn) {
+            minn = res;
+            answerPoint = point;
+        }
+    }
+    return answerPoint;
+}
+
 
 int h(pair<int, int> p1, pair<int, int> p2) {
     int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
@@ -150,4 +173,9 @@ void Ant::changeStatus() {
     else if (this->getStatus() == "busy") {
         this->status = "free";
     }
+}
+
+sf::RectangleShape& Ant::getShape()
+{
+    return this->shape;
 }
