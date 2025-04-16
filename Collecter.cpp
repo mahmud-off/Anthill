@@ -65,7 +65,7 @@ void Collecter::changeStatus() {
 	}
 }
 
-
+/*
 void Collecter::collectFood(Field *field, Anthill *anthill) {
 	this->changeStatus(); // change status to busy
     if (this->getWeight() < this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
@@ -75,13 +75,8 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
         informer.callToGetHelpToCollectFood(this, p.first, p.second, field, this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).first);
     } else {
         // weight is ok
-<<<<<<< HEAD:ant/ant/Collecter.cpp
         pair<int, int> p = this->findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
-        vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
-=======
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         //vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
->>>>>>> ivan:Collecter.cpp
         // drawing path from points in paths with graphic
         // drawing reverse path back to anthill
     	this->changeStatus(); // change status to free
@@ -90,7 +85,7 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
     }
 	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
-
+*/
 void Collecter::helpToCollectFood(int x, int y, Field* field){
     return;
 }

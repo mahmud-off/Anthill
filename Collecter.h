@@ -21,7 +21,7 @@ class Collecter : public Ant {
 public:
     Collecter();
     Collecter(int weight);
-    void collectFood(Field *field, Anthill *anthill);
+    //void collectFood(Field *field, Anthill *anthill);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
 

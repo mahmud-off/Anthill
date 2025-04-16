@@ -3,6 +3,7 @@
 #include "Field.h"
 #include "Anthill.h"
 #include "Dead.h"
+#include "Food.h"
 #define STEP 1
 
 using namespace std;
@@ -63,7 +64,7 @@ void Ant::findEnemy(Field* field){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-
+/*
 void Ant::findFood(Field* field){
     pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
     endPoint.first = point.second.first;
@@ -75,7 +76,7 @@ void Ant::findMaterial(Field* field){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-
+*/
 void Ant::findDeadAnts(Anthill* anthill){
 
     vector<pair<int, pair<int, int>>> deadAntsPositions;

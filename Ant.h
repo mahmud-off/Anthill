@@ -15,14 +15,10 @@
 #include <SFML/Graphics.hpp>
 
 class Anthill;
-<<<<<<< HEAD:ant/ant/Ant.h
-class Food;
 class Materials;
-=======
+class Food;
 class Field;
 class Dead;
->>>>>>> ivan:Ant.h
-
 using namespace std;
 
 class Ant {
@@ -38,14 +34,11 @@ public:
 	Ant();
 	virtual ~Ant();
 
-<<<<<<< HEAD:ant/ant/Ant.h
 	//functions for collecters and builders
 	pair<int, pair<int, int>> findNearestPointCollecter(int x1, int y1, vector<Food *> v); // nearest point with food or materials from ant
 	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v); // nearest point with food or materials from ant
 	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
 
-=======
->>>>>>> ivan:Ant.h
 	//access
 	int getAge()const { return age; }
 	string getRole()const { return role; }
