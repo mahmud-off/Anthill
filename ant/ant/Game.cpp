@@ -159,9 +159,11 @@ void Game::render()
 	this->renderChild();
 	this->renderNurse();
 	this->renderBuilder();
+	this->renderDead();
 	this->renderFoodStorage();
 	this->renderFood();
 	this->renderMaterials();
+
 	
 	this->window->display(); 
 }
@@ -194,6 +196,13 @@ void Game::renderChild()
 	for (int i = 0;i < anthill.getChildList().size() - 1;i++) {
 
 		this->window->draw(anthill.getChildList()[i]->getShape());
+	}
+}
+void Game::renderDead()
+{
+	for (int i = 0;i < anthill.getDeadAntsList().size() - 1;i++) {
+
+		this->window->draw(anthill.getDeadAntsList()[i]->getShape());
 	}
 }
 

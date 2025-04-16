@@ -20,6 +20,7 @@ Dead::Dead(vector<Child *> &list, Child *&child)
             break;
         }
     }
+    initDead();
 }
 
 Dead::Dead(vector<Collecter *> &list, Collecter *&collector)
@@ -35,6 +36,7 @@ Dead::Dead(vector<Collecter *> &list, Collecter *&collector)
             break;
         }
     }
+    initDead();
 }
 
 Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner)
@@ -50,6 +52,7 @@ Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner)
             break;
         }
     }
+    initDead();
 }
 
 Dead::Dead(vector<Builder *> &list, Builder *&builder)
@@ -65,6 +68,7 @@ Dead::Dead(vector<Builder *> &list, Builder *&builder)
             break;
         }
     }
+    initDead();
 }
 
 Dead::Dead(vector<Soldier *> &list, Soldier *&soldier)
@@ -80,6 +84,7 @@ Dead::Dead(vector<Soldier *> &list, Soldier *&soldier)
             break;
         }
     }
+    initDead();
 }
 
 Dead::Dead(vector<Nurse *> &list, Nurse *&nurse)
@@ -95,4 +100,11 @@ Dead::Dead(vector<Nurse *> &list, Nurse *&nurse)
             break;
         }
     }
+    initDead();
+}
+
+void Dead::initDead()
+{
+    this->getShape().setSize(sf::Vector2f(20.f, 20.f));
+    this->getShape().setFillColor(sf::Color::Red);
 }
