@@ -5,7 +5,15 @@
 #include <iostream>
 // #include "Field.h"
 
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Window.hpp>
+
+
 class Field;
+class Anthill;
 
 using namespace std;
 
@@ -45,9 +53,10 @@ public:
 	void setPosY(int y) { this->y = y; }
 	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
+	void setStatus(string status) { this->status = status; }
 
 	//functions
-	virtual void work(Field *field) = 0;
+	virtual void work(Field *field, Anthill *anthill) = 0;
 
 	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}
 
@@ -65,8 +74,11 @@ public:
 	bool operator==(const Ant* right)const;
 
 	string status; // free / busy
+	void changeStatus();
+	sf::RectangleShape& getShape();
 
 private:
+	sf::RectangleShape shape;
 	int age;
 	string role;
 	int health; // 0 - 100

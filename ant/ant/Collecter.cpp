@@ -1,5 +1,6 @@
 #include "Collecter.h"
 
+#include "AntHill.h"
 #include "Child.h"
 #include "Field.h"
 #include "Informer.h"
@@ -7,12 +8,14 @@
 Collecter::Collecter() {
     cout << "collecter created\n";
     this->setRole("collecter");
+	initCollecter();
 }
 
 Collecter::Collecter(int weight) {
     cout << "collecter created\n";
     this->setRole("collecter");
     this->setWeight(weight);
+	initCollecter();
 }
 
 
@@ -32,23 +35,21 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 			break;
 		}
 	}
+	initCollecter();
 }
 
 Collecter::~Collecter() {
     cout << "collecter was deleted\n";
 }
 
-void Collecter::changeStatus() {
-	if (this->getStatus() == "free") {
-		this->status = "busy";
-	}
-	else if (this->getStatus() == "busy") {
-		this->status = "free";
-	}
+void Collecter::initCollecter()
+{
+	this->getShape().setSize(sf::Vector2f(10.f, 10.f));
+	this->getShape().setFillColor(sf::Color::Cyan);
 }
 
 
-void Collecter::collectFood(Field *field) {
+void Collecter::collectFood(Field *field, Anthill *anthill) {
 	this->changeStatus(); // change status to busy
     if (this->getWeight() < this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).first) {
         // food is too heavy
@@ -60,10 +61,12 @@ void Collecter::collectFood(Field *field) {
         pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->foodCoordinates).second;
         vector<pair<int, int> > paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
-        // drawing reverse path to anthill
+        // drawing reverse path back to anthill
+    	this->changeStatus(); // change status to free
         field->field[p.first][p.second] = ""; // already no food in this point
         field->updateFoodCoordinatesList();
     }
+	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
 
 void Collecter::helpToCollectFood(int x, int y, Field *field) {

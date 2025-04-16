@@ -63,8 +63,7 @@ void Ant::moveByCoordinates(pair<int, int> point)
 }
 
 bool Ant::operator==(const Ant *right) const {
-
-    if(this->age == right->age &&
+    if (this->age == right->age &&
         this->health == right->health &&
         this->weight == right->weight &&
         this->x == right->x &&
@@ -78,25 +77,27 @@ void Ant::moveDown() {
     y -= 1 * STEP;
 }
 
-int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) { // check if point is in the Field
+int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) {
+    // check if point is in the Field
     if (point.first < fiedlWidth && point.second < fieldHeight && point.first > 0 && point.second > 0) {
         return 1;
-    }
-    else {
+    } else {
         return 0;
     }
 }
 
 
-pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
+pair<int, pair<int, int> > Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int> > > v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
-    pair<int, pair<int, int>> answerPoint;
+    pair<int, pair<int, int> > answerPoint;
     int minn = 1e9;
-    for (auto p : v) {
-        pair<int, pair<int, int>> point;
+    for (auto p: v) {
+        pair<int, pair<int, int> > point;
         point.second = p.second;
         point.first = p.first;
-        int res = sqrt((point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (point.second.second - y1));
+        int res = sqrt(
+            (point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (
+                point.second.second - y1));
         if (res < minn) {
             minn = res;
             answerPoint = point;
@@ -110,10 +111,10 @@ int h(pair<int, int> p1, pair<int, int> p2) {
     return res;
 }
 
-vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
-    vector<pair<int, int>> path; // path from start to end
+vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field) {
+    vector<pair<int, int> > path; // path from start to end
 
-    vector<pair<int, int>> options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
+    vector<pair<int, int> > options; // варианты куда можно пойти от точки старт (право лево вверх вниз)
 
     while (start != end) {
         pair<int, int> p1 = make_pair(start.first + 1, start.second);
@@ -130,9 +131,8 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
             options.push_back(p4);
 
 
-
-        vector<pair<int, pair<int, int>>> vH; // vector of h(option[i]) for every options
-        for (auto x : options) {
+        vector<pair<int, pair<int, int> > > vH; // vector of h(option[i]) for every options
+        for (auto x: options) {
             vH.push_back({h(x, end), x});
         }
         sort(vH.begin(), vH.end());
@@ -143,3 +143,16 @@ vector<pair<int, int>> Ant::A_StarSearch(pair<int, int> start, pair<int, int> en
     return path;
 }
 
+void Ant::changeStatus() {
+    if (this->getStatus() == "free") {
+        this->status = "busy";
+    }
+    else if (this->getStatus() == "busy") {
+        this->status = "free";
+    }
+}
+
+sf::RectangleShape& Ant::getShape()
+{
+    return this->shape;
+}

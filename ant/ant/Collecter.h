@@ -7,22 +7,28 @@
 
 class Child;
 class Field;
+class Anthill;
+
+
+
 
 class Collecter : public Ant {
 public:
+  
     Collecter();
     Collecter(int weight);
-    void collectFood(Field *field);
+    void collectFood(Field *field, Anthill *anthill);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
-    void changeStatus();
+
+    void initCollecter();
 
     int getWeight() { return this->getWeight(); }
 
     Collecter(vector<Child*>& list, Child* &child);
 
     virtual ~Collecter();
-    virtual void work(Field *field) override { collectFood(field); }
+    virtual void work(Field *field, Anthill *anthill) override { collectFood(field, anthill); }
     //
     // using Ant::moveRight;
     // using Ant::moveLeft;
@@ -37,6 +43,7 @@ public:
     // using Ant::getStatus;
 
 private:
+   
 };
 
 #endif // COLLECTER_H
