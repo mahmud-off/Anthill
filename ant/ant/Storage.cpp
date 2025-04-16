@@ -22,14 +22,20 @@ void Storage::delFood()
 	this->count--;
 }
 
-Storage::Storage(int count):count(count) {
+void Storage::createStorage(int count,int x,int y,int h,int w) {
+	this->count = count;
+	this->storageX = x;
+	this->storageY = y;
+	this->storageWidth = w;
+	this->storageHeight = h;
+
 	for (int i = 0;i < count;i++) {
 		this->storage.push_back(new Food);
 		storage[i]->initFood(getRandomStorage(this->storageX, this->storageX + this->storageWidth), getRandomStorage(this->storageY, this->storageY + this->storageHeight));
-
 	}
-
 }
+
+
 
 void Storage::setHYHW(int x, int y, int height, int width)
 {
