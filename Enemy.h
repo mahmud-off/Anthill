@@ -36,7 +36,7 @@ public:
     int getPosX() { return this->posX; }
     int getPosY() { return this->posY; }
 
-    //// setters
+    // setters
     void setHealth(int health) { this->health = health; }
 
 

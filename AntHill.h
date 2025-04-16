@@ -47,6 +47,10 @@ public:
 
     int getEnterPosX() { return this->enterX; }
     int getEnterPosY() { return this->enterY; }
+    int getPosX() { return this->x; }
+    int getPosY() { return this->y; }
+    int getWidth() { return this->width; }
+    int getHeight() { return this->height; }
     int getFoodStorage_X() { return this->foodStorage_X; }
     int getFoodStorage_Y() { return this->foodStorage_Y; }
 
@@ -82,6 +86,7 @@ private:
     int y;
     int enterX; // position of anthill enter
     int enterY;
+    int width, height;
     int foodStorage_X;
     int foodStorage_Y;
     int width;
@@ -91,7 +96,7 @@ private:
     // resources spending
     void antsDailyEat();
 
-    void anthillDestroying(); // осыпь муравейника
+    void anthillDestroying(); // ����� �����������
 
     int foodCount;
     int materialsCount;

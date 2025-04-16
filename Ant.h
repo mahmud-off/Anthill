@@ -3,20 +3,22 @@
 
 #include <vector>
 #include <iostream>
-// #include "Field.h"
+#include <algorithm>
+#include <cmath>
+#include <random>
 
-#include <SFML/Graphics.hpp>
+// #include "Field.h"
 #include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
-
-class Field;
 class Anthill;
-class Food;
 class Materials;
-
+class Food;
+class Field;
+class Dead;
 using namespace std;
 
 class Ant {
@@ -44,7 +46,6 @@ public:
 	int getWeight()const {return weight; }
 	int getPosX() { return this->x; }
 	int getPosY() { return this->y; }
-	int getWeight() { return weight; }
 	int getPower() { return this->power; }
 	string getStatus() { return this->status; }
 
@@ -57,22 +58,37 @@ public:
 	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
 	void setStatus(string status) { this->status = status; }
+	void setEndPoint(pair<int, int> point) { endPoint = point; }
 
-	//functions
-	virtual void work(Field *field, Anthill *anthill) = 0;
+	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
+	
+	//Base function for ant actions
+	virtual void work(Field* field, Anthill* anthil) = 0;
+
+	// Movent to point
+	void updateMovement(Field* field, Anthill* anthil);
+
+	// Определение координат
+	void findFood(Field* field);
+	void findMaterial(Field* field);
+	void findDeadAnts(Anthill* anthill);
+	void goHome(Anthill* anthill);
+	void findEnemy(Field* field);
+
+	// Рабочие действия
+	void build();
+	void attack();
+	void removeDeadAnt();
+
+	//void safeChild();
+
+
+
+	pair<int, int> randomAntHill(Anthill* anthill);
+	void randomMoving(Field* filed);
 
 	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}
-
-
-	// moving
-	void moveRight();
-	void moveLeft();
-	void moveDown();
-	void moveUp();
-
-	void randomMoving(int heightOfField, int widthOfField);
-	void moveByCoordinates(pair<int,int> point);
-
+	
 	//compare
 	bool operator==(const Ant* right)const;
 
@@ -81,7 +97,6 @@ public:
 	sf::RectangleShape& getShape();
 
 private:
-	sf::RectangleShape shape;
 	int age;
 	string role;
 	int health; // 0 - 100
@@ -90,7 +105,8 @@ private:
 	int y;
 	int id;
 	int power;
-
+	sf::RectangleShape shape; // Заменяем спрайт на прямоугольник
+	pair<int, int> endPoint;
 };
 
 #endif ANT_H

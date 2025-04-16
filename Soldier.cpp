@@ -36,8 +36,16 @@ Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
     this->initSoldier();
 }
 
+void Soldier::helpToFightEnemy(Enemy* enemy, Field* field)
+{
+    return;
+}
+
 Soldier::~Soldier() {
     cout << "soldier was deleted\n";
+}
+Soldier::Soldier(vector<Ant*>& list, Ant*& collecter)
+{
 }
 void Soldier::initSoldier()
 {
@@ -68,15 +76,5 @@ void Soldier::fightEnemy(Enemy *enemy, Field *field) {
                 this->setHealth(this->getHealth() - enemy->getPower()); // soldier didn't die
             }
         }
-    }
-}
-
-
-void Soldier::helpToFightEnemy(Enemy *enemy, Field *field) {
-    vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, {enemy->getPosX(), enemy->getPosY()}, field);
-    // drawing path from points in paths with graphic
-    this->fightEnemy(enemy, field);
-    if (this->getHealth() > 0) {
-        // soldier go home
     }
 }
