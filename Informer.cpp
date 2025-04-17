@@ -9,7 +9,7 @@
 void Informer::callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x, int y, Field *field, int foodWeight) {
     int antWeight = collecterWhoNeedHelp->getWeight();
     int summaryWeight = antWeight;
-    vector<Collecter*> collectersCameToHelp; // collecters who were free and came to help
+    vector<Collecter *> collectersCameToHelp; // collecters who were free and came to help
     collectersCameToHelp.push_back(collecterWhoNeedHelp);
     for (int i = 0; i < this->collectersInformerSubscribers.size(); i++) {
         Collecter *curCollecter = collectersInformerSubscribers[i];
@@ -31,8 +31,7 @@ void Informer::callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x
                     currentCollecter->changeStatus();
                 }
             }
-        }
-        else if (curCollecter->getStatus() == "busy") {
+        } else if (curCollecter->getStatus() == "busy") {
             continue;
         }
     }
@@ -41,10 +40,11 @@ void Informer::callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x
     field->updateFoodCoordinatesList();
 }
 
-void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int x, int y, Field *field, int materialWeight) {
+void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int x, int y, Field *field,
+                                               int materialWeight) {
     int antWeight = builderWhoNeedHelp->getWeight();
     int summaryWeight = antWeight;
-    vector<Builder*> buildersCameToHelp; // builders who were free and came to help
+    vector<Builder *> buildersCameToHelp; // builders who were free and came to help
     buildersCameToHelp.push_back(builderWhoNeedHelp);
     for (int i = 0; i < this->buildersInformerSubscribers.size(); i++) {
         Builder *curBuilder = buildersInformerSubscribers[i];
@@ -66,8 +66,7 @@ void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int 
                     currentBuilder->changeStatus();
                 }
             }
-        }
-        else if (curBuilder->getStatus() == "busy") {
+        } else if (curBuilder->getStatus() == "busy") {
             continue;
         }
     }
@@ -76,28 +75,52 @@ void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int 
     field->updateMaterialsCoordinatesList();
 }
 
-void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field, Enemy *enemyWhoAttackedAnt) {
-    for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
-        auto curSoldier = this->soldiersInformerSubscribers[i];
-        if (curSoldier->getStatus() == "free") {
-            curSoldier->changeStatus(); // change status to busy
-            curSoldier->setWorkStatus("help_moving");
-            curSoldier->setEnemy(enemyWhoAttackedAnt);
+void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field,
+                                        Enemy *enemyWhoAttackedAnt) {
+    int i = 0; // будет затираться при новом вайле
+    while (enemyWhoAttackedAnt->getHealth() > 0) { // help until enemy die
+        while (i < this->soldiersInformerSubscribers.size()) {
+            auto curSoldier = this->soldiersInformerSubscribers[i];
+            if (curSoldier->getStatus() == "free") {
+                curSoldier->changeStatus(); // change status to busy
+                curSoldier->setWorkStatus("help_moving");
+                curSoldier->setEnemy(enemyWhoAttackedAnt);
 
-            curSoldier->setEndPoint({antWhoWasAttacked->getPosX(), antWhoWasAttacked->getPosY()});
+                curSoldier->setEndPoint({antWhoWasAttacked->getPosX(), antWhoWasAttacked->getPosY()});
 
-            //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
-            //curSoldier->changeStatus(); // change status to free;
-        }
-        else if (curSoldier->status == "busy") {
-            continue;
+                curSoldier->fightEnemy(field);
+
+                //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
+                //curSoldier->changeStatus(); // change status to free;
+            } else if (curSoldier->status == "busy") {
+                continue;
+            }
+            i++;
         }
     }
 }
 
-void Informer::anthillWasAttacked()
-{
+void Informer::anthillWasAttacked(Anthill *anthill, int x, int y, Field *field, Enemy *enemyWhoAttackedAnthill) {
+    int i = 0;
+    while (enemyWhoAttackedAnthill->getHealth() > 0) {// help until enemy die
+        while (i < this->soldiersInformerSubscribers.size()) {
+            auto curSoldier = this->soldiersInformerSubscribers[i];
+            if (curSoldier->getStatus() == "free") {
+                curSoldier->changeStatus(); // change status to busy
+                curSoldier->setWorkStatus("help_moving");
+                curSoldier->setEnemy(enemyWhoAttackedAnthill);
+
+                curSoldier->setEndPoint({x, y});
+
+                curSoldier->fightEnemy(field);
+            } else if (curSoldier->status == "busy") {
+                continue;
+            }
+            i++;
+        }
+    }
 }
+
 
 void Informer::addToBuildersInformerSubscribers(Builder *newBuilder) {
     this->buildersInformerSubscribers.push_back(newBuilder);
@@ -118,5 +141,3 @@ void Informer::addToNursesInformerSubscribers(Nurse *newNurse) {
 void Informer::addToAllAntsInformerSubscribers(Ant *newAnt) {
     this->allAntsInformerSubscribers.push_back(newAnt);
 }
-
-

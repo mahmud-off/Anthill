@@ -9,6 +9,7 @@
 #include "Collecter.h"
 #include "Nurse.h"
 #include "Soldier.h"
+#include "Storage.h"
 
 
 Enemy::Enemy(int x, int y, int hit) // Coordinates compute in Field
@@ -195,17 +196,19 @@ bool Enemy::canFindFoodInAnthill(Anthill *anthill) {
 
 void Enemy::moveToFoodStorage(Anthill *anthill) {
     pair<int, int> enemiesCoordinates = {this->getPosX(), this->getPosY()};
-    pair<int, int> foodStorageCoordinates = {anthill->getFoodStorage_X(), anthill->getFoodStorage_Y()};
+    pair<int, int> foodStorageCoordinates = {anthill->storage->getX(), anthill->storage->getY()};
     vector<pair<int, int>> pathToFoodStorage = A_StarSearch(enemiesCoordinates, foodStorageCoordinates);
     // draw path to food storage
 }
 
 
-void Enemy::stealFoodFromAnthill(Anthill *anthill) {
+void Enemy::stealFoodFromAnthill(Anthill *anthill, Field *field) {
     if (this->canFindFoodInAnthill(anthill)) {
         this->moveToFoodStorage(anthill);
         if (anthill->getScale() != 0) {
             anthill->setScale(anthill->getScale() - 1);
+            Informer informer;
+            informer.anthillWasAttacked(anthill, anthill->storage->getX(), anthill->storage->getY(), field, this);
         }
     }
 }

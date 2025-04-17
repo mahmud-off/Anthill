@@ -15,6 +15,7 @@ class Soldier;
 class Field;
 class Enemy;
 class Ant;
+class Anthill;
 
 using namespace std;
 
@@ -23,9 +24,8 @@ public:
     void callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int x, int y, Field *field, int materialWeight);
     void callToGetHelpToCollectFood(Collecter *collecterWhoNeedHelp, int x, int y, Field *field, int foodWeight); // coordinates where was the food
     void callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field, Enemy *enemyWhoAttackedAnt);
+    void anthillWasAttacked(Anthill *anthill, int x, int y, Field *field, Enemy *enemyWhoAttackedAnthill);
 
-    // informers for all ants
-    void anthillWasAttacked(); // if opponents attack anthill
 
     //lists of subscribers
     void addToBuildersInformerSubscribers(Builder*);
