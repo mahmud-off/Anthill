@@ -29,7 +29,7 @@
 
 //Constants for change roles
 //for children
-#define CHILDREN_AGE 5
+#define CHILDREN_AGE 20
 #define COLLECTOR_WEIGHT 3
 //for collector
 #define COLLECTOR_AGE 10
@@ -258,20 +258,25 @@ void Anthill::update(Field* field) {
         }
 
         if(temp->getAge() >= COLLECTOR_AGE) {
-            if(temp->getAge() < 50 || temp->getWeight() >= 3) {
-                //change role to Builder
-                Builder* newBuilder = new Builder(this->getCollecterList(), temp);
-                this->getBuilderList().push_back(newBuilder);
-            }
-            if(this->getBuilderList().size() < this->getSoldierList().size()) {
-                //change role to Builder
-                Builder* newBuilder = new Builder(this->getCollecterList(), temp);
-                this->getBuilderList().push_back(newBuilder);
-            }
-            else {
-                //change role to Soldier
-                Soldier* newSoldier = new Soldier(this->getCollecterList(), temp);
-                this->getSoldierList().push_back(newSoldier);
+            if(temp->getAge() > 100) {
+                if(temp->getWeight() >= 3) {
+                    //change role to Builder
+                    Builder* newBuilder = new Builder(this->getCollecterList(), temp);
+                    this->getBuilderList().push_back(newBuilder);
+                    continue;
+                }
+                if(this->getBuilderList().size() < this->getSoldierList().size()) {
+                    //change role to Builder
+                    Builder* newBuilder = new Builder(this->getCollecterList(), temp);
+                    this->getBuilderList().push_back(newBuilder);
+                    continue;
+                }
+                else {
+                    //change role to Soldier
+                    Soldier* newSoldier = new Soldier(this->getCollecterList(), temp);
+                    this->getSoldierList().push_back(newSoldier);
+                    continue;
+                }
             }
         }
     }
@@ -307,14 +312,19 @@ void Anthill::update(Field* field) {
         //this->getChildList()[i]->findFood(field);
         //this->getChildList()[i]->findMaterial(field);
         this->getChildList()[i]->goHome(this);
-        this->getChildList()[i]->updateMovement(field, this);
+        //this->getChildList()[i]->setWeight(3);
+        //this->getChildList()[i]->setAge(this->getChildList()[i]->getAge()+1);
+        this->getChildList()[i]->updateMovement(field, this, "none");
+
     }
 */
 
     for(int i = 0; i < this->getCollecterList().size(); ++i) {
         this->getCollecterList()[i]->work(field, this);
+        //this->getCollecterList()[i]->setAge(this->getCollecterList()[i]->getAge()+1);
+        //this->getCollecterList()[i]->setWeight(5);
     }
-    /*
+/*
     for(int i = 0; i < this->getCleanerList().size(); ++i) {
         this->getCleanerList()[i]->randomMoving(field);
     }
@@ -324,14 +334,15 @@ void Anthill::update(Field* field) {
     for(int i = 0; i < this->getSoldierList().size(); ++i) {
         this->getSoldierList()[i]->randomMoving(field);
     }
+
+
     for(int i = 0; i < this->getBuilderList().size(); ++i) {
         this->getBuilderList()[i]->randomMoving(field);
     }
-    */
 
     //this->getChildList()[0]->randomMoving(field);
 
-
+*/
     //3.Recompute of AntHill's parameters
         //+- food count or others parameters
 

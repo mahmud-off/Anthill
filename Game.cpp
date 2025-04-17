@@ -187,14 +187,14 @@ void Game::render()
 
 void Game::renderCollecter()
 {
-	for (int i = 0;i<anthill.getCollecterList().size()-1;i++) {
+	for (int i = 0;i<anthill.getCollecterList().size();i++) {
 		this->window->draw(anthill.getCollecterList()[i]->getShape());
 	}
 }
 
 void Game::renderCleaner()
 {
-	for (int i = 0;i < anthill.getCleanerList().size() - 1;i++) {
+	for (int i = 0;i < anthill.getCleanerList().size();i++) {
 		this->window->draw(anthill.getCleanerList()[i]->getShape());
 	}
 }
@@ -203,14 +203,15 @@ void Game::renderCleaner()
 
 void Game::renderSoldier()
 {
-	for (int i = 0;i < anthill.getSoldierList().size() - 1;i++) {
+	for (int i = 0;i < anthill.getSoldierList().size();i++) {
 		this->window->draw(anthill.getSoldierList()[i]->getShape());
 	}
 }
 
 void Game::renderChild()
 {
-	for (int i = 0;i < anthill.getChildList().size() - 1;i++) {
+	//cout << anthill.getChildList().size() << "\n";
+	for (int i = 0;i < anthill.getChildList().size();i++) {
 
 		this->window->draw(anthill.getChildList()[i]->getShape());
 	}
@@ -218,13 +219,13 @@ void Game::renderChild()
 
 void Game::renderNurse()
 {
-	for (int i = 0;i < anthill.getNurseList().size() - 1;i++) {
+	for (int i = 0;i < anthill.getNurseList().size();i++) {
 		this->window->draw(anthill.getNurseList()[i]->getShape());
 	}
 }
 
 void Game::renderBuilder() {
-	for (int i = 0;i < anthill.getBuilderList().size() - 1;i++) {
+	for (int i = 0;i < anthill.getBuilderList().size();i++) {
 		this->window->draw(anthill.getBuilderList()[i]->getShape());
 	}
 }
@@ -236,11 +237,12 @@ void Game::renderFoodStorage() {
 
 void Game::renderFood()
 {
-	
+
 	for (int i = 0;i < field.foodCoordinates.size();i++)
 	{
 		this->window->draw(field.foodCoordinates[i]->getFoodShape());
 	}
+
 	for (int i = 0;i < field.detectedFood.size();i++)
 	{
 		this->window->draw(field.detectedFood[i]->getFoodShape());

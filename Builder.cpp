@@ -41,7 +41,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
 	anthill->setMaterialsCount(anthill->getMaterialsCount() + 1); // increase materials by 1
 }
 */
-Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
+Builder::Builder(vector<Collecter*>& list, Collecter *&collecter) {
 	cout << "builder from collecter" << endl;
 	this->setAge(collecter->getAge());
 	this->setRole("builder");
@@ -56,6 +56,7 @@ Builder::Builder(vector<Collecter *> &list, Collecter *&collecter) {
 			break;
 		}
 	}
+	initBuilder();
 }
 
 void Builder::initBuilder() {

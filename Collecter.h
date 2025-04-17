@@ -27,7 +27,7 @@ public:
 
     void initCollecter();
 
-    int getWeight() { return this->getWeight(); }
+    int getWeight() { return Ant::getWeight(); }
 
     Collecter(vector<Child*>& list, Child* &child);
 

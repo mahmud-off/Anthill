@@ -33,7 +33,7 @@ Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
             break;
         }
     }
-    this->initSoldier();
+    initSoldier();
 }
 
 void Soldier::helpToFightEnemy(Enemy* enemy, Field* field)

@@ -10,7 +10,7 @@
 #define MAX_WEIGHT_FOOD 10
 #define MAX_WEIGHT_MATERIALS 50
 #define MATERIALS "materials"
-#define FOOD "food"
+string FOOD = "food";
 
 Field::Field(int width, int height) {
     this->height = height;
@@ -79,18 +79,18 @@ void Field::foodSpawn(int k, Anthill* anthill) {
         srand(time(0));
         int x = rand() % this->width;
         int y = rand() % this->height;
-        cout << x << " " << y << "\n";
+        //cout << x << " " << y << "\n";
         while (field[y][x] != "" ) {
             // если ячейка поля уже занята, то пересчитываем заново
-            cout << x << " " << y << "\n";
+            //cout << x << " " << y << "\n";
             x = rand() % this->width;
             y = rand() % this->height;
         }
-        this->field[y][x] = FOOD;
+        this->field[y][x] = (string)FOOD;
+        cout << "\nYour food " << (int)(field[y][x] == FOOD) << " " << field[y][x] << "\n";
         int weight = rand() % MAX_WEIGHT_FOOD;
         this->foodCoordinates.push_back(new Food(x, y, weight));
-        this->foodCoordinates.back()->initFood(x, y, weight);
-
+        //this->foodCoordinates.back()->initFood(x, y, weight);
     }
 }
 
@@ -130,14 +130,18 @@ void Field::updateFoodCoordinatesList() {
     }
     cout << "\n";
 */
-    vector<Food*> newFoodCoordinates = detectedFood;
-    for (int i = 0; i < newFoodCoordinates.size(); i++) {
-        int x = newFoodCoordinates[i]->getX();
-        int y = newFoodCoordinates[i]->getY();
-        if (field[y][x] != FOOD) {
+    //vector<Food*> newFoodCoordinates(detectedFood);
+    for (int i = 0; i < detectedFood.size(); ++i) {
+        int x = detectedFood[i]->getXCoord();
+        int y = detectedFood[i]->getYCoord();
+        cout << "key-->" << field[y][x] << " ";
+        if (field[y][x] == FOOD) {
             detectedFood.erase(detectedFood.begin()+i);
+            break;
         }
     }
+    cout << "\n";
+
     /*
     cout << foodCoordinates.size()<<"\n";
     for(int i = 0; i < foodCoordinates.size(); ++i) {

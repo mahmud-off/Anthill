@@ -109,7 +109,8 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
 	// drawing path from points in paths with graphic
 	// drawing reverse path back to anthill
 	this->changeStatus(); // change status to free
-	field->field[this->getPosY()][this->getPosX()] = ""; // already no food in this point
+	cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
+	field->field[this->getPosY()][this->getPosX()] = "";// already no food in this point
 	field->updateFoodCoordinatesList();
 
 	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1

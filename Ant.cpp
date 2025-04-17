@@ -33,10 +33,12 @@ int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) {
 
 pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<Food*> v, vector<Food*>& detectedFood) {
     // vector<pair<int, int>> distances; // first - distance, second - point
-    pair<int, pair<int, int> > answerPoint;
+    pair<int, pair<int, int> > answerPoint = {0,{0,0}};
     int minn = 1e9;
+    Food* elem = nullptr;
+    int index = 0;
     for (int i = 0; i < v.size(); i++) {
-        auto p = v[i];
+        Food* p = v[i];
         pair<int, pair<int, int> > point;
         point.second.first = p->getX();
         point.second.second = p->getY();
@@ -47,12 +49,16 @@ pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<
         if (res < minn) {
             minn = res;
             answerPoint = point;
-            Food *detectedP = new Food(p->getX(),p->getY(), p->getWeight());
-            detectedFood.push_back(detectedP);
-            v.erase(v.begin()+i);
-            cout << v.size() << " " << detectedFood.size() << "\n";
+            elem = p;
+            index = i;
         }
     }
+    if(elem != nullptr) {
+        Food *detectedP = new Food(elem->getX(),elem->getY(), elem->getWeight());
+        detectedFood.push_back(detectedP);
+        v.erase(v.begin()+index);
+    }
+    cout << "-->" << v.size() << " " << detectedFood.size() << "\n";
     return answerPoint;
 }
 
@@ -168,7 +174,7 @@ void Ant::findFood(Field* field){
         //findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
     this->setEndPoint({point.second.first, point.second.second});
     field->field[point.second.second][point.second.first] = "";
-/*
+
     vector<Food*> newFoodCoordinates = field->foodCoordinates;
     for (int i = 0; i < newFoodCoordinates.size(); i++) {
         int x = newFoodCoordinates[i]->getX();
@@ -177,7 +183,7 @@ void Ant::findFood(Field* field){
             field->foodCoordinates.erase(field->foodCoordinates.begin()+i);
         }
     }
-*/
+
     //endPoint.first = point.second.first;
     //endPoint.second = point.second.second;
 }
