@@ -134,6 +134,7 @@ void Game::render()
 	this->renderChild();
 	this->renderNurse();
 	this->renderBuilder();
+	//this->renderDeadAnt();
 	this->window->display(); 
 }
 
@@ -185,9 +186,6 @@ void Game::renderBuilder() {
 		this->window->draw(anthill.getBuilderList()[i]->getShape());
 	}
 }
-
-
-
 
 Game::~Game() {
 	delete this->window;

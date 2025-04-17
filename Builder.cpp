@@ -83,10 +83,14 @@ void Builder::work(Field* field, Anthill* anthill){
     }
     else if (work_status == "find_material") {
         buildAnthill(anthill);
-
-        this->changeStatus(); // change status to free
-        this->findMaterial(field);
-        this->setWorkStatus("moving_material");
+        
+        if (field->materialsCoordinates.size() != 0) {
+            this->changeStatus(); // change status to free
+            this->findMaterial(field);
+            this->setWorkStatus("moving_material");
+        }else {
+            this->randomMoving(field);
+        }
     }
 }
 

@@ -26,6 +26,10 @@ int getRandomPoint(int min_n, int max_n) {
     return distribution(generator);
 };
 
+pair<int, int> Ant::randomAntNurseryPos() {
+    pair<int, int> point = { 0,0 };
+    return point;
+};
 pair<int, int> Ant::randomAntHill(Anthill* anthill) {
     int hill_x = getRandomPoint(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
     int hill_y = getRandomPoint(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());

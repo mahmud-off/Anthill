@@ -67,9 +67,13 @@ void Collecter::work(Field* field, Anthill* anthill) {
 
     }else if (work_status == "find_food") {
         growthFood(anthill);
-
         this->findFood(field);
-        this->setWorkStatus("moving_food");
+
+        if (field->foodCoordinates.size() !=0) {
+            this->setWorkStatus("moving_food");
+        }else{
+            this->randomMoving(field);
+        }
     }
     /*else if (work_status == help") {
         findNearestPoint of collecterWhoNeedHelp

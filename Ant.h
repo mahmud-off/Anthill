@@ -81,6 +81,7 @@ public:
 
 
 	pair<int, int> randomAntHill(Anthill* anthill);
+	pair<int, int> randomAntNurseryPos();
 	void randomMoving(Field* filed);
 
 	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}
