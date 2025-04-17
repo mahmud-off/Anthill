@@ -2,7 +2,7 @@
 
 Child::Child()
 {
-	cout << "child created\n";
+	//cout << "child created\n";
 	this->setRole("child");
 	this->initChild();
 }

@@ -14,7 +14,7 @@ public:
 
 	Nurse();
 	//virtual ~Nurse();
-	void work(Field *field, Anthill *anthill) override { ; }
+	void work(Field* field, Anthill* anthill) override;
 
 	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
 	void initNurse();

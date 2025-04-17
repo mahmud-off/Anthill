@@ -14,9 +14,6 @@ class Child;
 class Field;
 class Anthill;
 
-
-
-
 class Collecter : public Ant {
 public:
     Collecter();
@@ -35,6 +32,7 @@ public:
     
     void work(Field* field, Anthill* anthill) override;
     void changeStatus();
+    void growthFood(Anthill* anthill);
     //
     // using Ant::moveRight;
     // using Ant::moveLeft;
@@ -49,7 +47,6 @@ public:
     // using Ant::getStatus;
 
 private:
-   
 };
 
 #endif // COLLECTER_H

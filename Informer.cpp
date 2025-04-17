@@ -79,10 +79,15 @@ void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int 
 void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field, Enemy *enemyWhoAttackedAnt) {
     for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
         auto curSoldier = this->soldiersInformerSubscribers[i];
-        if (curSoldier->status == "free") {
+        if (curSoldier->getStatus() == "free") {
             curSoldier->changeStatus(); // change status to busy
-            curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
-            curSoldier->changeStatus(); // change status to free;
+            curSoldier->setWorkStatus("help_moving");
+            curSoldier->setEnemy(enemyWhoAttackedAnt);
+
+            curSoldier->setEndPoint({antWhoWasAttacked->getPosX(), antWhoWasAttacked->getPosY()});
+
+            //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
+            //curSoldier->changeStatus(); // change status to free;
         }
         else if (curSoldier->status == "busy") {
             continue;

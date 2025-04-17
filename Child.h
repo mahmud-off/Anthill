@@ -14,7 +14,7 @@ public:
 
     void initChild();
 
-    virtual ~Child() override { cout << "child was deleted"; };
+    virtual ~Child() override { /*cout << "child was deleted";*/ };
     void work(Field *field, Anthill *anthill) override { ; }
 
     // using Ant::moveRight;

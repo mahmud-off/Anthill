@@ -17,12 +17,16 @@ public:
     Soldier();
     Soldier(int power);
 
+    Enemy* getEnemy() { return this->enemy; }
+    void setEnemy(Enemy* new_enemy) { enemy = new_enemy; }
+
+
     Soldier(vector<Collecter*>& list, Collecter* &collecter);
     void helpToFightEnemy(Enemy *enemy, Field *field);
-    void fightEnemy(Enemy *enemy, Field *field);
+    void fightEnemy(Field *field);
     void initSoldier();
     virtual ~Soldier();
-    void work(Field *field, Anthill *anthill) override { ; }
+    void work(Field* field, Anthill* anthill) override;
     Soldier(vector<Ant*>& list, Ant* &collecter);
 
     using Ant::setPosX;
@@ -35,6 +39,7 @@ public:
 
 private:
     int hit; // ����
+    Enemy* enemy;
 };
 
 #endif 

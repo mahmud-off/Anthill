@@ -9,7 +9,7 @@
 #define DAILY_MATERIALS_SPAWN 50
 #define MAX_WEIGHT_FOOD 10
 #define MAX_WEIGHT_MATERIALS 50
-#define MATERIALS "materials"
+string MATERIALS = "materials";
 string FOOD = "food";
 
 Field::Field(int width, int height) {
@@ -37,13 +37,38 @@ void Field::materialsSpawn(int k, Anthill* anthill) {
             x = rand() % this->width;
             y = rand() % this->height;
         }
-        this->field[y][x] = MATERIALS;
+        this->field[y][x] = (string)MATERIALS;
         int weight = rand() % MAX_WEIGHT_MATERIALS;
-        this->materialsCoordinates.push_back(new Materials);
-        this->materialsCoordinates.back()->initMaterials(x, y, weight);
+        this->materialsCoordinates.push_back(new Materials(x,y,weight));
+        //this->materialsCoordinates.back()->initMaterials(x, y, weight);
 
     }
 }
+
+void Field::foodSpawn(int k, Anthill* anthill) {
+   /* cout << "HUI" << field.size() << " ";
+    cout << field[1].size() << endl;
+    cout << this->width << " ";
+    cout << this->height;*/
+    for (int i = 0; i < k; i++) {
+        srand(time(0));
+        int x = rand() % this->width;
+        int y = rand() % this->height;
+        //cout << x << " " << y << "\n";
+        while (field[y][x] != "") {
+            // если ячейка поля уже занята, то пересчитываем заново
+            //cout << x << " " << y << "\n";
+            x = rand() % this->width;
+            y = rand() % this->height;
+        }
+        this->field[y][x] = (string)FOOD;
+        cout << "\nYour food " << (int)(field[y][x] == FOOD) << " " << field[y][x] << "\n";
+        int weight = rand() % MAX_WEIGHT_FOOD;
+        this->foodCoordinates.push_back(new Food(x, y, weight));
+        //this->foodCoordinates.back()->initFood(x, y, weight);
+    }
+}
+
 
 void Field::createEnemy(Anthill* anthill) {
     //first - compute Enemy's point
@@ -70,29 +95,6 @@ void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
     }
 }
 
-void Field::foodSpawn(int k, Anthill* anthill) {
-    cout <<"HUI"<< field.size() << " ";
-    cout << field[1].size() << endl;
-    cout << this->width << " ";
-    cout << this->height;
-    for (int i = 0; i < k; i++) {
-        srand(time(0));
-        int x = rand() % this->width;
-        int y = rand() % this->height;
-        //cout << x << " " << y << "\n";
-        while (field[y][x] != "" ) {
-            // если ячейка поля уже занята, то пересчитываем заново
-            //cout << x << " " << y << "\n";
-            x = rand() % this->width;
-            y = rand() % this->height;
-        }
-        this->field[y][x] = (string)FOOD;
-        cout << "\nYour food " << (int)(field[y][x] == FOOD) << " " << field[y][x] << "\n";
-        int weight = rand() % MAX_WEIGHT_FOOD;
-        this->foodCoordinates.push_back(new Food(x, y, weight));
-        //this->foodCoordinates.back()->initFood(x, y, weight);
-    }
-}
 
 void Field::ResourceSpawn(Anthill* anthill) {
     this->foodSpawn(DAILY_FOOD_SPAWN, anthill);
@@ -134,13 +136,13 @@ void Field::updateFoodCoordinatesList() {
     for (int i = 0; i < detectedFood.size(); ++i) {
         int x = detectedFood[i]->getXCoord();
         int y = detectedFood[i]->getYCoord();
-        cout << "key-->" << field[y][x] << " ";
-        if (field[y][x] == FOOD) {
+        //cout << "key-->" << field[y][x] << " ";
+        if (field[y][x] != FOOD) {
             detectedFood.erase(detectedFood.begin()+i);
             break;
         }
     }
-    cout << "\n";
+    //cout << "\n";
 
     /*
     cout << foodCoordinates.size()<<"\n";
@@ -152,13 +154,13 @@ void Field::updateFoodCoordinatesList() {
 }
 
 void Field::updateMaterialsCoordinatesList() {
-    vector<Materials*> newMaterialsCoordinates;
-    for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
-        int x = materialsCoordinates[i]->getX();
-        int y = materialsCoordinates[i]->getY();
-        if (field[y][x] == MATERIALS) {
-            newMaterialsCoordinates.push_back(materialsCoordinates[i]);
+    for (int i = 0; i < detectedMaterials.size(); ++i) {
+        int x = detectedMaterials[i]->getX();
+        int y = detectedMaterials[i]->getY();
+        if (field[y][x] != MATERIALS) {
+            detectedMaterials.erase(detectedMaterials.begin() + i);
+            break;
         }
     }
-    materialsCoordinates = newMaterialsCoordinates;
+
 }

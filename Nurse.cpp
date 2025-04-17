@@ -2,13 +2,30 @@
 #include "Cleaner.h"
 Nurse::Nurse()
 {
-	cout << "nurse created\n";
+	//cout << "nurse created\n";
 	this->setRole("nurse");
 	this->initNurse();
 }
 
+void Nurse::work(Field* field, Anthill* anthill){
+	string work_status = getWorkStatus();
+
+	if (work_status == "moving") {
+		this->updateMovement(field, anthill, "find_new_position");
+
+		this->changeStatus(); // change status to busy
+	}
+	else if (work_status == "find_new_position") {
+		pair<int,int> randomPointInNursery= randomAntNurseryPos();
+		this->setEndPoint(randomPointInNursery);
+
+		this->setWorkStatus("moving");
+	}
+
+}
+
 Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
-	cout << "nurse from collecter" << endl;
+	//cout << "nurse from collecter" << endl;
 	this->setAge(cleaner->getAge());
 	this->setRole("nurse");
 	this->setHealth(cleaner->getHealth());
@@ -29,5 +46,5 @@ void Nurse::initNurse() {
 	this->getShape().setFillColor(sf::Color::Yellow);
 }
 Nurse::~Nurse() {
-    cout << "nurse was deleted\n";
+    //cout << "nurse was deleted\n";
 }

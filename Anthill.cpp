@@ -29,10 +29,10 @@
 
 //Constants for change roles
 //for children
-#define CHILDREN_AGE 300
+#define CHILDREN_AGE 20
 #define COLLECTOR_WEIGHT 3
 //for collector
-#define COLLECTOR_AGE 900
+#define COLLECTOR_AGE 10
 #define BUILDER_WEIGHT 3
 //for cleaner
 #define CLEANER_AGE 10
@@ -56,7 +56,7 @@ Anthill::Anthill(int scale, int x, int y, int w, int h) {
 
 
 void Anthill::generateAnts(int x, int y, Informer *informer) {
-    this->foodCount = 0.7 * this->scale;
+    this->foodCount =  1.5 * this->scale;
     this->antCount = 0.3 * this->scale;
     this->childrenCount = 0.2 * this->antCount;
     this->builderCount = 0.2 * this->antCount;
@@ -307,40 +307,39 @@ void Anthill::update(Field* field) {
         // call virtual func work {...} for each ant
 
     //random movement for every ant;
-
     for(int i = 0; i < this->getChildList().size(); ++i) {
         //this->getChildList()[i]->findFood(field);
         //this->getChildList()[i]->findMaterial(field);
-        this->getChildList()[i]->goHome(this);
-        this->getChildList()[i]->setWeight(3);
-        this->getChildList()[i]->setAge(this->getChildList()[i]->getAge()+1);
+        this->getChildList()[i]->findHome(this);
+        //this->getChildList()[i]->setWeight(3);
+        //this->getChildList()[i]->setAge(this->getChildList()[i]->getAge()+1);
         this->getChildList()[i]->updateMovement(field, this, "none");
+        this->getChildList()[i]->setHealth(-1);
 
     }
-
 
     for(int i = 0; i < this->getCollecterList().size(); ++i) {
         this->getCollecterList()[i]->work(field, this);
-        this->getCollecterList()[i]->setAge(this->getCollecterList()[i]->getAge()+1);
+        //this->getCollecterList()[i]->setAge(this->getCollecterList()[i]->getAge()+1);
         //this->getCollecterList()[i]->setWeight(5);
     }
 
-    for(int i = 0; i < this->getCleanerList().size(); ++i) {
-        this->getCleanerList()[i]->randomMoving(field);
+   for(int i = 0; i < this->getCleanerList().size(); ++i) {
+        this->getCleanerList()[i]->work(field, this);
     }
     for(int i = 0; i < this->getNurseList().size(); ++i) {
-        this->getNurseList()[i]->randomMoving(field);
+        this->getNurseList()[i]->work(field, this);
     }
     for(int i = 0; i < this->getSoldierList().size(); ++i) {
-        this->getSoldierList()[i]->randomMoving(field);
+        this->getSoldierList()[i]->work(field, this);
     }
 
+
     for(int i = 0; i < this->getBuilderList().size(); ++i) {
-        this->getBuilderList()[i]->randomMoving(field);
+        this->getBuilderList()[i]->work(field,this);
     }
 
     //this->getChildList()[0]->randomMoving(field);
-
 
     //3.Recompute of AntHill's parameters
         //+- food count or others parameters

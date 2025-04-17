@@ -23,7 +23,7 @@ Collecter::Collecter(int weight) {
 
 Collecter::Collecter(vector<Child*>& list, Child* &child)
 {
-	cout << "collecter from child" << endl;
+	//cout << "collecter from child" << endl;
 	this->setAge(child->getAge());
 	this->setRole("collecter");
 	this->setWorkStatus("find_food");
@@ -42,7 +42,7 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 }
 
 Collecter::~Collecter() {
-    cout << "collecter was deleted\n";
+    //cout << "collecter was deleted\n";
 }
 
 void Collecter::initCollecter()
@@ -64,16 +64,22 @@ void Collecter::work(Field* field, Anthill* anthill) {
 		this->setWorkStatus("find_home");
 
 	}else if (work_status == "find_home") { // && informer->collecterWhoNeedHelp.size() == 0
-		this->goHome(anthill);
+		this->findHome(anthill);
 		this->setWorkStatus("moving_home");
 
 	}else if(work_status == "moving_home"){
 		this->updateMovement(field, anthill, "find_food");
 
 	}else if (work_status == "find_food") {
-		//cout << this->getWorkStatus() << " ";
+		growthFood(anthill);
 		this->findFood(field);
-		this->setWorkStatus("moving_food");
+
+		if (field->foodCoordinates.size() != 0) {
+			this->setWorkStatus("moving_food");
+		}
+		else {
+			this->randomMoving(field);
+		}
 
 		//cout << this->getWorkStatus() << "\n";
 	}
@@ -90,6 +96,9 @@ void Collecter::changeStatus() {
 	else if (this->getStatus() == "busy") {
 		this->status = "free";
 	}
+}
+void Collecter::growthFood(Anthill* anthill) {
+	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
 
 
@@ -109,7 +118,7 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
 	// drawing path from points in paths with graphic
 	// drawing reverse path back to anthill
 	this->changeStatus(); // change status to free
-	cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
+	//cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
 	field->field[this->getPosY()][this->getPosX()] = "";// already no food in this point
 	field->updateFoodCoordinatesList();
 
