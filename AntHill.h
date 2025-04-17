@@ -10,7 +10,7 @@
 // #include "Soldier.h"
 #include <iostream>
 #include <vector>
-#include "Storage.h";
+
 
 class Builder;
 class Child;
@@ -19,9 +19,8 @@ class Collecter;
 class Nurse;
 class Soldier;
 class Dead;
-//class Storage;
+class Storage;
 
-//class Storage;
 
 #include "Informer.h"
 
@@ -61,7 +60,7 @@ public:
     int getBornRoomHeght(){return bornRoomHeight;}
 
 
-    //Storage *storage;
+    Storage *storage;
 
     //setters
     void setScale(int scale) { this->scale = scale; }
@@ -77,10 +76,6 @@ public:
 
     void setxy(int x, int y, int w, int h);
 
-    void setCoordinateStorage(int storageX, int storageY, int storageWidth, int storageHeight);
-
-    void setCoordinateBornRoom(int bornRoomX, int bornRoomY, int bornRoomWidth, int bornRoomHeight);
-
     // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
     //update
@@ -91,7 +86,6 @@ public:
     void spawnChildrenWhenNeed(Informer *informer = nullptr);
 
     vector<Dead*> detectedDead;
-    Storage& getStorage() { return this->storage; }
 
     void anthillDestroying(); // ����� �����������
 
@@ -103,8 +97,6 @@ private:
     int enterY;
     int width, height;
 
-    int foodStorage_X;
-    int foodStorage_Y;
 
     int bornRoomWidth;
     int bornRoomHeight;
@@ -142,8 +134,6 @@ private:
     vector<Soldier *> soldierList;
     //dead ants
     vector<Dead*> deadAntsList;
-
-    Storage storage;
 
 
 };

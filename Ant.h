@@ -51,7 +51,6 @@ public:
 	int getPower() { return this->power; }
 	string getStatus() { return this->status; }
 	string getWorkStatus() { return this->work_status; }
-	pair<int, int> getEndPoint() { return this->endPoint; }
 
 	//setters
 	void setAge(int n){ age = n; }

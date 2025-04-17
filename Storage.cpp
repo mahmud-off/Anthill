@@ -10,15 +10,15 @@ int getRandomStorage(int min_n, int max_n) {
 
 void Storage::addFood()
 {
-	this->storageFood.push_back(new Food(this->storageX, this->storageY, 3));
-	storageFood[storageFood.size()-1]->initFood(getRandomStorage(this->storageX, this->storageX + this->storageWidth), getRandomStorage(this->storageY, this->storageY + this->storageHeight));
+	this->storage.push_back(new Food(this->storageX, this->storageY, 3));
+	storage[storage.size()-1]->initFood(getRandomStorage(this->storageX, this->storageX + this->storageWidth), getRandomStorage(this->storageY, this->storageY + this->storageHeight));
 	this->count++;
 }
 
 void Storage::delFood()
 {
-	delete storageFood[storageFood.size() - 1];
-	this->storageFood.pop_back();
+	delete storage[storage.size() - 1];
+	this->storage.pop_back();
 	this->count--;
 }
 
@@ -30,24 +30,9 @@ void Storage::createStorage(int count,int x,int y,int h,int w) {
 	this->storageHeight = h;
 
 	for (int i = 0;i < count;i++) {
-		this->storageFood.push_back(new Food(this->storageX, this->storageY, 3));
-		storageFood[i]->initFood(getRandomStorage(this->storageX, this->storageX + this->storageWidth), getRandomStorage(this->storageY, this->storageY + this->storageHeight));
+		this->storage.push_back(new Food(this->storageX, this->storageY, 3));
+		storage[i]->initFood(getRandomStorage(this->storageX, this->storageX + this->storageWidth), getRandomStorage(this->storageY, this->storageY + this->storageHeight));
 	}
-}
-
-
-
-pair<int, int> Storage::newCoordinateStorage()
-{
-	
-	return { getRandomStorage(this->storageX, this->storageX + this->storageWidth), getRandomStorage(this->storageY, this->storageY + this->storageHeight) };
-	
-}
-
-void Storage::addFoodCoordinate(pair<int, int> coordinateFoodStorage,int weight)
-{
-	this->count += 1;
-	this->storageFood.push_back(new Food(coordinateFoodStorage.first, coordinateFoodStorage.second,weight ));
 }
 
 
