@@ -69,8 +69,8 @@ void Cleaner::work(Field* field, Anthill* anthill) {
         else {
             this->randomMoving(field);
         }
-        
-        
+
+
     }
 
 }

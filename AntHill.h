@@ -75,6 +75,8 @@ public:
 
     void update(Field* field);
 
+    void spwanChildrenWhenNeed(Informer *informer);
+
     vector<Dead*> detectedDead;
 
 
@@ -115,7 +117,7 @@ private:
     //dead ants
     vector<Dead*> deadAntsList;
 
-    
+
 };
 
 #endif ANTHILL_H

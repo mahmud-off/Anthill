@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 // #include "AntHill.h"
 
@@ -13,7 +14,7 @@ using namespace std;
 
 class Enemy {
 public:
-    Enemy(int x, int y);
+    Enemy(int x, int y, int hit);
     ~Enemy();
 
     // 1 - atack ants
@@ -39,14 +40,9 @@ public:
     // setters
     void setHealth(int health) { this->health = health; }
 
-
-
-
-
-    //functions
- 
-
-
+   sf::CircleShape& getEnemyShape() { return this->enemyShape; }
+    void setHit(int hit) { this->hit = hit; }
+    void initEnemy(int x, int y, int hit);
 
 private:
     //parameters
@@ -55,6 +51,8 @@ private:
     int weight;
     int posX;
     int posY;
+
+    sf::CircleShape enemyShape;
 };
 
 

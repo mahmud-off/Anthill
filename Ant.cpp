@@ -118,8 +118,6 @@ pair<int, pair<int, int>> Ant::findNearestPointDead(int x1, int y1, vector<Dead*
         if (res < minn) {
             minn = res;
             answerPoint = point;
-            elem = p;
-            index = i;
         }
     }
     if (elem != nullptr) {
@@ -231,7 +229,7 @@ void Ant::findFood(Field* field){
         int y = newFoodCoordinates[i]->getY();
         if (field->field[y][x] != "food") {
             field->foodCoordinates.erase(field->foodCoordinates.begin()+i);
-            
+
         }
     }
 
@@ -259,7 +257,7 @@ void Ant::findMaterial(Field* field){
 
 void Ant::findDeadAnts(Anthill* anthill){
 
-  
+
 
     int xdead = 0;
     int ydead = 0;
@@ -270,8 +268,8 @@ void Ant::findDeadAnts(Anthill* anthill){
         anthill->getDeadAntsList().erase(anthill->getDeadAntsList().begin() + i);
         break;
     }
-   
-    
+
+
 
     endPoint.first = xdead;
     endPoint.second = ydead;
@@ -303,7 +301,7 @@ void Ant::setPosX(int x)
 {
     this->x = x;
     this->getShape().setPosition(x, this->y);
-    
+
 }
 
 void Ant::setPosY(int y)

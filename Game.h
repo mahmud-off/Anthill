@@ -102,6 +102,8 @@ public:
 	void renderBuilder();
 	void renderCleaner();
 
+	void renderEnemy();
+
 	void renderFoodStorage();
 	void renderFood();
 	void renderMaterials();

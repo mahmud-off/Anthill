@@ -92,6 +92,7 @@ void Game::createWorld()
 	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2,&this->informer);
 	storage.createStorage(anthill.getFoodCount(),this->storageX,this->storageY,this->storageHeight,this->storageWidth);
 	field.ResourceSpawn(&this->anthill);
+	field.enemiesSpawn(&this->anthill);
 
 	for (int i = 0;i< this->anthill.getCollecterList().size();i++) {
 		this->anthill.getCollecterList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
@@ -167,9 +168,6 @@ void Game::update()
 
 void Game::render()
 {
-	
-
-	
 	this->window->draw(this->sprite);
 
 	this->renderCollecter();
@@ -181,8 +179,9 @@ void Game::render()
 	this->renderFoodStorage();
 	this->renderFood();
 	this->renderMaterials();
+	this->renderEnemy();
 	this->renderDead();
-	
+
 	this->window->display(); 
 }
 
@@ -201,7 +200,7 @@ void Game::renderCleaner()
 }
 void Game::renderDead()
 {
-	
+
 	for (int i = 0;i < anthill.getDeadAntsList().size();i++) {
 		//cout << anthill.getDeadAntsList()[i]->getShape().getPosition().x <<" "<< anthill.getDeadAntsList()[i]->getShape().getPosition().y << "\n";
 		this->window->draw(anthill.getDeadAntsList()[i]->getShape());
@@ -268,6 +267,12 @@ void Game::renderMaterials()
 	for (int i = 0;i < field.detectedMaterials.size();i++)
 	{
 		this->window->draw(field.detectedMaterials[i]->getMaterialsShape());
+	}
+}
+
+void Game::renderEnemy() {
+	for (int i = 0;i < field.getEnemiesList().size();i++) {
+		this->window->draw(field.getEnemiesList()[i]->getEnemyShape());
 	}
 }
 

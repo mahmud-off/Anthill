@@ -53,6 +53,17 @@ Anthill::Anthill(int scale, int x, int y, int w, int h) {
     this->height = h;
 }
 
+void Anthill::spwanChildrenWhenNeed(Informer *informer) {
+    this->childrenCount = 0.2 * this->antCount;
+    for (int i = 0; i < childrenCount; i++) {
+        childList.push_back(new Child());
+        informer->addToAllAntsInformerSubscribers(childList.back());
+        childList[i]->setPosX(x);
+        childList[i]->setPosY(y);
+    }
+}
+
+
 
 
 void Anthill::generateAnts(int x, int y, Informer *informer) {
