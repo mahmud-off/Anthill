@@ -26,6 +26,7 @@
 #include "Collecter.h"
 #include "Nurse.h"
 #include "Soldier.h"
+#include "Dead.h"
 #include "Food.h"
 #include "Materials.h"
 #include "Storage.h"
@@ -94,6 +95,7 @@ public:
 	void renderCollecter();
 	void renderSoldier();
 	void renderChild();
+	void renderDead();
 	void renderNurse();
 	void renderBuilder();
 	void renderCleaner();
