@@ -48,6 +48,7 @@ void Soldier::work(Field* field, Anthill* anthill){
     string work_status = getWorkStatus();
 
     if (work_status == "help_moving") {
+        this->setEndPoint({ this->enemy->getPosX(), this->enemy->getPosY() });
         this->updateMovement(field, anthill, "fight");
     }
     else if (work_status == "fight") {
