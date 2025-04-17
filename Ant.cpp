@@ -195,8 +195,8 @@ void Ant::stay_on_your_Point(int x, int y) {
 };
 
 pair<int, int> Ant::randomAntHill(Anthill* anthill) {
-    int hill_x = getRandomPoint(anthill->getPosX()-100, anthill->getWidth() + anthill->getPosX() + 100);
-    int hill_y = getRandomPoint(anthill->getPosY()-100, anthill->getHeight() + anthill->getPosY() + 100);
+    int hill_x = getRandomPoint(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
+    int hill_y = getRandomPoint(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());
 
     return { hill_x, hill_y };
 }

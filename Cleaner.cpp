@@ -9,7 +9,6 @@ Cleaner::Cleaner() {
     this->setWorkStatus("find_dead");
     this->setAge(getRandomPoint(200, 300));
     this->initCleaner();
-
 }
 
 Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
