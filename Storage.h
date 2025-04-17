@@ -1,6 +1,6 @@
 #ifndef STORAGE_H
 #define STORAGE_H
-#include "AntHill.h"
+
 //#include "Food.h"
 #include <vector>
 
@@ -8,7 +8,7 @@
 
 class Food;
 
-
+using namespace std;
 class Storage {
 public:
 	void addFood();
@@ -16,7 +16,11 @@ public:
 	void createStorage(int count, int x, int y, int h, int w);
 	int getCount() { return this->count; };
 
-	vector<Food *> storage;
+	pair<int,int> newCoordinateStorage();
+	void addFoodCoordinate(pair<int , int> coordinateFoodStorage,int weight);
+
+
+	vector<Food *> storageFood;
 	void setHYHW(int x, int y, int height, int width);
 
 	int getX() { return this->storageX; }

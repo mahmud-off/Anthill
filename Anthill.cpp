@@ -83,7 +83,7 @@ void Anthill::spawnChildrenWhenNeed(Informer *informer) {
 
 
 void Anthill::generateAnts(int x, int y, Informer *informer) {
-    this->foodCount =  1.5 * this->scale;
+    this->foodCount =  0.01* this->scale;
     this->antCount = 0.3 * this->scale;
     this->childrenCount = 0.2 * this->antCount;
     this->builderCount = 0.2 * this->antCount;
@@ -204,6 +204,22 @@ void Anthill::setxy(int x, int y, int w, int h)
 }
 
 static long long int ticks = 0;
+void Anthill::setCoordinateStorage(int storageX, int storageY, int storageWidth, int storageHeight)
+{
+    this->storageX = storageX;
+    this->storageY = storageY;
+    this->storageHeight = storageHeight;
+    this->storageWidth = storageWidth;
+}
+
+void Anthill::setCoordinateBornRoom(int bornRoomX, int bornRoomY, int bornRoomWidth, int bornRoomHeight)
+{
+    this->bornRoomX = bornRoomX;
+    this->bornRoomY = bornRoomY;
+    this->bornRoomWidth = bornRoomWidth;
+    this->bornRoomHeight = bornRoomHeight;
+}
+
 
 void Anthill::update(Field* field) {
 

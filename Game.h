@@ -17,7 +17,7 @@
 #include "Anthill.h"
 #include "Informer.h"
 #include "Field.h"
-#include "Storage.h"
+
 
 #include "Ant.h"
 #include "Builder.h"
@@ -46,13 +46,13 @@ private:
 	Anthill anthill;
 	Informer informer;
 	Field field;
-	Storage storage;
+
 
 	//????????? ???????
 	int bornRoomWidth;
 	int bornRoomHeight;
 	int bornRoomX;
-	int BornRoomY;
+	int bornRoomY;
 
 	//??????????
 	int antHillWidth;
@@ -66,6 +66,8 @@ private:
 	int storageY;
 	int storageHeight;
 	int storageWidth;
+
+
 
 	void initTexture(
 );
