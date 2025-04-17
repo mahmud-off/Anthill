@@ -87,7 +87,7 @@ void Ant::findDeadAnts(Anthill* anthill){
     vector<Dead*> deadList = anthill->getDeadAntsList();
 
     for (int i = 0; i < deadList.size(); ++i) {
-        deadAntsPositions[i] = { 0, {deadList[i]->getPosX(), deadList[i]->getPosY()} }; // узнать про 0
+        deadAntsPositions[i] = { 0, {deadList[i]->getPosX(), deadList[i]->getPosY()} };
     }
     pair<int, pair<int, int>> point = findNearestPoint(this->getPosX(), this->getPosY(), deadAntsPositions);
 

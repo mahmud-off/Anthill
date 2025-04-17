@@ -250,3 +250,35 @@ void Anthill::update() {
         //+- food count or others parameters
 
 }
+
+void Anthill::updateAntsAge(){
+    //Child age + 1
+    for (int i = 0; i < childList.size(); ++i) {
+        childList[i]->setAge(childList[i]->getAge() + 1);
+    }
+
+    //Collecter age + 1
+    for (int i = 0; i < collecterList.size(); ++i) {
+        collecterList[i]->setAge(collecterList[i]->getAge() + 1);
+    }
+
+    //Builder age + 1
+    for (int i = 0; i < builderList.size(); ++i) {
+        builderList[i]->setAge(builderList[i]->getAge() + 1);
+    }
+
+    //Cleaner age + 1
+    for (int i = 0; i < cleanerList.size(); ++i) {
+        cleanerList[i]->setAge(cleanerList[i]->getAge() + 1);
+    }
+
+    //Nurse age + 1
+    for (int i = 0; i < nurseList.size(); ++i) {
+        nurseList[i]->setAge(nurseList[i]->getAge() + 1);
+    }
+
+    //soldierList + 1
+    for (int i = 0; i < soldierList.size(); ++i) {
+        soldierList[i]->setAge(soldierList[i]->getAge() + 1);
+    }
+}

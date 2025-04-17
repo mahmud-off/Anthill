@@ -57,6 +57,9 @@ private:
 	//функкции инициализации
 	void initVar();
 	void initWindow();
+
+	// тики
+	int tics = 0;
 public:
 	Game();
 	

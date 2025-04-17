@@ -68,7 +68,7 @@ void Builder::work(Field* field, Anthill* anthill){
     if (work_status == "moving_material") {
         this->updateMovement(field, anthill, "collect_material");
 
-        this->changeStatus(); // change status to busy
+        this->changeStatus(); // change status to free
     }
     else if (work_status == "collect_material") {
         collectMaterials(field, anthill);

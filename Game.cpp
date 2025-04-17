@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#define TICS_TO_ANTHILL_DESTROYING 15
 
 int getRandom(int min_n, int max_n) {
 	static mt19937 generator(random_device{}());
@@ -121,7 +122,16 @@ void Game::createWorld()
 void Game::update()
 {
 	this->pollEvents();
+	this->window->clear();
 
+	this->anthill.updateAntsAge();
+	//this->anthill.update(&this->field);
+
+	this->tics++;
+	if (tics == TICS_TO_ANTHILL_DESTROYING) {
+		anthill.anthillDestroying();
+		this->tics = 0;
+	}
 	//this->upadateAnts();
 }
 

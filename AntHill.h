@@ -72,8 +72,10 @@ public:
 
     //update
 
+    void updateAntsAge();
     void update();
 
+    void anthillDestroying(); // ����� �����������
 
 private:
     //coordinates
@@ -89,7 +91,6 @@ private:
     // resources spending
     void antsDailyEat();
 
-    void anthillDestroying(); // ����� �����������
 
     int foodCount;
     int materialsCount;
