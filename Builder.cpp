@@ -19,7 +19,7 @@ Builder::Builder(int weight) {
     this->initBuilder();
 }
 
-/*
+
 void Builder::collectMaterials(Field *field, Anthill *anthill) {
 	this->changeStatus(); // change status to busy
     if (this->getWeight() < this->findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates).first) {
@@ -30,7 +30,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
     }
     else {
     	// material weight is ok
-        pair<int, int> p = this->findNearestPoint(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
+        pair<int, int> p = this->findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates).second;
         //vector<pair<int, int>> paths = this->A_StarSearch({this->getPosX(), this->getPosY()}, p, field);
         // drawing path from points in paths with graphic
         // drawing reverse path back to anthill
@@ -40,7 +40,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
     }
 	anthill->setMaterialsCount(anthill->getMaterialsCount() + 1); // increase materials by 1
 }
-*/
+
 Builder::Builder(vector<Collecter*>& list, Collecter *&collecter) {
 	cout << "builder from collecter" << endl;
 	this->setAge(collecter->getAge());

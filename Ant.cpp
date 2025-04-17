@@ -195,7 +195,7 @@ void Ant::findMaterial(Field* field){
     endPoint.second = point.second.second;
 }
 
-/*
+
 void Ant::findDeadAnts(Anthill* anthill){
 
     vector<pair<int, pair<int, int>>> deadAntsPositions;
@@ -209,7 +209,7 @@ void Ant::findDeadAnts(Anthill* anthill){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-*/
+
 void Ant::randomMoving(Field* filed){
     int randMove = getRandomPoint(-1, 1);
     setPosX(getPosX() + randMove);
@@ -231,8 +231,8 @@ bool Ant::operator==(const Ant *right) const {
     }
     return false;
 }
-/*
-pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<Food*> v) {
+
+pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
     pair<int, pair<int, int> > answerPoint;
     int minn = 1e9;
@@ -250,7 +250,7 @@ pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<Food*> v)
     }
     return answerPoint;
 }
-*/
+
 /*
 int h(pair<int, int> p1, pair<int, int> p2) {
     int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));
