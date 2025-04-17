@@ -30,6 +30,8 @@
 #include "Food.h"
 #include "Materials.h"
 #include "Storage.h"
+#include "Game.h"
+
 using namespace std;
 
 class Game{

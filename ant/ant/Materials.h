@@ -13,6 +13,7 @@ using namespace std;
 
 class Materials {
 public:
+	Materials(int x, int y, int w);
 	sf::CircleShape& getMaterialsShape();
 	void initMaterials(int x, int y, int weight = 0);
 	int getWeight() { return this->weight; };
@@ -21,6 +22,8 @@ public:
 	int getY();
 
 private:
+	int x;
+	int y;
 	sf::CircleShape materialsShape;
 	int weight;
 

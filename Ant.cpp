@@ -3,7 +3,6 @@
 #include "Field.h"
 #include "Anthill.h"
 #include "Dead.h"
-#include "Food.h"
 #define STEP 1
 
 using namespace std;
@@ -27,6 +26,10 @@ int getRandomPoint(int min_n, int max_n) {
     return distribution(generator);
 };
 
+pair<int, int> Ant::randomAntNurseryPos() {
+    pair<int, int> point = { 0,0 };
+    return point;
+};
 pair<int, int> Ant::randomAntHill(Anthill* anthill) {
     int hill_x = getRandomPoint(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
     int hill_y = getRandomPoint(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());
@@ -34,7 +37,7 @@ pair<int, int> Ant::randomAntHill(Anthill* anthill) {
     return { hill_x, hill_y };
 }
 
-void Ant::updateMovement(Field* field, Anthill* anthil){
+void Ant::updateMovement(Field* field, Anthill* anthil, string new_work_status){
     if (getPosX() != endPoint.first || getPosY() != endPoint.second) {
         if (getPosX() < endPoint.first) setPosX(getPosX() + 1);
         else if (getPosX() > endPoint.first) setPosX(getPosX() - 1);
@@ -45,9 +48,12 @@ void Ant::updateMovement(Field* field, Anthill* anthil){
         shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
         //printPosition();
     }
+    else {
+        this->setWorkStatus(new_work_status);
+    }
 }
 
-void Ant::goHome(Anthill* anthill){
+void Ant::findHome(Anthill* anthill){
     endPoint = randomAntHill(anthill);
 }
 
@@ -64,19 +70,17 @@ void Ant::findEnemy(Field* field){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-/*
+
 void Ant::findFood(Field* field){
     pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
+    setEndPoint({ point.second.first, point.second.second });
 }
 
 void Ant::findMaterial(Field* field){
     pair<int, pair<int, int>> point = findNearestPoint(getPosX(), getPosY(), field->materialsCoordinates);
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
+    setEndPoint({ point.second.first, point.second.second });
 }
-*/
+
 void Ant::findDeadAnts(Anthill* anthill){
 
     vector<pair<int, pair<int, int>>> deadAntsPositions;

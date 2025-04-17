@@ -20,6 +20,7 @@ class Nurse;
 class Soldier;
 class Dead;
 
+
 #include "Informer.h"
 
 #define RoleCount 6;
@@ -72,7 +73,7 @@ public:
 
     //update
 
-    void update();
+    void update(Field* field);
 
 
 private:
