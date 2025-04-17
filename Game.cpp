@@ -78,7 +78,7 @@ void Game::initWindow() {
     this->videoMode.width = 1920;
 
     this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-    this->window->setFramerateLimit(500);
+    this->window->setFramerateLimit(300);
 }
 
 
@@ -146,16 +146,7 @@ void Game::update() {
     this->anthill.update(&this->field);
     //this->anthill.getChildList()[0]->randomMoving(&this->field);
 
-    //testing
-    /*
-    for (int i = 0; i < this->anthill.getCollecterList().size(); ++i) {
-    Collecter* ant = this->anthill.getCollecterList()[i];
 
-    ant->setEndPoint({ 0,0 });
-
-    ant->updateMovement(&this->field, &this->anthill);
-    }
-*/
     //ant->setPosX(getRandom(0,1024));
     //ant->setPosY()
 
@@ -207,6 +198,9 @@ void Game::renderDead()
 		//cout << anthill.getDeadAntsList()[i]->getShape().getPosition().x <<" "<< anthill.getDeadAntsList()[i]->getShape().getPosition().y << "\n";
 		this->window->draw(anthill.getDeadAntsList()[i]->getShape());
 	}
+    for( int i = 0; i < anthill.detectedDead.size(); ++i) {
+        this->window->draw(anthill.detectedDead[i]->getShape());
+    }
 }
 
 

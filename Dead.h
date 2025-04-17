@@ -21,7 +21,9 @@ public:
     int getX() {return this->getPosX();};
     int getY() { return this->getPosY(); };
     void initDead( );
-    void work(Field *field, Anthill *anthill) override {;}
+    void work(Field *field, Anthill *anthill) override {
+        ;//stay_on_your_Point(x,y);
+    }
 
 private:
     int x;

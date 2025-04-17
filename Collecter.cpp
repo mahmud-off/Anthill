@@ -9,6 +9,7 @@ Collecter::Collecter() {
     //getShape().setPosition(position);
     this->setRole("collecter");
 	this->setWorkStatus("find_food");
+	this->setAge(getRandomPoint(200, 250));
 	initCollecter();
 }
 
@@ -72,10 +73,11 @@ void Collecter::work(Field* field, Anthill* anthill) {
 
 	}else if (work_status == "find_food") {
 		growthFood(anthill);
-		this->findFood(field);
 
 		//cout << field->foodCoordinates.size() << "\n";
 		if (field->foodCoordinates.size() != 0) {
+			this->changeStatus();
+			this->findFood(field);
 			this->setWorkStatus("moving_food");
 		}
 		else {

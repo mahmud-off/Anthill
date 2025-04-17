@@ -42,8 +42,8 @@ int getRandomNumber__(int min_n, int max_n) {
 
 pair<int, int> Ant::randomAntNurseryPos(Anthill* anthill) {
 
-    int x = getRandomNumber__(anthill->getBornRoomX() - anthill->getBornRoomWidth(), anthill->getBornRoomX() + anthill->getBornRoomWidth()-3);
-    int y = getRandomNumber__(anthill->getBornRoomY() - anthill->getBornRoomHeght(), anthill->getBornRoomY() + anthill->getBornRoomHeght()-3);
+    int x = getRandomNumber__(anthill->getBornRoomX() - anthill->getBornRoomWidth()*1.5, anthill->getBornRoomX() + anthill->getBornRoomWidth()*1.5);
+    int y = getRandomNumber__(anthill->getBornRoomY() - anthill->getBornRoomHeght()*1.5, anthill->getBornRoomY() + anthill->getBornRoomHeght()*1.5);
 
 
 
@@ -182,16 +182,21 @@ vector<pair<int, int> > Ant::A_StarSearch(pair<int, int> start, pair<int, int> e
     return path;
 }
 
-int getRandomPoint(int min_n, int max_n) {
+int Ant::getRandomPoint(int min_n, int max_n) {
     static mt19937 generator(random_device{}());
     uniform_int_distribution<int> distribution(min_n, max_n);
 
     return distribution(generator);
+}
+
+void Ant::stay_on_your_Point(int x, int y) {
+    this->x = x;
+    this->y = y;
 };
 
 pair<int, int> Ant::randomAntHill(Anthill* anthill) {
-    int hill_x = getRandomPoint(anthill->getPosX(), anthill->getWidth() + anthill->getPosX());
-    int hill_y = getRandomPoint(anthill->getPosY(), anthill->getHeight() + anthill->getPosY());
+    int hill_x = getRandomPoint(anthill->getPosX()-100, anthill->getWidth() + anthill->getPosX() + 100);
+    int hill_y = getRandomPoint(anthill->getPosY()-100, anthill->getHeight() + anthill->getPosY() + 100);
 
     return { hill_x, hill_y };
 }

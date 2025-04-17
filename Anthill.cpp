@@ -30,14 +30,14 @@
 
 //Constants for change roles
 //for children
-#define CHILDREN_AGE 300
+#define CHILDREN_AGE 200
 #define COLLECTOR_WEIGHT 3
 //for collector
 #define COLLECTOR_AGE 400
 #define BUILDER_WEIGHT 3
 //for cleaner
-#define CLEANER_AGE 600
-#define LIVE_TIME 2000
+#define CLEANER_AGE 500
+#define LIVE_TIME 1000
 #define MATERIALS_NEEDED_TO_INCREASE_ANTHILL 10
 
 
@@ -269,7 +269,7 @@ void Anthill::update(Field* field) {
             if(this->getCollecterList().size() < this->getCleanerList().size()) {
                 //change role to collector
                 Collecter* newCollector = new Collecter(this->getChildList(), temp);
-                cout << "work status->> " << newCollector->getWorkStatus() << "\n";
+                //cout << "work status->> " << newCollector->getWorkStatus() << "\n";
                 this->getCollecterList().push_back(newCollector);
             }
             else {
@@ -375,6 +375,10 @@ void Anthill::update(Field* field) {
         this->getBuilderList()[i]->work(field,this);
     }
 
+    for(int i = 0; i < this->getDeadAntsList().size(); ++i) {
+        this->getDeadAntsList()[i]->work(field, this);
+    }
+
     //this->getChildList()[0]->randomMoving(field);
 
     //3.Recompute of AntHill's parameters
@@ -383,10 +387,12 @@ void Anthill::update(Field* field) {
     if(ticks%70 == 0) {
         field->spawnFoodWhenNeeds(this);
         field->spawnMaterialsWhenNeeds(this);
+        ticks = 0;
     }
-    if(ticks%100 == 0)
+    if(ticks%150 == 0) {
         spawnChildrenWhenNeed();
-
+        ticks = 0;
+    }
 
 }
 

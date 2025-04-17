@@ -5,6 +5,7 @@ Nurse::Nurse()
 	//cout << "nurse created\n";
 	this->setRole("nurse");
 	this->setWorkStatus("find_new_position");
+	this->setAge(getRandomPoint(400, 800));
 	this->initNurse();
 }
 

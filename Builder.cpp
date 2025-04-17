@@ -10,6 +10,7 @@
 Builder::Builder() {
     ///cout << "builder created\n";
     this->setRole("builder");
+    this->setAge(getRandomPoint(400, 800));
     this->initBuilder();
     this->setWorkStatus("find_material");
 }

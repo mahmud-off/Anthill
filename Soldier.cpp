@@ -7,6 +7,8 @@
 Soldier::Soldier() {
     //cout << "soldier created\n";
     this->setRole("soldier");
+    this->setWorkStatus("rand_moving");
+    this->setAge(getRandomPoint(400, 800));
     this->initSoldier();
     // hit = 10; // power of hit
 }
@@ -14,6 +16,7 @@ Soldier::Soldier() {
 Soldier::Soldier(int power) {
     //cout << "soldier created\n";
     this->setRole("soldier");
+    this->setWorkStatus("rand_moving");
     this->setPower(power);
     this->initSoldier();
 }
@@ -22,6 +25,7 @@ Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
     //cout << "soldier from collecter" << endl;
     this->setAge(collecter->getAge());
     this->setRole("soldier");
+    this->setWorkStatus("rand_moving");
     this->setHealth(collecter->getHealth());
     this->setWeight(collecter->getWeight());
     this->setPosX(collecter->getPosX());

@@ -86,7 +86,9 @@ public:
 
 	//void safeChild();
 
+	int getRandomPoint(int min_n, int max_n);
 
+	void stay_on_your_Point(int x, int y);
 
 	pair<int, int> randomAntHill(Anthill* anthill);
 	pair<int, int> randomAntNurseryPos(Anthill* anthill);

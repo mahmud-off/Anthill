@@ -7,6 +7,7 @@ Cleaner::Cleaner() {
     //cout << "cleaner created\n";
     this->setRole("cleaner");
     this->setWorkStatus("find_dead");
+    this->setAge(getRandomPoint(200, 300));
     this->initCleaner();
 
 }
@@ -65,6 +66,7 @@ void Cleaner::work(Field* field, Anthill* anthill) {
 
         if (anthill->getDeadAntsList().size() != 0) {
             this->findDeadAnts(anthill);
+            this->changeStatus();
             this->setWorkStatus("moving_dead");
         }
         else {

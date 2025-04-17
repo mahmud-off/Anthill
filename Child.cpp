@@ -4,6 +4,7 @@ Child::Child()
 {
 	//cout << "child created\n";
 	this->setRole("child");
+	this->setAge(getRandomPoint(0, 100));
 	//this->setWorkStatus("find_food");
 	this->initChild();
 }
