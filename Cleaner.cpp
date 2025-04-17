@@ -18,12 +18,12 @@ Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
     this->setPosY(child->getPosY());
     for (int i = 0; i < list.size(); ++i) {
         if (list[i] == child) {
-            delete list[i];
+            //delete list[i];
             list.erase(list.begin() + i);
             break;
         }
     }
-    this->initCleaner();
+    initCleaner();
 }
 
 void Cleaner:: initCleaner()
@@ -34,6 +34,11 @@ void Cleaner:: initCleaner()
 
 Cleaner::~Cleaner() {
     cout << "cleaner was deleted\n";
+}
+
+Cleaner::Cleaner(vector<Ant*>& list, Ant*& child)
+{
+
 }
 
 // void Cleaner::cleanDeadAnts(Field field) {

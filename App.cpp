@@ -13,7 +13,7 @@
 
 #define FIELD_HEIGHT 250
 #define FIELD_WIDTH 250
-
+/*
 int main() {
     Informer informer;
     Field field(FIELD_WIDTH, FIELD_HEIGHT);
@@ -35,7 +35,7 @@ int main() {
     anthill.getDeadAntsList().push_back(deadTest);
     cout << "Children size after death: " << anthill.getChildList().size() << "\n";
     cout << "Death list size: " << anthill.getDeadAntsList().size() << "\n";
-
+*/
 /*
     //test for changing roles
     cout << "\nChildren size before: " << anthill.getChildList().size() << "\n";
@@ -113,4 +113,6 @@ int main() {
     // cout << anthill.collecterList.size() << " " << informer.getCollectersInformerSubscribers().size() << "\n";
     // cout << anthill.nurseList.size() << " " << informer.getNursesInformerSubscribers().size() << "\n";
     // cout << anthill.soldierList.size() << " " << informer.getSoldiersInformerSubscribers().size() << "\n";
+/*
 }
+*/

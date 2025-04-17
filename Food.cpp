@@ -1,7 +1,12 @@
 #include "Food.h"
 
 
-
+Food::Food(int x, int y, int w) {
+    this->x = x;
+    this->y = y;
+    this->weight = w;
+    initFood(x,y,w);
+}
 
 sf::CircleShape& Food::getFoodShape()
 {

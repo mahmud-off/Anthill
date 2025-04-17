@@ -14,16 +14,12 @@ public:
 
 	Nurse();
 	//virtual ~Nurse();
-	virtual void work(Field *field, Anthill *anthill) override { ; }
+	void work(Field *field, Anthill *anthill) override { ; }
 
 	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
 	void initNurse();
 	virtual ~Nurse();
 
-	using Ant::moveRight;
-	using Ant::moveLeft;
-	using Ant::moveUp;
-	using Ant::moveDown;
 	using Ant::setPosX;
 	using Ant::setPosY;
 

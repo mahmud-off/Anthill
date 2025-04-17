@@ -9,12 +9,15 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game():anthill(1000,0,0),field(0,0) {
+Game::Game():anthill(1000,500,100, 1000, 800),field(0,0) {
 	
 	
 	this->initVar();
 	this->initWindow();
-	anthill.setxy(this->antHillX, this->antHillY,this->antHillWidth,this->antHillHeight);
+	this->antHillX = this->anthill.getPosX();
+	this->antHillY = this->anthill.getPosY();
+	this->antHillHeight = this->anthill.getHeight();
+	this->antHillWidth = this->anthill.getWidth();
 	field.setHW(this->videoMode.width, this->videoMode.height);
 	this->initTexture();
 	this->initSprite();
@@ -88,7 +91,7 @@ void Game::createWorld()
 {
 	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2,&this->informer);
 	storage.createStorage(anthill.getFoodCount(),this->storageX,this->storageY,this->storageHeight,this->storageWidth);
-	field.ResourceSpawn();
+	field.ResourceSpawn(&this->anthill);
 
 	for (int i = 0;i< this->anthill.getCollecterList().size()-1;i++) {
 		this->anthill.getCollecterList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
@@ -141,7 +144,23 @@ void Game::update()
 {
 	this->pollEvents();
 	this->window->clear();
-	
+
+	//Update will be here
+	this->anthill.update(&this->field);
+	//this->anthill.getChildList()[0]->randomMoving(&this->field);
+
+	//testing
+	/*
+	for (int i = 0; i < this->anthill.getCollecterList().size(); ++i) {
+	Collecter* ant = this->anthill.getCollecterList()[i];
+
+	ant->setEndPoint({ 0,0 });
+
+	ant->updateMovement(&this->field, &this->anthill);
+	}
+*/
+	//ant->setPosX(getRandom(0,1024));
+	//ant->setPosY()
 
 	//this->upadateAnts();
 }
@@ -159,11 +178,9 @@ void Game::render()
 	this->renderChild();
 	this->renderNurse();
 	this->renderBuilder();
-	this->renderDead();
 	this->renderFoodStorage();
 	this->renderFood();
 	this->renderMaterials();
-
 	
 	this->window->display(); 
 }
@@ -184,10 +201,8 @@ void Game::renderCleaner()
 
 
 
-
 void Game::renderSoldier()
 {
-	
 	for (int i = 0;i < anthill.getSoldierList().size();i++) {
 		this->window->draw(anthill.getSoldierList()[i]->getShape());
 	}
@@ -195,17 +210,10 @@ void Game::renderSoldier()
 
 void Game::renderChild()
 {
+	//cout << anthill.getChildList().size() << "\n";
 	for (int i = 0;i < anthill.getChildList().size();i++) {
 
 		this->window->draw(anthill.getChildList()[i]->getShape());
-	}
-}
-void Game::renderDead()
-{
-
-	for (int i = 0;i < anthill.getDeadAntsList().size() ;i++) {
-
-		this->window->draw(anthill.getDeadAntsList()[i]->getShape());
 	}
 }
 
@@ -229,10 +237,15 @@ void Game::renderFoodStorage() {
 
 void Game::renderFood()
 {
-	
+
 	for (int i = 0;i < field.foodCoordinates.size();i++)
 	{
 		this->window->draw(field.foodCoordinates[i]->getFoodShape());
+	}
+
+	for (int i = 0;i < field.detectedFood.size();i++)
+	{
+		this->window->draw(field.detectedFood[i]->getFoodShape());
 	}
 
 }

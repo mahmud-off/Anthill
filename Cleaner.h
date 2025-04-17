@@ -26,13 +26,8 @@ public:
 
 	virtual ~Cleaner();
 	Cleaner(vector<Ant*>& list, Ant* &child);
-	virtual void work(Field *field, Anthill *anthill) override { ; }
+	void work(Field *field, Anthill *anthill) override { ; }
 
-
-	using Ant::moveRight;
-	using Ant::moveLeft;
-	using Ant::moveUp;
-	using Ant::moveDown;
 	using Ant::setPosX;
 	using Ant::setPosY;
 
