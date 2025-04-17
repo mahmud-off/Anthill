@@ -4,6 +4,7 @@ Child::Child()
 {
 	//cout << "child created\n";
 	this->setRole("child");
+	//this->setWorkStatus("find_food");
 	this->initChild();
 }
 

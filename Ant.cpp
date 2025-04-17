@@ -32,8 +32,22 @@ int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) {
         return 0;
     }
 }
-pair<int, int> Ant::randomAntNurseryPos() {
-    pair<int, int> point = { 0,0 };
+
+int getRandomNumber__(int min_n, int max_n) {
+    static mt19937 generator(random_device{}());
+    uniform_int_distribution<int> distribution(min_n, max_n);
+
+    return distribution(generator);
+};
+
+pair<int, int> Ant::randomAntNurseryPos(Anthill* anthill) {
+
+    int x = getRandomNumber__(anthill->getBornRoomX() - anthill->getBornRoomWidth(), anthill->getBornRoomX() + anthill->getBornRoomWidth()-3);
+    int y = getRandomNumber__(anthill->getBornRoomY() - anthill->getBornRoomHeght(), anthill->getBornRoomY() + anthill->getBornRoomHeght()-3);
+
+
+
+    pair<int, int> point = { x,y };
     return point;
 };
 

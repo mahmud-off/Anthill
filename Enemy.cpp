@@ -188,7 +188,7 @@ vector<pair<int, int> > A_StarSearch(pair<int, int> start, pair<int, int> end) {
 }
 
 bool Enemy::canFindFoodInAnthill(Anthill *anthill) {
-    if (distance(this->posX, this->posY, anthill->getFoodStorage_X(), anthill->getFoodStorage_Y()) <= roView) {
+    if (distance(this->posX, this->posY, anthill->storage->getX(), anthill->storage->getY()) <= roView) {
         return true;
     }
     return false;

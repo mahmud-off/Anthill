@@ -74,6 +74,7 @@ void Collecter::work(Field* field, Anthill* anthill) {
 		growthFood(anthill);
 		this->findFood(field);
 
+		//cout << field->foodCoordinates.size() << "\n";
 		if (field->foodCoordinates.size() != 0) {
 			this->setWorkStatus("moving_food");
 		}

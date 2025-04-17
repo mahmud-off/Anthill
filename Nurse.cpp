@@ -4,6 +4,7 @@ Nurse::Nurse()
 {
 	//cout << "nurse created\n";
 	this->setRole("nurse");
+	this->setWorkStatus("find_new_position");
 	this->initNurse();
 }
 
@@ -16,7 +17,7 @@ void Nurse::work(Field* field, Anthill* anthill){
 		this->changeStatus(); // change status to busy
 	}
 	else if (work_status == "find_new_position") {
-		pair<int,int> randomPointInNursery= randomAntNurseryPos();
+		pair<int,int> randomPointInNursery= randomAntNurseryPos(anthill);
 		this->setEndPoint(randomPointInNursery);
 
 		this->setWorkStatus("moving");
@@ -28,6 +29,7 @@ Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
 	//cout << "nurse from collecter" << endl;
 	this->setAge(cleaner->getAge());
 	this->setRole("nurse");
+	this->setWorkStatus("find_new_position");
 	this->setHealth(cleaner->getHealth());
 	this->setWeight(cleaner->getWeight());
 	this->setPosX(cleaner->getPosX());

@@ -54,6 +54,12 @@ public:
     int getWidth() { return this->width; }
     int getHeight() { return this->height; }
 
+    int getBornRoomX(){return bornRoomX;}
+    int getBornRoomY(){return bornRoomY;}
+    int getBornRoomWidth(){return bornRoomWidth;}
+    int getBornRoomHeght(){return bornRoomHeight;}
+
+
     Storage *storage;
 
     //setters
@@ -77,7 +83,7 @@ public:
     void updateAntsAge();
     void update(Field* field);
 
-    void spawnChildrenWhenNeed(Informer *informer);
+    void spawnChildrenWhenNeed(Informer *informer = nullptr);
 
     vector<Dead*> detectedDead;
 

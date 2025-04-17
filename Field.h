@@ -51,6 +51,8 @@ public:
 
     void enemiesSpawn(Anthill *anthill);
 
+    void spawnFoodWhenNeeds(Anthill* anthill);
+    void spawnMaterialsWhenNeeds(Anthill* anthill);
 
     vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
     vector<Food*> detectedFood;

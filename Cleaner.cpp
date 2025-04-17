@@ -12,7 +12,7 @@ Cleaner::Cleaner() {
 }
 
 Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
-/*    */cout << "cleaner from child" << endl;
+/*    cout << "cleaner from child" << endl;*/
     this->setAge(child->getAge());
     this->setRole("cleaner");
     this->setWorkStatus("find_dead");
@@ -61,9 +61,10 @@ void Cleaner::work(Field* field, Anthill* anthill) {
     }
     else if (work_status == "find_dead") {
 
-        this->findDeadAnts(anthill);
+
 
         if (anthill->getDeadAntsList().size() != 0) {
+            this->findDeadAnts(anthill);
             this->setWorkStatus("moving_dead");
         }
         else {

@@ -10,7 +10,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game(): anthill(500, 500, 100, 1000, 800), field(0, 0) {
+Game::Game(): anthill(500, 500, 100, 1000, 800,0,0,0,0,1100,500,100,100), field(0, 0) {
     this->initVar();
     this->initWindow();
     this->antHillX = this->anthill.getPosX();
