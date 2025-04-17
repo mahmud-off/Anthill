@@ -73,12 +73,14 @@ public:
 
     //update
 
+    void updateAntsAge();
     void update(Field* field);
 
     void spwanChildrenWhenNeed(Informer *informer);
 
     vector<Dead*> detectedDead;
 
+    void anthillDestroying(); // ����� �����������
 
 private:
     //coordinates
@@ -94,7 +96,6 @@ private:
     // resources spending
     void antsDailyEat();
 
-    void anthillDestroying(); // ����� �����������
 
     int foodCount;
     int materialsCount;

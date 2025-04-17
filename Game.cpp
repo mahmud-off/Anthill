@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#define TICS_TO_ANTHILL_DESTROYING 15
 
 int getRandom(int min_n, int max_n) {
 	static mt19937 generator(random_device{}());
@@ -10,8 +11,8 @@ int getRandom(int min_n, int max_n) {
 
 
 Game::Game():anthill(1000,500,100, 1000, 800),field(0,0) {
-	
-	
+
+
 	this->initVar();
 	this->initWindow();
 	this->antHillX = this->anthill.getPosX();
@@ -163,6 +164,14 @@ void Game::update()
 	//ant->setPosX(getRandom(0,1024));
 	//ant->setPosY()
 
+	this->anthill.updateAntsAge();
+	//this->anthill.update(&this->field);
+
+	this->tics++;
+	if (tics == TICS_TO_ANTHILL_DESTROYING) {
+		anthill.anthillDestroying();
+		this->tics = 0;
+	}
 	//this->upadateAnts();
 }
 

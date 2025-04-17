@@ -76,7 +76,8 @@ private:
 	void initVar();
 	void initWindow();
 
-
+	// tics
+	int tics = 0;
 public:
 	Game();
 	sf::Sprite sprite;
