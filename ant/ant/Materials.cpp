@@ -3,7 +3,12 @@
 
 
 
-
+Materials::Materials(int x, int y, int w) {
+    this->x = x;
+    this->y = y;
+    this->weight = w;
+    initMaterials(x, y, w);
+}
 sf::CircleShape& Materials::getMaterialsShape()
 {
     return this->materialsShape;
@@ -18,12 +23,12 @@ void Materials::initMaterials(int x, int y, int weight)
 
 int Materials::getX()
 {
-    return (int)this->materialsShape.getPosition().x;
+    return x;
 }
 
 int Materials::getY()
 {
-    return (int)this->materialsShape.getPosition().y;
+    return y;
 }
 
 

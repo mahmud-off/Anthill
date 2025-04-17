@@ -30,6 +30,10 @@ int isValid(pair<int, int> point, int fiedlWidth, int fieldHeight) {
         return 0;
     }
 }
+pair<int, int> Ant::randomAntNurseryPos() {
+    pair<int, int> point = { 0,0 };
+    return point;
+};
 
 pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<Food*> v, vector<Food*>& detectedFood) {
     // vector<pair<int, int>> distances; // first - distance, second - point
@@ -85,8 +89,8 @@ pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<M
         }
     }
     if (elem != nullptr) {
-        Materials* detectedP = new Materials;
-        detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
+        Materials* detectedP = new Materials(elem->getX(), elem->getY(), elem->getWeight());
+        //detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
         detectedMaterials.push_back(detectedP);
         v.erase(v.begin() + index);
     }
@@ -162,7 +166,7 @@ void Ant::updateMovement(Field* field, Anthill* anthil, string new_work_status){
     }
 }
 
-void Ant::goHome(Anthill* anthill){
+void Ant::findHome(Anthill* anthill){
     endPoint = randomAntHill(anthill);
 }
 /*
@@ -193,6 +197,7 @@ void Ant::findFood(Field* field){
         int y = newFoodCoordinates[i]->getY();
         if (field->field[y][x] != "food") {
             field->foodCoordinates.erase(field->foodCoordinates.begin()+i);
+            
         }
     }
 
@@ -205,17 +210,19 @@ void Ant::findMaterial(Field* field){
     this->setEndPoint({ point.second.first, point.second.second });
     field->field[point.second.second][point.second.first] = "";
 
-    vector<Materials*> newMaterialsCoordinates = field->materialsCoordinates;
-    for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
-        int x = newMaterialsCoordinates[i]->getX();
-        int y = newMaterialsCoordinates[i]->getY();
+    //vector<Materials*> newMaterialsCoordinates = field->materialsCoordinates;
+    for (int i = 0; i < field->materialsCoordinates.size(); i++) {
+        int x = field->materialsCoordinates[i]->getX();
+        int y = field->materialsCoordinates[i]->getY();
         if (field->field[y][x] != "materials") {
-            field->foodCoordinates.erase(field->foodCoordinates.begin() + i);
+            cout << "AAAAAAAAA"<<field->materialsCoordinates.size() << "\n";
+            field->materialsCoordinates.erase(field->materialsCoordinates.begin() + i);
+            break;
         }
     }
 }
 
-/*
+
 void Ant::findDeadAnts(Anthill* anthill){
 
     vector<pair<int, pair<int, int>>> deadAntsPositions;
@@ -229,7 +236,7 @@ void Ant::findDeadAnts(Anthill* anthill){
     endPoint.first = point.second.first;
     endPoint.second = point.second.second;
 }
-*/
+
 void Ant::randomMoving(Field* filed){
     int randMove = getRandomPoint(-1, 1);
     setPosX(getPosX() + randMove);
@@ -251,8 +258,8 @@ bool Ant::operator==(const Ant *right) const {
     }
     return false;
 }
-/*
-pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<Food*> v) {
+
+pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {
     // vector<pair<int, int>> distances; // first - distance, second - point
     pair<int, pair<int, int> > answerPoint;
     int minn = 1e9;
@@ -270,7 +277,7 @@ pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<Food*> v)
     }
     return answerPoint;
 }
-*/
+
 /*
 int h(pair<int, int> p1, pair<int, int> p2) {
     int res = sqrt((p2.first - p1.first) * (p2.first - p1.first) + (p2.second - p1.second) * (p2.second - p1.second));

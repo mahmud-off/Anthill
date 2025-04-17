@@ -83,7 +83,7 @@ void Game::initWindow()
 	this->videoMode.width = 1920;
 	
 	this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-	this->window->setFramerateLimit(60);
+	this->window->setFramerateLimit(3000);
 }
 
 

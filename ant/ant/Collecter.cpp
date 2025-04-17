@@ -64,16 +64,22 @@ void Collecter::work(Field* field, Anthill* anthill) {
 		this->setWorkStatus("find_home");
 
 	}else if (work_status == "find_home") { // && informer->collecterWhoNeedHelp.size() == 0
-		this->goHome(anthill);
+		this->findHome(anthill);
 		this->setWorkStatus("moving_home");
 
 	}else if(work_status == "moving_home"){
 		this->updateMovement(field, anthill, "find_food");
 
 	}else if (work_status == "find_food") {
-		//cout << this->getWorkStatus() << " ";
+		growthFood(anthill);
 		this->findFood(field);
-		this->setWorkStatus("moving_food");
+
+		if (field->foodCoordinates.size() != 0) {
+			this->setWorkStatus("moving_food");
+		}
+		else {
+			this->randomMoving(field);
+		}
 
 		//cout << this->getWorkStatus() << "\n";
 	}
@@ -90,6 +96,9 @@ void Collecter::changeStatus() {
 	else if (this->getStatus() == "busy") {
 		this->status = "free";
 	}
+}
+void Collecter::growthFood(Anthill* anthill) {
+	anthill->setFoodCount(anthill->getFoodCount() + 1); // change foodCount by 1
 }
 
 

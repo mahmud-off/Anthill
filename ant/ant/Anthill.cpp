@@ -324,8 +324,8 @@ void Anthill::update(Field* field) {
         //this->getCollecterList()[i]->setAge(this->getCollecterList()[i]->getAge()+1);
         //this->getCollecterList()[i]->setWeight(5);
     }
-/*
-    for(int i = 0; i < this->getCleanerList().size(); ++i) {
+
+   /* for(int i = 0; i < this->getCleanerList().size(); ++i) {
         this->getCleanerList()[i]->randomMoving(field);
     }
     for(int i = 0; i < this->getNurseList().size(); ++i) {
@@ -333,16 +333,15 @@ void Anthill::update(Field* field) {
     }
     for(int i = 0; i < this->getSoldierList().size(); ++i) {
         this->getSoldierList()[i]->randomMoving(field);
-    }
+    }*/
 
 
     for(int i = 0; i < this->getBuilderList().size(); ++i) {
-        this->getBuilderList()[i]->randomMoving(field);
+        this->getBuilderList()[i]->work(field,this);
     }
 
     //this->getChildList()[0]->randomMoving(field);
 
-*/
     //3.Recompute of AntHill's parameters
         //+- food count or others parameters
 
