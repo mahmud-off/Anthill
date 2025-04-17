@@ -75,6 +75,8 @@ public:
 
     void update(Field* field);
 
+    void spwanChildrenWhenNeed(Informer *informer);
+
 
 private:
     //coordinates

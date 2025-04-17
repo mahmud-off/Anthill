@@ -35,7 +35,7 @@ public:
     void ResourceSpawn(Anthill* anthill);
 
     //Enemies
-    void createEnemy(Anthill* anthill);
+    void createEnemy(int k, Anthill *anthill);
 
     void deleteEnemy(Enemy *killed);
 
@@ -48,6 +48,8 @@ public:
     int getWidth() const { return width; }
     int getGravePosX() { return this->gravePosX; }
     int getGravePosY() { return this->gravePosY; }
+
+    void enemiesSpawn(Anthill *anthill);
 
 
     vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords

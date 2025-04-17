@@ -29,7 +29,7 @@ Enemy::~Enemy() {
 
 void Enemy::initEnemy(int x, int y, int hit) {
     this->getEnemyShape().setPosition((float)x, (float)y);
-    this->getEnemyShape().setFillColor(sf::Color::Magenta);
+    this->getEnemyShape().setFillColor(sf::Color::Cyan);
     this->getEnemyShape().setRadius(5.f);
     this->setHit(hit);
 }

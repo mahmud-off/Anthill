@@ -9,7 +9,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game():anthill(50,500,100, 1000, 800),field(0,0) {
+Game::Game():anthill(500,500,100, 1000, 800),field(0,0) {
 	
 	
 	this->initVar();
@@ -83,7 +83,7 @@ void Game::initWindow()
 	this->videoMode.width = 1920;
 	
 	this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-	this->window->setFramerateLimit(3000);
+	this->window->setFramerateLimit(500);
 }
 
 
@@ -92,6 +92,7 @@ void Game::createWorld()
 	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2,&this->informer);
 	storage.createStorage(anthill.getFoodCount(),this->storageX,this->storageY,this->storageHeight,this->storageWidth);
 	field.ResourceSpawn(&this->anthill);
+	field.enemiesSpawn(&this->anthill);
 
 	for (int i = 0;i< this->anthill.getCollecterList().size();i++) {
 		this->anthill.getCollecterList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
@@ -167,9 +168,6 @@ void Game::update()
 
 void Game::render()
 {
-	
-
-	
 	this->window->draw(this->sprite);
 
 	this->renderCollecter();
@@ -181,6 +179,7 @@ void Game::render()
 	this->renderFoodStorage();
 	this->renderFood();
 	this->renderMaterials();
+	this->renderEnemy();
 	
 	this->window->display(); 
 }
@@ -265,6 +264,12 @@ void Game::renderMaterials()
 	for (int i = 0;i < field.detectedMaterials.size();i++)
 	{
 		this->window->draw(field.detectedMaterials[i]->getMaterialsShape());
+	}
+}
+
+void Game::renderEnemy() {
+	for (int i = 0;i < field.getEnemiesList().size();i++) {
+		this->window->draw(field.getEnemiesList()[i]->getEnemyShape());
 	}
 }
 
