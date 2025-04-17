@@ -8,7 +8,7 @@
 using namespace std;
 
 Ant::Ant() {
-    cout << "ant created\n";
+    //cout << "ant created\n";
     age = 0;
     role = "None";
     health = 100;
@@ -16,7 +16,7 @@ Ant::Ant() {
 }
 
 Ant::~Ant() {
-    cout << "Ant destructor;!!!\n";
+    //cout << "Ant destructor;!!!\n";
 }
 
 int getRandomPoint(int min_n, int max_n) {

@@ -9,7 +9,7 @@
 
 Dead::Dead(vector<Child *> &list, Child *&child)
 {
-    cout << "child died" << endl;
+    //cout << "child died" << endl;
     this->setRole("dead");
     this->setPosX(child->getPosX());
     this->setPosY(child->getPosY());
@@ -25,7 +25,7 @@ Dead::Dead(vector<Child *> &list, Child *&child)
 
 Dead::Dead(vector<Collecter *> &list, Collecter *&collector)
 {
-    cout << "collector died" << endl;
+    //cout << "collector died" << endl;
     this->setRole("dead");
     this->setPosX(collector->getPosX());
     this->setPosY(collector->getPosY());
@@ -41,7 +41,7 @@ Dead::Dead(vector<Collecter *> &list, Collecter *&collector)
 
 Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner)
 {
-    cout << "cleaner died" << endl;
+    //cout << "cleaner died" << endl;
     this->setRole("dead");
     this->setPosX(cleaner->getPosX());
     this->setPosY(cleaner->getPosY());
@@ -57,7 +57,7 @@ Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner)
 
 Dead::Dead(vector<Builder *> &list, Builder *&builder)
 {
-    cout << "build died" << endl;
+    //cout << "build died" << endl;
     this->setRole("dead");
     this->setPosX(builder->getPosX());
     this->setPosY(builder->getPosY());
@@ -73,7 +73,7 @@ Dead::Dead(vector<Builder *> &list, Builder *&builder)
 
 Dead::Dead(vector<Soldier *> &list, Soldier *&soldier)
 {
-    cout << "soldier died" << endl;
+    //cout << "soldier died" << endl;
     this->setRole("dead");
     this->setPosX(soldier->getPosX());
     this->setPosY(soldier->getPosY());
@@ -89,7 +89,7 @@ Dead::Dead(vector<Soldier *> &list, Soldier *&soldier)
 
 Dead::Dead(vector<Nurse *> &list, Nurse *&nurse)
 {
-    cout << "nurse died" << endl;
+    //cout << "nurse died" << endl;
     this->setRole("dead");
     this->setPosX(nurse->getPosX());
     this->setPosY(nurse->getPosY());
@@ -102,6 +102,7 @@ Dead::Dead(vector<Nurse *> &list, Nurse *&nurse)
     }
     initDead();
 }
+
 
 void Dead::initDead()
 {

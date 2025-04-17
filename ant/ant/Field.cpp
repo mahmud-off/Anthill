@@ -46,10 +46,10 @@ void Field::materialsSpawn(int k, Anthill* anthill) {
 }
 
 void Field::foodSpawn(int k, Anthill* anthill) {
-    cout << "HUI" << field.size() << " ";
+   /* cout << "HUI" << field.size() << " ";
     cout << field[1].size() << endl;
     cout << this->width << " ";
-    cout << this->height;
+    cout << this->height;*/
     for (int i = 0; i < k; i++) {
         srand(time(0));
         int x = rand() % this->width;

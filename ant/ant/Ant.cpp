@@ -10,7 +10,9 @@
 using namespace std;
 
 Ant::Ant() {
-    cout << "ant created\n";
+    //cout << "ant created\n";
+    x = 0;
+    y = 0;
     age = 0;
     role = "None";
     health = 100;
@@ -18,7 +20,7 @@ Ant::Ant() {
 }
 
 Ant::~Ant() {
-    cout << "Ant destructor;!!!\n";
+    //cout << "Ant destructor;!!!\n";
 
 }
 
@@ -62,7 +64,7 @@ pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<
         detectedFood.push_back(detectedP);
         v.erase(v.begin()+index);
     }
-    cout << "-->" << v.size() << " " << detectedFood.size() << "\n";
+    //cout << "-->" << v.size() << " " << detectedFood.size() << "\n";
     return answerPoint;
 }
 
@@ -92,6 +94,38 @@ pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<M
         Materials* detectedP = new Materials(elem->getX(), elem->getY(), elem->getWeight());
         //detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
         detectedMaterials.push_back(detectedP);
+        v.erase(v.begin() + index);
+    }
+    //cout << "-->" << v.size() << " " << detectedMaterials.size() << "\n";
+    return answerPoint;
+}
+
+pair<int, pair<int, int>> Ant::findNearestPointDead(int x1, int y1, vector<Dead*> v, vector<Dead*>& detectedDead)
+{
+    pair<int, pair<int, int> > answerPoint = { 0,{0,0} };
+    int minn = 1e9;
+    Dead* elem = nullptr;
+    int index = 0;
+    for (int i = 0; i < v.size(); i++) {
+        Dead* p = v[i];
+        pair<int, pair<int, int> > point;
+        point.second.first = p->getX();
+        point.second.second = p->getY();
+        point.first = p->getWeight();
+        int res = sqrt(
+            (point.second.first - x1) * (point.second.first - x1) + (point.second.second - y1) * (
+                point.second.second - y1));
+        if (res < minn) {
+            minn = res;
+            answerPoint = point;
+            elem = p;
+            index = i;
+        }
+    }
+    if (elem != nullptr) {
+        Dead* detectedP = new Dead(elem->getX(), elem->getY(), elem->getWeight());
+        //detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
+        detectedDead.push_back(detectedP);
         v.erase(v.begin() + index);
     }
     //cout << "-->" << v.size() << " " << detectedMaterials.size() << "\n";
@@ -215,7 +249,7 @@ void Ant::findMaterial(Field* field){
         int x = field->materialsCoordinates[i]->getX();
         int y = field->materialsCoordinates[i]->getY();
         if (field->field[y][x] != "materials") {
-            cout << "AAAAAAAAA"<<field->materialsCoordinates.size() << "\n";
+            //cout << "AAAAAAAAA"<<field->materialsCoordinates.size() << "\n";
             field->materialsCoordinates.erase(field->materialsCoordinates.begin() + i);
             break;
         }
@@ -225,16 +259,22 @@ void Ant::findMaterial(Field* field){
 
 void Ant::findDeadAnts(Anthill* anthill){
 
-    vector<pair<int, pair<int, int>>> deadAntsPositions;
-    vector<Dead*> deadList = anthill->getDeadAntsList();
+  
 
-    for (int i = 0; i < deadList.size(); ++i) {
-        deadAntsPositions[i] = { 0, {deadList[i]->getPosX(), deadList[i]->getPosY()} }; // узнать про 0
+    int xdead = 0;
+    int ydead = 0;
+    for (int i = 0; i < anthill->getDeadAntsList().size(); ++i) {
+        anthill->detectedDead.push_back(new Dead(anthill->getDeadAntsList()[i]->getPosX(), anthill->getDeadAntsList()[i]->getPosY(),0));
+        xdead = anthill->getDeadAntsList()[i]->getPosX();
+        ydead = anthill->getDeadAntsList()[i]->getPosY();
+        anthill->getDeadAntsList().erase(anthill->getDeadAntsList().begin() + i);
+        break;
     }
-    pair<int, pair<int, int>> point = findNearestPoint(this->getPosX(), this->getPosY(), deadAntsPositions);
+   
+    
 
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
+    endPoint.first = xdead;
+    endPoint.second = ydead;
 }
 
 void Ant::randomMoving(Field* filed){
@@ -257,6 +297,19 @@ bool Ant::operator==(const Ant *right) const {
         return true;
     }
     return false;
+}
+
+void Ant::setPosX(int x)
+{
+    this->x = x;
+    this->getShape().setPosition(x, this->y);
+    
+}
+
+void Ant::setPosY(int y)
+{
+    this->y = y;
+    this->getShape().setPosition(this->x, y);
 }
 
 pair<int, pair<int, int>> Ant::findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v) {

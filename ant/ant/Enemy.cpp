@@ -13,7 +13,7 @@
 
 Enemy::Enemy(int x, int y) // Coordinates compute in Field
 {
-    cout << "Enemy was created\n";
+    //cout << "Enemy was created\n";
     srand(time(0));
     health = 100;
     hit = 5 + rand() % 10;
@@ -23,7 +23,7 @@ Enemy::Enemy(int x, int y) // Coordinates compute in Field
 }
 
 Enemy::~Enemy() {
-    cout << "Enemy was deleted from " << this->posX << " " << this->posY << "\n";
+    //cout << "Enemy was deleted from " << this->posX << " " << this->posY << "\n";
 }
 
 

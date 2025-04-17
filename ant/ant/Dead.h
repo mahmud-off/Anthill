@@ -17,10 +17,16 @@ public:
     Dead(vector<Builder*>& list, Builder* &builder);
     Dead(vector<Soldier*>& list, Soldier* &soldier);
     Dead(vector<Nurse*>& list, Nurse* &nurse);
-    void initDead();
+    Dead(int x, int y, int weight) { this->x = x;this->y = y;this->weight = weight; }
+    int getX() {return this->getPosX();};
+    int getY() { return this->getPosY(); };
+    void initDead( );
     void work(Field *field, Anthill *anthill) override {;}
 
 private:
+    int x;
+    int y;
+    int weight;
 };
 
 #endif //DEAD_H

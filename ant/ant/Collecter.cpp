@@ -23,7 +23,7 @@ Collecter::Collecter(int weight) {
 
 Collecter::Collecter(vector<Child*>& list, Child* &child)
 {
-	cout << "collecter from child" << endl;
+	//cout << "collecter from child" << endl;
 	this->setAge(child->getAge());
 	this->setRole("collecter");
 	this->setWorkStatus("find_food");
@@ -42,7 +42,7 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 }
 
 Collecter::~Collecter() {
-    cout << "collecter was deleted\n";
+    //cout << "collecter was deleted\n";
 }
 
 void Collecter::initCollecter()
@@ -118,7 +118,7 @@ void Collecter::collectFood(Field *field, Anthill *anthill) {
 	// drawing path from points in paths with graphic
 	// drawing reverse path back to anthill
 	this->changeStatus(); // change status to free
-	cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
+	//cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
 	field->field[this->getPosY()][this->getPosX()] = "";// already no food in this point
 	field->updateFoodCoordinatesList();
 

@@ -9,7 +9,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game():anthill(50,500,100, 1000, 800),field(0,0) {
+Game::Game():anthill(1000,500,100, 1000, 800),field(0,0) {
 	
 	
 	this->initVar();
@@ -83,7 +83,7 @@ void Game::initWindow()
 	this->videoMode.width = 1920;
 	
 	this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-	this->window->setFramerateLimit(3000);
+	this->window->setFramerateLimit(500);
 }
 
 
@@ -181,6 +181,7 @@ void Game::render()
 	this->renderFoodStorage();
 	this->renderFood();
 	this->renderMaterials();
+	this->renderDead();
 	
 	this->window->display(); 
 }
@@ -200,7 +201,9 @@ void Game::renderCleaner()
 }
 void Game::renderDead()
 {
+	
 	for (int i = 0;i < anthill.getDeadAntsList().size();i++) {
+		//cout << anthill.getDeadAntsList()[i]->getShape().getPosition().x <<" "<< anthill.getDeadAntsList()[i]->getShape().getPosition().y << "\n";
 		this->window->draw(anthill.getDeadAntsList()[i]->getShape());
 	}
 }

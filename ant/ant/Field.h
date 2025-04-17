@@ -52,6 +52,7 @@ public:
 
     vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
     vector<Food*> detectedFood;
+    
     vector<Materials* > materialsCoordinates; // coordinates of cells with materials
     vector<Materials*> detectedMaterials;
 private:

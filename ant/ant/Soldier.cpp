@@ -5,21 +5,21 @@
 #include "Field.h"
 
 Soldier::Soldier() {
-    cout << "soldier created\n";
+    //cout << "soldier created\n";
     this->setRole("soldier");
     this->initSoldier();
     // hit = 10; // power of hit
 }
 
 Soldier::Soldier(int power) {
-    cout << "soldier created\n";
+    //cout << "soldier created\n";
     this->setRole("soldier");
     this->setPower(power);
     this->initSoldier();
 }
 
 Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter) {
-    cout << "soldier from collecter" << endl;
+    //cout << "soldier from collecter" << endl;
     this->setAge(collecter->getAge());
     this->setRole("soldier");
     this->setHealth(collecter->getHealth());
@@ -42,7 +42,7 @@ void Soldier::helpToFightEnemy(Enemy* enemy, Field* field)
 }
 
 Soldier::~Soldier() {
-    cout << "soldier was deleted\n";
+    //cout << "soldier was deleted\n";
 }
 void Soldier::work(Field* field, Anthill* anthill){
     string work_status = getWorkStatus();

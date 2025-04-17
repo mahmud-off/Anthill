@@ -8,14 +8,14 @@
 #define CONST_MAKE_ANTHILL_BIGGER 5
 
 Builder::Builder() {
-    cout << "builder created\n";
+    ///cout << "builder created\n";
     this->setRole("builder");
     this->initBuilder();
     this->setWorkStatus("find_material");
 }
 
 Builder::Builder(int weight) {
-    cout << "builder created\n";
+    //cout << "builder created\n";
     this->setRole("builder");
     this->setWeight(weight);
     this->initBuilder();
@@ -34,7 +34,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
  //   else {
     	// material weight is ok
     this->changeStatus(); // change status to free
-    cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
+    //cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
     field->field[this->getPosY()][this->getPosX()] = "";// already no food in this point
     field->updateMaterialsCoordinatesList();
 
@@ -44,7 +44,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
 }
 
 Builder::Builder(vector<Collecter*>& list, Collecter *&collecter) {
-	cout << "builder from collecter" << endl;
+	//cout << "builder from collecter" << endl;
 
 	this->setAge(collecter->getAge());
 	this->setRole("builder");
@@ -89,7 +89,7 @@ void Builder::work(Field* field, Anthill* anthill){
     }
     else if (work_status == "find_material") {
         buildAnthill(anthill);
-        cout <<"MATERIALS"<< field->materialsCoordinates.size() << "\n";
+        //cout <<"MATERIALS"<< field->materialsCoordinates.size() << "\n";
         if (field->materialsCoordinates.size() != 0) {
             this->changeStatus(); // change status to free
             this->findMaterial(field);
@@ -101,7 +101,7 @@ void Builder::work(Field* field, Anthill* anthill){
 }
 
 Builder::~Builder() {
-	cout << "builder was deleted\n";
+	//cout << "builder was deleted\n";
 }
 
 void Builder::helpToCollectMaterial(int x, int y, Field *field) {

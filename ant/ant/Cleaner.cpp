@@ -4,15 +4,18 @@
 #include "Dead.h"
 
 Cleaner::Cleaner() {
-    cout << "cleaner created\n";
+    //cout << "cleaner created\n";
     this->setRole("cleaner");
+    this->setWorkStatus("find_dead");
     this->initCleaner();
+
 }
 
 Cleaner::Cleaner(vector<Child *> &list, Child *&child) {
-    cout << "cleaner from child" << endl;
+/*    */cout << "cleaner from child" << endl;
     this->setAge(child->getAge());
     this->setRole("cleaner");
+    this->setWorkStatus("find_dead");
     this->setHealth(child->getHealth());
     this->setWeight(child->getWeight());
     this->setPosX(child->getPosX());
@@ -34,13 +37,10 @@ void Cleaner:: initCleaner()
 }
 
 Cleaner::~Cleaner() {
-    cout << "cleaner was deleted\n";
+    //cout << "cleaner was deleted\n";
 }
 
-Cleaner::Cleaner(vector<Ant*>& list, Ant*& child)
-{
 
-}
 
 void Cleaner::work(Field* field, Anthill* anthill) {
     string work_status = getWorkStatus();
@@ -60,13 +60,23 @@ void Cleaner::work(Field* field, Anthill* anthill) {
         this->updateMovement(field, anthill, "find_dead");
     }
     else if (work_status == "find_dead") {
+
         this->findDeadAnts(anthill);
-        this->setWorkStatus("moving_dead");
+
+        if (anthill->getDeadAntsList().size() != 0) {
+            this->setWorkStatus("moving_dead");
+        }
+        else {
+            this->randomMoving(field);
+        }
+        
+        
     }
+
 }
 
 void Cleaner::remove_dead(Field* field, Anthill* anthill) {
-    vector<Dead*> deadList = anthill->getDeadAntsList();
+    vector<Dead*>& deadList = anthill->detectedDead;
 
     if (deadList.size()){
         for (int i = 0; i < deadList.size(); ++i) {

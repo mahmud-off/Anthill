@@ -21,7 +21,7 @@ Collecter::Collecter(int weight) {
 
 Collecter::Collecter(vector<Child*>& list, Child* &child)
 {
-	cout << "collecter from child" << endl;
+	//cout << "collecter from child" << endl;
 	this->setAge(child->getAge());
 	this->setRole("collecter");
 	this->setHealth(child->getHealth());
@@ -39,7 +39,7 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 }
 
 Collecter::~Collecter() {
-    cout << "collecter was deleted\n";
+    //cout << "collecter was deleted\n";
 }
 
 void Collecter::initCollecter()

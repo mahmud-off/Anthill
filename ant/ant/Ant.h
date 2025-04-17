@@ -37,6 +37,8 @@ public:
 	//functions for collecters and builders
 	pair<int, pair<int, int>> findNearestPointCollecter(int x1, int y1, vector<Food *> v, vector<Food*>& detectedFood); // nearest point with food or materials from ant
 	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials); // nearest point with food or materials from ant
+	pair<int, pair<int, int>> findNearestPointDead(int x1, int y1, vector<Dead*> v, vector<Dead*>& detectedDead); // nearest point with food or materials from ant
+
 	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
 
 	//access
@@ -54,8 +56,8 @@ public:
 	void setAge(int n){ age = n; }
 	void setRole(string n) { role = n; }
 	void setHealth(int n) { health = n; }
-	void setPosX(int x) { this->x = x; }
-	void setPosY(int y) { this->y = y; }
+	void setPosX(int x);
+	void setPosY(int y);
 	void setWeight(int weight) { this->weight = weight; }
 	void setPower(int power) { this->power = power; }
 	void setStatus(string status) { this->status = status; }
@@ -90,7 +92,7 @@ public:
 	pair<int, int> randomAntNurseryPos();
 	void randomMoving(Field* filed);
 
-	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}
+	void printPosition()const{/*cout << "Ant's position : " << x << " " << y << "\n";*/}
 	
 	//compare
 	bool operator==(const Ant* right)const;

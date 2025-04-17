@@ -75,6 +75,8 @@ public:
 
     void update(Field* field);
 
+    vector<Dead*> detectedDead;
+
 
 private:
     //coordinates
@@ -112,6 +114,8 @@ private:
     vector<Soldier *> soldierList;
     //dead ants
     vector<Dead*> deadAntsList;
+
+    
 };
 
 #endif ANTHILL_H
