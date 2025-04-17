@@ -36,7 +36,7 @@ public:
 
 	//functions for collecters and builders
 	pair<int, pair<int, int>> findNearestPointCollecter(int x1, int y1, vector<Food *> v, vector<Food*>& detectedFood); // nearest point with food or materials from ant
-	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v); // nearest point with food or materials from ant
+	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials); // nearest point with food or materials from ant
 	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
 
 	//access

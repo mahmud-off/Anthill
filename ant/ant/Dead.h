@@ -13,11 +13,11 @@ class Dead: public Ant {
 public:
     Dead(vector<Child*>& list, Child* &child);
     Dead(vector<Collecter*>& list, Collecter* &collector);
-    Dead(vector<Cleaner*>& list, Cleaner* &cleaner);
+    Dead(vector<Cleaner*>& lsist, Cleaner* &cleaner);
     Dead(vector<Builder*>& list, Builder* &builder);
     Dead(vector<Soldier*>& list, Soldier* &soldier);
     Dead(vector<Nurse*>& list, Nurse* &nurse);
-
+    void initDead();
     void work(Field *field, Anthill *anthill) override {;}
 
 private:

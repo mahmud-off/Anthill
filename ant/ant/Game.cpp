@@ -9,7 +9,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game():anthill(1000,500,100, 1000, 800),field(0,0) {
+Game::Game():anthill(50,500,100, 1000, 800),field(0,0) {
 	
 	
 	this->initVar();
@@ -93,35 +93,35 @@ void Game::createWorld()
 	storage.createStorage(anthill.getFoodCount(),this->storageX,this->storageY,this->storageHeight,this->storageWidth);
 	field.ResourceSpawn(&this->anthill);
 
-	for (int i = 0;i< this->anthill.getCollecterList().size()-1;i++) {
+	for (int i = 0;i< this->anthill.getCollecterList().size();i++) {
 		this->anthill.getCollecterList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getCollecterList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight  ));
 		this->anthill.getCollecterList()[i]->getShape().setPosition((float)this->anthill.getCollecterList()[i]->getPosX(),
 			(float)this->anthill.getCollecterList()[i]->getPosY());
 	}
 
-	for (int i = 0;i < this->anthill.getBuilderList().size() - 1;i++) {
+	for (int i = 0;i < this->anthill.getBuilderList().size() ;i++) {
 		this->anthill.getBuilderList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getBuilderList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
 		this->anthill.getBuilderList()[i]->getShape().setPosition((float)this->anthill.getBuilderList()[i]->getPosX(),
 			(float)this->anthill.getBuilderList()[i]->getPosY());
 	}
 
-	for (int i = 0;i < this->anthill.getSoldierList().size() - 1;i++) {
+	for (int i = 0;i < this->anthill.getSoldierList().size() ;i++) {
 		this->anthill.getSoldierList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getSoldierList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
 		this->anthill.getSoldierList()[i]->getShape().setPosition((float)this->anthill.getSoldierList()[i]->getPosX(),
 			(float)this->anthill.getSoldierList()[i]->getPosY());
 	}
 
-	for (int i = 0;i < this->anthill.getNurseList().size() - 1;i++) {
+	for (int i = 0;i < this->anthill.getNurseList().size();i++) {
 		this->anthill.getNurseList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getNurseList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
 		this->anthill.getNurseList()[i]->getShape().setPosition((float)this->anthill.getNurseList()[i]->getPosX(),
 			(float)this->anthill.getNurseList()[i]->getPosY());
 	}
 
-	for (int i = 0;i < this->anthill.getChildList().size() - 1;i++) {
+	for (int i = 0;i < this->anthill.getChildList().size();i++) {
 		this->anthill.getChildList()[i]->setPosX(getRandom(this->bornRoomX, this->antHillWidth + this->antHillX));
 		
 		this->anthill.getChildList()[i]->setPosY(getRandom(this->BornRoomY , this->BornRoomY + this->bornRoomHeight));
@@ -131,7 +131,7 @@ void Game::createWorld()
 		//cout << this->anthill.getChildList()[i]->get_shape().getFillColor().toInteger()<<"\n";
 	}
 
-	for (int i = 0;i < this->anthill.getCleanerList().size() - 1;i++) {
+	for (int i = 0;i < this->anthill.getCleanerList().size();i++) {
 		this->anthill.getCleanerList()[i]->setPosX(getRandom(this->antHillX,this->antHillWidth + this->antHillX));
 		this->anthill.getCleanerList()[i]->setPosY(getRandom(this->antHillY,this->antHillY + this->antHillHeight));
 		this->anthill.getCleanerList()[i]->getShape().setPosition((float)this->anthill.getCleanerList()[i]->getPosX(),
@@ -198,6 +198,12 @@ void Game::renderCleaner()
 		this->window->draw(anthill.getCleanerList()[i]->getShape());
 	}
 }
+void Game::renderDead()
+{
+	for (int i = 0;i < anthill.getDeadAntsList().size();i++) {
+		this->window->draw(anthill.getDeadAntsList()[i]->getShape());
+	}
+}
 
 
 
@@ -255,6 +261,10 @@ void Game::renderMaterials()
 	for (int i = 0;i < field.materialsCoordinates.size();i++)
 	{
 		this->window->draw(field.materialsCoordinates[i]->getMaterialsShape());
+	}
+	for (int i = 0;i < field.detectedMaterials.size();i++)
+	{
+		this->window->draw(field.detectedMaterials[i]->getMaterialsShape());
 	}
 }
 

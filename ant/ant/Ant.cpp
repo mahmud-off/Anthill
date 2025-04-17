@@ -62,11 +62,14 @@ pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<
     return answerPoint;
 }
 
-pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<Materials*> v) {
+pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials) {
     // vector<pair<int, int>> distances; // first - distance, second - point
-    pair<int, pair<int, int> > answerPoint;
+    pair<int, pair<int, int> > answerPoint = { 0,{0,0} };
     int minn = 1e9;
-    for (auto p : v) {
+    Materials* elem = nullptr;
+    int index = 0;
+    for (int i = 0; i < v.size(); i++) {
+        Materials* p = v[i];
         pair<int, pair<int, int> > point;
         point.second.first = p->getX();
         point.second.second = p->getY();
@@ -77,8 +80,17 @@ pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<M
         if (res < minn) {
             minn = res;
             answerPoint = point;
+            elem = p;
+            index = i;
         }
     }
+    if (elem != nullptr) {
+        Materials* detectedP = new Materials;
+        detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
+        detectedMaterials.push_back(detectedP);
+        v.erase(v.begin() + index);
+    }
+    //cout << "-->" << v.size() << " " << detectedMaterials.size() << "\n";
     return answerPoint;
 }
 
@@ -189,10 +201,18 @@ void Ant::findFood(Field* field){
 }
 
 void Ant::findMaterial(Field* field){
-    pair<int, pair<int, int>> point = findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates);
-        //findNearestPoint(getPosX(), getPosY(), field->materialsCoordinates);
-    endPoint.first = point.second.first;
-    endPoint.second = point.second.second;
+    pair<int, pair<int, int>> point = findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates, field->detectedMaterials);
+    this->setEndPoint({ point.second.first, point.second.second });
+    field->field[point.second.second][point.second.first] = "";
+
+    vector<Materials*> newMaterialsCoordinates = field->materialsCoordinates;
+    for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
+        int x = newMaterialsCoordinates[i]->getX();
+        int y = newMaterialsCoordinates[i]->getY();
+        if (field->field[y][x] != "materials") {
+            field->foodCoordinates.erase(field->foodCoordinates.begin() + i);
+        }
+    }
 }
 
 /*

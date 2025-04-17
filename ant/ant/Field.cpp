@@ -9,7 +9,7 @@
 #define DAILY_MATERIALS_SPAWN 50
 #define MAX_WEIGHT_FOOD 10
 #define MAX_WEIGHT_MATERIALS 50
-#define MATERIALS "materials"
+string MATERIALS = "materials";
 string FOOD = "food";
 
 Field::Field(int width, int height) {
@@ -134,13 +134,13 @@ void Field::updateFoodCoordinatesList() {
     for (int i = 0; i < detectedFood.size(); ++i) {
         int x = detectedFood[i]->getXCoord();
         int y = detectedFood[i]->getYCoord();
-        cout << "key-->" << field[y][x] << " ";
-        if (field[y][x] == FOOD) {
+        //cout << "key-->" << field[y][x] << " ";
+        if (field[y][x] != FOOD) {
             detectedFood.erase(detectedFood.begin()+i);
             break;
         }
     }
-    cout << "\n";
+    //cout << "\n";
 
     /*
     cout << foodCoordinates.size()<<"\n";
@@ -152,13 +152,13 @@ void Field::updateFoodCoordinatesList() {
 }
 
 void Field::updateMaterialsCoordinatesList() {
-    vector<Materials*> newMaterialsCoordinates;
-    for (int i = 0; i < newMaterialsCoordinates.size(); i++) {
-        int x = materialsCoordinates[i]->getX();
-        int y = materialsCoordinates[i]->getY();
-        if (field[y][x] == MATERIALS) {
-            newMaterialsCoordinates.push_back(materialsCoordinates[i]);
+    for (int i = 0; i < detectedMaterials.size(); ++i) {
+        int x = detectedMaterials[i]->getX();
+        int y = detectedMaterials[i]->getY();
+        if (field[y][x] != MATERIALS) {
+            detectedMaterials.erase(detectedMaterials.begin() + i);
+            break;
         }
     }
-    materialsCoordinates = newMaterialsCoordinates;
+
 }
