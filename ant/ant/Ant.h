@@ -70,12 +70,11 @@ public:
 	// Movent to point
 	void updateMovement(Field* field, Anthill* anthil, string new_work);
 
-
 	// Определение координат
 	void findFood(Field* field);
 	void findMaterial(Field* field);
 	void findDeadAnts(Anthill* anthill);
-	void goHome(Anthill* anthill);
+	void findHome(Anthill* anthill);
 	void findEnemy(Field* field);
 
 	// Рабочие действия
@@ -88,6 +87,7 @@ public:
 
 
 	pair<int, int> randomAntHill(Anthill* anthill);
+	pair<int, int> randomAntNurseryPos();
 	void randomMoving(Field* filed);
 
 	void printPosition()const{cout << "Ant's position : " << x << " " << y << "\n";}

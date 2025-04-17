@@ -1,6 +1,7 @@
 #include "Cleaner.h"
-
+#include "Anthill.h"
 #include "Child.h"
+#include "Dead.h"
 
 Cleaner::Cleaner() {
     cout << "cleaner created\n";
@@ -41,22 +42,61 @@ Cleaner::Cleaner(vector<Ant*>& list, Ant*& child)
 
 }
 
-// void Cleaner::cleanDeadAnts(Field field) {
-//     if (!canFindDeadAnts(field)) { // if can't find ants
-//         return;
-//     }
-//     pair<int, int> deadAntPosition = getPositionOfNearestDeadAnt(field);
-//     vector<pair<int, int>> pathToDeadAnt = this->A_StarSearch({this->getPosX(), this->getPosY()}, deadAntPosition, field);
-//     // cleaner go to dead ant
-//     // delete ant
-//     pair<int, int> enterCoordinates = make_pair(field.anthill->getEnterPosX(), field.anthill->getEnterPosY());
-//     pair<int, int> graveCoordinates = make_pair(field.anthill->getEnterPosX(), field.anthill->getEnterPosY());
-//     // cleaner go to enter with dead ant
-//     vector<pair<int, int>> pathToEnter = this->A_StarSearch({this->getPosX(), this->getPosY()}, enterCoordinates, field);
-//     // cleaner go to grave
-//     vector<pair<int, int>> pathFromEnterToGrave = this->A_StarSearch(enterCoordinates, graveCoordinates, field);
-//     // cleaner go back
-// }
+void Cleaner::work(Field* field, Anthill* anthill) {
+    string work_status = getWorkStatus();
+
+    if (work_status == "moving_dead") {
+        this->updateMovement(field, anthill, "remove_dead");
+    }
+    else if (work_status == "remove_dead") {
+        remove_dead(field, anthill);
+        this->setWorkStatus("find_home");
+    }
+    else if (work_status == "find_home") { // && informer->collecterWhoNeedHelp.size() == 0
+        this->findHome(anthill);
+        this->setWorkStatus("moving_home");
+    }
+    else if (work_status == "moving_home") {
+        this->updateMovement(field, anthill, "find_dead");
+    }
+    else if (work_status == "find_dead") {
+        this->findDeadAnts(anthill);
+        this->setWorkStatus("moving_dead");
+    }
+}
+
+void Cleaner::remove_dead(Field* field, Anthill* anthill) {
+    vector<Dead*> deadList = anthill->getDeadAntsList();
+
+    if (deadList.size()){
+        for (int i = 0; i < deadList.size(); ++i) {
+            if (deadList[i]->getPosX() == this->getPosX() && deadList[i]->getPosY() == this->getPosY()) {
+                deadList.erase(deadList.begin() + i);
+                return;
+            }
+        }
+    }
+
+    this->randomMoving(field);
+
+}
+
+ //void Cleaner::cleanDeadAnts(Field field) {
+ //    if (!canFindDeadAnts(field)) { // if can't find ants
+ //        return;
+ //    }
+ //    pair<int, int> deadAntPosition = getPositionOfNearestDeadAnt(field);
+ //    vector<pair<int, int>> pathToDeadAnt = this->A_StarSearch({this->getPosX(), this->getPosY()}, deadAntPosition, field);
+ //    // cleaner go to dead ant
+ //    // delete ant
+ //    pair<int, int> enterCoordinates = make_pair(field.anthill->getEnterPosX(), field.anthill->getEnterPosY());
+ //    pair<int, int> graveCoordinates = make_pair(field.anthill->getEnterPosX(), field.anthill->getEnterPosY());
+ //    // cleaner go to enter with dead ant
+ //    vector<pair<int, int>> pathToEnter = this->A_StarSearch({this->getPosX(), this->getPosY()}, enterCoordinates, field);
+ //    // cleaner go to grave
+ //    vector<pair<int, int>> pathFromEnterToGrave = this->A_StarSearch(enterCoordinates, graveCoordinates, field);
+ //    // cleaner go back
+ //}
 
 // pair<int, int> Cleaner::getPositionOfNearestDeadAnt(Field field) {
 //     double minDist = INT_MAX; //minimal distance

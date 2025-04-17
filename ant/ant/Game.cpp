@@ -268,9 +268,6 @@ void Game::renderMaterials()
 	}
 }
 
-
-
-
 Game::~Game() {
 	delete this->window;
 }
