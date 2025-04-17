@@ -164,13 +164,14 @@ void Game::update()
 	//ant->setPosX(getRandom(0,1024));
 	//ant->setPosY()
 
-	this->anthill.updateAntsAge();
+
 	//this->anthill.update(&this->field);
 
 	this->tics++;
 	if (tics == TICS_TO_ANTHILL_DESTROYING) {
 		anthill.anthillDestroying();
 		this->tics = 0;
+		this->anthill.updateAntsAge();
 	}
 	//this->upadateAnts();
 }
