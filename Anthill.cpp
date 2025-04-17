@@ -45,20 +45,37 @@ using std::cin;
 using std::string;
 using namespace std;
 
-Anthill::Anthill(int scale, int x, int y, int w, int h) {
+int getRandomNumber(int min_n, int max_n) {
+    static mt19937 generator(random_device{}());
+    uniform_int_distribution<int> distribution(min_n, max_n);
+
+    return distribution(generator);
+};
+
+Anthill::Anthill (int scale, int x, int y, int w, int h, int storageX, int storageY, int storageWidth, int storageHeight, int bornRoomX,int bornRoomY, int bornRoomWidth,int bornRoomHeight) {
     this->scale = scale;
     this->x = x;
     this->y = y;
     this->width = w;
     this->height = h;
+
+    this->storageX = storageX;
+    this->storageY = storageY;
+    this->storageHeight = storageHeight;
+    this->storageWidth = storageWidth;
+
+    this->bornRoomX = bornRoomX;
+    this->bornRoomY = bornRoomY;
+    this->bornRoomWidth = bornRoomWidth;
+    this->bornRoomHeight = bornRoomHeight;
 }
 
-void Anthill::spwanChildrenWhenNeed(Informer *informer) {
+void Anthill::spawnChildrenWhenNeed(Informer *informer) {
     this->childrenCount = 0.2 * this->antCount;
     for (int i = 0; i < childrenCount; i++) {
         childList.push_back(new Child());
         informer->addToAllAntsInformerSubscribers(childList.back());
-        childList[i]->setPosX(x);
+        childList[i]->setPosX(getRandomNumber(this->bornRoomX + this->bornRoomWidth, this->bornRoomY + this->bornRoomY));
         childList[i]->setPosY(y);
     }
 }

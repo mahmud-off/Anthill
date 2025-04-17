@@ -18,6 +18,10 @@ public:
 
 	vector<Food *> storage;
 	void setHYHW(int x, int y, int height, int width);
+
+	int getX() { return this->storageX; }
+	int getY() { return this->storageY; }
+
 private:
 	int count;
 	int storageX;

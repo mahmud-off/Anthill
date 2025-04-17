@@ -24,7 +24,7 @@ public:
     void hitAttackedAnt(Ant *attackedAnt);
 
     // 2 - steal food from anthill
-    void stealFoodFromAnthill(Anthill *anthill);
+    void stealFoodFromAnthill(Anthill *anthill, Field *field);
     bool canFindFoodInAnthill(Anthill *anthill);
     void moveToFoodStorage(Anthill *anthill);
 

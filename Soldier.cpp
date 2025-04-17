@@ -76,7 +76,7 @@ void Soldier::fightEnemy(Field *field) {
                 this->getEnemy()->setHealth(0);
                 field->deleteEnemy(this->getEnemy()); // delete killed enemy
                 // need to delete enemy here
-                this->changeStatus();
+                this->changeStatus(); // change status to free
                 this->setWorkStatus("rand_moving");
             }
             else {

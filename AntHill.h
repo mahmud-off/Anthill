@@ -19,6 +19,7 @@ class Collecter;
 class Nurse;
 class Soldier;
 class Dead;
+class Storage;
 
 
 #include "Informer.h"
@@ -52,15 +53,15 @@ public:
     int getPosY() { return this->y; }
     int getWidth() { return this->width; }
     int getHeight() { return this->height; }
-    int getFoodStorage_X() { return this->foodStorage_X; }
-    int getFoodStorage_Y() { return this->foodStorage_Y; }
+
+    Storage *storage;
 
     //setters
     void setScale(int scale) { this->scale = scale; }
     void setMaterialsCount(int materialsCount) { this->materialsCount = materialsCount; }
     void setFoodCount(int foodCount) { this->foodCount = foodCount; }
 
-    Anthill (int scale, int x, int y, int w, int h);
+    Anthill (int scale, int x, int y, int w, int h, int storageX, int storageY, int storageWidth, int storageHeight, int bornRoomX,int bornRoomY, int bornRoomWidth,int bornRoomHeight);
 
     void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();
@@ -76,7 +77,7 @@ public:
     void updateAntsAge();
     void update(Field* field);
 
-    void spwanChildrenWhenNeed(Informer *informer);
+    void spawnChildrenWhenNeed(Informer *informer);
 
     vector<Dead*> detectedDead;
 
@@ -89,8 +90,18 @@ private:
     int enterX; // position of anthill enter
     int enterY;
     int width, height;
-    int foodStorage_X;
-    int foodStorage_Y;
+
+
+    int bornRoomWidth;
+    int bornRoomHeight;
+    int bornRoomX;
+    int bornRoomY;
+
+    int storageX;
+    int storageY;
+    int storageHeight;
+    int storageWidth;
+
 
 
     // resources spending
