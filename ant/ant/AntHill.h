@@ -10,7 +10,7 @@
 // #include "Soldier.h"
 #include <iostream>
 #include <vector>
-
+#include "Storage.h";
 
 class Builder;
 class Child;
@@ -19,7 +19,7 @@ class Collecter;
 class Nurse;
 class Soldier;
 class Dead;
-
+//class Storage;
 
 #include "Informer.h"
 
@@ -60,7 +60,7 @@ public:
     void setMaterialsCount(int materialsCount) { this->materialsCount = materialsCount; }
     void setFoodCount(int foodCount) { this->foodCount = foodCount; }
 
-    Anthill (int scale, int x, int y, int w, int h);
+    Anthill (int scale, int x, int y, int w, int h, int storageX, int storageY, int storageWidth, int storageHeight, int bornRoomX, int bornRoomY, int bornRoomWidth, int bornRoomHeight);
 
     void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
     void dailyResourceExpenditure();
@@ -69,6 +69,10 @@ public:
 
     void setxy(int x, int y, int w, int h);
 
+    void setCoordinateStorage(int storageX, int storageY, int storageWidth, int storageHeight);
+
+    void setCoordinateBornRoom(int bornRoomX, int bornRoomY, int bornRoomWidth, int bornRoomHeight);
+
     // ежедневаня трата ресурсов муравейника, состоит из трат еды и ежедневного осыпания муравейника
 
     //update
@@ -76,6 +80,7 @@ public:
     void update(Field* field);
 
     vector<Dead*> detectedDead;
+    Storage& getStorage() { return this->storage; }
 
 
 private:
@@ -104,6 +109,16 @@ private:
     int nurseCount;
     int soldierCount;
 
+    int bornRoomWidth;
+    int bornRoomHeight;
+    int bornRoomX;
+    int bornRoomY;
+
+    int storageX;
+    int storageY;
+    int storageHeight;
+    int storageWidth;
+
     int antCount;
 
     vector<Collecter *> collecterList;
@@ -114,6 +129,8 @@ private:
     vector<Soldier *> soldierList;
     //dead ants
     vector<Dead*> deadAntsList;
+
+    Storage storage;
 
     
 };

@@ -9,7 +9,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game():anthill(1000,500,100, 1000, 800),field(0,0) {
+Game::Game():anthill(1000,500,100, 1000, 800,0,0,0,0,0,0,0,0),field(0,0) {
 	
 	
 	this->initVar();
@@ -21,6 +21,8 @@ Game::Game():anthill(1000,500,100, 1000, 800),field(0,0) {
 	field.setHW(this->videoMode.width, this->videoMode.height);
 	this->initTexture();
 	this->initSprite();
+	this->anthill.setCoordinateStorage(this->storageX, this->storageY, this->storageWidth, this->storageHeight);
+	this->anthill.setCoordinateBornRoom(this->bornRoomX, this->bornRoomY, this->bornRoomWidth, this->bornRoomHeight);
 
 }
 
@@ -63,7 +65,7 @@ void Game::initVar()
 	this->bornRoomHeight = 200;
 	this->bornRoomWidth = 200;
 	this->bornRoomX = 900;
-	this->BornRoomY = 400;
+	this->bornRoomY = 400;
 
 	this->antHillWidth = 800;
 	this->antHillHeight = 500;
@@ -90,7 +92,8 @@ void Game::initWindow()
 void Game::createWorld()
 {
 	this->anthill.generateAnts(this->window->getSize().x/2,this->window->getSize().y/2,&this->informer);
-	storage.createStorage(anthill.getFoodCount(),this->storageX,this->storageY,this->storageHeight,this->storageWidth);
+	this->anthill.getStorage().createStorage(anthill.getFoodCount(), this->storageX, this->storageY, this->storageHeight, this->storageWidth);
+	//storage.createStorage(anthill.getFoodCount(),this->storageX,this->storageY,this->storageHeight,this->storageWidth);
 	field.ResourceSpawn(&this->anthill);
 
 	for (int i = 0;i< this->anthill.getCollecterList().size();i++) {
@@ -124,7 +127,7 @@ void Game::createWorld()
 	for (int i = 0;i < this->anthill.getChildList().size();i++) {
 		this->anthill.getChildList()[i]->setPosX(getRandom(this->bornRoomX, this->antHillWidth + this->antHillX));
 		
-		this->anthill.getChildList()[i]->setPosY(getRandom(this->BornRoomY , this->BornRoomY + this->bornRoomHeight));
+		this->anthill.getChildList()[i]->setPosY(getRandom(this->bornRoomY , this->bornRoomY + this->bornRoomHeight));
 
 		this->anthill.getChildList()[i]->getShape().setPosition((float)this->anthill.getChildList()[i]->getPosX(),(float)this->anthill.getChildList()[i]->getPosY());
 		//cout << "---------" << (float)this->anthill.getChildList()[i]->getPosX() << "  " << (float)this->anthill.getChildList()[i]->getPosY() << "\n";
@@ -239,8 +242,9 @@ void Game::renderBuilder() {
 	}
 }
 void Game::renderFoodStorage() {
-	for (int i = 0;i < storage.getCount();i++) {
-		this->window->draw(storage.storage[i]->getFoodShape());
+	cout<< this->anthill.getStorage().getCount()<<" "<< this->anthill.getStorage().storageFood.size()<<"\n";
+	for (int i = 0;i <this->anthill.getStorage().getCount();i++) {
+		this->window->draw(anthill.getStorage().storageFood[i]->getFoodShape());
 	}
 }
 
