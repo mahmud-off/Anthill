@@ -97,6 +97,9 @@ private:
 	void initTextureForCleaner();
 	void initSpriteForCleaner();
 
+	void initTextureForDead();
+	void initSpriteForDead();
+
 	//???????? ?????????????
 	void initVar();
 	void initWindow();
@@ -134,6 +137,9 @@ public:
 
 	sf::Sprite spriteForCleaner;
 	sf::Texture textureForCleaner;
+
+	sf::Sprite spriteForDead;
+	sf::Texture textureForDead;
 
 	void createWorld();
 

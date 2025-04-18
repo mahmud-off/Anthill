@@ -224,7 +224,7 @@ void Anthill::update(Field *field, Game *game, Informer *informer) {
     for(int i = 0; i < this->getBuilderList().size(); ++i) {
         Builder* temp = this->getBuilderList()[i];
         if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
-            Dead* deadTest = new Dead(this->getBuilderList(),temp);
+            Dead* deadTest = new Dead(this->getBuilderList(),temp, game);
             this->getDeadAntsList().push_back(deadTest);
         }
     }
@@ -233,7 +233,7 @@ void Anthill::update(Field *field, Game *game, Informer *informer) {
     for(int i = 0; i < this->getSoldierList().size(); ++i) {
         Soldier* temp = this->getSoldierList()[i];
         if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
-            Dead* deadTest = new Dead(this->getSoldierList(),temp);
+            Dead* deadTest = new Dead(this->getSoldierList(),temp, game);
             this->getDeadAntsList().push_back(deadTest);
         }
     }
@@ -242,7 +242,7 @@ void Anthill::update(Field *field, Game *game, Informer *informer) {
     for(int i = 0; i < this->getNurseList().size(); ++i) {
         Nurse* temp = this->getNurseList()[i];
         if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
-            Dead* deadTest = new Dead(this->getNurseList(),temp);
+            Dead* deadTest = new Dead(this->getNurseList(),temp, game);
             this->getDeadAntsList().push_back(deadTest);
         }
     }
@@ -253,7 +253,7 @@ void Anthill::update(Field *field, Game *game, Informer *informer) {
 
         //Death check
         if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
-            Dead* deadTest = new Dead(this->getChildList(),temp);
+            Dead* deadTest = new Dead(this->getChildList(),temp, game);
             this->getDeadAntsList().push_back(deadTest);
             continue;
         }
@@ -291,7 +291,7 @@ void Anthill::update(Field *field, Game *game, Informer *informer) {
 
         //Death check
         if (temp->getHealth() <= 0) {
-            Dead *deadTest = new Dead(this->getCollecterList(), temp);
+            Dead *deadTest = new Dead(this->getCollecterList(), temp, game);
             this->getDeadAntsList().push_back(deadTest);
             continue;
         }
@@ -334,7 +334,7 @@ void Anthill::update(Field *field, Game *game, Informer *informer) {
 
         //Death check
         if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
-            Dead* deadTest = new Dead(this->getCleanerList(),temp);
+            Dead* deadTest = new Dead(this->getCleanerList(),temp, game);
             this->getDeadAntsList().push_back(deadTest);
             continue;
         }

@@ -10,7 +10,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game(): anthill(500, 500, 100, 1000, 800,0,0,0,0,1100,500,100,100), field(0, 0) {
+Game::Game(): anthill(300, 500, 100, 1000, 800,0,0,0,0,800,250,100,100), field(0, 0) {
     this->initVar();
     this->initWindow();
     this->antHillX = this->anthill.getPosX();
@@ -28,6 +28,7 @@ Game::Game(): anthill(500, 500, 100, 1000, 800,0,0,0,0,1100,500,100,100), field(
     this->initTextureForFood();
     this->initTextureForNurse();
     this->initTextureForCleaner();
+    this->initTextureForDead();
 
     this->initSprite();
     this->initSpriteForChild();
@@ -39,6 +40,7 @@ Game::Game(): anthill(500, 500, 100, 1000, 800,0,0,0,0,1100,500,100,100), field(
     this->initSpriteForFood();
     this->initSpriteForNurse();
     this->initSpriteForCleaner();
+    this->initSpriteForDead();
 }
 
 
@@ -142,14 +144,22 @@ void Game::initSpriteForCleaner() {
     this->spriteForCleaner.setScale(1.3f, 1.f);
 }
 
+void Game::initTextureForDead() {
+    this->textureForDead.loadFromFile("dead.png");
+}
+void Game::initSpriteForDead() {
+    this->spriteForDead.setTexture(this->textureForDead);
+    this->spriteForDead.setScale(1.3f, 1.f);
+}
+
 void Game::initVar() {
     this->window = nullptr;
 
 
     this->bornRoomHeight = 200;
     this->bornRoomWidth = 200;
-    this->bornRoomX = 900;
-    this->BornRoomY = 300;
+    this->bornRoomX = 800;
+    this->BornRoomY = 250;
 
     this->antHillWidth = 600;
     this->antHillHeight = 500;
@@ -168,7 +178,7 @@ void Game::initWindow() {
     this->videoMode.width = 1920;
 
     this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-    this->window->setFramerateLimit(1000);
+    this->window->setFramerateLimit(700);
 }
 
 

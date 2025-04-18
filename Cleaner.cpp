@@ -66,7 +66,7 @@ void Cleaner::work(Field *field, Anthill *anthill, Game *game) {
 
 
         if (anthill->getDeadAntsList().size() != 0) {
-            this->findDeadAnts(anthill);
+            this->findDeadAnts(anthill, game);
             this->changeStatus();
             this->setWorkStatus("moving_dead");
         }

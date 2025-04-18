@@ -115,7 +115,7 @@ pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<M
     return answerPoint;
 }
 
-pair<int, pair<int, int>> Ant::findNearestPointDead(int x1, int y1, vector<Dead*> v, vector<Dead*>& detectedDead)
+pair<int, pair<int, int>> Ant::findNearestPointDead(int x1, int y1, vector<Dead*> v, vector<Dead*>& detectedDead, Game *game)
 {
     pair<int, pair<int, int> > answerPoint = { 0,{0,0} };
     int minn = 1e9;
@@ -136,7 +136,7 @@ pair<int, pair<int, int>> Ant::findNearestPointDead(int x1, int y1, vector<Dead*
         }
     }
     if (elem != nullptr) {
-        Dead* detectedP = new Dead(elem->getX(), elem->getY(), elem->getWeight());
+        Dead* detectedP = new Dead(elem->getX(), elem->getY(), elem->getWeight(), game);
         //detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
         detectedDead.push_back(detectedP);
         v.erase(v.begin() + index);
@@ -275,14 +275,14 @@ void Ant::findMaterial(Field* field, Game *game){
 }
 
 
-void Ant::findDeadAnts(Anthill* anthill){
+void Ant::findDeadAnts(Anthill* anthill, Game *game){
 
 
 
     int xdead = 0;
     int ydead = 0;
     for (int i = 0; i < anthill->getDeadAntsList().size(); ++i) {
-        anthill->detectedDead.push_back(new Dead(anthill->getDeadAntsList()[i]->getPosX(), anthill->getDeadAntsList()[i]->getPosY(),0));
+        anthill->detectedDead.push_back(new Dead(anthill->getDeadAntsList()[i]->getPosX(), anthill->getDeadAntsList()[i]->getPosY(),0, game));
         xdead = anthill->getDeadAntsList()[i]->getPosX();
         ydead = anthill->getDeadAntsList()[i]->getPosY();
         anthill->getDeadAntsList().erase(anthill->getDeadAntsList().begin() + i);

@@ -4,10 +4,11 @@
 #include "Collecter.h"
 #include "Cleaner.h"
 #include "Builder.h"
+#include "Game.h"
 #include "Soldier.h"
 #include "Nurse.h"
 
-Dead::Dead(vector<Child *> &list, Child *&child)
+Dead::Dead(vector<Child *> &list, Child *&child, Game *game)
 {
     //cout << "child died" << endl;
     this->setRole("dead");
@@ -20,10 +21,10 @@ Dead::Dead(vector<Child *> &list, Child *&child)
             break;
         }
     }
-    initDead();
+    initDead(game);
 }
 
-Dead::Dead(vector<Collecter *> &list, Collecter *&collector)
+Dead::Dead(vector<Collecter *> &list, Collecter *&collector, Game *game)
 {
     //cout << "collector died" << endl;
     this->setRole("dead");
@@ -36,10 +37,10 @@ Dead::Dead(vector<Collecter *> &list, Collecter *&collector)
             break;
         }
     }
-    initDead();
+    initDead(game);
 }
 
-Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner)
+Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner, Game *game)
 {
     //cout << "cleaner died" << endl;
     this->setRole("dead");
@@ -52,10 +53,10 @@ Dead::Dead(vector<Cleaner *> &list, Cleaner *&cleaner)
             break;
         }
     }
-    initDead();
+    initDead(game);
 }
 
-Dead::Dead(vector<Builder *> &list, Builder *&builder)
+Dead::Dead(vector<Builder *> &list, Builder *&builder, Game *game)
 {
     //cout << "build died" << endl;
     this->setRole("dead");
@@ -68,10 +69,10 @@ Dead::Dead(vector<Builder *> &list, Builder *&builder)
             break;
         }
     }
-    initDead();
+    initDead(game);
 }
 
-Dead::Dead(vector<Soldier *> &list, Soldier *&soldier)
+Dead::Dead(vector<Soldier *> &list, Soldier *&soldier, Game *game)
 {
     //cout << "soldier died" << endl;
     this->setRole("dead");
@@ -84,10 +85,10 @@ Dead::Dead(vector<Soldier *> &list, Soldier *&soldier)
             break;
         }
     }
-    initDead();
+    initDead(game);
 }
 
-Dead::Dead(vector<Nurse *> &list, Nurse *&nurse)
+Dead::Dead(vector<Nurse *> &list, Nurse *&nurse, Game *game)
 {
     //cout << "nurse died" << endl;
     this->setRole("dead");
@@ -100,12 +101,14 @@ Dead::Dead(vector<Nurse *> &list, Nurse *&nurse)
             break;
         }
     }
-    initDead();
+    initDead(game);
 }
 
 
-void Dead::initDead()
+void Dead::initDead(Game *game)
 {
     this->getShape().setSize(sf::Vector2f(20.f, 20.f));
-    this->getShape().setFillColor(sf::Color::Red);
+    // this->getShape().setFillColor(sf::Color::Red);
+    this->getShape().setTexture(&game->textureForDead);
+    this->getShape().setScale(5.f, 5.f);
 }
