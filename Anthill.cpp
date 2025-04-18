@@ -216,7 +216,7 @@ void Anthill::setxy(int x, int y, int w, int h) {
 
 static long long int ticks = 0;
 
-void Anthill::update(Field *field, Game *game) {
+void Anthill::update(Field *field, Game *game, Informer *informer) {
     //1.Rolling shifts check
         //Check for each type of ant
     ++ticks;
@@ -387,7 +387,7 @@ void Anthill::update(Field *field, Game *game) {
     }
 
     for(int i = 0; i < this->getDeadAntsList().size(); ++i) {
-        this->getDeadAntsList()[i]->work(field, this);
+        this->getDeadAntsList()[i]->work(field, this, game);
     }
 
     //this->getChildList()[0]->randomMoving(field);
@@ -396,12 +396,12 @@ void Anthill::update(Field *field, Game *game) {
         //+- food count or others parameters
 
     if(ticks%70 == 0) {
-        field->spawnFoodWhenNeeds(this);
-        field->spawnMaterialsWhenNeeds(this);
+        field->spawnFoodWhenNeeds(this, game);
+        field->spawnMaterialsWhenNeeds(this, game);
         ticks = 0;
     }
     if(ticks%150 == 0) {
-        spawnChildrenWhenNeed();
+        spawnChildrenWhenNeed(informer, game);
         ticks = 0;
     }
 

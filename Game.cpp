@@ -233,7 +233,7 @@ void Game::update() {
     this->window->clear();
 
     //Update will be here
-    this->anthill.update(&this->field, this);
+    this->anthill.update(&this->field, this, &this->informer);
     //this->anthill.getChildList()[0]->randomMoving(&this->field);
 
     //testing

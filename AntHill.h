@@ -76,7 +76,7 @@ public:
 
     //update
 
-    void update(Field* field, Game *game);
+    void update(Field* field, Game *game, Informer *informer);
     void updateAntsAge();
 
     void spawnChildrenWhenNeed(Informer *informer, Game *game);

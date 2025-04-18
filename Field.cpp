@@ -144,7 +144,7 @@ void Field::spawnFoodWhenNeeds(Anthill* anthill, Game *game)
 
 }
 
-void Field::spawnMaterialsWhenNeeds(Anthill *anthill)
+void Field::spawnMaterialsWhenNeeds(Anthill *anthill, Game *game)
 {
     int x = getRandomNumber(0, this->width-3);
     int y = getRandomNumber(0, this->height-3);
@@ -154,7 +154,7 @@ void Field::spawnMaterialsWhenNeeds(Anthill *anthill)
     }
     this->field[y][x] = MATERIALS;
     int weight = rand() % MAX_WEIGHT_MATERIALS;
-    this->materialsCoordinates.push_back(new Materials(x, y, weight));
+    this->materialsCoordinates.push_back(new Materials(x, y, weight, game));
 }
 
 void Field::setHW(int x,int y)
