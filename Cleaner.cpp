@@ -5,15 +5,19 @@
 #include "Game.h"
 
 Cleaner::Cleaner(Game *game) {
-    cout << "cleaner created\n";
+    // cout << "cleaner created\n";
     this->setRole("cleaner");
+    this->setWorkStatus("find_dead");
+    this->setAge(getRandomPoint(200, 300));
     this->initCleaner(game);
+
 }
 
 Cleaner::Cleaner(vector<Child *> &list, Child *&child, Game *game) {
     cout << "cleaner from child" << endl;
     this->setAge(child->getAge());
     this->setRole("cleaner");
+    this->setWorkStatus("find_dead");
     this->setHealth(child->getHealth());
     this->setWeight(child->getWeight());
     this->setPosX(child->getPosX());
@@ -35,34 +39,47 @@ void Cleaner::initCleaner(Game *game) {
 }
 
 Cleaner::~Cleaner() {
-    cout << "cleaner was deleted\n";
+    //cout << "cleaner was deleted\n";
 }
 
-Cleaner::Cleaner(vector<Ant *> &list, Ant *&child) {
-}
+
 
 void Cleaner::work(Field *field, Anthill *anthill, Game *game) {
     string work_status = getWorkStatus();
 
     if (work_status == "moving_dead") {
         this->updateMovement(field, anthill, "remove_dead");
-    } else if (work_status == "remove_dead") {
+    }
+    else if (work_status == "remove_dead") {
         remove_dead(field, anthill);
         this->setWorkStatus("find_home");
-    } else if (work_status == "find_home") {
-        // && informer->collecterWhoNeedHelp.size() == 0
+    }
+    else if (work_status == "find_home") { // && informer->collecterWhoNeedHelp.size() == 0
         this->findHome(anthill);
         this->setWorkStatus("moving_home");
-    } else if (work_status == "moving_home") {
+    }
+    else if (work_status == "moving_home") {
         this->updateMovement(field, anthill, "find_dead");
-    } else if (work_status == "find_dead") {
-        this->findDeadAnts(anthill);
-        this->setWorkStatus("moving_dead");
+    }
+    else if (work_status == "find_dead") {
+
+
+
+        if (anthill->getDeadAntsList().size() != 0) {
+            this->findDeadAnts(anthill);
+            this->changeStatus();
+            this->setWorkStatus("moving_dead");
+        }
+        else {
+            this->randomMoving(field);
+        }
+
+
     }
 }
 
-void Cleaner::remove_dead(Field *field, Anthill *anthill) {
-    vector<Dead *> deadList = anthill->getDeadAntsList();
+void Cleaner::remove_dead(Field* field, Anthill* anthill) {
+    vector<Dead*>& deadList = anthill->detectedDead;
 
     if (deadList.size()) {
         for (int i = 0; i < deadList.size(); ++i) {
@@ -74,6 +91,7 @@ void Cleaner::remove_dead(Field *field, Anthill *anthill) {
     }
 
     this->randomMoving(field);
+
 }
 
 //void Cleaner::cleanDeadAnts(Field field) {

@@ -4,8 +4,10 @@
 
 Nurse::Nurse(Game *game)
 {
-	cout << "nurse created\n";
+	//cout << "nurse created\n";
 	this->setRole("nurse");
+	this->setWorkStatus("find_new_position");
+	this->setAge(getRandomPoint(400, 800));
 	this->initNurse(game);
 }
 
@@ -18,7 +20,7 @@ void Nurse::work(Field* field, Anthill* anthill, Game* game){
 		this->changeStatus(); // change status to busy
 	}
 	else if (work_status == "find_new_position") {
-		pair<int,int> randomPointInNursery= randomAntNurseryPos();
+		pair<int,int> randomPointInNursery= randomAntNurseryPos(anthill);
 		this->setEndPoint(randomPointInNursery);
 
 		this->setWorkStatus("moving");
@@ -30,6 +32,7 @@ Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner, Game *game) {
 	cout << "nurse from collecter" << endl;
 	this->setAge(cleaner->getAge());
 	this->setRole("nurse");
+	this->setWorkStatus("find_new_position");
 	this->setHealth(cleaner->getHealth());
 	this->setWeight(cleaner->getWeight());
 	this->setPosX(cleaner->getPosX());
@@ -49,5 +52,5 @@ void Nurse::initNurse(Game *game) {
 	this->getShape().setScale(5.f, 5.f);
 }
 Nurse::~Nurse() {
-    cout << "nurse was deleted\n";
+    //cout << "nurse was deleted\n";
 }

@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#define TICS_TO_ANTHILL_DESTROYING 15
 
 int getRandom(int min_n, int max_n) {
     static mt19937 generator(random_device{}());
@@ -9,7 +10,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game(): anthill(400, 500, 100, 700, 600, 0, 0, 0, 0, 0, 0, 0, 0), field(0, 0) {
+Game::Game(): anthill(500, 500, 100, 1000, 800,0,0,0,0,1100,500,100,100), field(0, 0) {
     this->initVar();
     this->initWindow();
     this->antHillX = this->anthill.getPosX();
@@ -144,6 +145,7 @@ void Game::initSpriteForCleaner() {
 void Game::initVar() {
     this->window = nullptr;
 
+
     this->bornRoomHeight = 200;
     this->bornRoomWidth = 200;
     this->bornRoomX = 900;
@@ -166,7 +168,7 @@ void Game::initWindow() {
     this->videoMode.width = 1920;
 
     this->window = new sf::RenderWindow(this->videoMode, "Anthill", sf::Style::Default);
-    this->window->setFramerateLimit(500);
+    this->window->setFramerateLimit(1000);
 }
 
 
@@ -247,24 +249,34 @@ void Game::update() {
     //ant->setPosX(getRandom(0,1024));
     //ant->setPosY()
 
-    //this->upadateAnts();
+
+	//this->anthill.update(&this->field);
+
+	this->tics++;
+	if (tics == TICS_TO_ANTHILL_DESTROYING) {
+		anthill.anthillDestroying();
+		this->tics = 0;
+		this->anthill.updateAntsAge();
+	}
+	//this->upadateAnts();
 }
 
 void Game::render() {
     this->window->draw(this->sprite);
 
-    this->renderCollecter();
-    this->renderSoldier();
-    this->renderCleaner();
-    this->renderChild();
-    this->renderNurse();
-    this->renderBuilder();
-    this->renderFoodStorage();
-    this->renderFood();
-    this->renderMaterials();
-    this->renderEnemy();
+	this->renderCollecter();
+	this->renderSoldier();
+	this->renderCleaner();
+	this->renderChild();
+	this->renderNurse();
+	this->renderBuilder();
+	this->renderFoodStorage();
+	this->renderFood();
+	this->renderMaterials();
+	this->renderEnemy();
+	this->renderDead();
 
-    this->window->display();
+	this->window->display();
 }
 
 void Game::renderCollecter() {
@@ -280,8 +292,12 @@ void Game::renderCleaner() {
 }
 
 void Game::renderDead() {
-    for (int i = 0; i < anthill.getDeadAntsList().size(); i++) {
+    for (int i = 0;i < anthill.getDeadAntsList().size();i++) {
+        //cout << anthill.getDeadAntsList()[i]->getShape().getPosition().x <<" "<< anthill.getDeadAntsList()[i]->getShape().getPosition().y << "\n";
         this->window->draw(anthill.getDeadAntsList()[i]->getShape());
+    }
+    for( int i = 0; i < anthill.detectedDead.size(); ++i) {
+        this->window->draw(anthill.detectedDead[i]->getShape());
     }
 }
 

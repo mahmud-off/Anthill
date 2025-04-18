@@ -51,13 +51,15 @@ public:
 
     void enemiesSpawn(Anthill *anthill, Game *game);
 
+    void spawnFoodWhenNeeds(Anthill* anthill, Game *game);
+    void spawnMaterialsWhenNeeds(Anthill* anthill, Game *game);
 
-    vector<Food *> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
-    vector<Food *> detectedFood;
-    vector<Materials *> materialsCoordinates; // coordinates of cells with materials
-    vector<Materials *> detectedMaterials;
-
+    vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
+    vector<Food*> detectedFood;
+    vector<Materials* > materialsCoordinates; // coordinates of cells with materials
+    vector<Materials*> detectedMaterials;
 private:
+
     // grave coordinates
     int gravePosX;
     int gravePosY;

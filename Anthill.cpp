@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <time.h>
 
+#include "Field.h"
 #include "Informer.h"
 
 #define ANTHILL_DESTROYING 5
@@ -30,14 +31,14 @@
 
 //Constants for change roles
 //for children
-#define CHILDREN_AGE 20
+#define CHILDREN_AGE 200
 #define COLLECTOR_WEIGHT 3
 //for collector
-#define COLLECTOR_AGE 10
+#define COLLECTOR_AGE 400
 #define BUILDER_WEIGHT 3
 //for cleaner
-#define CLEANER_AGE 10
-
+#define CLEANER_AGE 500
+#define LIVE_TIME 1000
 #define MATERIALS_NEEDED_TO_INCREASE_ANTHILL 10
 
 
@@ -88,13 +89,10 @@ void Anthill::setCoordinateBornRoom(int bornRoomX, int bornRoomY, int bornRoomWi
 
 void Anthill::spawnChildrenWhenNeed(Informer *informer, Game *game) {
     this->childrenCount = 0.2 * this->antCount;
-    for (int i = 0; i < childrenCount; i++) {
         childList.push_back(new Child(game));
-        informer->addToAllAntsInformerSubscribers(childList.back());
-        childList[i]->setPosX(getRandomNumberAnthill(this->bornRoomX + this->bornRoomWidth,
-                                              this->bornRoomY + this->bornRoomY));
-        childList[i]->setPosY(y);
-    }
+        //informer->addToAllAntsInformerSubscribers(childList.back());
+        childList[childList.size()-1]->setPosX(getRandomNumberAnthill(this->bornRoomX, this->bornRoomX + this->bornRoomWidth));
+        childList[childList.size()-1]->setPosY(getRandomNumberAnthill(this->bornRoomY, this->bornRoomY + this->bornRoomHeight));
 }
 
 
@@ -216,34 +214,35 @@ void Anthill::setxy(int x, int y, int w, int h) {
     this->y = y;
 }
 
+static long long int ticks = 0;
 
 void Anthill::update(Field *field, Game *game) {
     //1.Rolling shifts check
-    //Check for each type of ant
-
+        //Check for each type of ant
+    ++ticks;
     //Builder death
-    for (int i = 0; i < this->getBuilderList().size(); ++i) {
-        Builder *temp = this->getBuilderList()[i];
-        if (temp->getHealth() <= 0) {
-            Dead *deadTest = new Dead(this->getBuilderList(), temp);
+    for(int i = 0; i < this->getBuilderList().size(); ++i) {
+        Builder* temp = this->getBuilderList()[i];
+        if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
+            Dead* deadTest = new Dead(this->getBuilderList(),temp);
             this->getDeadAntsList().push_back(deadTest);
         }
     }
 
     //Soldier death
-    for (int i = 0; i < this->getSoldierList().size(); ++i) {
-        Soldier *temp = this->getSoldierList()[i];
-        if (temp->getHealth() <= 0) {
-            Dead *deadTest = new Dead(this->getSoldierList(), temp);
+    for(int i = 0; i < this->getSoldierList().size(); ++i) {
+        Soldier* temp = this->getSoldierList()[i];
+        if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
+            Dead* deadTest = new Dead(this->getSoldierList(),temp);
             this->getDeadAntsList().push_back(deadTest);
         }
     }
 
     //Nurse death
-    for (int i = 0; i < this->getNurseList().size(); ++i) {
-        Nurse *temp = this->getNurseList()[i];
-        if (temp->getHealth() <= 0) {
-            Dead *deadTest = new Dead(this->getNurseList(), temp);
+    for(int i = 0; i < this->getNurseList().size(); ++i) {
+        Nurse* temp = this->getNurseList()[i];
+        if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
+            Dead* deadTest = new Dead(this->getNurseList(),temp);
             this->getDeadAntsList().push_back(deadTest);
         }
     }
@@ -253,26 +252,28 @@ void Anthill::update(Field *field, Game *game) {
         Child *temp = getChildList()[i];
 
         //Death check
-        if (temp->getHealth() <= 0) {
-            Dead *deadTest = new Dead(this->getChildList(), temp);
+        if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
+            Dead* deadTest = new Dead(this->getChildList(),temp);
             this->getDeadAntsList().push_back(deadTest);
             continue;
         }
 
-        if (temp->getAge() >= CHILDREN_AGE) {
-            if (temp->getWeight() >= COLLECTOR_WEIGHT) {
+        if(temp->getAge() >= CHILDREN_AGE) {
+            /*
+            if(temp->getWeight() >= COLLECTOR_WEIGHT) {
                 //change role to collector
-                Collecter *newCollector = new Collecter(this->getChildList(), temp, game);
+                Collecter* newCollector = new Collecter(this->getChildList(), temp);
                 this->getCollecterList().push_back(newCollector);
                 continue;
             }
-            if (temp->getHealth() <= 50) {
+            if(temp->getHealth() <= 50) {
                 //change role to cleaner
-                Cleaner *newCleaner = new Cleaner(this->getChildList(), temp, game);
+                Cleaner* newCleaner = new Cleaner(this->getChildList(), temp);
                 this->getCleanerList().push_back(newCleaner);
                 continue;
-            }
-            if (this->getCollecterList().size() < this->getCleanerList().size()) {
+            } */
+
+            if(this->getCollecterList().size() < this->getCleanerList().size()) {
                 //change role to collector
                 Collecter *newCollector = new Collecter(this->getChildList(), temp, game);
                 this->getCollecterList().push_back(newCollector);
@@ -297,20 +298,29 @@ void Anthill::update(Field *field, Game *game) {
 
         if (temp->getAge() >= COLLECTOR_AGE) {
             if (temp->getAge() > 100) {
+                /*
                 if (temp->getWeight() >= 3) {
                     //change role to Builder
                     Builder *newBuilder = new Builder(this->getCollecterList(), temp, game);
                     this->getBuilderList().push_back(newBuilder);
                     continue;
                 }
-                if (this->getBuilderList().size() < this->getSoldierList().size()) {
+                if(this->getBuilderList().size() < this->getSoldierList().size()) {
                     //change role to Builder
-                    Builder *newBuilder = new Builder(this->getCollecterList(), temp, game);
+                    Builder* newBuilder = new Builder(this->getCollecterList(), temp);
                     this->getBuilderList().push_back(newBuilder);
                     continue;
-                } else {
+                }
+                */
+                if(this->getBuilderList().size() < this->getSoldierList().size()) {
+                    //change role to Builder
+                    Builder* newBuilder = new Builder(this->getCollecterList(), temp, game);
+                    this->getBuilderList().push_back(newBuilder);
+                    continue;
+                }
+                else {
                     //change role to Soldier
-                    Soldier *newSoldier = new Soldier(this->getCollecterList(), temp, game);
+                    Soldier* newSoldier = new Soldier(this->getCollecterList(), temp, game);
                     this->getSoldierList().push_back(newSoldier);
                     continue;
                 }
@@ -323,8 +333,8 @@ void Anthill::update(Field *field, Game *game) {
         Cleaner *temp = this->getCleanerList()[i];
 
         //Death check
-        if (temp->getHealth() <= 0) {
-            Dead *deadTest = new Dead(this->getCleanerList(), temp);
+        if(temp->getHealth() <= 0 || temp->getAge() >= LIVE_TIME) {
+            Dead* deadTest = new Dead(this->getCleanerList(),temp);
             this->getDeadAntsList().push_back(deadTest);
             continue;
         }
@@ -339,21 +349,21 @@ void Anthill::update(Field *field, Game *game) {
     }
 
 
+
     //2.Ordinary tasks for every ant
-    // call virtual func work {...} for each ant
+        // call virtual func work {...} for each ant
 
     //random movement for every ant;
-    /*
-        for(int i = 0; i < this->getChildList().size(); ++i) {
-            //this->getChildList()[i]->findFood(field);
-            //this->getChildList()[i]->findMaterial(field);
-            this->getChildList()[i]->goHome(this);
-            //this->getChildList()[i]->setWeight(3);
-            //this->getChildList()[i]->setAge(this->getChildList()[i]->getAge()+1);
-            this->getChildList()[i]->updateMovement(field, this, "none");
+    for(int i = 0; i < this->getChildList().size(); ++i) {
+        //this->getChildList()[i]->findFood(field);
+        //this->getChildList()[i]->findMaterial(field);
+        this->getChildList()[i]->findHome(this);
+        //this->getChildList()[i]->setWeight(3);
+        //this->getChildList()[i]->setAge(this->getChildList()[i]->getAge()+1);
+        this->getChildList()[i]->updateMovement(field, this, "none");
+        //this->getChildList()[i]->setHealth(-1);
 
-        }
-    */
+    }
 
     for (int i = 0; i < this->getCollecterList().size(); ++i) {
         this->getCollecterList()[i]->work(field, this, game);
@@ -361,23 +371,70 @@ void Anthill::update(Field *field, Game *game) {
         //this->getCollecterList()[i]->setWeight(5);
     }
 
-    /* for(int i = 0; i < this->getCleanerList().size(); ++i) {
-         this->getCleanerList()[i]->randomMoving(field);
-     }
-     for(int i = 0; i < this->getNurseList().size(); ++i) {
-         this->getNurseList()[i]->randomMoving(field);
-     }
-     for(int i = 0; i < this->getSoldierList().size(); ++i) {
-         this->getSoldierList()[i]->randomMoving(field);
-     }*/
+   for(int i = 0; i < this->getCleanerList().size(); ++i) {
+        this->getCleanerList()[i]->work(field, this, game);
+    }
+    for(int i = 0; i < this->getNurseList().size(); ++i) {
+        this->getNurseList()[i]->work(field, this, game);
+    }
+    for(int i = 0; i < this->getSoldierList().size(); ++i) {
+        this->getSoldierList()[i]->work(field, this, game);
+    }
 
 
     for (int i = 0; i < this->getBuilderList().size(); ++i) {
         this->getBuilderList()[i]->work(field, this, game);
     }
 
+    for(int i = 0; i < this->getDeadAntsList().size(); ++i) {
+        this->getDeadAntsList()[i]->work(field, this);
+    }
+
     //this->getChildList()[0]->randomMoving(field);
 
     //3.Recompute of AntHill's parameters
-    //+- food count or others parameters
+        //+- food count or others parameters
+
+    if(ticks%70 == 0) {
+        field->spawnFoodWhenNeeds(this);
+        field->spawnMaterialsWhenNeeds(this);
+        ticks = 0;
+    }
+    if(ticks%150 == 0) {
+        spawnChildrenWhenNeed();
+        ticks = 0;
+    }
+
+}
+
+void Anthill::updateAntsAge(){
+    //Child age + 1
+    for (int i = 0; i < childList.size(); ++i) {
+        childList[i]->setAge(childList[i]->getAge() + 1);
+    }
+
+    //Collecter age + 1
+    for (int i = 0; i < collecterList.size(); ++i) {
+        collecterList[i]->setAge(collecterList[i]->getAge() + 1);
+    }
+
+    //Builder age + 1
+    for (int i = 0; i < builderList.size(); ++i) {
+        builderList[i]->setAge(builderList[i]->getAge() + 1);
+    }
+
+    //Cleaner age + 1
+    for (int i = 0; i < cleanerList.size(); ++i) {
+        cleanerList[i]->setAge(cleanerList[i]->getAge() + 1);
+    }
+
+    //Nurse age + 1
+    for (int i = 0; i < nurseList.size(); ++i) {
+        nurseList[i]->setAge(nurseList[i]->getAge() + 1);
+    }
+
+    //soldierList + 1
+    for (int i = 0; i < soldierList.size(); ++i) {
+        soldierList[i]->setAge(soldierList[i]->getAge() + 1);
+    }
 }

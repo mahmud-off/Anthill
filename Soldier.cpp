@@ -8,6 +8,8 @@
 Soldier::Soldier(Game *game) {
     cout << "soldier created\n";
     this->setRole("soldier");
+    this->setWorkStatus("rand_moving");
+    this->setAge(getRandomPoint(400, 800));
     this->initSoldier(game);
     // hit = 10; // power of hit
 }
@@ -15,6 +17,7 @@ Soldier::Soldier(Game *game) {
 Soldier::Soldier(int power, Game *game) {
     cout << "soldier created\n";
     this->setRole("soldier");
+    this->setWorkStatus("rand_moving");
     this->setPower(power);
     this->initSoldier(game);
 }
@@ -23,6 +26,7 @@ Soldier::Soldier(vector<Collecter *> &list, Collecter *&collecter, Game *game) {
     cout << "soldier from collecter" << endl;
     this->setAge(collecter->getAge());
     this->setRole("soldier");
+    this->setWorkStatus("rand_moving");
     this->setHealth(collecter->getHealth());
     this->setWeight(collecter->getWeight());
     this->setPosX(collecter->getPosX());
@@ -42,7 +46,7 @@ void Soldier::helpToFightEnemy(Enemy *enemy, Field *field) {
 }
 
 Soldier::~Soldier() {
-    cout << "soldier was deleted\n";
+    //cout << "soldier was deleted\n";
 }
 
 void Soldier::work(Field *field, Anthill *anthill, Game* game) {
@@ -50,10 +54,11 @@ void Soldier::work(Field *field, Anthill *anthill, Game* game) {
 
     if (work_status == "help_moving") {
         this->updateMovement(field, anthill, "fight");
-    } else if (work_status == "fight") {
+    }
+    else if (work_status == "fight") {
         this->fightEnemy(field); // ,"rand_moving"
-    } else if (work_status == "rand_moving") {
-        // && informer->collecterWhoNeedHelp.size() == 0
+    }
+    else if (work_status == "rand_moving") { // && informer->collecterWhoNeedHelp.size() == 0
         this->randomMoving(field);
     }
 }

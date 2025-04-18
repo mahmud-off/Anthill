@@ -48,6 +48,12 @@ public:
     int getWidth() { return this->width; }
     int getHeight() { return this->height; }
 
+    int getBornRoomX(){return bornRoomX;}
+    int getBornRoomY(){return bornRoomY;}
+    int getBornRoomWidth(){return bornRoomWidth;}
+    int getBornRoomHeght(){return bornRoomHeight;}
+
+
     Storage *storage;
     void setCoordinateStorage(int storageX, int storageY, int storageWidth, int storageHeight);
     void setCoordinateBornRoom(int bornRoomX, int bornRoomY, int bornRoomWidth, int bornRoomHeight);
@@ -71,9 +77,13 @@ public:
     //update
 
     void update(Field* field, Game *game);
+    void updateAntsAge();
 
     void spawnChildrenWhenNeed(Informer *informer, Game *game);
 
+    vector<Dead*> detectedDead;
+
+    void anthillDestroying(); // ����� �����������
 
 private:
     //coordinates
@@ -99,7 +109,6 @@ private:
     // resources spending
     void antsDailyEat();
 
-    void anthillDestroying(); // ����� �����������
 
     int foodCount;
     int materialsCount;

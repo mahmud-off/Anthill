@@ -14,8 +14,8 @@ public:
 
     void initChild(Game *game);
 
-    virtual ~Child() override { cout << "child was deleted"; };
-    void work(Field *field, Anthill *anthill, Game* game) override { ; }
+    virtual ~Child() override { /*cout << "child was deleted";*/ };
+    void work(Field *field, Anthill *anthill, Game *game) override { ; }
 
 private:
 };

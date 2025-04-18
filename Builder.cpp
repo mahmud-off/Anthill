@@ -10,14 +10,15 @@
 #define CONST_MAKE_ANTHILL_BIGGER 5
 
 Builder::Builder(Game *game) {
-    cout << "builder created\n";
+    // cout << "builder created\n";
     this->setRole("builder");
     this->initBuilder(game);
+    this->setAge(getRandomPoint(400, 800));
     this->setWorkStatus("find_material");
 }
 
 Builder::Builder(int weight, Game *game) {
-    cout << "builder created\n";
+    // cout << "builder created\n";
     this->setRole("builder");
     this->setWeight(weight);
     this->initBuilder(game);
@@ -36,7 +37,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
  //   else {
     	// material weight is ok
     this->changeStatus(); // change status to free
-    cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
+    //cout << "Check Ant's point" << field->field[this->getPosY()][this->getPosX()] << " \n";
     field->field[this->getPosY()][this->getPosX()] = "";// already no food in this point
     field->updateMaterialsCoordinatesList();
 
@@ -46,7 +47,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
 }
 
 Builder::Builder(vector<Collecter*>& list, Collecter *&collecter, Game *game) {
-	cout << "builder from collecter" << endl;
+	// cout << "builder from collecter" << endl;
 
 	this->setAge(collecter->getAge());
 	this->setRole("builder");
@@ -77,7 +78,7 @@ void Builder::work(Field* field, Anthill* anthill, Game *game){
     if (work_status == "moving_material") {
         this->updateMovement(field, anthill, "collect_material");
 
-        this->changeStatus(); // change status to busy
+        this->changeStatus(); // change status to free
     }
     else if (work_status == "collect_material") {
         collectMaterials(field, anthill);
@@ -92,7 +93,7 @@ void Builder::work(Field* field, Anthill* anthill, Game *game){
     }
     else if (work_status == "find_material") {
         buildAnthill(anthill);
-        cout <<"MATERIALS"<< field->materialsCoordinates.size() << "\n";
+        //cout <<"MATERIALS"<< field->materialsCoordinates.size() << "\n";
         if (field->materialsCoordinates.size() != 0) {
             this->changeStatus(); // change status to free
             this->findMaterial(field, game);
@@ -104,7 +105,7 @@ void Builder::work(Field* field, Anthill* anthill, Game *game){
 }
 
 Builder::~Builder() {
-	cout << "builder was deleted\n";
+	//cout << "builder was deleted\n";
 }
 
 void Builder::helpToCollectMaterial(int x, int y, Field *field) {
