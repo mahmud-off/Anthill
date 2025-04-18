@@ -77,10 +77,12 @@ void Soldier::fightEnemy(Field *field) {
                 this->getEnemy()->setHealth(0);
                 field->deleteEnemy(this->getEnemy()); // delete killed enemy
                 // need to delete enemy here
-                this->changeStatus();
+                this->changeStatus(); // busy -> free;
                 this->setWorkStatus("rand_moving");
             }
             else {
+                this->getEnemy()->setWorkStatus("fight");
+                this->getEnemy()->setAnt(this);
                 this->getEnemy()->setHealth(this->getEnemy()->getHealth() - this->getPower()); // enemy didn't die
             }
         //}

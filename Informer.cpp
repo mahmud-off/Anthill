@@ -88,6 +88,7 @@ void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Fi
 
             //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
             //curSoldier->changeStatus(); // change status to free;
+            break;
         }
         else if (curSoldier->status == "busy") {
             continue;
