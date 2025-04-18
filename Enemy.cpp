@@ -1,12 +1,14 @@
 #include "Enemy.h"
 #include <ctime>
 #include <cstdlib>
+#include <utility>
 #include <math.h>
 #include "AntHill.h"
 #include "builder.h"
 #include "Child.h"
 #include "Cleaner.h"
 #include "Collecter.h"
+#include "Field.h"
 #include "Nurse.h"
 #include "Soldier.h"
 #include "Storage.h"
@@ -23,6 +25,7 @@ Enemy::Enemy(int x, int y, int hit) // Coordinates compute in Field
 {
     //cout << "Enemy was created\n";
     srand(time(0));
+    work_status = "find_new_ant";
     health = 100;
     hit = 5 + rand() % 10;
     weight = 5 + rand() % 10;
@@ -46,29 +49,39 @@ void Enemy::initEnemy(int x, int y, int hit) {
 void Enemy::hitAttackedAnt(Ant *attackedAnt) {
     if (attackedAnt->getHealth() - this->getPower() <= 0) {
         // attackedAnt become killed
+
         attackedAnt->setHealth(0); // when update - it will be deleted
+        this->setWorkStatus("find_new_ant");
     } else {
         attackedAnt->setHealth(attackedAnt->getHealth() - this->getPower());
-        this->setWorkStatus("find_new_ant");
+
     }
 }
 
 void Enemy::atackAntInField(Anthill *anthill, Field *field) {
     if (this->getPosX() == this->ant->getPosX() && this->getPosY() == this->ant->getPosY()) {
         this->hitAttackedAnt(this->ant);
-        Informer informer;
-        informer.callToGetHelpFromSoldier(this->ant, this->ant->getPosX(), this->ant->getPosY(), field, this);
-    }else {
-        this->setWorkStatus("moving_ant");
+        cout << 1;
+        //Informer informer;
+        //informer.callToGetHelpFromSoldier(this->ant, this->ant->getPosX(), this->ant->getPosY(), field, this);
+        cout << 2;
+        this->setWorkStatus("find_new_ant");
+        cout << this->ant->getHealth() << "\n";
+    }
+    /*
+    else {
+        this->setWorkStatus("fight");
         this->updateMovement(field, anthill, "fight");
         this->atackAntInField(anthill, field);
     }
+    */
 }
 
 
 int antNotInAnthill(Ant* ant, Anthill* anthill) {
     
     if (!(ant->getPosX() >= anthill->getPosX() && ant->getPosX() <= anthill->getPosX() + anthill->getWidth() && ant->getPosY() >= anthill->getPosY() && ant->getPosY() <= anthill->getPosY() + anthill->getHeight())){
+        //cout << "lohhhh" << "\n";
         return 1;
     }
 
@@ -79,7 +92,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
     // ant must be NOT in anthill
     for (int i = 0; i < anthill->getCollecterList().size(); i++) {
         auto ant = anthill->getCollecterList()[i];
-        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView) {
+        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView && distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) > 0) {
             if (antNotInAnthill(ant, anthill)) {
                 return true;
             }  
@@ -87,7 +100,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
     }
     for (int i = 0; i < anthill->getCleanerList().size(); i++) {
         auto ant = anthill->getCleanerList()[i];
-        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView) {
+        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView && distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) > 0) {
             if (antNotInAnthill(ant, anthill)) {
                 return true;
             }
@@ -95,7 +108,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
     }
     for (int i = 0; i < anthill->getBuilderList().size(); i++) {
         auto ant = anthill->getBuilderList()[i];
-        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView) {
+        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView && distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) > 0) {
             if (antNotInAnthill(ant, anthill)) {
                 return true;
             }
@@ -103,7 +116,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
     }
     for (int i = 0; i < anthill->getNurseList().size(); i++) {
         auto ant = anthill->getNurseList()[i];
-        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView) {
+        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView && distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) > 0) {
             if (antNotInAnthill(ant, anthill)) {
                 return true;
             }
@@ -111,7 +124,7 @@ bool Enemy::canFindAntsInField(Anthill *anthill) {
     }
     for (int i = 0; i < anthill->getChildList().size(); i++) {
         auto ant = anthill->getChildList()[i];
-        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView) {
+        if (distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) <= roView && distance(this->posX, this->posY, ant->getPosX(), ant->getPosY()) > 0) {
             if (antNotInAnthill(ant, anthill)) {
                 return true;
             }
@@ -164,10 +177,24 @@ double Enemy::distance(int x1, int y1, int x2, int y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
+int getRandomPoint___(int min_n, int max_n) {
+    static mt19937 generator(random_device{}());
+    uniform_int_distribution<int> distribution(min_n, max_n);
+
+    return distribution(generator);
+}
+
 void Enemy::work(Field* field, Anthill* anthill){
     string now_work_status = getWorkStatus();
 
+    if(now_work_status == "moving_ant") {
+        updateMovement(field, anthill, "find_new_ant");
+    }else if(now_work_status == "find_new_ant") {
+        this->ant->setEndPoint({getRandomPoint___(0, field->getWidth()-3), getRandomPoint___(0, field->getHeight()-3)});
+    }
+/*
     if (now_work_status == "moving_ant") {
+        //this->updateMovement(field, anthill, "fight");
         this->updateMovement(field, anthill, "fight");
     }
     else if (now_work_status == "fight") {
@@ -183,6 +210,8 @@ void Enemy::work(Field* field, Anthill* anthill){
             randomMoving(field);
         }
     }
+    */
+
 }
 
 void Enemy::randomMoving(Field* filed) {
@@ -192,7 +221,7 @@ void Enemy::randomMoving(Field* filed) {
     randMove = getRandomPoint_move_enemy(-1, 1);
     setPosY(getPosY() + randMove);
 
-    shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
+    enemyShape.setPosition(sf::Vector2f(getPosX(), getPosY()));
 
 }
 
@@ -204,11 +233,11 @@ void Enemy::updateMovement(Field* field, Anthill* anthill, string new_work){
         if (getPosY() < this->ant->getPosY()) setPosY(getPosY() + 1);
         else if (getPosY() > this->ant->getPosY()) setPosY(getPosY() - 1);
 
-        shape.setPosition(sf::Vector2f(getPosX(), getPosY()));
+        enemyShape.setPosition(sf::Vector2f(getPosX(), getPosY()));
         //printPosition();
     }
     else {
-        this->setWorkStatus(new_work);
+        this->setWorkStatus(std::move(new_work));
     }
 }
 

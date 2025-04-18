@@ -50,7 +50,7 @@ public:
     void setPosX(int x) { posX = x; }
     void setPosY(int y) { posY = y; }
     void setAnt(Ant* ant) { this->ant = ant; }
-    void setWorkStatus(string new_work_status) { work_status = new_work_status; }
+    void setWorkStatus(string new_work_status) { this->work_status = new_work_status; }
 
     //functions
     void work(Field* field, Anthill* anthill);

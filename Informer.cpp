@@ -75,6 +75,28 @@ void Informer::callToGetHelpToCollectMaterials(Builder *builderWhoNeedHelp, int 
     field->updateMaterialsCoordinatesList();
 }
 
+void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field, Enemy *enemyWhoAttackedAnt) {
+    for (int i = 0; i < this->soldiersInformerSubscribers.size(); i++) {
+        auto curSoldier = this->soldiersInformerSubscribers[i];
+        if (curSoldier->getStatus() == "free") {
+            curSoldier->changeStatus(); // change status to busy
+            curSoldier->setWorkStatus("help_moving");
+            curSoldier->setEnemy(enemyWhoAttackedAnt);
+
+            curSoldier->setEndPoint({antWhoWasAttacked->getPosX(), antWhoWasAttacked->getPosY()});
+
+            //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
+            //curSoldier->changeStatus(); // change status to free;
+            break;
+        }
+        else if (curSoldier->status == "busy") {
+            continue;
+        }
+    }
+}
+
+
+/*
 void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Field *field,
                                         Enemy *enemyWhoAttackedAnt) {
     int i = 0; // будет затираться при новом вайле
@@ -87,7 +109,7 @@ void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Fi
                 curSoldier->setEnemy(enemyWhoAttackedAnt);
 
                 curSoldier->setEndPoint({antWhoWasAttacked->getPosX(), antWhoWasAttacked->getPosY()});
-                curSoldier->fightEnemy(field);
+                //curSoldier->fightEnemy(field);
                 return;
                 //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
                 //curSoldier->changeStatus(); // change status to free;
@@ -98,7 +120,7 @@ void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Fi
         }
     }
 }
-
+*/
 void Informer::anthillWasAttacked(Anthill *anthill, int x, int y, Field *field, Enemy *enemyWhoAttackedAnthill) {
     int i = 0;
     while (enemyWhoAttackedAnthill->getHealth() > 0) {// help until enemy die

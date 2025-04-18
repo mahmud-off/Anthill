@@ -342,6 +342,8 @@ void Anthill::update(Field* field) {
     //2.Ordinary tasks for every ant
         // call virtual func work {...} for each ant
 
+
+
     //random movement for every ant;
     for(int i = 0; i < this->getChildList().size(); ++i) {
         //this->getChildList()[i]->findFood(field);
@@ -378,6 +380,8 @@ void Anthill::update(Field* field) {
     for(int i = 0; i < this->getDeadAntsList().size(); ++i) {
         this->getDeadAntsList()[i]->work(field, this);
     }
+
+
 
     //this->getChildList()[0]->randomMoving(field);
 
