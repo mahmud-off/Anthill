@@ -87,9 +87,8 @@ void Informer::callToGetHelpFromSoldier(Ant *antWhoWasAttacked, int x, int y, Fi
                 curSoldier->setEnemy(enemyWhoAttackedAnt);
 
                 curSoldier->setEndPoint({antWhoWasAttacked->getPosX(), antWhoWasAttacked->getPosY()});
-
                 curSoldier->fightEnemy(field);
-
+                return;
                 //curSoldier->helpToFightEnemy(enemyWhoAttackedAnt, field);
                 //curSoldier->changeStatus(); // change status to free;
             } else if (curSoldier->status == "busy") {
