@@ -4,21 +4,23 @@
 #include "Field.h"
 #include "Informer.h"
 #include "Dead.h"
+#include "Game.h"
+#include "Game.h"
 
 #define CONST_MAKE_ANTHILL_BIGGER 5
 
-Builder::Builder() {
+Builder::Builder(Game *game) {
     cout << "builder created\n";
     this->setRole("builder");
-    this->initBuilder();
+    this->initBuilder(game);
     this->setWorkStatus("find_material");
 }
 
-Builder::Builder(int weight) {
+Builder::Builder(int weight, Game *game) {
     cout << "builder created\n";
     this->setRole("builder");
     this->setWeight(weight);
-    this->initBuilder();
+    this->initBuilder(game);
     this->setWorkStatus("find_material");
 }
 
@@ -43,7 +45,7 @@ void Builder::collectMaterials(Field *field, Anthill *anthill) {
 	//anthill->setMaterialsCount(anthill->getMaterialsCount() + 1); // increase materials by 1
 }
 
-Builder::Builder(vector<Collecter*>& list, Collecter *&collecter) {
+Builder::Builder(vector<Collecter*>& list, Collecter *&collecter, Game *game) {
 	cout << "builder from collecter" << endl;
 
 	this->setAge(collecter->getAge());
@@ -60,15 +62,16 @@ Builder::Builder(vector<Collecter*>& list, Collecter *&collecter) {
 			break;
 		}
 	}
-	initBuilder();
+	initBuilder(game);
 }
 
-void Builder::initBuilder() {
+void Builder::initBuilder(Game *game) {
     this->getShape().setSize(sf::Vector2f(10.f, 10.f));
-    this->getShape().setFillColor(sf::Color::White);
+    this->getShape().setTexture(&game->textureForBuilder);
+    this->getShape().setScale(5.f, 5.f);
 }
 
-void Builder::work(Field* field, Anthill* anthill){
+void Builder::work(Field* field, Anthill* anthill, Game *game){
     string work_status = getWorkStatus();
 
     if (work_status == "moving_material") {
@@ -92,7 +95,7 @@ void Builder::work(Field* field, Anthill* anthill){
         cout <<"MATERIALS"<< field->materialsCoordinates.size() << "\n";
         if (field->materialsCoordinates.size() != 0) {
             this->changeStatus(); // change status to free
-            this->findMaterial(field);
+            this->findMaterial(field, game);
             this->setWorkStatus("moving_material");
         }else {
             this->randomMoving(field);

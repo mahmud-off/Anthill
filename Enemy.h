@@ -9,12 +9,13 @@
 class Anthill;
 class Ant;
 class Field;
+class Game;
 
 using namespace std;
 
 class Enemy {
 public:
-    Enemy(int x, int y, int hit);
+    Enemy(int x, int y, int hit, Game *game);
     ~Enemy();
 
     // 1 - atack ants
@@ -40,9 +41,9 @@ public:
     // setters
     void setHealth(int health) { this->health = health; }
 
-   sf::CircleShape& getEnemyShape() { return this->enemyShape; }
+   sf::RectangleShape& getEnemyShape() { return this->enemyShape; }
     void setHit(int hit) { this->hit = hit; }
-    void initEnemy(int x, int y, int hit);
+    void initEnemy(int x, int y, int hit, Game *game);
 
 private:
     //parameters
@@ -52,7 +53,7 @@ private:
     int posX;
     int posY;
 
-    sf::CircleShape enemyShape;
+    sf::RectangleShape enemyShape;
 };
 
 

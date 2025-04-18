@@ -8,7 +8,7 @@
 class Collecter;
 class Field;
 class Anthill;
-
+class Game;
 
 
 
@@ -17,12 +17,12 @@ class Builder : public Ant {
 public:
 
 	
-	Builder();
-	Builder(int weight);
+	Builder(Game *game);
+	Builder(int weight, Game *game);
 	virtual ~Builder();
-	Builder(vector<Collecter*>& list, Collecter* &collecter);
-	void initBuilder();
-	void work(Field* field, Anthill* anthill) override;
+	Builder(vector<Collecter*>& list, Collecter* &collecter, Game *game);
+	void initBuilder(Game *game);
+	void work(Field* field, Anthill* anthill, Game* game) override;
 
 
 	void collectMaterials(Field *field, Anthill *anthill);

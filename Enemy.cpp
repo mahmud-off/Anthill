@@ -7,12 +7,13 @@
 #include "Child.h"
 #include "Cleaner.h"
 #include "Collecter.h"
+#include "Game.h"
 #include "Nurse.h"
 #include "Soldier.h"
 #include "Storage.h"
 
 
-Enemy::Enemy(int x, int y, int hit) // Coordinates compute in Field
+Enemy::Enemy(int x, int y, int hit, Game *game) // Coordinates compute in Field
 {
     cout << "Enemy was created\n";
     srand(time(0));
@@ -21,18 +22,19 @@ Enemy::Enemy(int x, int y, int hit) // Coordinates compute in Field
     weight = 5 + rand() % 10;
     posX = x;
     posY = y;
-    initEnemy(x, y, hit);
+    initEnemy(x, y, hit, game);
 }
 
 Enemy::~Enemy() {
     cout << "Enemy was deleted from " << this->posX << " " << this->posY << "\n";
 }
 
-void Enemy::initEnemy(int x, int y, int hit) {
+void Enemy::initEnemy(int x, int y, int hit, Game *game) {
     this->getEnemyShape().setPosition((float)x, (float)y);
-    this->getEnemyShape().setFillColor(sf::Color::Cyan);
-    this->getEnemyShape().setRadius(5.f);
+    this->getEnemyShape().setSize(sf::Vector2f(10.f, 10.f));
     this->setHit(hit);
+    this->getEnemyShape().setScale(5.f, 5.f);
+    this->getEnemyShape().setTexture(&game->textureForEnemy);
 }
 
 
@@ -188,7 +190,16 @@ vector<pair<int, int> > A_StarSearch(pair<int, int> start, pair<int, int> end) {
 }
 
 bool Enemy::canFindFoodInAnthill(Anthill *anthill) {
-    if (distance(this->posX, this->posY, anthill->getFoodStorage_X(), anthill->getFoodStorage_Y()) <= roView) {
+    if (distance(this->posX, this->posY, anthill->storage->getX(), anthill->storage->getY()) <= roView) {
+        return true;
+    }
+    if (distance(this->posX, this->posY, anthill->storage->getX() + anthill->storage->getW(), anthill->storage->getY()) <= roView) {
+        return true;
+    }
+    if (distance(this->posX, this->posY, anthill->storage->getX(), anthill->storage->getY() + anthill->storage->getH()) <= roView) {
+        return true;
+    }
+    if (distance(this->posX, this->posY, anthill->storage->getX() + anthill->storage->getW(), anthill->storage->getY() + anthill->storage->getH()) <= roView) {
         return true;
     }
     return false;

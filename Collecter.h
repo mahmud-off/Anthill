@@ -13,24 +13,25 @@
 class Child;
 class Field;
 class Anthill;
+class Game;
 
 class Collecter : public Ant {
 public:
-    Collecter();
-    Collecter(int weight);
+    Collecter(Game *game);
+    Collecter(int weight, Game *game);
     void collectFood(Field *field, Anthill *anthill);
     void helpToCollectFood(int x, int y, Field *field); // coordinates
     // void setStatus(string status) { this->status = status; }
 
-    void initCollecter();
+    void initCollecter(Game *game);
 
     int getWeight() { return Ant::getWeight(); }
 
-    Collecter(vector<Child*>& list, Child* &child);
+    Collecter(vector<Child*>& list, Child* &child, Game *game);
 
     virtual ~Collecter();
     
-    void work(Field* field, Anthill* anthill) override;
+    void work(Field* field, Anthill* anthill, Game* game) override;
     void changeStatus();
     void growthFood(Anthill* anthill);
     //

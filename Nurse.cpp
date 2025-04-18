@@ -1,13 +1,15 @@
 #include "Nurse.h"
 #include "Cleaner.h"
-Nurse::Nurse()
+#include "Game.h"
+
+Nurse::Nurse(Game *game)
 {
 	cout << "nurse created\n";
 	this->setRole("nurse");
-	this->initNurse();
+	this->initNurse(game);
 }
 
-void Nurse::work(Field* field, Anthill* anthill){
+void Nurse::work(Field* field, Anthill* anthill, Game* game){
 	string work_status = getWorkStatus();
 
 	if (work_status == "moving") {
@@ -24,7 +26,7 @@ void Nurse::work(Field* field, Anthill* anthill){
 
 }
 
-Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
+Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner, Game *game) {
 	cout << "nurse from collecter" << endl;
 	this->setAge(cleaner->getAge());
 	this->setRole("nurse");
@@ -39,11 +41,12 @@ Nurse::Nurse(vector<Cleaner *> &list, Cleaner *&cleaner) {
 			break;
 		}
 	}
-	this->initNurse();
+	this->initNurse(game);
 }
-void Nurse::initNurse() {
+void Nurse::initNurse(Game *game) {
 	this->getShape().setSize(sf::Vector2f(10.f, 10.f));
-	this->getShape().setFillColor(sf::Color::Yellow);
+	this->getShape().setTexture(&game->textureForNurse);
+	this->getShape().setScale(5.f, 5.f);
 }
 Nurse::~Nurse() {
     cout << "nurse was deleted\n";

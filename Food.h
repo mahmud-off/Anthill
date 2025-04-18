@@ -8,15 +8,17 @@
 #include<SFML/Window.hpp>
 
 
+class Game;
+
 using namespace std;
 #include <random>
 
 class Food{
 public:
-	Food(int x, int y, int w);
+	Food(int x, int y, int w, Game *game);
 
-	sf::CircleShape& getFoodShape();
-	void initFood(int x,int y,int weight = 0);
+	sf::RectangleShape& getFoodShape();
+	void initFood(int x,int y,int weight, Game *game);
 	int getWeight() { return weight; };
 	
 	int getX();
@@ -28,7 +30,7 @@ public:
 
 
 private:
-	sf::CircleShape foodShape;
+	sf::RectangleShape foodShape;
 	int weight;
 	int x;
 	int y;

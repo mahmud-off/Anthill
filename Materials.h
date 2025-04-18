@@ -7,15 +7,17 @@
 #include<SFML/Network.hpp>
 #include<SFML/Window.hpp>
 
+class Game;
+
 
 using namespace std;
 #include <random>
 
 class Materials {
 public:
-	Materials(int x, int y, int w);
-	sf::CircleShape& getMaterialsShape();
-	void initMaterials(int x, int y, int weight = 0);
+	Materials(int x, int y, int w, Game *game);
+	sf::RectangleShape& getMaterialsShape();
+	void initMaterials(int x, int y, int weight, Game *game = nullptr);
 	int getWeight() { return this->weight; };
 
 	int getX();
@@ -24,7 +26,7 @@ public:
 private:
 	int x;
 	int y;
-	sf::CircleShape materialsShape;
+	sf::RectangleShape materialsShape;
 	int weight;
 
 };

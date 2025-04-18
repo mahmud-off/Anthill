@@ -9,7 +9,7 @@ int getRandom(int min_n, int max_n) {
 };
 
 
-Game::Game(): anthill(500, 500, 100, 1000, 800), field(0, 0) {
+Game::Game(): anthill(400, 500, 100, 700, 600, 0, 0, 0, 0, 0, 0, 0, 0), field(0, 0) {
     this->initVar();
     this->initWindow();
     this->antHillX = this->anthill.getPosX();
@@ -18,7 +18,26 @@ Game::Game(): anthill(500, 500, 100, 1000, 800), field(0, 0) {
     this->antHillWidth = this->anthill.getWidth();
     field.setHW(this->videoMode.width, this->videoMode.height);
     this->initTexture();
+    this->initTextureForChild();
+    this->initTextureForSoldier();
+    this->initTextureForEnemy();
+    this->initTextureForBuilder();
+    this->initTextureForCollecter();
+    this->initTextureForMaterial();
+    this->initTextureForFood();
+    this->initTextureForNurse();
+    this->initTextureForCleaner();
+
     this->initSprite();
+    this->initSpriteForChild();
+    this->initSpriteForSoldier();
+    this->initSpriteForEnemy();
+    this->initSpriteForBuilder();
+    this->initSpriteForCollecter();
+    this->initSpriteForMaterial();
+    this->initSpriteForFood();
+    this->initSpriteForNurse();
+    this->initSpriteForCleaner();
 }
 
 
@@ -43,24 +62,94 @@ void Game::pollEvents() {
 
 
 void Game::initTexture() {
-    this->fon.loadFromFile("C:/Users/burov/Documents/HSE/c++/project hui ant/ant/source/textures/anthill.png");
+    this->fon.loadFromFile("anthill.png");
 }
-
 void Game::initSprite() {
     this->sprite.setTexture(this->fon);
-    this->sprite.setScale(1.3f, 1.f);
+    this->sprite.setScale(0.95f, 0.75f);
+}
+
+void Game::initTextureForChild() {
+    this->textureForChildren.loadFromFile("child.png");
+}
+void Game::initSpriteForChild() {
+    this->spriteForChildren.setTexture(this->textureForChildren);
+    this->spriteForChildren.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForSoldier() {
+    this->textureForSoldiers.loadFromFile("solder.png");
+}
+void Game::initSpriteForSoldier() {
+    this->spriteForSoldiers.setTexture(this->textureForChildren);
+    this->spriteForSoldiers.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForEnemy() {
+    this->textureForEnemy.loadFromFile("monstr 2.png");
+}
+void Game::initSpriteForEnemy() {
+    this->spriteForEnemy.setTexture(this->textureForEnemy);
+    this->spriteForEnemy.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForBuilder() {
+    this->textureForBuilder.loadFromFile("builder.png");
+}
+void Game::initSpriteForBuilder() {
+    this->spriteForBuilder.setTexture(this->textureForBuilder);
+    this->spriteForBuilder.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForCollecter() {
+    this->textureForCollecter.loadFromFile("collecter.png");
+}
+void Game::initSpriteForCollecter() {
+    this->spriteForCollecter.setTexture(this->textureForCollecter);
+    this->spriteForCollecter.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForMaterial() {
+    this->textureForMaterial.loadFromFile("material.png");
+}
+void Game::initSpriteForMaterial() {
+    this->spriteForMaterial.setTexture(this->textureForMaterial);
+    this->spriteForMaterial.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForFood() {
+    this->textureForFood.loadFromFile("food.png");
+}
+void Game::initSpriteForFood() {
+    this->spriteForFood.setTexture(this->textureForFood);
+    this->spriteForFood.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForNurse() {
+    this->textureForNurse.loadFromFile("nurse.png");
+}
+void Game::initSpriteForNurse() {
+    this->spriteForNurse.setTexture(this->textureForNurse);
+    this->spriteForNurse.setScale(1.3f, 1.f);
+}
+
+void Game::initTextureForCleaner() {
+    this->textureForCleaner.loadFromFile("cleaner.png");
+}
+void Game::initSpriteForCleaner() {
+    this->spriteForCleaner.setTexture(this->textureForCleaner);
+    this->spriteForCleaner.setScale(1.3f, 1.f);
 }
 
 void Game::initVar() {
     this->window = nullptr;
 
-
     this->bornRoomHeight = 200;
     this->bornRoomWidth = 200;
     this->bornRoomX = 900;
-    this->BornRoomY = 400;
+    this->BornRoomY = 300;
 
-    this->antHillWidth = 800;
+    this->antHillWidth = 600;
     this->antHillHeight = 500;
     this->antHillX = 460;
     this->antHillY = 250;
@@ -82,11 +171,11 @@ void Game::initWindow() {
 
 
 void Game::createWorld() {
-    this->anthill.generateAnts(this->window->getSize().x / 2, this->window->getSize().y / 2, &this->informer);
+    this->anthill.generateAnts(this->window->getSize().x / 2, this->window->getSize().y / 2, &this->informer, this);
     storage.createStorage(anthill.getFoodCount(), this->storageX, this->storageY, this->storageHeight,
-                          this->storageWidth);
-    field.ResourceSpawn(&this->anthill);
-    field.enemiesSpawn(&this->anthill);
+                          this->storageWidth, this);
+    field.ResourceSpawn(&this->anthill, this);
+    field.enemiesSpawn(&this->anthill, this);
 
     for (int i = 0; i < this->anthill.getCollecterList().size(); i++) {
         this->anthill.getCollecterList()[i]->setPosX(getRandom(this->antHillX, this->antHillWidth + this->antHillX));
@@ -142,7 +231,7 @@ void Game::update() {
     this->window->clear();
 
     //Update will be here
-    this->anthill.update(&this->field);
+    this->anthill.update(&this->field, this);
     //this->anthill.getChildList()[0]->randomMoving(&this->field);
 
     //testing
@@ -233,9 +322,9 @@ void Game::renderFood() {
         this->window->draw(field.foodCoordinates[i]->getFoodShape());
     }
 
-    for (int i = 0; i < field.detectedFood.size(); i++) {
-        this->window->draw(field.detectedFood[i]->getFoodShape());
-    }
+    // for (int i = 0; i < field.detectedFood.size(); i++) {
+    //     this->window->draw(field.detectedFood[i]->getFoodShape());
+    // }
 }
 
 void Game::renderMaterials() {

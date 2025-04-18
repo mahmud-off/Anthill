@@ -7,13 +7,14 @@
 #include <random>
 
 class Food;
+class Game;
 
 
 class Storage {
 public:
-	void addFood();
+	void addFood(Game *game);
 	void delFood();
-	void createStorage(int count, int x, int y, int h, int w);
+	void createStorage(int count, int x, int y, int h, int w, Game *game);
 	int getCount() { return this->count; };
 
 	vector<Food *> storage;
@@ -21,6 +22,8 @@ public:
 
 	int getX() { return this->storageX; }
 	int getY() { return this->storageY; }
+	int getW() { return this->storageWidth; }
+	int getH() { return this->storageHeight; }
 
 private:
 	int count;

@@ -1,13 +1,6 @@
 #ifndef ANTHILL_H
 #define ANTHILL_H
 
-//#include "Ant.h"
-// #include "Builder.h"
-// #include "Child.h"
-// #include "Cleaner.h"
-// #include "Collecter.h"
-// #include "Nurse.h"
-// #include "Soldier.h"
 #include <iostream>
 #include <vector>
 
@@ -20,6 +13,7 @@ class Nurse;
 class Soldier;
 class Dead;
 class Storage;
+class Game;
 
 
 #include "Informer.h"
@@ -55,6 +49,8 @@ public:
     int getHeight() { return this->height; }
 
     Storage *storage;
+    void setCoordinateStorage(int storageX, int storageY, int storageWidth, int storageHeight);
+    void setCoordinateBornRoom(int bornRoomX, int bornRoomY, int bornRoomWidth, int bornRoomHeight);
 
     //setters
     void setScale(int scale) { this->scale = scale; }
@@ -63,7 +59,7 @@ public:
 
     Anthill (int scale, int x, int y, int w, int h, int storageX, int storageY, int storageWidth, int storageHeight, int bornRoomX,int bornRoomY, int bornRoomWidth,int bornRoomHeight);
 
-    void generateAnts(int posX, int posY, Informer *informer); // positions of ants in the beginning
+    void generateAnts(int x, int y, Informer *informer, Game *game); // positions of ants in the beginning
     void dailyResourceExpenditure();
 
     void increaseAnthill();
@@ -74,9 +70,9 @@ public:
 
     //update
 
-    void update(Field* field);
+    void update(Field* field, Game *game);
 
-    void spawnChildrenWhenNeed(Informer *informer);
+    void spawnChildrenWhenNeed(Informer *informer, Game *game);
 
 
 private:

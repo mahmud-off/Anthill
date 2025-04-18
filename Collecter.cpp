@@ -3,25 +3,26 @@
 #include "AntHill.h"
 #include "Child.h"
 #include "Field.h"
+#include "Game.h"
 #include "Informer.h"
 
-Collecter::Collecter() {
+Collecter::Collecter(Game *game) {
     //getShape().setPosition(position);
     this->setRole("collecter");
 	this->setWorkStatus("find_food");
-	initCollecter();
+	initCollecter(game);
 }
 
-Collecter::Collecter(int weight) {
+Collecter::Collecter(int weight, Game *game) {
     //getShape().setPosition(position);
     this->setRole("collecter");
 	this->setWorkStatus("find_food");
     this->setWeight(weight);
-	initCollecter();
+	initCollecter(game);
 }
 
 
-Collecter::Collecter(vector<Child*>& list, Child* &child)
+Collecter::Collecter(vector<Child*>& list, Child* &child, Game* game)
 {
 	cout << "collecter from child" << endl;
 	this->setAge(child->getAge());
@@ -38,19 +39,20 @@ Collecter::Collecter(vector<Child*>& list, Child* &child)
 			break;
 		}
 	}
-	initCollecter();
+	initCollecter(game);
 }
 
 Collecter::~Collecter() {
     cout << "collecter was deleted\n";
 }
 
-void Collecter::initCollecter()
+void Collecter::initCollecter(Game *game)
 {
 	this->getShape().setSize(sf::Vector2f(10.f, 10.f));
-	this->getShape().setFillColor(sf::Color::Cyan);
+	this->getShape().setTexture(&game->textureForCollecter);
+	this->getShape().setScale(5.f, 5.f);
 }
-void Collecter::work(Field* field, Anthill* anthill) {
+void Collecter::work(Field* field, Anthill* anthill, Game* game) {
 	string work_status = getWorkStatus();
 
 	if (work_status == "moving_food") {
@@ -72,7 +74,7 @@ void Collecter::work(Field* field, Anthill* anthill) {
 
 	}else if (work_status == "find_food") {
 		growthFood(anthill);
-		this->findFood(field);
+		this->findFood(field, game);
 
 		if (field->foodCoordinates.size() != 0) {
 			this->setWorkStatus("moving_food");

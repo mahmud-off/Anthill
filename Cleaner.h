@@ -15,11 +15,11 @@ class Cleaner : public Ant {
 public:
 
 	
-	Cleaner();
+	Cleaner(Game *game);
 
-	Cleaner(vector<Child*>& list, Child* &child);
+	Cleaner(vector<Child*>& list, Child* &child, Game *game);
 
-	void initCleaner();
+	void initCleaner(Game *game);
 
 	// void cleanDeadAnts(Field field);
 	// pair<int, int> getPositionOfNearestDeadAnt(Field field);
@@ -28,7 +28,7 @@ public:
 
 	virtual ~Cleaner();
 	Cleaner(vector<Ant*>& list, Ant* &child);
-	void work(Field* field, Anthill* anthill) override;
+	void work(Field* field, Anthill* anthill, Game* game) override;
 	void remove_dead(Field* field, Anthill* anthill);
 
 	using Ant::setPosX;

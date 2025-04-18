@@ -22,7 +22,7 @@ public:
     int getHeight() { return height; }
     int getWidth() { return width; }
 
-    void setHW(int x,int y);
+    void setHW(int x, int y);
 
     void updateFoodCoordinatesList();
 
@@ -32,10 +32,10 @@ public:
 
     Field(int width, int height);
 
-    void ResourceSpawn(Anthill* anthill);
+    void ResourceSpawn(Anthill *anthill, Game *game);
 
     //Enemies
-    void createEnemy(int k, Anthill *anthill);
+    void createEnemy(int k, Anthill *anthill, Game *game);
 
     void deleteEnemy(Enemy *killed);
 
@@ -49,23 +49,23 @@ public:
     int getGravePosX() { return this->gravePosX; }
     int getGravePosY() { return this->gravePosY; }
 
-    void enemiesSpawn(Anthill *anthill);
+    void enemiesSpawn(Anthill *anthill, Game *game);
 
 
-    vector<Food*> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
-    vector<Food*> detectedFood;
-    vector<Materials* > materialsCoordinates; // coordinates of cells with materials
-    vector<Materials*> detectedMaterials;
+    vector<Food *> foodCoordinates; // coordinates of cells with food : weight and {x, y} - coords
+    vector<Food *> detectedFood;
+    vector<Materials *> materialsCoordinates; // coordinates of cells with materials
+    vector<Materials *> detectedMaterials;
+
 private:
-
     // grave coordinates
     int gravePosX;
     int gravePosY;
 
     // resource spawn
-    void foodSpawn(int k, Anthill* anthill);
+    void foodSpawn(int k, Anthill *anthill, Game *game);
 
-    void materialsSpawn(int k,Anthill* anthill);
+    void materialsSpawn(int k, Anthill *anthill, Game *game);
 
 
     int height;
@@ -75,4 +75,4 @@ private:
     vector<Enemy *> enemies;
 };
 
-#endif 
+#endif

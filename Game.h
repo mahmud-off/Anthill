@@ -41,7 +41,7 @@ private:
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
-	
+
 	//?????????? ???????, ????????? ? ????? ??????????? ???????????
 	Anthill anthill;
 	Informer informer;
@@ -67,10 +67,35 @@ private:
 	int storageHeight;
 	int storageWidth;
 
-	void initTexture(
-);
-
+	void initTexture();
 	void initSprite();
+
+	void initTextureForChild();
+	void initSpriteForChild();
+
+	void initTextureForSoldier();
+	void initSpriteForSoldier();
+
+	void initTextureForEnemy();
+	void initSpriteForEnemy();
+
+	void initTextureForBuilder();
+	void initSpriteForBuilder();
+
+	void initTextureForCollecter();
+	void initSpriteForCollecter();
+
+	void initTextureForMaterial();
+	void initSpriteForMaterial();
+
+	void initTextureForFood();
+	void initSpriteForFood();
+
+	void initTextureForNurse();
+	void initSpriteForNurse();
+
+	void initTextureForCleaner();
+	void initSpriteForCleaner();
 
 	//???????? ?????????????
 	void initVar();
@@ -81,6 +106,33 @@ public:
 	Game();
 	sf::Sprite sprite;
 	sf::Texture fon;
+
+	sf::Sprite spriteForChildren;
+	sf::Texture textureForChildren;
+
+	sf::Sprite spriteForSoldiers;
+	sf::Texture textureForSoldiers;
+
+	sf::Sprite spriteForEnemy;
+	sf::Texture textureForEnemy;
+
+	sf::Sprite spriteForBuilder;
+	sf::Texture textureForBuilder;
+
+	sf::Sprite spriteForCollecter;
+	sf::Texture textureForCollecter;
+
+	sf::Sprite spriteForMaterial;
+	sf::Texture textureForMaterial;
+
+	sf::Sprite spriteForFood;
+	sf::Texture textureForFood;
+
+	sf::Sprite spriteForNurse;
+	sf::Texture textureForNurse;
+
+	sf::Sprite spriteForCleaner;
+	sf::Texture textureForCleaner;
 
 	void createWorld();
 
@@ -109,7 +161,7 @@ public:
 	void renderMaterials();
 
 
-	
+
 
 	~Game();
 

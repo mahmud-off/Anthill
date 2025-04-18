@@ -19,6 +19,8 @@ class Materials;
 class Food;
 class Field;
 class Dead;
+class Game;
+
 using namespace std;
 
 class Ant {
@@ -35,8 +37,8 @@ public:
 	virtual ~Ant();
 
 	//functions for collecters and builders
-	pair<int, pair<int, int>> findNearestPointCollecter(int x1, int y1, vector<Food *> v, vector<Food*>& detectedFood); // nearest point with food or materials from ant
-	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials); // nearest point with food or materials from ant
+	pair<int, pair<int, int>> findNearestPointCollecter(int x1, int y1, vector<Food *> v, vector<Food*>& detectedFood, Game *game); // nearest point with food or materials from ant
+	pair<int, pair<int, int>> findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials, Game *game); // nearest point with food or materials from ant
 	vector<pair<int, int>> A_StarSearch(pair<int, int> start, pair<int, int> end, Field *field); // shortest path from start to end
 
 	//access
@@ -65,14 +67,14 @@ public:
 	pair<int, pair<int, int>> findNearestPoint(int x1, int y1, vector<pair<int, pair<int, int>>> v); // nearest point with food or materials from ant
 	
 	//Base function for ant actions
-	virtual void work(Field* field, Anthill* anthil) = 0;
+	virtual void work(Field* field, Anthill* anthil, Game *game) = 0;
 
 	// Movent to point
 	void updateMovement(Field* field, Anthill* anthil, string new_work);
 
 	// Определение координат
-	void findFood(Field* field);
-	void findMaterial(Field* field);
+	void findFood(Field* field, Game *game);
+	void findMaterial(Field* field, Game *game);
 	void findDeadAnts(Anthill* anthill);
 	void findHome(Anthill* anthill);
 	void findEnemy(Field* field);

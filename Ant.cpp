@@ -5,6 +5,7 @@
 #include "Dead.h"
 #include "Food.h"
 #include "Materials.h"
+#include "Game.h"
 #define STEP 1
 
 using namespace std;
@@ -35,7 +36,7 @@ pair<int, int> Ant::randomAntNurseryPos() {
     return point;
 };
 
-pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<Food*> v, vector<Food*>& detectedFood) {
+pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<Food*> v, vector<Food*>& detectedFood, Game* game) {
     // vector<pair<int, int>> distances; // first - distance, second - point
     pair<int, pair<int, int> > answerPoint = {0,{0,0}};
     int minn = 1e9;
@@ -58,7 +59,7 @@ pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<
         }
     }
     if(elem != nullptr) {
-        Food *detectedP = new Food(elem->getX(),elem->getY(), elem->getWeight());
+        Food *detectedP = new Food(elem->getX(),elem->getY(), elem->getWeight(), game);
         detectedFood.push_back(detectedP);
         v.erase(v.begin()+index);
     }
@@ -66,7 +67,7 @@ pair<int, pair<int, int> > Ant::findNearestPointCollecter(int x1, int y1,vector<
     return answerPoint;
 }
 
-pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials) {
+pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<Materials*> v, vector<Materials*>& detectedMaterials, Game *game) {
     // vector<pair<int, int>> distances; // first - distance, second - point
     pair<int, pair<int, int> > answerPoint = { 0,{0,0} };
     int minn = 1e9;
@@ -89,7 +90,7 @@ pair<int, pair<int, int> > Ant::findNearestPointBuilder(int x1, int y1, vector<M
         }
     }
     if (elem != nullptr) {
-        Materials* detectedP = new Materials(elem->getX(), elem->getY(), elem->getWeight());
+        Materials* detectedP = new Materials(elem->getX(), elem->getY(), elem->getWeight(), game);
         //detectedP->initMaterials(elem->getX(), elem->getY(), elem->getWeight());
         detectedMaterials.push_back(detectedP);
         v.erase(v.begin() + index);
@@ -185,8 +186,8 @@ void Ant::findEnemy(Field* field){
 }
 */
 
-void Ant::findFood(Field* field){
-    pair<int, pair<int, int>> point = findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates, field->detectedFood);
+void Ant::findFood(Field* field, Game* game){
+    pair<int, pair<int, int>> point = findNearestPointCollecter(this->getPosX(), this->getPosY(), field->foodCoordinates, field->detectedFood, game);
         //findNearestPoint(getPosX(), getPosY(), field->foodCoordinates);
     this->setEndPoint({point.second.first, point.second.second});
     field->field[point.second.second][point.second.first] = "";
@@ -205,8 +206,8 @@ void Ant::findFood(Field* field){
     //endPoint.second = point.second.second;
 }
 
-void Ant::findMaterial(Field* field){
-    pair<int, pair<int, int>> point = findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates, field->detectedMaterials);
+void Ant::findMaterial(Field* field, Game *game){
+    pair<int, pair<int, int>> point = findNearestPointBuilder(this->getPosX(), this->getPosY(), field->materialsCoordinates, field->detectedMaterials, game);
     this->setEndPoint({ point.second.first, point.second.second });
     field->field[point.second.second][point.second.first] = "";
 

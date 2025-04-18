@@ -5,6 +5,7 @@
 
 #include "AntHill.h"
 #include "Materials.h"
+#include "Game.h"
 
 #define ENEMIES_SPAWN 50
 #define DAILY_FOOD_SPAWN 100
@@ -29,13 +30,13 @@ int getRandomNumber(int min_n, int max_n) {
 };
 
 int canSpawnHere(Anthill *anthill, int x, int y) {
-    if ((x > anthill->getPosX() && x < (x + anthill->getWidth())) && (y > anthill->getPosY() && y < (y + anthill->getHeight()))) { // pos(x, y) in anthill
+    if ((x > anthill->getPosX() - 350 && x < (x + anthill->getWidth())) && (y > anthill->getPosY() && y < (y + anthill->getHeight()))) { // pos(x, y) in anthill
         return 0;
     }
     return 1; // pos(x, y) not in anthill
 }
 
-void Field::materialsSpawn(int k, Anthill *anthill) {
+void Field::materialsSpawn(int k, Anthill *anthill, Game *game) {
     srand(time(0));
     for (int i = 0; i < k; i++) {
         int x = getRandomNumber(0, this->width);
@@ -51,13 +52,13 @@ void Field::materialsSpawn(int k, Anthill *anthill) {
             }
         }
         int weight = rand() % MAX_WEIGHT_MATERIALS;
-        this->materialsCoordinates.push_back(new Materials(x, y, weight));
-        this->materialsCoordinates.back()->initMaterials(x, y, weight);
+        this->materialsCoordinates.push_back(new Materials(x, y, weight, game));
+        this->materialsCoordinates.back()->initMaterials(x, y, weight, game);
 
     }
 }
 
-void Field::createEnemy(int k, Anthill *anthill) {
+void Field::createEnemy(int k, Anthill *anthill, Game *game) {
     //first - compute Enemy's point
     for (int i = 0; i < k; i++) {
         int x = getRandomNumber(0, this->width);
@@ -73,7 +74,7 @@ void Field::createEnemy(int k, Anthill *anthill) {
             }
         }
         //create Enemy
-        Enemy *newEnemy = new Enemy(x, y, ENEMY_HIT);
+        Enemy *newEnemy = new Enemy(x, y, ENEMY_HIT, game);
         enemies.push_back(newEnemy);
     }
 }
@@ -88,7 +89,7 @@ void Field::deleteEnemy(Enemy *killed) { // O(Enemies count)
     }
 }
 
-void Field::foodSpawn(int k, Anthill *anthill) {
+void Field::foodSpawn(int k, Anthill *anthill, Game *game) {
     cout <<"HUI"<< field.size() << " ";
     cout << field[1].size() << endl;
     cout << this->width << " ";
@@ -109,19 +110,19 @@ void Field::foodSpawn(int k, Anthill *anthill) {
         }
         this->field[y][x] = FOOD;
         int weight = rand() % MAX_WEIGHT_FOOD;
-        this->foodCoordinates.push_back(new Food(x, y, weight));
-        this->foodCoordinates.back()->initFood(x, y, weight);
+        this->foodCoordinates.push_back(new Food(x, y, weight, game));
+        this->foodCoordinates.back()->initFood(x, y, weight, game);
 
     }
 }
 
-void Field::ResourceSpawn(Anthill *anthill) {
-    this->foodSpawn(DAILY_FOOD_SPAWN, anthill);
-    this->materialsSpawn(DAILY_MATERIALS_SPAWN, anthill);
+void Field::ResourceSpawn(Anthill *anthill, Game *game) {
+    this->foodSpawn(DAILY_FOOD_SPAWN, anthill, game);
+    this->materialsSpawn(DAILY_MATERIALS_SPAWN, anthill, game);
 }
 
-void Field::enemiesSpawn(Anthill *anthill) {
-    this->createEnemy(ENEMIES_SPAWN, anthill);
+void Field::enemiesSpawn(Anthill *anthill, Game *game) {
+    this->createEnemy(ENEMIES_SPAWN, anthill, game);
 }
 
 void Field::setHW(int x,int y)

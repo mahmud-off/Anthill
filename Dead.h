@@ -18,7 +18,7 @@ public:
     Dead(vector<Soldier*>& list, Soldier* &soldier);
     Dead(vector<Nurse*>& list, Nurse* &nurse);
     void initDead();
-    void work(Field *field, Anthill *anthill) override {;}
+    void work(Field *field, Anthill *anthill, Game* game) override {;}
 
 private:
 };

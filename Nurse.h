@@ -6,18 +6,19 @@
 
 class Cleaner;
 class Field;
+class Game;
 
 
 
 class Nurse : public Ant {
 public:
 
-	Nurse();
+	Nurse(Game *game);
 	//virtual ~Nurse();
-	void work(Field* field, Anthill* anthill) override;
+	void work(Field* field, Anthill* anthill, Game* game) override;
 
-	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner);
-	void initNurse();
+	Nurse(vector<Cleaner*>& list, Cleaner* &cleaner, Game *game);
+	void initNurse(Game *game);
 	virtual ~Nurse();
 
 	using Ant::setPosX;

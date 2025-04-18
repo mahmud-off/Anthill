@@ -7,6 +7,7 @@
 
 class Enemy;
 class Collecter;
+class Game;
 
 
 
@@ -14,19 +15,21 @@ class Soldier : public Ant {
 public:
 
 
-    Soldier();
-    Soldier(int power);
+    Soldier(Game *game);
+    Soldier(int power, Game *game);
 
     Enemy* getEnemy() { return this->enemy; }
     void setEnemy(Enemy* new_enemy) { enemy = new_enemy; }
 
 
-    Soldier(vector<Collecter*>& list, Collecter* &collecter);
+    Soldier(vector<Collecter*>& list, Collecter* &collecter, Game *game);
     void helpToFightEnemy(Enemy *enemy, Field *field);
     void fightEnemy(Field *field);
-    void initSoldier();
+
+    void initSoldier(Game *game);
+
     virtual ~Soldier();
-    void work(Field* field, Anthill* anthill) override;
+    void work(Field* field, Anthill* anthill, Game* game) override;
     Soldier(vector<Ant*>& list, Ant* &collecter);
 
     using Ant::setPosX;
